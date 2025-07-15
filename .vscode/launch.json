@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+         {
+        "name": "web_app (Hot reload)",
+        "request": "launch",
+        "type": "dart",
+        // "program": "lib/web_main.dart",
+        "args": [
+          "-d",
+          "chrome",
+          "--web-experimental-hot-reload",
+          "--web-port",
+          "5000"
+        ]
+      },
+
+        {
+            "name": "portfolio",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "portfolio (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "portfolio (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        
+    ]
+}
