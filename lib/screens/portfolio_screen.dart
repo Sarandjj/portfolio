@@ -1,6 +1,7 @@
 // lib/screens/portfolio_screen.dart
 import 'package:flutter/material.dart';
 import 'package:portfolio/sections/footer_section.dart';
+import 'package:portfolio/services/analytics_service.dart';
 import 'package:portfolio/utils/loading_screen.dart';
 import 'package:portfolio/utils/scroll_reveal_widget.dart';
 import '../widgets/theme_switcher.dart';
@@ -27,6 +28,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   void initState() {
     super.initState();
     _parallaxController = ParallaxScrollController();
+
+    // Track portfolio page view
+    AnalyticsService.logPageView(
+      pageName: 'Portfolio Home',
+      pageClass: 'PortfolioScreen',
+    );
   }
 
   @override
@@ -43,6 +50,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           setState(() {
             _showContent = true;
           });
+
+          // Track when loading completes
+          AnalyticsService.logEngagementEvent(
+            eventName: 'portfolio_loaded',
+            parameters: {'load_time': DateTime.now().millisecondsSinceEpoch},
+          );
         },
       );
     }

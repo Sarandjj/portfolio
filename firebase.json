@@ -1,1 +1,55 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"saran-portfolio-76b1f","appId":"1:936005766674:android:d25265e25e2d7a20a612cb","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"saran-portfolio-76b1f","appId":"1:936005766674:ios:15031cd1bbecce38a612cb","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"saran-portfolio-76b1f","appId":"1:936005766674:ios:15031cd1bbecce38a612cb","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"saran-portfolio-76b1f","configurations":{"android":"1:936005766674:android:d25265e25e2d7a20a612cb","ios":"1:936005766674:ios:15031cd1bbecce38a612cb","macos":"1:936005766674:ios:15031cd1bbecce38a612cb","web":"1:936005766674:web:3298387161e8a84ca612cb","windows":"1:936005766674:web:87ab97d885bcdd3ba612cb"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "saran-portfolio-76b1f",
+          "appId": "1:936005766674:android:d25265e25e2d7a20a612cb",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "saran-portfolio-76b1f",
+          "appId": "1:936005766674:ios:15031cd1bbecce38a612cb",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "saran-portfolio-76b1f",
+          "appId": "1:936005766674:ios:15031cd1bbecce38a612cb",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "saran-portfolio-76b1f",
+          "configurations": {
+            "android": "1:936005766674:android:d25265e25e2d7a20a612cb",
+            "ios": "1:936005766674:ios:15031cd1bbecce38a612cb",
+            "macos": "1:936005766674:ios:15031cd1bbecce38a612cb",
+            "web": "1:936005766674:web:3298387161e8a84ca612cb",
+            "windows": "1:936005766674:web:87ab97d885bcdd3ba612cb"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
