@@ -30,7 +30,7 @@ class GlassContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    
+
     return Container(
       width: width,
       height: height,
@@ -44,10 +44,8 @@ class GlassContainer extends StatelessWidget {
             decoration: BoxDecoration(
               color: color ?? themeProvider.glassColor,
               borderRadius: borderRadius ?? BorderRadius.circular(16),
-              border: border ?? Border.all(
-                color: themeProvider.glassBorderColor,
-                width: 1.5,
-              ),
+              border:
+                  border ?? Border.all(color: themeProvider.glassBorderColor, width: 1.5),
             ),
             child: child,
           ),

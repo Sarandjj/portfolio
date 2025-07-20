@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
-import '../widgets/glass_container.dart';
-import '../utils/scroll_animations.dart';
 
-class ProjectsSection extends StatefulWidget {
+class ProjectsSection extends StatelessWidget {
   const ProjectsSection({super.key});
 
-  @override
-  State<ProjectsSection> createState() => _ProjectsSectionState();
-}
-
-class _ProjectsSectionState extends State<ProjectsSection> with TickerProviderStateMixin {
-  late AnimationController _slideController;
-  late List<Animation<Offset>> _projectAnimations;
-
-  final List<Project> _projects = [
+  final List<Project> _projects = const [
     Project(
       'E-Commerce Flutter App',
       'A full-featured e-commerce application with payment integration, user authentication, and real-time notifications.',
@@ -38,123 +28,124 @@ class _ProjectsSectionState extends State<ProjectsSection> with TickerProviderSt
   ];
 
   @override
-  void initState() {
-    super.initState();
-    _slideController = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    );
-
-    _projectAnimations = List.generate(
-      _projects.length,
-      (index) => Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
-        CurvedAnimation(
-          parent: _slideController,
-          curve: Interval(index * 0.2, (index * 0.2) + 0.4, curve: Curves.easeOut),
-        ),
-      ),
-    );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _slideController.forward();
-    });
-  }
-
-  @override
-  void dispose() {
-    _slideController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isTablet = size.width < 1024 && size.width >= 768;
     final isMobile = size.width < 768;
 
-    return ScrollRevealWidget(
-      startOffset: const Offset(0, 100),
+    return TweenAnimationBuilder<double>(
       duration: const Duration(milliseconds: 1200),
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: isMobile ? 20 : (isTablet ? 30 : 40),
-          vertical: isMobile ? 40 : (isTablet ? 60 : 80),
-        ),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: isMobile ? size.width - 40 : (isTablet ? 800 : 1200),
-            ),
-            child: Column(
-              children: [
-                ScrollRevealWidget(
-                  startOffset: const Offset(0, 40),
-                  duration: const Duration(milliseconds: 800),
-                  child: Text(
-                    'Featured Projects',
-                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                      fontSize: isMobile ? 28 : (isTablet ? 32 : 36),
-                    ),
+      tween: Tween(begin: 0.0, end: 1.0),
+      builder: (context, value, child) {
+        return Transform.translate(
+          offset: Offset(0, 100 * (1 - value)),
+          child: Opacity(
+            opacity: value,
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? 20 : (isTablet ? 30 : 40),
+                vertical: isMobile ? 40 : (isTablet ? 60 : 80),
+              ),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: isMobile ? size.width - 40 : (isTablet ? 800 : 1200),
                   ),
-                ),
-                SizedBox(height: isMobile ? 16 : 20),
-                ScrollRevealWidget(
-                  startOffset: const Offset(0, 30),
-                  duration: const Duration(milliseconds: 900),
-                  child: Text(
-                    'Here are some of the projects I\'ve worked on recently',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyLarge?.copyWith(fontSize: isMobile ? 14 : 16),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                SizedBox(height: isMobile ? 40 : 60),
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: isMobile ? 1 : (isTablet ? 2 : 2),
-                    crossAxisSpacing: isMobile ? 20 : 30,
-                    mainAxisSpacing: isMobile ? 20 : 30,
-                    childAspectRatio: isMobile ? 1.2 : (isTablet ? 0.9 : 0.8),
-                  ),
-                  itemCount: _projects.length,
-                  itemBuilder: (context, index) {
-                    return SlideTransition(
-                      position: _projectAnimations[index],
-                      child: FadeTransition(
-                        opacity: _slideController,
-                        child: _buildProjectCard(_projects[index], isMobile, isTablet),
+                  child: Column(
+                    children: [
+                      // Header
+                      Text(
+                        'Featured Projects',
+                        style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                          fontSize: isMobile ? 28 : (isTablet ? 32 : 36),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    );
-                  },
+                      SizedBox(height: isMobile ? 16 : 20),
+                      Text(
+                        'Here are some of the projects I\'ve worked on recently',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyLarge?.copyWith(fontSize: isMobile ? 14 : 16),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: isMobile ? 40 : 60),
+
+                      // Projects Grid
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: isMobile ? 1 : (isTablet ? 2 : 2),
+                          crossAxisSpacing: isMobile ? 20 : 30,
+                          mainAxisSpacing: isMobile ? 20 : 30,
+                          childAspectRatio: isMobile ? 1.2 : (isTablet ? 0.9 : 0.8),
+                        ),
+                        itemCount: _projects.length,
+                        itemBuilder: (context, index) {
+                          return TweenAnimationBuilder<double>(
+                            duration: Duration(milliseconds: 800 + (index * 200)),
+                            tween: Tween(begin: 0.0, end: 1.0),
+                            builder: (context, animValue, child) {
+                              return Transform.translate(
+                                offset: Offset(0, 50 * (1 - animValue)),
+                                child: Opacity(
+                                  opacity: animValue,
+                                  child: _buildProjectCard(
+                                    _projects[index],
+                                    isMobile,
+                                    isTablet,
+                                    context,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildProjectCard(Project project, bool isMobile, bool isTablet) {
-    return ShadowAnimationWidget(
-      maxShadowIntensity: 0.3,
-      shadowColor: Theme.of(context).colorScheme.primary,
-      blurRadius: 30.0,
-      shadowOffset: const Offset(0, 20),
-      child: GlassContainer(
+  Widget _buildProjectCard(
+    Project project,
+    bool isMobile,
+    bool isTablet,
+    BuildContext context,
+  ) {
+    return Card(
+      elevation: 12,
+      shadowColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
         padding: EdgeInsets.all(isMobile ? 16 : (isTablet ? 20 : 24)),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Theme.of(context).cardColor,
+              Theme.of(context).cardColor.withOpacity(0.8),
+            ],
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Project thumbnail placeholder
+            // Project thumbnail
             Container(
               height: isMobile ? 100 : (isTablet ? 110 : 120),
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(12),
                 gradient: LinearGradient(
                   colors: [
                     Theme.of(context).colorScheme.primary.withOpacity(0.3),
@@ -163,13 +154,13 @@ class _ProjectsSectionState extends State<ProjectsSection> with TickerProviderSt
                 ),
               ),
               child: TweenAnimationBuilder<double>(
-                duration: const Duration(milliseconds: 800),
+                duration: const Duration(milliseconds: 1000),
                 tween: Tween(begin: 0.0, end: 1.0),
                 builder: (context, value, child) {
                   return Transform.scale(
                     scale: 0.7 + (0.3 * value),
                     child: Icon(
-                      Icons.code,
+                      Icons.code_rounded,
                       size: isMobile ? 36 : (isTablet ? 42 : 48),
                       color: Theme.of(context).colorScheme.primary,
                     ),
@@ -178,67 +169,94 @@ class _ProjectsSectionState extends State<ProjectsSection> with TickerProviderSt
               ),
             ),
             SizedBox(height: isMobile ? 12 : 16),
+
+            // Title
             Text(
               project.title,
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                 fontSize: isMobile ? 18 : (isTablet ? 20 : 24),
+                fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: isMobile ? 8 : 12),
+
+            // Description
             Text(
               project.description,
               style: Theme.of(
                 context,
-              ).textTheme.bodyMedium?.copyWith(fontSize: isMobile ? 12 : 14),
+              ).textTheme.bodyMedium?.copyWith(fontSize: isMobile ? 12 : 14, height: 1.4),
               maxLines: isMobile ? 2 : 3,
               overflow: TextOverflow.ellipsis,
             ),
             SizedBox(height: isMobile ? 12 : 16),
+
+            // Technologies
             Wrap(
               spacing: isMobile ? 6 : 8,
               runSpacing: isMobile ? 6 : 8,
-              children: project.technologies
-                  .map(
-                    (tech) => Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: isMobile ? 6 : 8,
-                        vertical: isMobile ? 3 : 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+              children: project.technologies.asMap().entries.map((entry) {
+                return TweenAnimationBuilder<double>(
+                  duration: Duration(milliseconds: 600 + (entry.key * 100)),
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  builder: (context, value, child) {
+                    return Transform.scale(
+                      scale: value,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobile ? 8 : 10,
+                          vertical: isMobile ? 4 : 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                          ),
+                        ),
+                        child: Text(
+                          entry.value,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: isMobile ? 10 : 12,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                      child: Text(
-                        tech,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: isMobile ? 10 : 12,
-                        ),
-                      ),
-                    ),
-                  )
-                  .toList(),
+                    );
+                  },
+                );
+              }).toList(),
             ),
             const Spacer(),
-            Column(
+
+            // Action buttons
+            Row(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildProjectButton('GitHub', Icons.code, () {
-                        // Open GitHub link
-                      }, isMobile),
-                    ),
-                    SizedBox(width: isMobile ? 8 : 12),
-                    Expanded(
-                      child: _buildProjectButton('Live Demo', Icons.launch, () {
-                        // Open live demo
-                      }, isMobile),
-                    ),
-                  ],
+                Expanded(
+                  child: _buildProjectButton(
+                    'GitHub',
+                    Icons.code_rounded,
+                    () {
+                      // Handle GitHub link
+                      debugPrint('Open GitHub: ${project.githubUrl}');
+                    },
+                    isMobile,
+                    context,
+                  ),
+                ),
+                SizedBox(width: isMobile ? 8 : 12),
+                Expanded(
+                  child: _buildProjectButton(
+                    'Live Demo',
+                    Icons.launch_rounded,
+                    () {
+                      // Handle demo link
+                      debugPrint('Open Demo: ${project.demoUrl}');
+                    },
+                    isMobile,
+                    context,
+                  ),
                 ),
               ],
             ),
@@ -253,30 +271,43 @@ class _ProjectsSectionState extends State<ProjectsSection> with TickerProviderSt
     IconData icon,
     VoidCallback onTap,
     bool isMobile,
+    BuildContext context,
   ) {
-    return GlassContainer(
-      padding: EdgeInsets.symmetric(vertical: isMobile ? 6 : 8),
+    return Material(
+      color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: isMobile ? 14 : 16,
-              color: Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            vertical: isMobile ? 8 : 10,
+            horizontal: isMobile ? 12 : 16,
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
             ),
-            SizedBox(width: isMobile ? 3 : 4),
-            Text(
-              text,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: isMobile ? 16 : 18,
                 color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w600,
-                fontSize: isMobile ? 11 : 14,
               ),
-            ),
-          ],
+              SizedBox(width: isMobile ? 4 : 6),
+              Text(
+                text,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                  fontSize: isMobile ? 12 : 14,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -290,5 +321,11 @@ class Project {
   final String githubUrl;
   final String demoUrl;
 
-  Project(this.title, this.description, this.technologies, this.githubUrl, this.demoUrl);
+  const Project(
+    this.title,
+    this.description,
+    this.technologies,
+    this.githubUrl,
+    this.demoUrl,
+  );
 }

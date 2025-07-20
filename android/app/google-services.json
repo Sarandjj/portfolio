@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "936005766674",
+    "project_id": "saran-portfolio-76b1f",
+    "storage_bucket": "saran-portfolio-76b1f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936005766674:android:d25265e25e2d7a20a612cb",
+        "android_client_info": {
+          "package_name": "com.example.portfolio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7b8Kxz3W3rfxd3DfS0UPhd9-3LqGwbuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

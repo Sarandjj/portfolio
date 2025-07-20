@@ -1,68 +1,78 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
+import 'package:flutter/scheduler.dart';
 
 class ScrollAnimationController extends ChangeNotifier {
-  final ScrollController _scrollController = ScrollController();
+  ScrollController? _scrollController;
   double _scrollOffset = 0.0;
   double _scrollVelocity = 0.0;
-  
-  ScrollController get scrollController => _scrollController;
+  bool _disposed = false;
+
+  ScrollController? get scrollController => _scrollController;
   double get scrollOffset => _scrollOffset;
   double get scrollVelocity => _scrollVelocity;
-  
-  // Calculate parallax effect
-  double getParallaxOffset(double factor) {
-    return _scrollOffset * factor;
-  }
-  
-  // Calculate shadow intensity based on scroll
-  double getShadowIntensity() {
-    final intensity = (_scrollOffset / 100).clamp(0.0, 1.0);
-    return intensity;
-  }
 
   ScrollAnimationController() {
-    _scrollController.addListener(_onScroll);
+    _scrollController = ScrollController();
+    _scrollController?.addListener(_onScroll);
   }
 
+  double getParallaxOffset(double factor) => _disposed ? 0.0 : _scrollOffset * factor;
+  double getShadowIntensity() => _disposed ? 0.0 : (_scrollOffset / 100).clamp(0.0, 1.0);
+
   void _onScroll() {
-    final newOffset = _scrollController.offset;
+    if (_disposed || _scrollController == null) return;
+
+    final newOffset = _scrollController!.offset;
     _scrollVelocity = newOffset - _scrollOffset;
     _scrollOffset = newOffset;
-    notifyListeners();
+
+    if (!_disposed) {
+      notifyListeners();
+    }
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
-    super.dispose();
+    if (!_disposed) {
+      _disposed = true;
+      _scrollController?.removeListener(_onScroll);
+      _scrollController?.dispose();
+      _scrollController = null;
+      super.dispose();
+    }
   }
 
   Future<void> scrollToSection(GlobalKey key) async {
-    if (key.currentContext != null) {
-      final RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
+    if (_disposed || _scrollController == null || key.currentContext == null) return;
+
+    try {
+      final RenderBox? renderBox = key.currentContext?.findRenderObject() as RenderBox?;
+      if (renderBox == null) return;
+
       final position = renderBox.localToGlobal(Offset.zero);
-      
-      await _scrollController.animateTo(
-        position.dy - 80,
-        duration: const Duration(milliseconds: 1500),
-        curve: Curves.easeInOutCubic,
-      );
+
+      if (!_disposed && _scrollController != null) {
+        await _scrollController!.animateTo(
+          position.dy - 80,
+          duration: const Duration(milliseconds: 1500),
+          curve: Curves.easeInOutCubic,
+        );
+      }
+    } catch (e) {
+      // Silently handle any disposal-related errors
     }
   }
 }
 
-class ScrollRevealWidget extends StatefulWidget {
+class SafeScrollRevealWidget extends StatefulWidget {
   final Widget child;
   final Duration duration;
   final Offset startOffset;
   final double startScale;
   final double startOpacity;
   final Curve curve;
-  final double triggerOffset;
 
-  const ScrollRevealWidget({
+  const SafeScrollRevealWidget({
     super.key,
     required this.child,
     this.duration = const Duration(milliseconds: 800),
@@ -70,71 +80,73 @@ class ScrollRevealWidget extends StatefulWidget {
     this.startScale = 0.9,
     this.startOpacity = 0.0,
     this.curve = Curves.easeOutCubic,
-    this.triggerOffset = 100,
   });
 
   @override
-  State<ScrollRevealWidget> createState() => _ScrollRevealWidgetState();
+  State<SafeScrollRevealWidget> createState() => _SafeScrollRevealWidgetState();
 }
 
-class _ScrollRevealWidgetState extends State<ScrollRevealWidget>
+class _SafeScrollRevealWidgetState extends State<SafeScrollRevealWidget>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _animation;
+  AnimationController? _controller;
+  Animation<double>? _animation;
   bool _hasAnimated = false;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
-    _animation = CurvedAnimation(
-      parent: _animationController,
-      curve: widget.curve,
-    );
+    _initializeAnimation();
+  }
+
+  void _initializeAnimation() {
+    if (!mounted) return;
+
+    _controller = AnimationController(duration: widget.duration, vsync: this);
+
+    _animation = CurvedAnimation(parent: _controller!, curve: widget.curve);
+
+    // Safe post-frame callback
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _controller != null) {
+        _startAnimation();
+      }
+    });
+  }
+
+  void _startAnimation() {
+    if (!mounted || _hasAnimated || _controller == null) return;
+
+    _hasAnimated = true;
+    _controller?.forward();
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _controller?.dispose();
+    _controller = null;
+    _animation = null;
     super.dispose();
-  }
-
-  void _checkVisibility() {
-    if (_hasAnimated) return;
-
-    final RenderBox? renderBox = context.findRenderObject() as RenderBox?;
-    if (renderBox == null) return;
-
-    final size = renderBox.size;
-    final position = renderBox.localToGlobal(Offset.zero);
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    if (position.dy + size.height >= widget.triggerOffset &&
-        position.dy <= screenHeight - widget.triggerOffset) {
-      _hasAnimated = true;
-      _animationController.forward();
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => _checkVisibility());
+    if (_animation == null) {
+      return widget.child; // Return child immediately if animation isn't ready
+    }
 
     return AnimatedBuilder(
-      animation: _animation,
+      animation: _animation!,
       builder: (context, child) {
+        final value = _animation?.value ?? 1.0;
         return Transform.translate(
           offset: Offset(
-            widget.startOffset.dx * (1 - _animation.value),
-            widget.startOffset.dy * (1 - _animation.value),
+            widget.startOffset.dx * (1 - value),
+            widget.startOffset.dy * (1 - value),
           ),
           child: Transform.scale(
-            scale: widget.startScale + (1 - widget.startScale) * _animation.value,
+            scale: widget.startScale + (1 - widget.startScale) * value,
             child: Opacity(
-              opacity: widget.startOpacity + (1 - widget.startOpacity) * _animation.value,
+              opacity: widget.startOpacity + (1 - widget.startOpacity) * value,
               child: widget.child,
             ),
           ),
@@ -144,101 +156,81 @@ class _ScrollRevealWidgetState extends State<ScrollRevealWidget>
   }
 }
 
-class ParallaxWidget extends StatelessWidget {
-  final Widget child;
-  final double speed;
-
-  const ParallaxWidget({
-    super.key,
-    required this.child,
-    this.speed = 0.5,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Transform.translate(
-      offset: const Offset(0, 0), // Enhanced parallax can be added later
-      child: child,
-    );
-  }
-}
-
-class ShadowAnimationWidget extends StatefulWidget {
+class SafeShadowAnimationWidget extends StatefulWidget {
   final Widget child;
   final double maxShadowIntensity;
   final Color shadowColor;
   final double blurRadius;
   final Offset shadowOffset;
-  final Duration animationDuration;
 
-  const ShadowAnimationWidget({
+  const SafeShadowAnimationWidget({
     super.key,
     required this.child,
     this.maxShadowIntensity = 0.3,
     this.shadowColor = Colors.black,
     this.blurRadius = 20.0,
     this.shadowOffset = const Offset(0, 10),
-    this.animationDuration = const Duration(milliseconds: 300),
   });
 
   @override
-  State<ShadowAnimationWidget> createState() => _ShadowAnimationWidgetState();
+  State<SafeShadowAnimationWidget> createState() => _SafeShadowAnimationWidgetState();
 }
 
-class _ShadowAnimationWidgetState extends State<ShadowAnimationWidget>
+class _SafeShadowAnimationWidgetState extends State<SafeShadowAnimationWidget>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _shadowAnimation;
-  bool _isHovered = false;
+  AnimationController? _controller;
+  Animation<double>? _animation;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      duration: widget.animationDuration,
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    _shadowAnimation = Tween<double>(
+    _animation = Tween<double>(
       begin: 0.0,
       end: widget.maxShadowIntensity,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeOutCubic,
-    ));
+    ).animate(CurvedAnimation(parent: _controller!, curve: Curves.easeOutCubic));
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _controller?.dispose();
+    _controller = null;
+    _animation = null;
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_animation == null) {
+      return widget.child;
+    }
+
     return MouseRegion(
       onEnter: (_) {
-        setState(() {
-          _isHovered = true;
-        });
-        _animationController.forward();
+        if (mounted && _controller != null) {
+          _controller!.forward();
+        }
       },
       onExit: (_) {
-        setState(() {
-          _isHovered = false;
-        });
-        _animationController.reverse();
+        if (mounted && _controller != null) {
+          _controller!.reverse();
+        }
       },
       child: AnimatedBuilder(
-        animation: _shadowAnimation,
+        animation: _animation!,
         builder: (context, child) {
+          final value = _animation?.value ?? 0.0;
           return Container(
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: widget.shadowColor.withOpacity(_shadowAnimation.value),
-                  blurRadius: widget.blurRadius * _shadowAnimation.value,
-                  offset: widget.shadowOffset * _shadowAnimation.value,
-                  spreadRadius: 2 * _shadowAnimation.value,
+                  color: widget.shadowColor.withOpacity(value),
+                  blurRadius: widget.blurRadius * value,
+                  offset: widget.shadowOffset * value,
+                  spreadRadius: 2 * value,
                 ),
               ],
             ),
@@ -246,91 +238,6 @@ class _ShadowAnimationWidgetState extends State<ShadowAnimationWidget>
           );
         },
       ),
-    );
-  }
-}
-
-class StaggeredAnimationWidget extends StatefulWidget {
-  final List<Widget> children;
-  final Duration staggerDelay;
-  final Duration animationDuration;
-  final Offset startOffset;
-  final double startOpacity;
-
-  const StaggeredAnimationWidget({
-    super.key,
-    required this.children,
-    this.staggerDelay = const Duration(milliseconds: 100),
-    this.animationDuration = const Duration(milliseconds: 600),
-    this.startOffset = const Offset(0, 30),
-    this.startOpacity = 0.0,
-  });
-
-  @override
-  State<StaggeredAnimationWidget> createState() => _StaggeredAnimationWidgetState();
-}
-
-class _StaggeredAnimationWidgetState extends State<StaggeredAnimationWidget>
-    with TickerProviderStateMixin {
-  late List<AnimationController> _controllers;
-  late List<Animation<double>> _animations;
-  bool _hasStarted = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _controllers = List.generate(
-      widget.children.length,
-      (index) => AnimationController(
-        duration: widget.animationDuration,
-        vsync: this,
-      ),
-    );
-    _animations = _controllers.map((controller) =>
-      CurvedAnimation(parent: controller, curve: Curves.easeOutCubic),
-    ).toList();
-  }
-
-  @override
-  void dispose() {
-    for (var controller in _controllers) {
-      controller.dispose();
-    }
-    super.dispose();
-  }
-
-  void _startStaggeredAnimation() {
-    if (_hasStarted) return;
-    _hasStarted = true;
-    
-    for (int i = 0; i < _controllers.length; i++) {
-      Future.delayed(widget.staggerDelay * i, () {
-        if (mounted) {
-          _controllers[i].forward();
-        }
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => _startStaggeredAnimation());
-
-    return Column(
-      children: List.generate(widget.children.length, (index) {
-        return AnimatedBuilder(
-          animation: _animations[index],
-          builder: (context, child) {
-            return Transform.translate(
-              offset: widget.startOffset * (1 - _animations[index].value),
-              child: Opacity(
-                opacity: widget.startOpacity + (1 - widget.startOpacity) * _animations[index].value,
-                child: widget.children[index],
-              ),
-            );
-          },
-        );
-      }),
     );
   }
 }

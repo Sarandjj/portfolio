@@ -9,8 +9,7 @@ class HeroSection extends StatefulWidget {
   State<HeroSection> createState() => _HeroSectionState();
 }
 
-class _HeroSectionState extends State<HeroSection>
-    with TickerProviderStateMixin {
+class _HeroSectionState extends State<HeroSection> with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _floatingController;
   late AnimationController _pulseController;
@@ -27,12 +26,12 @@ class _HeroSectionState extends State<HeroSection>
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     );
-    
+
     _floatingController = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: this,
     )..repeat(reverse: true);
-    
+
     _pulseController = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
@@ -59,13 +58,15 @@ class _HeroSectionState extends State<HeroSection>
       ),
     );
 
-    _floatingAnimation = Tween<double>(begin: -10.0, end: 10.0).animate(
-      CurvedAnimation(parent: _floatingController, curve: Curves.easeInOut),
-    );
+    _floatingAnimation = Tween<double>(
+      begin: -10.0,
+      end: 10.0,
+    ).animate(CurvedAnimation(parent: _floatingController, curve: Curves.easeInOut));
 
-    _pulseAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
-      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
-    );
+    _pulseAnimation = Tween<double>(
+      begin: 1.0,
+      end: 1.1,
+    ).animate(CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut));
 
     _fadeController.forward();
   }
@@ -83,45 +84,51 @@ class _HeroSectionState extends State<HeroSection>
     final size = MediaQuery.of(context).size;
     final isTablet = size.width < 1024 && size.width >= 768;
     final isMobile = size.width < 768;
-    
+
     return Container(
       height: size.height,
       width: size.width,
       child: Stack(
         children: [
           // Animated floating background elements
-          ...List.generate(6, (index) => AnimatedBuilder(
-            animation: _floatingController,
-            builder: (context, child) {
-              final colors = [
-                Theme.of(context).colorScheme.primary,
-                Theme.of(context).colorScheme.secondary,
-                Theme.of(context).colorScheme.tertiary,
-              ];
-              return Positioned(
-                top: 50 + (index * 150) + (_floatingAnimation.value * (index.isEven ? 1 : -1)),
-                left: (index.isEven ? 50 : size.width - 150) + _floatingAnimation.value,
-                child: Transform.rotate(
-                  angle: _floatingController.value * 2 * 3.14159,
-                  child: Container(
-                    width: 60 + (index * 10),
-                    height: 60 + (index * 10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: RadialGradient(
-                        colors: [
-                          colors[index % 3].withOpacity(0.2),
-                          colors[index % 3].withOpacity(0.05),
-                          Colors.transparent,
-                        ],
+          ...List.generate(
+            6,
+            (index) => AnimatedBuilder(
+              animation: _floatingController,
+              builder: (context, child) {
+                final colors = [
+                  Theme.of(context).colorScheme.primary,
+                  Theme.of(context).colorScheme.secondary,
+                  Theme.of(context).colorScheme.tertiary,
+                ];
+                return Positioned(
+                  top:
+                      50 +
+                      (index * 150) +
+                      (_floatingAnimation.value * (index.isEven ? 1 : -1)),
+                  left: (index.isEven ? 50 : size.width - 150) + _floatingAnimation.value,
+                  child: Transform.rotate(
+                    angle: _floatingController.value * 2 * 3.14159,
+                    child: Container(
+                      width: 60 + (index * 10),
+                      height: 60 + (index * 10),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [
+                            colors[index % 3].withOpacity(0.2),
+                            colors[index % 3].withOpacity(0.05),
+                            Colors.transparent,
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
-          )),
-          
+                );
+              },
+            ),
+          ),
+
           // Main content
           Center(
             child: AnimatedBuilder(
@@ -138,9 +145,7 @@ class _HeroSectionState extends State<HeroSection>
                           maxWidth: isMobile ? size.width - 40 : (isTablet ? 700 : 900),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: isMobile ? 20 : 40,
-                          ),
+                          padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 40),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -164,21 +169,24 @@ class _HeroSectionState extends State<HeroSection>
                                       ).createShader(bounds),
                                       child: Text(
                                         'John Developer',
-                                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                                          fontSize: isMobile ? 40 : (isTablet ? 56 : 72),
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.white,
-                                          letterSpacing: -2,
-                                        ),
+                                        style: Theme.of(context).textTheme.displayLarge
+                                            ?.copyWith(
+                                              fontSize: isMobile
+                                                  ? 40
+                                                  : (isTablet ? 56 : 72),
+                                              fontWeight: FontWeight.w900,
+                                              color: Colors.white,
+                                              letterSpacing: -2,
+                                            ),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
                                   );
                                 },
                               ),
-                              
+
                               SizedBox(height: isMobile ? 20 : 30),
-                              
+
                               // Glassmorphism subtitle container
                               Container(
                                 padding: EdgeInsets.symmetric(
@@ -188,18 +196,26 @@ class _HeroSectionState extends State<HeroSection>
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                                      Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                                      Theme.of(
+                                        context,
+                                      ).colorScheme.primary.withOpacity(0.1),
+                                      Theme.of(
+                                        context,
+                                      ).colorScheme.secondary.withOpacity(0.1),
                                     ],
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                   border: Border.all(
-                                    color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary.withOpacity(0.3),
                                     width: 1.5,
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.primary.withOpacity(0.1),
                                       blurRadius: 20,
                                       spreadRadius: 5,
                                     ),
@@ -208,44 +224,51 @@ class _HeroSectionState extends State<HeroSection>
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text('🚀', style: TextStyle(fontSize: isMobile ? 20 : 24)),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: isMobile ? 20 : 24),
+                                    ),
                                     SizedBox(width: 8),
                                     Text(
                                       'Flutter Developer & Mobile App Specialist',
-                                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                        fontSize: isMobile ? 16 : (isTablet ? 20 : 24),
-                                        fontWeight: FontWeight.w700,
-                                        color: Theme.of(context).colorScheme.primary,
-                                      ),
+                                      style: Theme.of(context).textTheme.headlineLarge
+                                          ?.copyWith(
+                                            fontSize: isMobile
+                                                ? 16
+                                                : (isTablet ? 20 : 24),
+                                            fontWeight: FontWeight.w700,
+                                            color: Theme.of(context).colorScheme.primary,
+                                          ),
                                       textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),
                               ),
-                              
+
                               SizedBox(height: isMobile ? 30 : 40),
-                              
+
                               // Enhanced typewriter animation
                               Container(
                                 height: isMobile ? 80 : 100,
                                 child: TypewriterText(
                                   texts: const [
-                                    '💻 Building Beautiful Apps',
-                                    '🎨 Creating Amazing UIs',
-                                    '⚡ Fast & Responsive',
-                                    '🌟 Modern Animations',
-                                    '📱 Cross-Platform Magic',
+                                    ' Building Beautiful Apps',
+                                    ' Creating Amazing UIs',
+                                    ' Fast & Responsive',
+                                    ' Modern Animations',
+                                    ' Cross-Platform Magic',
                                   ],
-                                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                    fontSize: isMobile ? 18 : (isTablet ? 22 : 26),
-                                    fontWeight: FontWeight.w600,
-                                    color: Theme.of(context).colorScheme.secondary,
-                                  ),
+                                  style: Theme.of(context).textTheme.headlineLarge
+                                      ?.copyWith(
+                                        fontSize: isMobile ? 18 : (isTablet ? 22 : 26),
+                                        fontWeight: FontWeight.w600,
+                                        color: Theme.of(context).colorScheme.secondary,
+                                      ),
                                 ),
                               ),
-                              
+
                               SizedBox(height: isMobile ? 40 : 60),
-                              
+
                               // Enhanced action buttons with micro-animations
                               AnimatedBuilder(
                                 animation: _floatingController,
@@ -259,7 +282,7 @@ class _HeroSectionState extends State<HeroSection>
                                       children: [
                                         _buildEnhancedActionButton(
                                           context,
-                                          '✨ View My Work',
+                                          ' View My Work',
                                           Icons.rocket_launch,
                                           () {},
                                           isMobile,
@@ -267,7 +290,7 @@ class _HeroSectionState extends State<HeroSection>
                                         ),
                                         _buildEnhancedActionButton(
                                           context,
-                                          '💬 Get In Touch',
+                                          ' Get In Touch',
                                           Icons.chat_bubble_outline,
                                           () {},
                                           isMobile,
@@ -275,7 +298,7 @@ class _HeroSectionState extends State<HeroSection>
                                         ),
                                         _buildEnhancedActionButton(
                                           context,
-                                          '📄 Resume',
+                                          ' Resume',
                                           Icons.download,
                                           () {},
                                           isMobile,
@@ -286,9 +309,9 @@ class _HeroSectionState extends State<HeroSection>
                                   );
                                 },
                               ),
-                              
+
                               SizedBox(height: isMobile ? 60 : 100),
-                              
+
                               // Enhanced scroll indicator
                               AnimatedBuilder(
                                 animation: _floatingController,
@@ -298,31 +321,45 @@ class _HeroSectionState extends State<HeroSection>
                                     child: Column(
                                       children: [
                                         Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 8,
+                                          ),
                                           decoration: BoxDecoration(
                                             gradient: LinearGradient(
                                               colors: [
-                                                Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                                                Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                                                Theme.of(
+                                                  context,
+                                                ).colorScheme.primary.withOpacity(0.1),
+                                                Theme.of(
+                                                  context,
+                                                ).colorScheme.secondary.withOpacity(0.1),
                                               ],
                                             ),
                                             borderRadius: BorderRadius.circular(20),
                                             border: Border.all(
-                                              color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.primary.withOpacity(0.3),
                                             ),
                                           ),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Text('👇', style: TextStyle(fontSize: 16)),
+                                              Text('', style: TextStyle(fontSize: 16)),
                                               SizedBox(width: 8),
                                               Text(
                                                 'Scroll to explore my work',
-                                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                                  fontSize: isMobile ? 12 : 14,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Theme.of(context).colorScheme.primary,
-                                                ),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.copyWith(
+                                                      fontSize: isMobile ? 12 : 14,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Theme.of(
+                                                        context,
+                                                      ).colorScheme.primary,
+                                                    ),
                                               ),
                                             ],
                                           ),
@@ -335,7 +372,9 @@ class _HeroSectionState extends State<HeroSection>
                                               scale: _pulseAnimation.value,
                                               child: Icon(
                                                 Icons.keyboard_double_arrow_down,
-                                                color: Theme.of(context).colorScheme.primary,
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.primary,
                                                 size: isMobile ? 28 : 32,
                                               ),
                                             );
@@ -382,33 +421,33 @@ class _HeroSectionState extends State<HeroSection>
               vertical: isMobile ? 14 : 18,
             ),
             decoration: BoxDecoration(
-              gradient: isPrimary 
-                ? LinearGradient(
-                    colors: [
-                      Theme.of(context).colorScheme.primary,
-                      Theme.of(context).colorScheme.secondary,
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  )
-                : LinearGradient(
-                    colors: [
-                      Theme.of(context).colorScheme.surface.withOpacity(0.1),
-                      Theme.of(context).colorScheme.surface.withOpacity(0.05),
-                    ],
-                  ),
+              gradient: isPrimary
+                  ? LinearGradient(
+                      colors: [
+                        Theme.of(context).colorScheme.primary,
+                        Theme.of(context).colorScheme.secondary,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    )
+                  : LinearGradient(
+                      colors: [
+                        Theme.of(context).colorScheme.surface.withOpacity(0.1),
+                        Theme.of(context).colorScheme.surface.withOpacity(0.05),
+                      ],
+                    ),
               borderRadius: BorderRadius.circular(25),
-              border: isPrimary 
-                ? null 
-                : Border.all(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                    width: 1.5,
-                  ),
+              border: isPrimary
+                  ? null
+                  : Border.all(
+                      color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                      width: 1.5,
+                    ),
               boxShadow: [
                 BoxShadow(
-                  color: isPrimary 
-                    ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
-                    : Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                  color: isPrimary
+                      ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
+                      : Theme.of(context).colorScheme.primary.withOpacity(0.1),
                   blurRadius: isPrimary ? 15 : 10,
                   spreadRadius: isPrimary ? 2 : 1,
                   offset: const Offset(0, 5),
@@ -420,9 +459,7 @@ class _HeroSectionState extends State<HeroSection>
               children: [
                 Icon(
                   icon,
-                  color: isPrimary 
-                    ? Colors.white 
-                    : Theme.of(context).colorScheme.primary,
+                  color: isPrimary ? Colors.white : Theme.of(context).colorScheme.primary,
                   size: isMobile ? 18 : 22,
                 ),
                 SizedBox(width: isMobile ? 8 : 12),
@@ -430,9 +467,9 @@ class _HeroSectionState extends State<HeroSection>
                   text,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w700,
-                    color: isPrimary 
-                      ? Colors.white 
-                      : Theme.of(context).colorScheme.primary,
+                    color: isPrimary
+                        ? Colors.white
+                        : Theme.of(context).colorScheme.primary,
                     fontSize: isMobile ? 14 : 16,
                   ),
                 ),

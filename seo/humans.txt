@@ -1,0 +1,15 @@
+/* TEAM */
+Developer: Sarankumar G
+Contact: your-email@gmail.com
+Twitter: @yourtwitterhandle
+Location: Tamil Nadu, India
+
+/* THANKS */
+Flutter Team - flutter.dev
+Firebase - firebase.google.com
+
+/* SITE */
+Last update: 2025/07/20
+Standards: HTML5, CSS3
+Components: Flutter Web, Firebase
+IDE: VS Code, Android Studio

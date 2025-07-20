@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://sarankumar.dev</loc>
+    <lastmod>2025-07-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- Image for portfolio preview -->
+    <image:image>
+      <image:loc>https://sarankumar.dev/assets/images/portfolio-preview.jpg</image:loc>
+      <image:title>Sarankumar G - Flutter Developer Portfolio</image:title>
+      <image:caption>Professional Flutter developer portfolio showcasing mobile app development projects</image:caption>
+    </image:image>
+    
+    <!-- Project images if you have them -->
+    <image:image>
+      <image:loc>https://sarankumar.dev/assets/images/rak-sports-app.jpg</image:loc>
+      <image:title>RAK Sports Academy App</image:title>
+      <image:caption>Tournament management application built with Flutter and Firebase</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://sarankumar.dev/assets/images/student-management-app.jpg</image:loc>
+      <image:title>Student Management System</image:title>
+      <image:caption>Educational platform with Firebase and Google Drive integration</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://sarankumar.dev/assets/images/weather-iot-app.jpg</image:loc>
+      <image:title>Weather IoT Monitoring System</image:title>
+      <image:caption>IoT dashboard for real-time weather data visualization</image:caption>
+    </image:image>
+  </url>
+
+  <!-- If you plan to add a blog or other pages in the future -->
+  <!--
+  <url>
+    <loc>https://sarankumar.dev/blog</loc>
+    <lastmod>2025-07-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://sarankumar.dev/projects</loc>
+    <lastmod>2025-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://sarankumar.dev/contact</loc>
+    <lastmod>2025-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  -->
+
+</urlset>

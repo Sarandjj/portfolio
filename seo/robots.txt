@@ -1,0 +1,48 @@
+# Flutter Portfolio - Sarankumar G
+# Allow all search engines to crawl everything
+
+User-agent: *
+Allow: /
+
+# Disallow crawling of Flutter build artifacts and development files
+Disallow: /assets/packages/
+Disallow: /assets/shaders/
+Disallow: /.well-known/
+Disallow: /flutter_service_worker.js
+Disallow: /version.json
+
+# Allow important assets
+Allow: /assets/images/
+Allow: /assets/fonts/
+Allow: /icons/
+Allow: /favicon.ico
+Allow: /manifest.json
+
+# Sitemap location
+Sitemap: https://sarankumar.dev/sitemap.xml
+
+# Crawl delay (optional - be nice to servers)
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Block AI training crawlers (optional)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /

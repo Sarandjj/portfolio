@@ -8,9 +8,11 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeData get currentTheme => _isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme;
 
-  Color get glassColor => _isDarkMode ? AppTheme.darkGlassColor : AppTheme.lightGlassColor;
+  Color get glassColor =>
+      _isDarkMode ? AppTheme.darkGlassColor : AppTheme.lightGlassColor;
 
-  Color get glassBorderColor => _isDarkMode ? AppTheme.darkGlassBorder : AppTheme.lightGlassBorder;
+  Color get glassBorderColor =>
+      _isDarkMode ? AppTheme.darkGlassBorder : AppTheme.lightGlassBorder;
 
   void toggleTheme() {
     _isDarkMode = !_isDarkMode;
