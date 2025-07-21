@@ -9,7 +9,7 @@ class FooterSection extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final isTablet = size.width < 1024 && size.width >= 768;
     final isMobile = size.width < 768;
-    
+
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 20 : (isTablet ? 30 : 40),
@@ -31,10 +31,10 @@ class FooterSection extends StatelessWidget {
                     children: [
                       // Copyright
                       Text(
-                        '© 2025 John Developer. All rights reserved.',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontSize: 12,
-                        ),
+                        '© 2025 Sarankumar All rights reserved.',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(fontSize: 12),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 20),
@@ -67,11 +67,12 @@ class FooterSection extends StatelessWidget {
                                   const SizedBox(width: 3),
                                   Text(
                                     'Resume',
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: Theme.of(context).colorScheme.primary,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                    ),
+                                    style: Theme.of(context).textTheme.bodyMedium
+                                        ?.copyWith(
+                                          color: Theme.of(context).colorScheme.primary,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
+                                        ),
                                   ),
                                 ],
                               ),
@@ -86,10 +87,10 @@ class FooterSection extends StatelessWidget {
                     children: [
                       // Copyright
                       Text(
-                        '© 2025 John Developer. All rights reserved.',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontSize: isTablet ? 13 : 14,
-                        ),
+                        '© 2025 Sarankumar All rights reserved.',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(fontSize: isTablet ? 13 : 14),
                       ),
                       // Quick links
                       Row(
@@ -120,11 +121,12 @@ class FooterSection extends StatelessWidget {
                                   SizedBox(width: isTablet ? 3 : 4),
                                   Text(
                                     'Resume',
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: Theme.of(context).colorScheme.primary,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: isTablet ? 13 : 14,
-                                    ),
+                                    style: Theme.of(context).textTheme.bodyMedium
+                                        ?.copyWith(
+                                          color: Theme.of(context).colorScheme.primary,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: isTablet ? 13 : 14,
+                                        ),
                                   ),
                                 ],
                               ),

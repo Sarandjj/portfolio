@@ -168,7 +168,7 @@ class _HeroSectionState extends State<HeroSection> with TickerProviderStateMixin
                                         stops: const [0.0, 0.3, 0.7, 1.0],
                                       ).createShader(bounds),
                                       child: Text(
-                                        'John Developer',
+                                        'Sarankumar',
                                         style: Theme.of(context).textTheme.displayLarge
                                             ?.copyWith(
                                               fontSize: isMobile
@@ -245,7 +245,7 @@ class _HeroSectionState extends State<HeroSection> with TickerProviderStateMixin
                                 ),
                               ),
 
-                              SizedBox(height: isMobile ? 30 : 40),
+                              SizedBox(height: isMobile ? 20 : 30),
 
                               // Enhanced typewriter animation
                               Container(
@@ -267,7 +267,7 @@ class _HeroSectionState extends State<HeroSection> with TickerProviderStateMixin
                                 ),
                               ),
 
-                              SizedBox(height: isMobile ? 40 : 60),
+                              SizedBox(height: isMobile ? 40 : 50),
 
                               // Enhanced action buttons with micro-animations
                               AnimatedBuilder(
@@ -310,7 +310,7 @@ class _HeroSectionState extends State<HeroSection> with TickerProviderStateMixin
                                 },
                               ),
 
-                              SizedBox(height: isMobile ? 60 : 100),
+                              SizedBox(height: isMobile ? 60 : 80),
 
                               // Enhanced scroll indicator
                               AnimatedBuilder(

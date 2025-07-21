@@ -1,7 +1,6 @@
 /* TEAM */
 Developer: Sarankumar G
-Contact: your-email@gmail.com
-Twitter: @yourtwitterhandle
+Contact: kumar2004saran@gmail.com
 Location: Tamil Nadu, India
 
 /* THANKS */

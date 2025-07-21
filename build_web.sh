@@ -4,7 +4,7 @@
 set -e
 
 # STEP 1: Build the Flutter web app
-flutter build web --release --dart-define=FLUTTER_WEB_RENDERER=canvaskit
+flutter build web --release
 
 # STEP 2: Copy your SEO and meta files into the build directory
 echo "🔁 Copying SEO files to build/web..."

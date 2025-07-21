@@ -193,10 +193,13 @@ class _AboutSectionState extends State<AboutSection> with TickerProviderStateMix
                                       children: [
                                         Expanded(
                                           flex: 2,
-                                          child: _buildContentSections(
-                                            context,
-                                            isMobile,
-                                          )[0],
+                                          child: Column(
+                                            children: [
+                                              _buildContentSections(context, isMobile)[0],
+                                              const SizedBox(height: 40),
+                                              _buildStatsRow(context, isMobile),
+                                            ],
+                                          ),
                                         ),
                                         const SizedBox(width: 40),
                                         Expanded(
@@ -295,9 +298,9 @@ class _AboutSectionState extends State<AboutSection> with TickerProviderStateMix
           _buildSkillsList(context, isMobile),
 
           const SizedBox(height: 30),
-
-          // Stats Row
-          _buildStatsRow(context, isMobile),
+          if (isMobile)
+            // Stats Row
+            _buildStatsRow(context, isMobile),
         ],
       ),
     ];
@@ -376,8 +379,8 @@ class _AboutSectionState extends State<AboutSection> with TickerProviderStateMix
 
   Widget _buildStatsRow(BuildContext context, bool isMobile) {
     final stats = [
-      {'number': '3+', 'label': 'Years Experience'},
-      {'number': '50+', 'label': 'Projects Done'},
+      {'number': '2+', 'label': 'Years Experience'},
+      {'number': '9+', 'label': 'Projects Done'},
       {'number': '100%', 'label': 'Client Satisfaction'},
     ];
 

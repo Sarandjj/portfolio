@@ -44,21 +44,21 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_showContent) {
-      return LoadingScreen(
-        onLoadingComplete: () {
-          setState(() {
-            _showContent = true;
-          });
+    // if (!_showContent) {
+    //   return LoadingScreen(
+    //     onLoadingComplete: () {
+    //       setState(() {
+    //         _showContent = true;
+    //       });
 
-          // Track when loading completes
-          AnalyticsService.logEngagementEvent(
-            eventName: 'portfolio_loaded',
-            parameters: {'load_time': DateTime.now().millisecondsSinceEpoch},
-          );
-        },
-      );
-    }
+    //       // Track when loading completes
+    //       AnalyticsService.logEngagementEvent(
+    //         eventName: 'portfolio_loaded',
+    //         parameters: {'load_time': DateTime.now().millisecondsSinceEpoch},
+    //       );
+    //     },
+    //   );
+    // }
 
     return Scaffold(
       body: Stack(
@@ -168,11 +168,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   child: const TechStackSection(),
                 ),
 
-                ScrollRevealWidget(
-                  startOffset: const Offset(50, 50),
-                  child: const ProjectsSection(),
-                ),
-
+                // ScrollRevealWidget(
+                //   startOffset: const Offset(50, 50),
+                //   child: const ProjectsSection(),
+                // ),
                 ScrollRevealWidget(
                   startOffset: const Offset(0, 80),
                   child: const ExperienceSection(),
@@ -189,11 +188,11 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           ),
 
           // Floating theme switcher
-          Positioned(
-            top: MediaQuery.of(context).size.width < 768 ? 20 : 40,
-            right: MediaQuery.of(context).size.width < 768 ? 20 : 40,
-            child: const ThemeSwitcher(),
-          ),
+          // Positioned(
+          //   top: MediaQuery.of(context).size.width < 768 ? 20 : 40,
+          //   right: MediaQuery.of(context).size.width < 768 ? 20 : 40,
+          //   child: const ThemeSwitcher(),
+          // ),
         ],
       ),
     );

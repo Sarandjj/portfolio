@@ -1,6 +1,7 @@
 <!-- web/index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <base href="$FLUTTER_BASE_HREF">
   <meta charset="UTF-8">
@@ -9,23 +10,43 @@
 
   <!-- Enhanced SEO Meta Tags -->
   <title>Sarankumar G | Flutter Web & Mobile App Developer Portfolio</title>
-  <meta name="description" content="Sarankumar is a Flutter developer with 1.5+ years of experience building cross-platform apps for sports, student management, and IoT systems using Firebase, Node.js, and Google Cloud.">
-  <meta name="keywords" content="Flutter Developer, Dart Developer, Mobile App Developer, Firebase Developer, Tamil Nadu Flutter Developer, Cross Platform Apps, Portfolio">
+  <meta name="description"
+    content="Sarankumar G is a freelance Flutter developer in India specializing in cross-platform mobile apps with Firebase, Node.js, and Google Cloud. Hire for Android & iOS app development.">
+
+  <meta name="keywords"
+    content="Flutter Developer, Dart Developer, Mobile App Developer, Firebase Developer, Tamil Nadu Flutter Developer, Cross Platform Apps, Portfolio">
   <meta name="author" content="Sarankumar G">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
   <meta name="revisit-after" content="7 days">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+  <!-- Add these meta tags -->
+  <meta name="geo.region" content="IN-TN">
+  <meta name="geo.placename" content="Tamil Nadu">
+  <meta name="ICBM" content="11.1271, 78.6569">
+
+  <!-- Enhanced social proof -->
+  <meta property="article:author" content="https://www.linkedin.com/in/sarankuamr-g">
+  <meta property="profile:first_name" content="Sarankumar">
+  <meta property="profile:last_name" content="G">
+
+  <!-- Add this for better mobile experience -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
   <!-- Enhanced Social Meta Tags -->
   <meta property="og:title" content="Sarankumar G | Flutter Developer Portfolio">
-  <meta property="og:description" content="1.5+ years Flutter developer from Tamil Nadu, India. Building cross-platform apps with Firebase, Node.js, and Google Cloud.">
-  <meta property="og:type" content="website">
+  <meta property="og:description"
+    content="2+ years Flutter developer from Tamil Nadu, India. Building cross-platform apps with Firebase, Node.js, and Google Cloud.">
+  <meta property="og:type" content="profile">
   <meta property="og:url" content="https://sarankumar-flutter.web.app">
   <meta property="og:image" content="https://sarankumar-flutter.web.app/icons/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Sarankumar Flutter Developer">
-  
+
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Sarankumar G | Flutter Developer">
   <meta name="twitter:description" content="Flutter & Firebase developer specializing in cross-platform mobile apps">
@@ -37,7 +58,20 @@
   <link rel="preconnect" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://firebase.googleapis.com">
   <link rel="canonical" href="https://sarankumar-flutter.web.app">
-  
+  <link rel="preload" href="main.dart.js" as="script">
+  <link rel="alternate" hreflang="en-IN" href="https://sarankumar-flutter.web.app" />
+
+
+  <!-- Add Critical Resource Hints -->
+  <link rel="modulepreload" href="flutter.js">
+  <link rel="preload" href="assets/FontManifest.json" as="fetch" crossorigin>
+
+  <!-- Optimize font loading -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    media="print" onload="this.media='all'">
+
   <!-- Critical CSS for loading state -->
   <style>
     body {
@@ -47,7 +81,7 @@
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       overflow: hidden;
     }
-    
+
     .loading-container {
       position: fixed;
       top: 0;
@@ -61,7 +95,7 @@
       background: linear-gradient(135deg, #2563EB 0%, #D97706 50%, #1F2937 100%);
       z-index: 9999;
     }
-    
+
     .loading-logo {
       width: 120px;
       height: 120px;
@@ -74,7 +108,7 @@
       margin-bottom: 30px;
       animation: pulse 2s infinite;
     }
-    
+
     .loading-text {
       color: white;
       font-size: 24px;
@@ -82,7 +116,7 @@
       margin-bottom: 20px;
       opacity: 0.9;
     }
-    
+
     .loading-bar {
       width: 200px;
       height: 4px;
@@ -90,52 +124,55 @@
       border-radius: 2px;
       overflow: hidden;
     }
-    
+
     .loading-progress {
       height: 100%;
       background: linear-gradient(90deg, #fff, #60A5FA);
       border-radius: 2px;
       animation: loading 2s infinite;
     }
-    
+
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
     }
-    
+
     @keyframes loading {
-      0% { width: 0%; }
-      50% { width: 70%; }
-      100% { width: 100%; }
+      0% {
+        width: 0%;
+      }
+
+      50% {
+        width: 70%;
+      }
+
+      100% {
+        width: 100%;
+      }
     }
-    
+
     .flutter-icon {
       font-size: 48px;
       color: #02569B;
     }
   </style>
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Sarankumar Flutter Developer">
-  <link rel="apple-touch-icon" sizes="57x57" href="icons/Icon-57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="icons/Icon-60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="icons/Icon-72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="icons/Icon-76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="icons/Icon-114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="icons/Icon-120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="icons/Icon-144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="icons/Icon-152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="icons/Icon-180.png">
-  
-  <link rel="icon" type="image/png" sizes="16x16" href="icons/Icon-16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="icons/Icon-32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="icons/Icon-96.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/Icon-192.png">
-  <link rel="manifest" href="manifest.json">
-  
+  <!-- Favicons and Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/Icon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/Icon-16.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png" />
+  <link rel="shortcut icon" href="icons/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+  <link rel="manifest" href="icons/site.webmanifest" />
+
   <!-- Theme color for browser UI -->
   <meta name="theme-color" content="#2563EB">
   <meta name="msapplication-TileColor" content="#2563EB">
@@ -159,12 +196,14 @@
 
   <!-- Noscript Fallback -->
   <noscript>
-    <div style="padding: 40px; max-width: 800px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, sans-serif;">
+    <div
+      style="padding: 40px; max-width: 800px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, sans-serif;">
       <h1 style="color: #2563EB;">Sarankumar G - Flutter Developer</h1>
-      <p>Welcome to my portfolio! I'm a Flutter developer with 1.5+ years of experience.</p>
+      <p>Welcome to my portfolio! I'm a Flutter developer with 2+ years of experience.</p>
       <h2>About Me</h2>
-      <p>I specialize in building cross-platform mobile applications using Flutter and Firebase. My experience includes developing apps for sports management, student systems, and IoT applications.</p>
-      
+      <p>I specialize in building cross-platform mobile applications using Flutter and Firebase. My experience includes
+        developing apps for sports management, student systems, and IoT applications.</p>
+
       <h2>Skills</h2>
       <ul>
         <li>Flutter & Dart Development</li>
@@ -173,51 +212,86 @@
         <li>Google Cloud Platform</li>
         <li>Cross-Platform App Development</li>
       </ul>
-      
+
       <h2>Contact</h2>
       <p>Email: kumar2004saran@gmail.com</p>
       <p>GitHub: https://github.com/Sarandjj</p>
       <p>LinkedIn: https://www.linkedin.com/in/sarankuamr-g</p>
-      
-      <p><strong>Note:</strong> This portfolio requires JavaScript to display the full interactive experience. Please enable JavaScript in your browser.</p>
+
+      <p><strong>Note:</strong> This portfolio requires JavaScript to display the full interactive experience. Please
+        enable JavaScript in your browser.</p>
     </div>
   </noscript>
 
   <!-- Enhanced Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sarankumar G",
+  "jobTitle": "Flutter Developer",
+  "description": "Freelance Flutter developer building cross-platform mobile apps using Flutter, Firebase, and Node.js.",
+  "url": "https://sarankumar.dev",
+  "email": "mailto:kumar2004saran@gmail.com",
+  "birthPlace": "Tamil Nadu, India",
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Flutter Developer",
+    "occupationalCategory": "Software Development",
+   "skills": [
+  "Flutter",
+  "Dart",
+  "Firebase",
+  "Node.js",
+  "Google Cloud Platform",
+  "Cross-Platform Development",
+  "Mobile App Development",
+  "App Development",
+  "Flutter Development",
+  "Firebase Integration",
+  "Node.js Backend Development",
+  "Cross-Platform App Development"
+],
+
+    "experienceRequirements": "2+ years"
+  },
+  "knowsAbout": [
+    "Flutter", "Firebase", "Node.js", "Dart",
+    "Mobile Development", "Cross-Platform Apps"
+  ],
+  "sameAs": [
+    "https://github.com/Sarandjj",
+    "https://www.linkedin.com/in/sarankuamr-g"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Freelance Flutter Developer"
+  }
+}
+</script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
     "@type": "Person",
     "name": "Sarankumar G",
     "jobTitle": "Flutter Developer",
-    "description": "Flutter and Firebase developer with 1.5+ years experience building cross-platform apps for sports, education, and IoT systems.",
     "url": "https://sarankumar-flutter.web.app",
-    "email": "your-email@gmail.com",
-    "birthPlace": "Tamil Nadu, India",
-    "hasOccupation": {
-      "@type": "Occupation",
-      "name": "Flutter Developer",
-      "occupationalCategory": "Software Development",
-      "skills": ["Flutter", "Dart", "Firebase", "Node.js", "Google Cloud Platform", "Cross-Platform Development", "Mobile App Development"],
-      "experienceRequirements": "1.5+ years"
-    },
-    "knowsAbout": ["Flutter", "Firebase", "Node.js", "Dart", "Mobile Development", "Cross-Platform Apps"],
     "sameAs": [
-      "https://github.com/sarankumar",
-      "https://linkedin.com/in/sarankumar"
-    ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Freelance Flutter Developer"
-    }
+      "https://github.com/Sarandjj",
+      "https://www.linkedin.com/in/sarankuamr-g"
+    ]
   }
-  </script>
+}
+</script>
 
   <!-- Google Analytics 4 (replace with your GA4 ID) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YMR3RP8RJ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-8YMR3RP8RJ');
   </script>
@@ -236,4 +310,5 @@
   </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
+
 </html>

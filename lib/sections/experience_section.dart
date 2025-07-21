@@ -6,28 +6,28 @@ class ExperienceSection extends StatelessWidget {
   static const List<Experience> _experiences = [
     Experience(
       'Senior Flutter Developer',
-      'Tech Solutions Inc.',
+      ' ',
       '2022 - Present',
       'Leading mobile app development projects using Flutter, implementing best practices for code quality and performance optimization.',
     ),
-    Experience(
-      'Mobile App Developer',
-      'Innovation Labs',
-      '2020 - 2022',
-      'Developed cross-platform mobile applications, collaborated with UI/UX designers to create intuitive user interfaces.',
-    ),
-    Experience(
-      'Junior Developer',
-      'StartUp Studio',
-      '2019 - 2020',
-      'Started career in mobile development, learned Flutter framework and contributed to various client projects.',
-    ),
-    Experience(
-      'Computer Science Degree',
-      'University of Technology',
-      '2015 - 2019',
-      'Bachelor\'s degree in Computer Science with focus on software engineering and mobile application development.',
-    ),
+    // Experience(
+    //   'Mobile App Developer',
+    //   'Innovation Labs',
+    //   '2020 - 2022',
+    //   'Developed cross-platform mobile applications, collaborated with UI/UX designers to create intuitive user interfaces.',
+    // ),
+    // Experience(
+    //   'Junior Developer',
+    //   'StartUp Studio',
+    //   '2019 - 2020',
+    //   'Started career in mobile development, learned Flutter framework and contributed to various client projects.',
+    // ),
+    // Experience(
+    //   'Computer Science Degree',
+    //   'University of Technology',
+    //   '2015 - 2019',
+    //   'Bachelor\'s degree in Computer Science with focus on software engineering and mobile application development.',
+    // ),
   ];
 
   @override

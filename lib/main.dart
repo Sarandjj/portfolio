@@ -15,15 +15,19 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   if (kIsWeb) {
-    // Prevent right-click context menu
     BrowserContextMenu.disableContextMenu();
-
-    // Set custom URL strategy
     setUrlStrategy(PathUrlStrategy());
-
-    // Enable web gestures
     GestureBinding.instance.resamplingEnabled = true;
+
+    // Add SEO-friendly title updates
+    SystemChrome.setApplicationSwitcherDescription(
+      ApplicationSwitcherDescription(
+        label: 'Sarankumar G - Flutter Developer Portfolio',
+        primaryColor: 0xFF2563EB,
+      ),
+    );
   }
 
   runApp(const MyApp());
@@ -39,14 +43,23 @@ class MyApp extends StatelessWidget {
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
           return MaterialApp(
-            title: 'Flutter Portfolio',
+            title: 'Sarankumar G | Flutter Developer Portfolio',
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            themeMode: ThemeMode.dark,
             home: const PortfolioScreen(),
             debugShowCheckedModeBanner: false,
-            // Add Firebase Analytics Observer
             navigatorObservers: [AnalyticsService.observer],
+
+            // Add these for better SEO
+            builder: (context, child) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: TextScaler.linear(1.0), // Prevent text scaling issues
+                ),
+                child: child!,
+              );
+            },
           );
         },
       ),
