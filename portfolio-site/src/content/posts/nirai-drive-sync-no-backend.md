@@ -1,6 +1,6 @@
 ---
 title: "Offline-first sync to Google Drive with no backend"
-description: "How Nirai keeps a to-do list identical across devices using one JSON file in the user's own Google Drive, a last-write-wins merge, and tombstones for deletes."
+description: "How Nirai keeps a to-do list identical across devices using one JSON file in the user's own Google Drive, a field-by-field merge, and tombstones for deletes."
 date: 2026-10-27
 project: nirai
 tags: [Flutter, Drift, Sync]
@@ -26,9 +26,13 @@ The file is one JSON document with all nine synced tables, a version number and 
 
 The merge being a **pure function** (two payloads in, one payload out, no I/O) is the decision that made everything else testable. I can run it on two in-memory databases and check that they end up identical, without touching Drive.
 
-## Merging: last write wins, per row
+## Merging: field by field, with last write winning ties
 
-Every row has an `updatedAt` and the `deviceId` that wrote it. For ordinary rows the later `updatedAt` wins. Here is the rule as a simplified sketch (the real code has more fields, but this is the idea):
+Every row has an `updatedAt` and the `deviceId` that wrote it. Each device also keeps a saved copy of the data both sides last agreed on (the base).
+
+If a row changed on only one device, that version simply wins. If the same row changed on both, the merge goes field by field against the base: a field changed on one side takes that side's value, so editing a task's notes on one phone and completing it on another keeps both edits. Fields that belong together, like a due date and its repeat rule, are merged as one unit. Only when both devices changed the same field does the newer edit win.
+
+That fallback rule is last write wins, and it needs a fixed way to break ties. Here is a simplified sketch (the real code has more fields):
 
 ```dart
 Row pick(Row a, Row b) {
@@ -43,7 +47,7 @@ Row pick(Row a, Row b) {
 }
 ```
 
-The last line matters. If both devices break a tie the same way, then `merge(A, B)` and `merge(B, A)` give the same row, and both phones converge. There is a test that checks exactly that.
+The last line matters. If both devices break a tie the same way, then `merge(A, B)` and `merge(B, A)` give the same row, and both phones converge. There is a test that checks exactly that, and a randomised test where three simulated devices edit offline, sync in random order, and must end up identical.
 
 Two tables need something smarter than "one row wins":
 
@@ -75,7 +79,7 @@ The project-and-new-task case is why the merge is applied with `PRAGMA defer_for
 
 ## What I'd say honestly about the limits
 
-Last write wins uses each phone's own clock, and there is no server to correct it. If one phone's clock is 15 minutes ahead, its edits win any conflict inside that window. I tested and documented this instead of hiding it. For a personal to-do list synced between a person's own devices, I think that is the right trade. It would not be right for a shared document with many editors.
+Last write wins, the rule for same-field conflicts, uses each phone's own clock, and there is no server to correct it. If one phone's clock is 15 minutes ahead, its edits win any conflict inside that window. I tested and documented this instead of hiding it. For a personal to-do list synced between a person's own devices, I think that is the right trade. It would not be right for a shared document with many editors.
 
 ## What I'd do differently
 

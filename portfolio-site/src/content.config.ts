@@ -31,6 +31,8 @@ const projects = defineCollection({
       .optional(),
     /** store or product links; when present they replace the "get notified" button */
     links: z.array(z.object({ label: z.string(), url: z.string() })).default([]),
+    /** real screenshots under public/, shown instead of the placeholder phones */
+    screens: z.array(z.object({ src: z.string(), alt: z.string() })).default([]),
     /** A live Flutter web build with fake data, shown inside a phone on the case study page */
     demo: z
       .object({

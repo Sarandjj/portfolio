@@ -74,11 +74,17 @@ const jsonLd = [
         </div>
         {
           hasShots && (
-            <div class="shots" aria-label="Screenshots (placeholders)">
-              <ShotFrame c1={p.c1} c2={p.c2} />
-              <ShotFrame c1={p.c2} c2={p.c1} />
-              <ShotFrame c1={p.c1} c2={p.c2} />
-            </div>
+            p.screens.length > 0 ? (
+              <div class="shots shots-real" aria-label="Screenshots">
+                {p.screens.slice(0, 3).map((sc) => <img class="shot-img" src={sc.src} alt={sc.alt} width="540" height="979" loading="eager" />)}
+              </div>
+            ) : (
+              <div class="shots" aria-label="Screenshots (placeholders)">
+                <ShotFrame c1={p.c1} c2={p.c2} />
+                <ShotFrame c1={p.c2} c2={p.c1} />
+                <ShotFrame c1={p.c1} c2={p.c2} />
+              </div>
+            )
           )
         }
       </header>

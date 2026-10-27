@@ -26,7 +26,7 @@ Time zone: Asia/Kolkata (IST, UTC+5:30)
 
 ## Blog posts
 
-- [Offline-first sync to Google Drive with no backend](https://sarankumar.dev/blog/nirai-drive-sync-no-backend): how Nirai merges changes between devices through one JSON file in the user's own Drive, with last-write-wins and tombstones.
+- [Offline-first sync to Google Drive with no backend](https://sarankumar.dev/blog/nirai-drive-sync-no-backend): how Nirai merges changes between devices through one JSON file in the user's own Drive, with a field-by-field merge and tombstones.
 - [Soft deletes in Drift: SQLite's onDelete does not fire on UPDATE](https://sarankumar.dev/blog/finwise-soft-delete-drift): why tombstones switch off foreign-key cascades and how FinWise rebuilt them.
 - [I built my own document scanner, then went back to ML Kit](https://sarankumar.dev/blog/clean-scanner-ml-kit): a real-phone comparison that decided between a custom edge detector and Google's scanner.
 

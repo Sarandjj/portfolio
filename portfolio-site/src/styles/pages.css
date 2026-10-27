@@ -205,3 +205,22 @@
 .prose table { border-collapse: collapse; margin: 0 0 18px; font-size: 15px; display: block; overflow-x: auto; }
 .prose th, .prose td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
 .prose th { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+/* real screenshots on case studies */
+.shot-img { width: 150px; height: auto; aspect-ratio: 540 / 979; object-fit: cover; border-radius: 22px; border: 5px solid #0c0c0c; background: #0c0c0c; box-shadow: 0 30px 50px -24px rgba(20, 20, 18, 0.45); }
+.shot-img:nth-child(2) { transform: translateY(18px); }
+@media (max-width: 960px) { .shot-img { width: 120px; } }
+@media (max-width: 420px) { .shots-real .shot-img:nth-child(3) { display: none; } }
+
+/* "Go deeper" sections on case studies: simple first, detail on demand */
+.prose details { border: 1px solid var(--line); border-radius: 18px; background: var(--card); margin: 0 0 12px; padding: 0 20px; }
+.prose details[open] { padding-bottom: 8px; }
+.prose summary { cursor: pointer; list-style: none; padding: 16px 0; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.prose summary::-webkit-details-marker { display: none; }
+.prose summary::after { content: '+'; font-family: var(--mono); font-size: 20px; color: var(--muted); transition: transform 0.2s ease; }
+.prose details[open] > summary::after { content: '–'; }
+.prose summary:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 4px; border-radius: 8px; }
+.prose details > :not(summary) { margin-top: 4px; }
+.prose details p, .prose details li { font-size: 16px; }
+.prose details table { font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { .prose summary::after { transition: none; } }

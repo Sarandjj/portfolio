@@ -32,29 +32,28 @@ todo:
   - Whether you plan to publish it, and where
 ---
 
-## The problem
+## The idea
 
-Crypto data is easy to find and hard to browse calmly. Coin18 is a research and tracking tool, deliberately not an exchange, wallet or trading platform, with clear loading, empty and error states on every screen.
+A calm place to research crypto markets: browse coins, see a price chart and keep a watchlist. It is a research tool, not an exchange, wallet or trading app.
 
-<span class="note-draft">placeholder: add in your own words why you built Coin18</span>
+## Why I built it
 
-## What I built
+Crypto data is easy to find and hard to browse calmly. Coin18 shows a ranked list, search and filters, and a clear chart, with a loading, empty or error state on every screen instead of a blank page.
 
-- A Flutter app with a ranked market list, debounced search, sorting and filter chips.
-- A coin detail screen with an interactive chart and range switching.
-- A market stats screen and a watchlist that persists on the device and refreshes prices in a batch.
-- A Node.js and Express backend that the app talks to instead of calling the data provider directly.
+## How the data is used
 
-## Hard parts and decisions
+- **Market data comes through my own server.** The app never calls a data provider directly. It talks only to the Coin18 API, a small Node.js and Express service.
+- **The server protects the key and the limits.** The provider key lives only on the server. Responses are cached for 60 to 300 seconds, and if the provider fails the API returns the last cached answer instead of an error.
+- **Smaller responses.** The server trims each response from about 300 KB to about 2 KB before it reaches the phone.
+- **Your watchlist stays on your phone.** There are no accounts. The watchlist is saved on the device and refreshed in one batch.
+- **Honest about freshness.** Every response says when it was refreshed, and the app never presents prices as financial advice.
 
-**Keep provider keys off the phone.** A key shipped inside an app can be extracted. All external calls go through the Coin18 API, so the app only knows its own base URL.
+## Key decisions
 
-**A backend that protects the provider's rate limits.** Responses are cached in memory for 60 to 300 seconds depending on the endpoint, and if the provider fails the API returns the last cached result instead of an error.
+- **A backend at all.** A key inside an app can be extracted, so it is kept on a server.
+- **A replaceable provider.** The provider code sits behind an adapter and the API is versioned from the first endpoint (`/v1`), so changing provider needs no app update.
+- **Small and focused.** No trading, payments, accounts or social features until the basics are solid.
 
-**Replaceable data source.** The provider code sits behind an adapter and the API is versioned from the first endpoint (`/v1`), so changing provider does not require a new app release.
+## Where it stands
 
-**Honest data.** Every response carries a refresh time and source status, and the app never presents prices as financial advice.
-
-## What's next
-
-<span class="note-draft">placeholder: add the next milestone</span>
+In progress. The market list, search, coin detail with chart, market stats and watchlist work. The backend runs on Render, and the free plan makes it sleep when idle.

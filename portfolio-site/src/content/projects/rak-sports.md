@@ -48,6 +48,22 @@ I developed the Flutter application and its core user-facing features, and I was
 - <span class="note-draft">confirm: Firebase Cloud Functions that deliver notifications to users, tokens and topics</span>
 - Releases to Google Play and the Apple App Store, and fixes after release.
 
+## The problem, in plain terms
+
+People who play sports often keep track of their activity in scattered places, or not at all, and without a structured way to get updates or look back at what they did, motivation drops and a routine is hard to build.
+
+## How I approached it
+
+The aim was a simple, habit-friendly mobile experience, not a long list of features. That meant:
+
+- Fewer steps for the things people do every day.
+- Key actions that are quick and obvious.
+- Only the relevant information, at the right time, instead of crowded dashboards.
+
+Mistakes I tried to avoid on mobile: too many features at once, complicated navigation, and no clear feedback or sense of progress. The goal was clarity and consistency, not complexity.
+
+<span class="note-draft">confirm: this describes your approach in general terms. Edit anything that does not match how you worked on the app. I left out the "impact" claims (better consistency, more engagement) because there are no numbers behind them yet. Add real figures if you have them.</span>
+
 ## Why it is here
 
 This is a shipped product, not a demo: it is on both public stores, and the work covers the app, its payments, notifications and backend connections, not only screens.
