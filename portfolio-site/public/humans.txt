@@ -1,0 +1,8 @@
+/* TEAM */
+Developer: Sarankumar G
+Contact: sarankumarg.in@gmail.com
+Location: Tamil Nadu, India
+
+/* SITE */
+Standards: HTML5, CSS3
+Components: Astro, Tailwind CSS, Firebase Hosting

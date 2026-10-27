@@ -1,0 +1,41 @@
+# Everyone is welcome, including AI search and answer engines.
+# These bots are listed on purpose so the intent is explicit; the "*" rule already allows them.
+
+User-agent: *
+Allow: /
+
+# OpenAI (ChatGPT search, browsing, training)
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: GPTBot
+Allow: /
+
+# Anthropic (Claude search, browsing, training)
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Google and Apple AI features
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Microsoft Bing (also feeds Copilot and several AI search tools)
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://sarankumar.dev/sitemap-index.xml

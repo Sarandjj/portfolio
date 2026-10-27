@@ -1,0 +1,131 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Kili from '../components/Kili.astro';
+import { getProjects } from '../lib/projects';
+import { SITE, FORM_ENDPOINT } from '../data/site';
+
+const projects = await getProjects();
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    url: `${SITE.url}/contact`,
+    mainEntity: { '@id': `${SITE.url}/#person` },
+  },
+];
+---
+
+<Base
+  title="Contact | Sarankumar G"
+  description="Start a project or ask a question. Send a message to Sarankumar G, a mobile and full-stack developer in Tamil Nadu, India."
+  jsonLd={jsonLd}
+>
+  <div class="page">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
+      <h1 class="page-title">Got an idea? <em>Let's talk.</em></h1>
+      <p class="page-lede">Tell me what you need and I'll get back to you.</p>
+
+      <div class="contact-grid">
+        <div>
+          <form class="form" id="form" action={FORM_ENDPOINT} method="post" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" required />
+              <span class="err" data-err="name"></span>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+              <span class="err" data-err="email"></span>
+            </div>
+            <div class="field">
+              <label for="topic">What is it about?</label>
+              <select id="topic" name="topic">
+                <option value="project">A new project</option>
+                <option value="question">A question</option>
+                {projects.map((p) => <option value={p.id}>News about {p.data.name}</option>)}
+                <option value="other">Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+              <span class="err" data-err="message"></span>
+            </div>
+            <div class="hp" aria-hidden="true">
+              <label>Leave this empty <input name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+            </div>
+            <button class="btn solid" type="submit" id="send" style="justify-self:start">Send message</button>
+            <p class="form-status" id="status" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="success" id="success" role="status" tabindex="-1">
+            <Kili />
+            <h2 class="sec-h" style="margin-top:14px">Message sent. <em>Thank you!</em></h2>
+            <p class="lede" style="margin:8px auto 0">I'll get back to you soon. You can also reach me at {SITE.email}.</p>
+          </div>
+        </div>
+
+        <div class="direct">
+          <a class="row" href={`mailto:${SITE.email}`}><span><small>Email</small>{SITE.email}</span><span aria-hidden="true">→</span></a>
+          <a class="row" href={SITE.linkedin} target="_blank" rel="noopener"><span><small>LinkedIn</small>sarankuamr-g</span><span aria-hidden="true">→</span></a>
+          <a class="row" href={SITE.github} target="_blank" rel="noopener"><span><small>GitHub</small>Sarandjj</span><span aria-hidden="true">→</span></a>
+          <p class="lede" style="font-size:15px;margin:4px 0 0"><span class="note-draft">placeholder: add WhatsApp or a booking link if you want one</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import '../scripts/kili';
+    import { FORM_ENDPOINT } from '../data/site';
+
+    const form = document.querySelector<HTMLFormElement>('#form')!;
+    const status = document.querySelector<HTMLElement>('#status')!;
+    const send = document.querySelector<HTMLButtonElement>('#send')!;
+    const success = document.querySelector<HTMLElement>('#success')!;
+    const topic = form.querySelector<HTMLSelectElement>('#topic')!;
+    const message = form.querySelector<HTMLTextAreaElement>('#message')!;
+
+    // /contact?topic=nirai pre-selects "News about Nirai" and a starter message
+    const wanted = new URLSearchParams(location.search).get('topic');
+    if (wanted && [...topic.options].some((o) => o.value === wanted)) {
+      topic.value = wanted;
+      const label = topic.selectedOptions[0].textContent?.replace('News about ', '') ?? wanted;
+      if (!message.value) message.value = `I'd like to hear when ${label} is available.`;
+    }
+
+    const setErr = (field: string, text: string) => {
+      const el = form.querySelector<HTMLElement>(`[data-err="${field}"]`);
+      if (el) el.textContent = text;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      let bad = false;
+      for (const f of ['name', 'email', 'message']) setErr(f, '');
+      if (!String(data.get('name')).trim()) { setErr('name', 'Please enter your name.'); bad = true; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(data.get('email')))) { setErr('email', 'Please enter a valid email.'); bad = true; }
+      if (!String(data.get('message')).trim()) { setErr('message', 'Please write a short message.'); bad = true; }
+      if (bad) return;
+
+      send.disabled = true;
+      status.dataset.state = '';
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        form.hidden = true;
+        success.classList.add('on');
+        success.focus();
+      } catch {
+        status.dataset.state = 'error';
+        status.textContent = `Could not send. Please email me at ${'sarankumarg.in@gmail.com'} instead.`;
+        send.disabled = false;
+      }
+    });
+  </script>
+</Base>

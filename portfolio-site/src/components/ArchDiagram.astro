@@ -1,0 +1,24 @@
+---
+// A simple left-to-right flow (top-to-bottom on small screens). Real text, so it is readable
+// by search engines and screen readers, unlike an image.
+interface Props {
+  title: string;
+  steps: { label: string; note: string }[];
+}
+const { title, steps } = Astro.props;
+---
+
+<figure class="arch">
+  <figcaption class="label">{title}</figcaption>
+  <ol class="arch-flow">
+    {
+      steps.map((s, i) => (
+        <li>
+          <span class="arch-n mono">{String(i + 1).padStart(2, '0')}</span>
+          <strong>{s.label}</strong>
+          <span>{s.note}</span>
+        </li>
+      ))
+    }
+  </ol>
+</figure>

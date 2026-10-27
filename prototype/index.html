@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sarankumar G | Mobile & Full-Stack Developer</title>
+<meta name="description" content="Prototype v2 of the new portfolio. Placeholder content.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+@property --sky-top{syntax:'<color>';inherits:true;initial-value:#3d8bff}
+@property --sky-bot{syntax:'<color>';inherits:true;initial-value:#a9d8ff}
+@property --hill{syntax:'<color>';inherits:true;initial-value:#2bb673}
+
+:root{
+  --paper:#f3f0e8; --paper2:#ebe7dc; --card:#fbfaf6; --ink:#141412; --muted:#6b675e; --line:#dcd7c9;
+  --accent:#ff4f1f; --green:#2bb673; --serif:"Instrument Serif",Georgia,serif;
+  --sans:Geist,system-ui,sans-serif; --mono:"Geist Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#11110f; --paper2:#191916; --card:#1b1b18; --ink:#f1ede3; --muted:#9b968a; --line:#2e2d28;
+}}
+:root[data-theme="dark"]{--paper:#11110f; --paper2:#191916; --card:#1b1b18; --ink:#f1ede3; --muted:#9b968a; --line:#2e2d28}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .4s,color .4s}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+em,.serif{font-family:var(--serif);font-style:italic;font-weight:400}
+.mono{font-family:var(--mono)}
+::selection{background:var(--accent);color:#fff}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 82%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em}
+.mark i{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 22%,transparent)}
+.navlinks{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+.navlinks a:hover{color:var(--ink)}
+.navr{display:flex;align-items:center;gap:8px}
+.kbd{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;color:var(--muted);background:var(--card)}
+.kbd:hover{color:var(--ink)}
+.round{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;font-size:15px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:500;font-size:15px;border:1px solid var(--ink);transition:transform .2s,background .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.btn.sm{padding:8px 16px;font-size:14px}
+@media(max-width:820px){.navlinks,.kbd{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center}
+.status{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.status b{color:var(--ink);font-weight:500}
+.status .live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:7px;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.3}}
+h1{font-size:clamp(38px,7.2vw,104px);line-height:.98;letter-spacing:-.045em;font-weight:600;margin:28px 0 28px}
+h1 em{color:var(--accent);letter-spacing:-.02em;font-size:1.06em}
+h1 .line{display:block;overflow:hidden}
+h1 .line span{display:inline-block;transform:translateY(105%);animation:rise .9s cubic-bezier(.2,.75,.2,1) forwards}
+h1 .line:nth-child(2) span{animation-delay:.08s}h1 .line:nth-child(3) span{animation-delay:.16s}
+@keyframes rise{to{transform:none}}
+.intro{font-size:19px;color:var(--muted);max-width:540px}
+.intro b{color:var(--ink);font-weight:500}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;align-items:center}
+.hint{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--muted);margin-left:8px}
+@media(max-width:960px){.hero .wrap{grid-template-columns:1fr}.hint{display:none}}
+
+/* ---------- phone + sky ---------- */
+.device{position:relative;justify-self:center;padding-top:96px}
+.phone{position:relative;width:300px;height:620px;border-radius:52px;background:#0c0c0c;padding:11px;box-shadow:0 0 0 2px #2a2a28,0 50px 80px -30px rgba(20,20,18,.45),inset 0 0 0 1px #3a3a36}
+.screen{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;color:#fff;
+  background:linear-gradient(180deg,var(--sky-top),var(--sky-bot));transition:--sky-top 1.2s,--sky-bot 1.2s,--hill 1.2s}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:96px;height:28px;border-radius:20px;background:#000;z-index:6}
+.sbar{position:absolute;top:14px;left:26px;right:24px;display:flex;justify-content:space-between;font-size:13px;font-weight:600;z-index:5}
+.sky{position:absolute;inset:0;pointer-events:none}
+.sky .stars{opacity:0;transition:opacity 1.2s}
+.sky .sun,.sky .moon{transition:transform 1.4s cubic-bezier(.3,.7,.2,1),opacity 1.2s}
+.cloud{animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(320px)}}
+.hills path{fill:var(--hill);transition:fill 1.2s}
+.homegrid{position:absolute;top:70px;left:18px;right:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px 10px;z-index:3}
+.app{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10.5px;font-weight:500;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+.app i{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-style:normal;font-size:24px;box-shadow:0 6px 14px rgba(0,0,0,.18);transition:transform .2s}
+.app:hover i{transform:scale(1.08)}
+.app:active i{transform:scale(.92)}
+.widget{position:absolute;left:18px;right:18px;top:300px;z-index:3;border-radius:22px;padding:14px 16px;background:rgba(255,255,255,.2);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.25);font-size:12px}
+.widget b{font-size:28px;font-weight:600;letter-spacing:-.03em;display:block;line-height:1.1}
+.dock{position:absolute;bottom:14px;left:12px;right:12px;height:78px;border-radius:30px;background:rgba(255,255,255,.22);backdrop-filter:blur(16px);display:flex;justify-content:space-around;align-items:center;z-index:3}
+.dock .app span{display:none}
+
+/* app window */
+.win{position:absolute;inset:0;z-index:8;background:#fff;color:#141412;border-radius:42px;display:flex;flex-direction:column;transform:scale(.1);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.win.open{transform:none;opacity:1;pointer-events:auto}
+.win header{padding:58px 22px 18px;color:#fff}
+.win header small{font-family:var(--mono);font-size:10px;opacity:.85;text-transform:uppercase;letter-spacing:.06em}
+.win header h3{font-size:26px;letter-spacing:-.03em;font-weight:600;line-height:1.1;margin-top:4px}
+.win .body{padding:18px 22px;font-size:13.5px;color:#555;overflow:auto;flex:1}
+.win .body p+p{margin-top:10px}
+.win .chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+.win .chips span{font-family:var(--mono);font-size:10.5px;padding:4px 8px;border-radius:7px;background:#f1efe9;color:#333}
+.win .row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #eee;color:#222}
+.win .row span{color:#888}
+.win .go{display:block;text-align:center;margin-top:16px;padding:12px;border-radius:14px;background:#141412;color:#fff;font-weight:500}
+.ph{display:inline-block;font-family:var(--mono);font-size:10px;color:#b45309;border:1px dashed #d97706;border-radius:6px;padding:2px 7px;margin-bottom:8px}
+.homebar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:120px;height:5px;border-radius:5px;background:#141412;opacity:.85;z-index:9}
+.homebar-hit{position:absolute;bottom:0;left:0;right:0;height:30px;z-index:10;cursor:pointer}
+
+/* kili */
+#kili{position:absolute;top:10px;right:22px;width:108px;z-index:4;cursor:pointer;filter:drop-shadow(0 10px 10px rgba(0,0,0,.12))}
+#kili .bob{animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+#kili .open{transform-box:fill-box;transform-origin:center;animation:blink 4.6s infinite}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+#kili .wing{transform-box:view-box;transform-origin:88px 80px;animation:flap 4s ease-in-out infinite}
+@keyframes flap{0%,70%,100%{transform:rotate(0)}76%,88%{transform:rotate(-38deg)}82%,94%{transform:rotate(-18deg)}}
+#kili .closed,#kili .zz{display:none}
+#kili.sleep .open,#kili.sleep .pupil{display:none}
+#kili.sleep .closed,#kili.sleep .zz{display:block}
+#kili.sleep .wing{animation:none}
+#kili .zz text{animation:zz 2.4s ease-in-out infinite;opacity:0}
+#kili .zz text:nth-child(2){animation-delay:1.2s}
+@keyframes zz{0%{opacity:0;transform:translate(0,0)}40%{opacity:1}100%{opacity:0;transform:translate(8px,-16px)}}
+.say{position:absolute;top:0;right:132px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:16px 16px 4px 16px;padding:9px 14px;font-size:13.5px;max-width:210px;box-shadow:0 12px 30px -12px rgba(0,0,0,.25);transition:opacity .3s,transform .3s}
+.say.hide{opacity:0;transform:translateY(6px)}
+.skypick{display:flex;justify-content:center;gap:4px;margin-top:18px;font-family:var(--mono);font-size:11px}
+.skypick button{padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.skypick button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+@media(max-width:400px){.phone{width:272px;height:566px}.homegrid{left:12px;right:12px;gap:16px 6px}.app i{width:46px;height:46px;border-radius:13px;font-size:20px}.app{font-size:9.5px}.widget{top:270px}.say{right:118px;max-width:150px;font-size:12.5px}}
+
+/* ---------- sections ---------- */
+section{padding:110px 0}
+.label{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:22px}
+.label::after{content:"";flex:1;height:1px;background:var(--line)}
+h2{font-size:clamp(36px,5vw,64px);line-height:1.02;letter-spacing:-.04em;font-weight:600;max-width:820px}
+h2 em{color:var(--accent)}
+.lede{color:var(--muted);font-size:18px;max-width:560px;margin-top:16px}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:14px;margin-top:48px}
+.tile{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;overflow:hidden;transition:transform .3s,border-color .3s}
+.tile:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--ink) 30%,var(--line))}
+.tile h3{font-size:19px;letter-spacing:-.02em;font-weight:600}
+.tile p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.tile .tag{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.t-code{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column}
+.t-term{grid-column:span 2;background:#141412;color:#e9e6dc;border-color:#141412}
+.t-term p{color:#9b968a}
+.t-stack{grid-column:span 3}
+.code{margin-top:auto;background:#141412;color:#e9e6dc;border-radius:16px;padding:18px 20px;font-family:var(--mono);font-size:13px;line-height:1.75;white-space:pre;overflow:auto}
+.k{color:#ff8a65}.c{color:#7dd3a8}.s{color:#f6c86b}.f{color:#8ab4ff}.d{color:#6f6b62}
+.term{font-family:var(--mono);font-size:13px;margin-top:14px;line-height:1.8;min-height:96px}
+.term .ok{color:#7dd3a8}
+.term .cur{display:inline-block;width:8px;height:15px;background:#e9e6dc;vertical-align:-2px;animation:pulse 1s steps(1) infinite}
+.clock{font-size:46px;letter-spacing:-.04em;font-weight:600;margin-top:18px;line-height:1}
+.rings{display:grid;grid-template-columns:repeat(4,minmax(0,52px));gap:6px;margin-top:22px}
+.ring{position:relative;aspect-ratio:1}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:600;color:#1a9d5b}
+.groups{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.groups div{font-size:14px}
+.groups b{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:400;margin-bottom:6px}
+.t-cta{background:var(--accent);color:#fff;border-color:var(--accent);display:flex;flex-direction:column;justify-content:space-between}
+.t-cta p{color:rgba(255,255,255,.85)}
+.t-cta .arrow{font-size:40px;line-height:1;transition:transform .3s}
+.t-cta:hover .arrow{transform:translate(6px,-6px) rotate(-45deg)}
+@media(max-width:960px){.bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:auto}.t-code,.t-term,.t-stack{grid-column:span 2}.t-code{grid-row:auto}.groups{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.bento{grid-template-columns:1fr}.t-code,.t-term,.t-stack{grid-column:auto}}
+
+/* work list */
+.work{margin-top:40px;border-top:1px solid var(--line)}
+.wrow{display:grid;grid-template-columns:70px 1fr auto 90px;gap:20px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--line);transition:padding .35s}
+.wrow:hover{padding-left:14px}
+.wrow .n{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.wrow h3{font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;font-weight:600;line-height:1.1}
+.wrow h3 em{color:var(--muted);font-size:.8em}
+.wrow:hover h3 em{color:var(--accent)}
+.wrow .st{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-align:right}
+.wrow .yr{font-family:var(--mono);font-size:13px;text-align:right}
+.peek{position:fixed;top:0;left:0;width:200px;height:250px;border-radius:22px;pointer-events:none;z-index:40;opacity:0;transform:translate(-50%,-50%) scale(.6) rotate(-6deg);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1);overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.4)}
+.peek.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-4deg)}
+.peek .ptop{height:96px;padding:18px;color:#fff;font-weight:600;font-size:15px}
+.peek .pb{background:#fff;height:100%;padding:12px}
+.peek .pb i{display:block;height:30px;border-radius:9px;background:#f1efe9;margin-bottom:8px}
+@media(max-width:700px){.wrow{grid-template-columns:44px 1fr;gap:6px 14px}.wrow .st{grid-column:2;text-align:left}.wrow .yr{display:none}.peek{display:none}}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px}
+.step{border-top:2px solid var(--ink);padding-top:18px}
+.step .mono{font-size:12.5px;color:var(--accent)}
+.step h3{font-size:22px;letter-spacing:-.02em;font-weight:600;margin:8px 0 6px}
+.step p{color:var(--muted);font-size:15px}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* writing */
+.posts{margin-top:36px}
+.post{display:flex;justify-content:space-between;gap:20px;padding:20px 0;border-bottom:1px dashed var(--line);align-items:baseline}
+.post h3{font-size:20px;font-weight:500;letter-spacing:-.015em}
+.post:hover h3{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:5px}
+.post .mono{font-size:12.5px;color:var(--muted);white-space:nowrap}
+
+/* contact */
+.contact{padding:140px 0 90px;text-align:center}
+.big{font-size:clamp(56px,11vw,168px);line-height:.92;letter-spacing:-.055em;font-weight:600}
+.big em{color:var(--accent);display:block}
+.mail{display:inline-flex;align-items:center;gap:12px;margin-top:40px;font-size:clamp(17px,2.4vw,24px);border-bottom:2px solid var(--ink);padding-bottom:4px}
+.mail small{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:3px 8px}
+.socials{display:flex;justify-content:center;gap:10px;margin-top:32px;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:26px 0;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* command palette */
+.cmdk{position:fixed;inset:0;z-index:90;background:rgba(10,10,9,.35);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:14vh 16px 0}
+.cmdk.on{display:flex}
+.cmdk .box{width:min(560px,100%);background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 40px 80px -20px rgba(0,0,0,.4);overflow:hidden}
+.cmdk input{width:100%;border:0;border-bottom:1px solid var(--line);background:none;padding:18px 20px;font:inherit;font-size:17px;color:var(--ink);outline:none}
+.cmdk ul{list-style:none;padding:8px;max-height:320px;overflow:auto}
+.cmdk li{padding:11px 14px;border-radius:10px;cursor:pointer;display:flex;justify-content:space-between;font-size:15px}
+.cmdk li span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.cmdk li.sel{background:var(--paper2)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s cubic-bezier(.2,.75,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}h1 .line span{transform:none}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="mark" href="#top"><i></i>Sarankumar G</a>
+    <div class="navlinks"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#writing">Writing</a></div>
+    <div class="navr">
+      <button class="kbd" id="openK">⌘K</button>
+      <button class="round" id="theme" aria-label="Toggle dark mode">◐</button>
+      <a class="btn solid sm" href="#contact">Hire me</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="status">
+        <span class="live"><b>Available</b> for freelance</span>
+        <span>Tamil Nadu, India</span>
+        <span id="istSmall">IST --:--</span>
+      </div>
+      <h1>
+        <span class="line"><span>I build <em>apps for</em></span></span>
+        <span class="line"><span><em>your pocket</em> and the</span></span>
+        <span class="line"><span>systems behind them.</span></span>
+      </h1>
+      <p class="intro">I'm Sarankumar, a <b>mobile &amp; full-stack developer</b>. Flutter for iOS, Android and web, with Firebase, Node.js and Google Cloud underneath. Idea to app store, done properly.</p>
+      <div class="cta">
+        <a class="btn solid" href="#work">See selected work ↓</a>
+        <a class="btn ghost" href="#contact">Start a project</a>
+        <span class="hint">psst, the phone works →</span>
+      </div>
+    </div>
+
+    <div class="device">
+      <div class="say hide" id="say">Hi! I'm Kili 🦜</div>
+      <svg id="kili" viewBox="0 0 120 140" role="img" aria-label="Kili the parrot mascot. Click to chat.">
+        <g class="bob">
+          <!-- tail -->
+          <path d="M44 112 Q30 132 26 140 L40 140 Q48 128 54 116Z" fill="#1d8a55"/>
+          <path d="M54 114 Q46 134 46 140 L58 140 Q60 128 62 116Z" fill="#2bb673"/>
+          <!-- body -->
+          <path d="M60 22 C88 22 98 48 96 78 C94 108 80 122 60 122 C40 122 26 108 24 78 C22 48 32 22 60 22Z" fill="#2bb673"/>
+          <ellipse cx="60" cy="94" rx="21" ry="24" fill="#a6e36b"/>
+          <!-- crest -->
+          <path d="M52 26 Q50 12 58 8 Q56 18 60 24Z M60 24 Q62 8 72 6 Q64 16 66 26Z" fill="#ffc93c"/>
+          <!-- left wing -->
+          <path d="M30 70 Q18 92 30 112 Q40 100 40 78Z" fill="#1d8a55"/>
+          <!-- right wing (waves) -->
+          <path class="wing" d="M90 70 Q104 90 92 112 Q80 100 80 78Z" fill="#1d8a55"/>
+          <!-- cheeks -->
+          <ellipse cx="36" cy="66" rx="6" ry="4" fill="#ff7a6b" opacity=".55"/><ellipse cx="84" cy="66" rx="6" ry="4" fill="#ff7a6b" opacity=".55"/>
+          <!-- eyes -->
+          <g class="open"><circle cx="46" cy="54" r="11" fill="#fff"/></g>
+          <g class="open"><circle cx="74" cy="54" r="11" fill="#fff"/></g>
+          <circle class="pupil" id="pL" cx="46" cy="54" r="5.5" fill="#141412"/>
+          <circle class="pupil" id="pR" cx="74" cy="54" r="5.5" fill="#141412"/>
+          <path class="closed" d="M37 55 Q46 61 55 55 M65 55 Q74 61 83 55" stroke="#141412" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <!-- beak -->
+          <path d="M53 64 Q60 58 67 64 Q68 78 59 82 Q62 74 53 64Z" fill="#ff4f1f"/>
+          <path d="M55 72 Q60 76 64 73 Q62 80 58 80Z" fill="#c2360f"/>
+        </g>
+        <!-- feet gripping the phone edge -->
+        <path d="M48 120 v14 M44 134 h8 M70 120 v14 M66 134 h8" stroke="#ff8a3d" stroke-width="4" stroke-linecap="round"/>
+        <g class="zz" font-family="Geist Mono,monospace" font-weight="600" fill="#6b675e"><text x="96" y="30" font-size="12">z</text><text x="104" y="20" font-size="9">z</text></g>
+      </svg>
+
+      <div class="phone">
+        <div class="screen" id="screen">
+          <div class="island"></div>
+          <div class="sbar"><span id="pTime">9:41</span><span>●●● ▮</span></div>
+
+          <svg class="sky" viewBox="0 0 278 598" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+            <g class="stars" id="stars" fill="#fff">
+              <circle cx="30" cy="60" r="1.2"/><circle cx="80" cy="110" r="1"/><circle cx="140" cy="48" r="1.4"/><circle cx="200" cy="96" r="1"/><circle cx="250" cy="58" r="1.3"/>
+              <circle cx="110" cy="170" r="1"/><circle cx="230" cy="190" r="1.2"/><circle cx="50" cy="210" r="1"/><circle cx="170" cy="240" r="1.1"/><circle cx="20" cy="140" r=".9"/>
+            </g>
+            <g class="sun" id="sun"><circle cx="200" cy="0" r="26" fill="#ffd34d"/><circle cx="200" cy="0" r="40" fill="#ffd34d" opacity=".25"/></g>
+            <g class="moon" id="moon"><circle cx="210" cy="0" r="20" fill="#f4f1e6"/><circle cx="220" cy="-6" r="18" fill="var(--sky-top)"/></g>
+            <g fill="#fff" opacity=".85">
+              <g class="cloud" style="animation-duration:46s"><ellipse cx="0" cy="440" rx="34" ry="11"/><ellipse cx="18" cy="432" rx="20" ry="12"/></g>
+              <g class="cloud" style="animation-duration:70s;animation-delay:-30s"><ellipse cx="0" cy="412" rx="26" ry="9"/><ellipse cx="12" cy="405" rx="15" ry="10"/></g>
+            </g>
+            <g class="hills">
+              <path d="M0 470 C60 430 120 440 160 462 C200 484 240 450 278 440 V598 H0Z" style="opacity:.7"/>
+              <path d="M0 500 C70 470 130 505 190 492 C230 484 260 478 278 482 V598 H0Z"/>
+            </g>
+          </svg>
+
+          <div class="homegrid" id="home">
+            <button class="app" data-app="p1"><i style="background:linear-gradient(135deg,#ff6a3d,#ff3d77)">🛍️</i><span>Project 1</span></button>
+            <button class="app" data-app="p2"><i style="background:linear-gradient(135deg,#2bb673,#0e8a7a)">📊</i><span>Project 2</span></button>
+            <button class="app" data-app="p3"><i style="background:linear-gradient(135deg,#4f7bff,#7a4dff)">💬</i><span>Project 3</span></button>
+            <button class="app" data-app="p4"><i style="background:linear-gradient(135deg,#ffb020,#ff7a1a)">⛅</i><span>Project 4</span></button>
+            <button class="app" data-app="about"><i style="background:#fbfaf6">🙋🏽‍♂️</i><span>About</span></button>
+            <button class="app" data-app="stack"><i style="background:#141412">⚙️</i><span>Stack</span></button>
+            <button class="app" data-app="blog"><i style="background:#fff3d6">✍️</i><span>Writing</span></button>
+            <button class="app" data-app="cv"><i style="background:#e8e4ff">📄</i><span>Résumé</span></button>
+          </div>
+
+          <div class="widget"><span id="wLabel">Tamil Nadu · Day</span><b id="wTime">--:--</b><span id="wNote">Probably shipping something</span></div>
+
+          <div class="dock">
+            <a class="app" href="mailto:kumar2004saran@gmail.com" aria-label="Email"><i style="background:#2f80ff">✉️</i><span>Mail</span></a>
+            <a class="app" href="https://github.com/Sarandjj" target="_blank" rel="noopener" aria-label="GitHub"><i style="background:#141412">🐙</i><span>GitHub</span></a>
+            <a class="app" href="https://www.linkedin.com/in/sarankumar-g" target="_blank" rel="noopener" aria-label="LinkedIn"><i style="background:#0a66c2;font-weight:700;font-size:20px">in</i><span>LinkedIn</span></a>
+          </div>
+
+          <div class="win" id="win">
+            <header id="winHead"><small id="winKicker"></small><h3 id="winTitle"></h3></header>
+            <div class="body" id="winBody"></div>
+            <div class="homebar"></div><div class="homebar-hit" id="close" title="Close app"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skypick" id="skypick">
+        <button data-t="live" class="on">Live</button><button data-t="morning">Morning</button><button data-t="day">Day</button><button data-t="evening">Evening</button><button data-t="night">Night</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="label reveal">01 / What I do</div>
+    <h2 class="reveal">Not just Flutter. <em>The whole product,</em> front to back.</h2>
+    <p class="lede reveal">Clients come for the app and stay because the backend, the deploys and the speed are handled too.</p>
+
+    <div class="bento">
+      <div class="tile t-code reveal">
+        <span class="tag">Mobile · Flutter</span>
+        <h3>Apps that feel native on iOS, Android and the web</h3>
+        <p>One codebase, pixel-tuned UI, smooth 120 Hz animation, published to both stores.</p>
+<div class="code"><span class="k">class</span> <span class="f">YourApp</span> <span class="k">extends</span> <span class="f">StatelessWidget</span> {
+  <span class="d">// idea → store, one codebase</span>
+  <span class="k">@override</span>
+  <span class="f">Widget</span> <span class="c">build</span>(<span class="f">BuildContext</span> context) {
+    <span class="k">return</span> <span class="f">MaterialApp</span>(
+      title: <span class="s">'Ships on time'</span>,
+      home: <span class="k">const</span> <span class="f">Delightful</span>(),
+    );
+  }
+}</div>
+      </div>
+
+      <div class="tile t-term reveal">
+        <span class="tag" style="color:#9b968a">Backend · Cloud</span>
+        <h3>Firebase, Node.js &amp; Google Cloud</h3>
+        <div class="term" id="term"></div>
+      </div>
+
+      <div class="tile reveal">
+        <span class="tag">Right now in Tamil Nadu</span>
+        <div class="clock" id="clock">--:--</div>
+        <p id="clockNote">Replies within a day</p>
+      </div>
+
+      <div class="tile reveal">
+        <span class="tag">Web · Speed</span>
+        <div class="rings" id="rings"></div>
+        <p>The Lighthouse score I aim for on every site I ship.</p>
+      </div>
+
+      <div class="tile t-stack reveal">
+        <span class="tag">Toolbox</span>
+        <div class="groups">
+          <div><b>Mobile</b>Flutter, Dart, Riverpod / Bloc, Platform channels</div>
+          <div><b>Backend</b>Firebase, Node.js, Express, REST, Cloud Functions</div>
+          <div><b>Web</b>Astro, React, Tailwind, SEO, Core Web Vitals</div>
+          <div><b>Shipping</b>GCP, CI/CD, Play Console, App Store Connect</div>
+        </div>
+      </div>
+
+      <a class="tile t-cta reveal" href="#contact">
+        <span class="arrow">→</span>
+        <div><h3>Have an app in mind?</h3><p>Let's talk scope, timeline and budget.</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="work" style="padding-top:20px">
+  <div class="wrap">
+    <div class="label reveal">02 / Selected work</div>
+    <h2 class="reveal">Things I've <em>shipped.</em></h2>
+    <p class="lede reveal">Each one gets a full case study: the problem, the build, what was hard, and the result. <span class="ph" style="margin:0">placeholders below</span></p>
+
+    <div class="work">
+      <a class="wrow reveal" href="#" data-c1="#ff6a3d" data-c2="#ff3d77" data-t="Project One">
+        <span class="n">01</span><h3>Project One <em>e-commerce app</em></h3><span class="st">Flutter · Firebase · Stripe</span><span class="yr">2026</span>
+      </a>
+      <a class="wrow reveal" href="#" data-c1="#2bb673" data-c2="#0e8a7a" data-t="Project Two">
+        <span class="n">02</span><h3>Project Two <em>analytics dashboard</em></h3><span class="st">Flutter · Node.js · MongoDB</span><span class="yr">2025</span>
+      </a>
+      <a class="wrow reveal" href="#" data-c1="#4f7bff" data-c2="#7a4dff" data-t="Project Three">
+        <span class="n">03</span><h3>Project Three <em>AI chat assistant</em></h3><span class="st">Flutter · Cloud Functions · LLM API</span><span class="yr">2025</span>
+      </a>
+      <a class="wrow reveal" href="#" data-c1="#ffb020" data-c2="#ff7a1a" data-t="Project Four">
+        <span class="n">04</span><h3>Project Four <em>utility app</em></h3><span class="st">Flutter · Maps · REST</span><span class="yr">2024</span>
+      </a>
+    </div>
+  </div>
+</section>
+<div class="peek" id="peek"><div class="ptop" id="peekTop">Project</div><div class="pb"><i></i><i></i><i style="width:70%"></i><i></i></div></div>
+
+<section id="process" style="background:var(--paper2)">
+  <div class="wrap">
+    <div class="label reveal">03 / How I work</div>
+    <h2 class="reveal">Simple process, <em>no surprises.</em></h2>
+    <div class="steps">
+      <div class="step reveal"><span class="mono">01</span><h3>Discover</h3><p>A short call to understand the goal, users and budget. You get a clear written scope.</p></div>
+      <div class="step reveal"><span class="mono">02</span><h3>Design</h3><p>Flows and screens in Figma, agreed before any code is written.</p></div>
+      <div class="step reveal"><span class="mono">03</span><h3>Build</h3><p>Weekly builds you can install and try, so feedback comes early.</p></div>
+      <div class="step reveal"><span class="mono">04</span><h3>Ship &amp; support</h3><p>Store release, analytics, and fixes after launch.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    <div class="label reveal">04 / Writing</div>
+    <h2 class="reveal">Notes from <em>building.</em></h2>
+    <div class="posts">
+      <a class="post reveal" href="#"><h3>How I built Project One with Flutter and Firebase</h3><span class="mono">Coming soon</span></a>
+      <a class="post reveal" href="#"><h3>Firebase Auth mistakes I made, so you don't have to</h3><span class="mono">Coming soon</span></a>
+      <a class="post reveal" href="#"><h3>Making a Flutter app feel fast on cheap phones</h3><span class="mono">Coming soon</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="big reveal">Got an idea?<em>Let's build it.</em></div>
+    <button class="mail reveal" id="copy">kumar2004saran@gmail.com <small id="copyLbl">click to copy</small></button>
+    <div class="socials reveal">
+      <a class="btn ghost sm" href="mailto:kumar2004saran@gmail.com">Email</a>
+      <a class="btn ghost sm" href="https://www.linkedin.com/in/sarankumar-g" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost sm" href="https://github.com/Sarandjj" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© 2026 Sarankumar G</span><span>Prototype v2 · press ⌘K</span></div></footer>
+
+<div class="cmdk" id="cmdk" role="dialog" aria-label="Command menu">
+  <div class="box"><input id="kq" placeholder="Type a command or search…" autocomplete="off"><ul id="kl"></ul></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* theme */
+const root=document.documentElement;
+try{const t=localStorage.getItem('theme');if(t)root.dataset.theme=t}catch(e){}
+function toggleTheme(){
+  const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme=dark?'light':'dark';
+  try{localStorage.setItem('theme',root.dataset.theme)}catch(e){}
+}
+$('#theme').onclick=toggleTheme;
+addEventListener('scroll',()=>$('#nav').classList.toggle('scrolled',scrollY>10),{passive:true});
+
+/* Tamil Nadu time drives the sky, the clock tiles and Kili's mood */
+const SKY={
+  morning:{top:'#8ec5ff',bot:'#ffe1b0',hill:'#5cc27e',sun:450,moon:false,stars:0,label:'Morning',note:'Coffee and code'},
+  day:    {top:'#3d8bff',bot:'#a9d8ff',hill:'#2bb673',sun:425,moon:false,stars:0,label:'Day',note:'Probably shipping something'},
+  evening:{top:'#5a3f9e',bot:'#ff9a6b',hill:'#3a6b52',sun:472,moon:false,stars:.35,label:'Evening',note:'Wrapping up the day'},
+  night:  {top:'#0b1230',bot:'#2b2f63',hill:'#1d2b3a',sun:700,moon:true,stars:1,label:'Night',note:'Asleep. Kili too. Leave a message'}
+};
+const ist=()=>{const p=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+  return {h:+p.find(x=>x.type==='hour').value,m:p.find(x=>x.type==='minute').value}};
+const phaseOf=h=>h>=5&&h<10?'morning':h>=10&&h<17?'day':h>=17&&h<20?'evening':'night';
+let forced=null;
+function paintSky(){
+  const t=ist(), hhmm=`${String(t.h).padStart(2,'0')}:${t.m}`, ph=forced||phaseOf(t.h), s=SKY[ph], sc=$('#screen').style;
+  sc.setProperty('--sky-top',s.top);sc.setProperty('--sky-bot',s.bot);sc.setProperty('--hill',s.hill);
+  $('#sun').style.transform=`translateY(${s.sun}px)`;$('#sun').style.opacity=s.moon?0:1;
+  $('#moon').style.transform=`translateY(${s.moon?428:700}px)`;$('#moon').style.opacity=s.moon?1:0;
+  $('#stars').style.opacity=s.stars;
+  $('#pTime').textContent=hhmm;$('#wTime').textContent=hhmm;$('#clock').textContent=hhmm;$('#istSmall').textContent='IST '+hhmm;
+  $('#wLabel').textContent='Tamil Nadu · '+s.label;$('#wNote').textContent=s.note;
+  $('#clockNote').textContent=ph==='night'?'Asleep now, replies in the morning':'Awake, replies within a day';
+  $('#kili').classList.toggle('sleep',ph==='night');
+}
+paintSky();setInterval(paintSky,20000);
+$('#skypick').onclick=e=>{const b=e.target.closest('button');if(!b)return;
+  $$('#skypick button').forEach(x=>x.classList.toggle('on',x===b));forced=b.dataset.t==='live'?null:b.dataset.t;paintSky()};
+
+/* Kili: eyes follow the cursor, click to chat */
+const kili=$('#kili'),pL=$('#pL'),pR=$('#pR');
+addEventListener('mousemove',e=>{
+  const r=kili.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height*.38),d=Math.hypot(dx,dy)||1,m=Math.min(4.5,d/40);
+  const ox=dx/d*m,oy=dy/d*m;pL.setAttribute('cx',46+ox);pL.setAttribute('cy',54+oy);pR.setAttribute('cx',74+ox);pR.setAttribute('cy',54+oy);
+},{passive:true});
+const LINES=['Hi! I\'m Kili, Tamil for parrot 🦜','Tap an app on the phone!','The sky follows Tamil Nadu time ☀️','Press ⌘K to jump anywhere','Click the email to copy it'];
+let li=0,sayT;
+function say(t,ms=3200){const b=$('#say');b.textContent=t;b.classList.remove('hide');clearTimeout(sayT);sayT=setTimeout(()=>b.classList.add('hide'),ms)}
+kili.onclick=()=>kili.classList.contains('sleep')?say('zzz… (it\'s night in Tamil Nadu)'):say(LINES[li++%LINES.length]);
+setTimeout(()=>kili.classList.contains('sleep')?say('zzz…',2600):say(LINES[0]),1400);
+
+/* phone apps */
+const APPS={
+  p1:{k:'Placeholder project',t:'Project One',bg:'linear-gradient(135deg,#ff6a3d,#ff3d77)',b:`<span class="ph">placeholder</span><p>One line on the problem it solves and who uses it.</p><div class="chips"><span>Flutter</span><span>Firebase</span><span>Stripe</span></div><div class="row">Platform<span>iOS · Android</span></div><div class="row">My role<span>Solo build</span></div><div class="row">Result<span>Real number here</span></div><a class="go" href="#work">Read case study</a>`},
+  p2:{k:'Placeholder project',t:'Project Two',bg:'linear-gradient(135deg,#2bb673,#0e8a7a)',b:`<span class="ph">placeholder</span><p>Dashboard with live data and reports.</p><div class="chips"><span>Flutter Web</span><span>Node.js</span><span>MongoDB</span></div><div class="row">Platform<span>Web</span></div><div class="row">Result<span>Real number here</span></div><a class="go" href="#work">Read case study</a>`},
+  p3:{k:'Placeholder project',t:'Project Three',bg:'linear-gradient(135deg,#4f7bff,#7a4dff)',b:`<span class="ph">placeholder</span><p>An AI assistant inside a mobile app.</p><div class="chips"><span>Flutter</span><span>Cloud Functions</span><span>LLM API</span></div><a class="go" href="#work">Read case study</a>`},
+  p4:{k:'Placeholder project',t:'Project Four',bg:'linear-gradient(135deg,#ffb020,#ff7a1a)',b:`<span class="ph">placeholder</span><p>Small utility app with maps and alerts.</p><div class="chips"><span>Flutter</span><span>Maps</span><span>REST</span></div><a class="go" href="#work">Read case study</a>`},
+  about:{k:'About',t:'Hi, I\'m Saran',bg:'linear-gradient(135deg,#141412,#3a3a36)',b:`<p>Mobile &amp; full-stack developer from Tamil Nadu, India.</p><p>I build Flutter apps and the Firebase, Node.js and Google Cloud systems behind them.</p><div class="row">Based in<span>Tamil Nadu</span></div><div class="row">Open to<span>Freelance · Remote</span></div><a class="go" href="#contact">Say hello</a>`},
+  stack:{k:'Toolbox',t:'My stack',bg:'linear-gradient(135deg,#141412,#2bb673)',b:`<div class="row">Mobile<span>Flutter, Dart</span></div><div class="row">Backend<span>Firebase, Node.js</span></div><div class="row">Cloud<span>Google Cloud</span></div><div class="row">Web<span>Astro, React</span></div><div class="row">Ship<span>CI/CD, Stores</span></div>`},
+  blog:{k:'Writing',t:'Notes from building',bg:'linear-gradient(135deg,#ffb020,#ff4f1f)',b:`<div class="row">Flutter + Firebase build log<span>Soon</span></div><div class="row">Firebase Auth mistakes<span>Soon</span></div><div class="row">Fast Flutter on cheap phones<span>Soon</span></div><a class="go" href="#writing">All posts</a>`},
+  cv:{k:'Résumé',t:'Download my CV',bg:'linear-gradient(135deg,#7a4dff,#4f7bff)',b:`<p>One-page PDF with experience, skills and projects.</p><span class="ph">add real PDF</span><a class="go" href="#">Download PDF</a>`}
+};
+const win=$('#win');
+$('#home').onclick=e=>{const b=e.target.closest('.app');if(!b)return;const a=APPS[b.dataset.app];
+  const sr=$('#screen').getBoundingClientRect(),ir=b.querySelector('i').getBoundingClientRect();
+  win.style.transformOrigin=`${ir.left+ir.width/2-sr.left}px ${ir.top+ir.height/2-sr.top}px`;
+  $('#winHead').style.background=a.bg;$('#winKicker').textContent=a.k;$('#winTitle').textContent=a.t;$('#winBody').innerHTML=a.b;
+  win.classList.add('open')};
+const closeApp=()=>win.classList.remove('open');
+$('#close').onclick=closeApp;
+win.addEventListener('click',e=>{if(e.target.closest('.go'))closeApp()});
+
+/* terminal tile */
+const T=['$ flutter build web --release','<span class="ok">✓</span> Built build/web','$ firebase deploy --only hosting,functions','<span class="ok">✓</span> Deploy complete. Live in 38s'];
+const term=$('#term');
+async function runTerm(){
+  if(reduce){term.innerHTML=T.join('<br>');return}
+  for(;;){term.innerHTML='';
+    for(const line of T){const div=document.createElement('div');term.append(div);
+      if(line.startsWith('$')){for(let i=1;i<=line.length;i++){div.innerHTML=line.slice(0,i)+'<span class="cur"></span>';await new Promise(r=>setTimeout(r,28))}div.textContent=line}
+      else{await new Promise(r=>setTimeout(r,500));div.innerHTML=line}
+      await new Promise(r=>setTimeout(r,350))}
+    await new Promise(r=>setTimeout(r,3500))}
+}
+runTerm();
+
+/* score rings */
+$('#rings').innerHTML=['Perf','A11y','BP','SEO'].map(l=>`<div class="ring" title="${l}"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" stroke="#d6f0df" stroke-width="5" fill="none"/><circle cx="26" cy="26" r="22" stroke="#1a9d5b" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2" class="arc"/></svg><b>100</b></div>`).join('');
+
+/* scroll reveal (also fills the rings) */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');
+  e.target.querySelectorAll('.arc').forEach(a=>{a.style.transition='stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)';a.style.strokeDashoffset=0});
+  io.unobserve(e.target)}),{threshold:.15});
+$$('.reveal').forEach(el=>io.observe(el));
+
+/* work list hover preview */
+const peek=$('#peek');let px=0,py=0,tx=0,ty=0;
+$$('.wrow').forEach(r=>{
+  r.onmouseenter=()=>{$('#peekTop').style.background=`linear-gradient(135deg,${r.dataset.c1},${r.dataset.c2})`;$('#peekTop').textContent=r.dataset.t;peek.classList.add('on')};
+  r.onmouseleave=()=>peek.classList.remove('on');
+});
+addEventListener('mousemove',e=>{tx=e.clientX+130;ty=e.clientY},{passive:true});
+(function loop(){px+=(tx-px)*.15;py+=(ty-py)*.15;peek.style.left=px+'px';peek.style.top=py+'px';requestAnimationFrame(loop)})();
+
+/* copy email */
+$('#copy').onclick=async()=>{try{await navigator.clipboard.writeText('kumar2004saran@gmail.com');$('#copyLbl').textContent='copied ✓'}catch(e){location.href='mailto:kumar2004saran@gmail.com'}
+  setTimeout(()=>$('#copyLbl').textContent='click to copy',2000)};
+
+/* ⌘K command menu */
+const CMDS=[
+  ['Go to Work','section',()=>location.hash='#work'],['Go to Services','section',()=>location.hash='#services'],
+  ['Go to Process','section',()=>location.hash='#process'],['Go to Writing','section',()=>location.hash='#writing'],
+  ['Contact me','section',()=>location.hash='#contact'],['Copy email','action',()=>$('#copy').click()],
+  ['Toggle dark mode','action',toggleTheme],['Open GitHub','link',()=>open('https://github.com/Sarandjj')],
+  ['Open LinkedIn','link',()=>open('https://www.linkedin.com/in/sarankumar-g')]
+];
+const K=$('#cmdk'),kq=$('#kq'),kl=$('#kl');let ks=0,kf=CMDS;
+function renderK(){kf=CMDS.filter(c=>c[0].toLowerCase().includes(kq.value.toLowerCase()));ks=Math.min(ks,Math.max(kf.length-1,0));
+  kl.innerHTML=kf.map((c,i)=>`<li data-i="${i}" class="${i===ks?'sel':''}">${c[0]}<span>${c[1]}</span></li>`).join('')}
+const openK=()=>{K.classList.add('on');kq.value='';ks=0;renderK();kq.focus()},closeK=()=>K.classList.remove('on');
+const runK=i=>{const c=kf[i];closeK();c&&c[2]()};
+$('#openK').onclick=openK;
+K.onclick=e=>{const li=e.target.closest('li');if(li)runK(+li.dataset.i);else if(e.target===K)closeK()};
+kq.oninput=()=>{ks=0;renderK()};
+addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();K.classList.contains('on')?closeK():openK();return}
+  if(e.key==='Escape'){closeK();closeApp()}
+  if(!K.classList.contains('on'))return;
+  if(e.key==='ArrowDown'){ks=(ks+1)%kf.length;renderK();e.preventDefault()}
+  if(e.key==='ArrowUp'){ks=(ks-1+kf.length)%kf.length;renderK();e.preventDefault()}
+  if(e.key==='Enter')runK(ks);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import { getProjects } from '../../lib/projects';
+import { SITE } from '../../data/site';
+
+const projects = await getProjects();
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Projects',
+    url: `${SITE.url}/projects`,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    hasPart: projects.map((p) => ({ '@type': 'SoftwareApplication', name: p.data.name, url: `${SITE.url}/projects/${p.id}` })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Projects', item: `${SITE.url}/projects` },
+    ],
+  },
+];
+const FILTERS = [
+  ['all', 'All'],
+  ['mobile', 'Mobile'],
+  ['web', 'Web'],
+  ['backend', 'Backend'],
+] as const;
+---
+
+<Base
+  title="Projects | Sarankumar G"
+  description="Five apps in different stages: FinWise, Nirai, NallHub, Coin18 and Clean Scanner. Flutter, Supabase, Firebase and Node.js."
+  jsonLd={jsonLd}
+>
+  <div class="page">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Projects' }]} />
+      <h1 class="page-title">Things I'm <em>building.</em></h1>
+      <p class="page-lede">Five real apps in different stages. Each one has a case study with the problem, the build, the hard parts and where it stands.</p>
+
+      <div class="filters" id="filters" role="group" aria-label="Filter projects">
+        {FILTERS.map(([key, label], i) => <button type="button" data-f={key} aria-pressed={String(i === 0)}>{label}</button>)}
+      </div>
+
+      <div class="pgrid" id="pgrid">
+        {
+          projects.map((p) => (
+            <a class="pcard" href={`/projects/${p.id}`} data-tags={p.data.tags.join(' ')}>
+              <div class="pcard-top">
+                <span class="pcard-icon" style={`background:linear-gradient(135deg,${p.data.c1},${p.data.c2})`} aria-hidden="true">{p.data.emoji}</span>
+                <StatusBadge status={p.data.status} />
+              </div>
+              <h2>{p.data.name} <em>{p.data.kind}</em></h2>
+              <p>{p.data.summary}</p>
+              <div class="chips">{p.data.stack.slice(0, 4).map((s) => <span class="chip">{s}</span>)}</div>
+              <span class="more">Read the case study →</span>
+            </a>
+          ))
+        }
+      </div>
+      <p class="page-lede" id="none" hidden style="margin-top:28px">Nothing in this group yet.</p>
+    </div>
+  </div>
+
+  <script>
+    const btns = [...document.querySelectorAll<HTMLButtonElement>('#filters button')];
+    const cards = [...document.querySelectorAll<HTMLElement>('.pcard')];
+    document.querySelector('#filters')!.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('button');
+      if (!b) return;
+      btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      const f = b.dataset.f!;
+      let shown = 0;
+      cards.forEach((c) => {
+        const ok = f === 'all' || (c.dataset.tags ?? '').split(' ').includes(f);
+        c.hidden = !ok;
+        if (ok) shown++;
+      });
+      document.querySelector<HTMLElement>('#none')!.hidden = shown > 0;
+    });
+  </script>
+</Base>

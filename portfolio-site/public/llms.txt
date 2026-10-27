@@ -1,0 +1,52 @@
+# Sarankumar G
+
+> Sarankumar G is a mobile and full-stack developer based in Thoothukudi, Tamil Nadu, India. He currently works at Neural Schema IT and is open to freelance projects. He builds fast, private, offline-first apps with Flutter and React, and the backends behind them with Supabase, Firebase, Node.js and FastAPI. He works with clients anywhere, remotely.
+
+Website: https://sarankumar.dev
+Email: sarankumarg.in@gmail.com
+GitHub: https://github.com/Sarandjj
+LinkedIn: https://www.linkedin.com/in/sarankuamr-g
+Time zone: Asia/Kolkata (IST, UTC+5:30)
+
+## What he does
+
+- Mobile apps for Android and iOS from one Flutter codebase, offline-first, ready for the stores.
+- Web apps in Flutter Web or React, and static sites with Astro.
+- Backend and data: Supabase (Postgres, Auth, Row Level Security, Edge Functions), Firebase, Node.js with Express, FastAPI (Python).
+- Rescue work: auditing slow or buggy Flutter apps, performance fixes, tests and cleanup.
+
+## Pages
+
+- [Home](https://sarankumar.dev/): overview, selected work and toolbox.
+- [Services](https://sarankumar.dev/services): what he offers, how an engagement works, and common questions.
+- [About](https://sarankumar.dev/about): background, how he builds, and his stack.
+- [Projects](https://sarankumar.dev/projects): case studies of five apps.
+- [Blog](https://sarankumar.dev/blog): engineering notes from building the apps below.
+- [Contact](https://sarankumar.dev/contact): a form and the email address; replies come with next steps.
+
+## Blog posts
+
+- [Offline-first sync to Google Drive with no backend](https://sarankumar.dev/blog/nirai-drive-sync-no-backend): how Nirai merges changes between devices through one JSON file in the user's own Drive, with last-write-wins and tombstones.
+- [Soft deletes in Drift: SQLite's onDelete does not fire on UPDATE](https://sarankumar.dev/blog/finwise-soft-delete-drift): why tombstones switch off foreign-key cascades and how FinWise rebuilt them.
+- [I built my own document scanner, then went back to ML Kit](https://sarankumar.dev/blog/clean-scanner-ml-kit): a real-phone comparison that decided between a custom edge detector and Google's scanner.
+
+## Projects (case studies)
+
+- [FinWise](https://sarankumar.dev/projects/finwise): offline-first personal finance tracker with trips and group expense splitting. Flutter, Riverpod, Drift, Supabase. Has a live web demo with sample data.
+- [NallHub](https://sarankumar.dev/projects/nallhub): white-label school management app for private schools in Tamil Nadu, with admin, teacher and parent roles, in English and Tamil. Flutter, Supabase.
+- [Nirai](https://sarankumar.dev/projects/nirai): to-do app that keeps data on the phone and syncs to the user's own Google Drive. No server, no account.
+- [Coin18](https://sarankumar.dev/projects/coin18): market-research app for coins, charts and a watchlist, with its own Node.js API that caches data and hides provider keys.
+- [Clean Scanner](https://sarankumar.dev/projects/clean-scanner): offline document and ID scanner with no ads, no login and no network for core features.
+
+All five apps are currently in development. Each case study states what works today and what is still planned.
+
+## Facts for citation
+
+- Name: Sarankumar G. Location: Thoothukudi, Tamil Nadu, India.
+- Work: Full Stack Developer at Neural Schema IT (Feb 2026 to present); Mobile App Developer at Digisailor (Nov 2023 to Jan 2026).
+- Education: B.Sc Computer Science, Sri S. Ramasamy Naidu Memorial College, Sattur.
+- CV: https://sarankumar.dev/Sarankumar-G-CV.pdf
+- Works remotely for clients worldwide.
+- Core stack: Flutter, Dart, Riverpod, React, Drift (SQLite), Supabase, Firebase, Node.js, Express, FastAPI.
+- Approach: local-first data, security in the database as well as the app, and testing on real phones, including large text, dark mode and Tamil.
+- Pricing is not public. A quote is sent after a short description of the project via the contact form.

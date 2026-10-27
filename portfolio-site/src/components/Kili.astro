@@ -1,0 +1,42 @@
+---
+// Kili, the parrot mascot, drawn in code. Eyes follow the cursor and it sleeps at night
+// (see src/scripts/kili.ts). Use one Kili per page: the gradient ids are fixed.
+import '../styles/kili.css';
+
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+
+<svg class:list={['kili', cls]} viewBox="0 0 120 140" role="img" aria-label="Kili the parrot, the site mascot">
+  <defs>
+    <linearGradient id="kili-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2bb673"></stop>
+      <stop offset="1" stop-color="#1d8a55"></stop>
+    </linearGradient>
+  </defs>
+  <g class="bob">
+    <path d="M44 112 Q30 132 26 140 L40 140 Q48 128 54 116Z" fill="#1d8a55"></path>
+    <path d="M54 114 Q46 134 46 140 L58 140 Q60 128 62 116Z" fill="#2bb673"></path>
+    <path d="M60 22 C88 22 98 48 96 78 C94 108 80 122 60 122 C40 122 26 108 24 78 C22 48 32 22 60 22Z" fill="#2bb673"></path>
+    <ellipse cx="60" cy="94" rx="21" ry="24" fill="#a6e36b"></ellipse>
+    <path d="M52 26 Q50 12 58 8 Q56 18 60 24Z M60 24 Q62 8 72 6 Q64 16 66 26Z" fill="#ffc93c"></path>
+    <path d="M30 70 Q18 92 30 112 Q40 100 40 78Z" fill="#1d8a55"></path>
+    <path class="wing" d="M90 70 Q104 90 92 112 Q80 100 80 78Z" fill="#1d8a55"></path>
+    <ellipse cx="36" cy="66" rx="6" ry="4" fill="#ff7a6b" opacity=".55"></ellipse>
+    <ellipse cx="84" cy="66" rx="6" ry="4" fill="#ff7a6b" opacity=".55"></ellipse>
+    <g class="open"><circle cx="46" cy="54" r="11" fill="#fff"></circle></g>
+    <g class="open"><circle cx="74" cy="54" r="11" fill="#fff"></circle></g>
+    <circle class="pupil" data-eye="l" cx="46" cy="54" r="5.5" fill="#141412"></circle>
+    <circle class="pupil" data-eye="r" cx="74" cy="54" r="5.5" fill="#141412"></circle>
+    <path class="closed" d="M37 55 Q46 61 55 55 M65 55 Q74 61 83 55" stroke="#141412" stroke-width="2.6" fill="none" stroke-linecap="round"></path>
+    <path d="M53 64 Q60 58 67 64 Q68 78 59 82 Q62 74 53 64Z" fill="#ff4f1f"></path>
+    <path d="M55 72 Q60 76 64 73 Q62 80 58 80Z" fill="#c2360f"></path>
+  </g>
+  <path d="M48 120 v14 M44 134 h8 M70 120 v14 M66 134 h8" stroke="#ff8a3d" stroke-width="4" stroke-linecap="round"></path>
+  <g class="zz" font-family="Geist Mono Variable, monospace" font-weight="600" fill="#605c53">
+    <text x="96" y="30" font-size="12">z</text>
+    <text x="104" y="20" font-size="9">z</text>
+  </g>
+</svg>

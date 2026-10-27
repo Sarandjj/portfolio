@@ -1,0 +1,217 @@
+---
+import Base from '../layouts/Base.astro';
+import Phone from '../components/Phone.astro';
+import '../styles/home.css';
+import { SITE, STATUS_LABEL } from '../data/site';
+import { getPosts } from '../lib/posts';
+import { getProjects } from '../lib/projects';
+const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
+
+const codeSample = `<span class="k">class</span> <span class="f">YourApp</span> <span class="k">extends</span> <span class="f">StatelessWidget</span> {
+  <span class="d">// idea → store, one codebase</span>
+  <span class="k">@override</span>
+  <span class="f">Widget</span> <span class="c">build</span>(<span class="f">BuildContext</span> context) {
+    <span class="k">return</span> <span class="f">MaterialApp</span>(
+      title: <span class="s">'Your app'</span>,
+      home: <span class="k">const</span> <span class="f">Delightful</span>(),
+    );
+  }
+}`;
+
+const posts = await getPosts();
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${SITE.url}/#person`,
+    name: SITE.name,
+    url: SITE.url,
+    jobTitle: 'Mobile and full-stack developer',
+    email: SITE.email,
+    address: { '@type': 'PostalAddress', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
+    worksFor: { '@type': 'Organization', name: 'Neural Schema IT' },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'Sri S. Ramasamy Naidu Memorial College, Sattur' },
+    sameAs: [SITE.github, SITE.linkedin],
+    knowsAbout: ['Flutter', 'Dart', 'React', 'Firebase', 'Supabase', 'Node.js', 'FastAPI', 'Python', 'Offline-first apps', 'Mobile app development'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    url: SITE.url,
+    name: SITE.name,
+    inLanguage: 'en',
+    publisher: { '@id': `${SITE.url}/#person` },
+  },
+];
+---
+
+<Base jsonLd={jsonLd}>
+  <section class="hero" id="top" style="padding-bottom:40px">
+    <div class="wrap">
+      <div>
+        <div class="status">
+          <span class="live"><b>Available</b> for freelance</span>
+          <span>Tamil Nadu, India</span>
+          <span id="istSmall">IST --:--</span>
+        </div>
+        <h1>
+          <span class="line"><span>I build <em>apps for</em></span></span>
+          <span class="line"><span><em>your pocket</em> and the</span></span>
+          <span class="line"><span>systems behind them.</span></span>
+        </h1>
+        <p class="intro">
+          I'm Sarankumar, a <b>mobile &amp; full-stack developer</b>. Flutter for iOS, Android and web, React for the web, with Supabase, Firebase,
+          Node.js and FastAPI underneath. Fast, private, offline-first apps, from idea to release.
+        </p>
+        <div class="cta">
+          <a class="btn solid" href="#work">See selected work ↓</a>
+          <a class="btn ghost" href="#contact">Start a project</a>
+          <span class="hint" aria-hidden="true">psst, the phone works →</span>
+        </div>
+      </div>
+      <Phone />
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="label reveal">01 / What I do</div>
+      <h2 class="reveal">Not just Flutter. <em>The whole product,</em> front to back.</h2>
+      <p class="lede reveal">The app, the data layer, the backend and the release, handled by one developer.</p>
+
+      <div class="bento">
+        <div class="tile t-code reveal">
+          <span class="tag">Mobile · Flutter</span>
+          <h3>Apps that feel native on iOS, Android and the web</h3>
+          <p>One codebase, careful UI, smooth animation, and offline-first by default.</p>
+<div class="code" tabindex="0" role="region" aria-label="Flutter code sample" set:html={codeSample} />
+        </div>
+
+        <div class="tile t-term reveal">
+          <span class="tag">Backend · Cloud</span>
+          <h3>Supabase, Firebase, Node.js &amp; FastAPI</h3>
+          <div class="term" id="term" aria-hidden="true"></div>
+        </div>
+
+        <div class="tile reveal">
+          <span class="tag">Right now in Tamil Nadu</span>
+          <div class="clock" id="clock">--:--</div>
+          <p id="clockNote">Awake right now</p>
+        </div>
+
+        <div class="tile reveal">
+          <span class="tag">Web · Speed</span>
+          <div class="scores" role="img" aria-label="Lighthouse target: 95 or higher for performance, accessibility, best practices and SEO">
+            {
+              [0, 1, 2, 3].map(() => (
+                <div class="score">
+                  <svg viewBox="0 0 52 52">
+                    <circle cx="26" cy="26" r="22" stroke="#d6f0df" stroke-width="5" fill="none"></circle>
+                    <circle class="arc" cx="26" cy="26" r="22" stroke="#1a9d5b" stroke-width="5" fill="none" stroke-linecap="round"></circle>
+                  </svg>
+                  <b>95+</b>
+                </div>
+              ))
+            }
+          </div>
+          <p>The Lighthouse target for every page I ship.</p>
+        </div>
+
+        <div class="tile t-stack reveal">
+          <span class="tag">Toolbox</span>
+          <div class="groups">
+            <div><b>Mobile</b>Flutter, Dart, Riverpod, camera, ML Kit and biometrics plugins</div>
+            <div><b>Data &amp; backend</b>Drift (SQLite), Supabase, Firebase, Node.js with Express, FastAPI (Python)</div>
+            <div><b>Web</b>React, Flutter Web, Astro (this site), Firebase Hosting</div>
+            <div><b>Shipping</b>Google Play Console, Render, Git</div>
+          </div>
+        </div>
+
+        <a class="tile t-cta reveal" href="#contact">
+          <span class="arrow" aria-hidden="true">→</span>
+          <div><h3>Have an app in mind?</h3><p>Let's talk scope, timeline and budget.</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" style="padding-top:20px">
+    <div class="wrap">
+      <div class="label reveal">02 / Selected work</div>
+      <h2 class="reveal">Things I'm <em>building.</em></h2>
+      <p class="lede reveal">
+        Five real apps in different stages. Each gets a full case study: the problem, the build, what was hard, and where it stands.
+      </p>
+
+      <p class="reveal" style="margin-top:20px"><a class="btn ghost sm" href="/projects">All projects →</a></p>
+
+      <div class="work">
+        {
+          PROJECTS.map((p, i) => (
+            <a class="wrow reveal" href={`/projects/${p.slug}`} data-c1={p.c1} data-c2={p.c2} data-t={p.name}>
+              <span class="n">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{p.name} <em>{p.kind}</em></h3>
+              <span class="st">{p.stack.slice(0, 3).join(' · ')}</span>
+              <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <div class="peek" id="peek" aria-hidden="true">
+    <div class="ptop" id="peekTop">Project</div>
+    <div class="pb"><i></i><i></i><i style="width:70%"></i><i></i></div>
+  </div>
+
+  <section id="process" style="background:var(--paper2)">
+    <div class="wrap">
+      <div class="label reveal">03 / How I work</div>
+      <h2 class="reveal">Simple process, <em>no surprises.</em></h2>
+      <p class="lede reveal"><span class="note-draft">draft copy, to be confirmed</span></p>
+      <div class="steps">
+        <div class="step reveal"><span class="mono">01</span><h3>Discover</h3><p>A short call to understand the goal, the users and the budget. You get the scope in writing.</p></div>
+        <div class="step reveal"><span class="mono">02</span><h3>Design</h3><p>Key screens and flows agreed before any code is written.</p></div>
+        <div class="step reveal"><span class="mono">03</span><h3>Build</h3><p>Regular builds you can install and try, so feedback comes early.</p></div>
+        <div class="step reveal"><span class="mono">04</span><h3>Ship &amp; support</h3><p>Store release, analytics, and fixes after launch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="writing">
+    <div class="wrap">
+      <div class="label reveal">04 / Writing</div>
+      <h2 class="reveal">Notes from <em>building.</em></h2>
+      <p class="lede reveal">Short engineering notes from the apps above: the problem, the decision, and the trade-off.</p>
+      <div class="posts">
+        {
+          posts.map((p) => (
+            <a class="post reveal" href={`/blog/${p.id}`}>
+              <h3>{p.data.title}</h3>
+              <span class="mono">{p.data.tags[0]} · read the post</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="big reveal">Got an idea?<em>Let's build it.</em></div>
+      <p class="lede reveal" style="margin:20px auto 0">Tell me what you need and I'll get back to you.</p>
+      <button class="mail reveal" type="button" data-copy-email>{SITE.email} <small data-copy-label>click to copy</small></button>
+      <div class="socials reveal">
+        <a class="btn ghost sm" href={`mailto:${SITE.email}`}>Email</a>
+        <a class="btn ghost sm" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost sm" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import '../scripts/kili';
+    import '../scripts/home';
+  </script>
+</Base>

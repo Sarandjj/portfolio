@@ -1,0 +1,12 @@
+---
+import { getProjects } from '../lib/projects';
+const projects = (await getProjects()).map((p) => ({ slug: p.id, name: p.data.name }));
+---
+
+<div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Command menu">
+  <div class="box">
+    <input id="kq" placeholder="Type a command or search…" autocomplete="off" aria-label="Search commands" />
+    <ul id="kl" role="listbox"></ul>
+  </div>
+</div>
+<script id="cmd-projects" type="application/json" set:html={JSON.stringify(projects)} />

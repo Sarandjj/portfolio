@@ -1,0 +1,54 @@
+---
+// Click-to-launch phone for a live Flutter web demo. The iframe is only created when the
+// visitor taps, so the page itself stays light (the demo is a separate multi-MB app).
+interface Props {
+  url: string;
+  name: string;
+  c1: string;
+  c2: string;
+  note: string;
+}
+const { url, name, c1, c2, note } = Astro.props;
+---
+
+<section id="demo" class="demo" style={`--c1:${c1};--c2:${c2}`}>
+  <div class="demo-text">
+    <p class="label">Live demo</p>
+    <h2 class="sec-h">Try {name} <em>right here.</em></h2>
+    <p class="lede">{note}</p>
+    <div class="page-cta">
+      <button class="btn solid" type="button" data-launch>Launch the demo</button>
+      <a class="btn ghost" href={url} target="_blank" rel="noopener">Open full screen ↗</a>
+    </div>
+    <p class="lede" style="font-size:14px;margin-top:18px">
+      It is a real build of the app running in your browser with made-up data. Nothing is sent anywhere.
+    </p>
+  </div>
+
+  <div class="demo-phone" data-demo-url={url} data-demo-title={`${name} live demo`}>
+    <div class="demo-screen">
+      <button class="demo-poster" type="button" data-launch aria-label={`Launch the ${name} demo`}>
+        <span class="demo-play" aria-hidden="true">▶</span>
+        <span>Tap to launch</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const wrap = document.querySelector<HTMLElement>('[data-demo-url]');
+    if (wrap) {
+      const launch = () => {
+        const screen = wrap.querySelector('.demo-screen')!;
+        if (screen.querySelector('iframe')) return;
+        const frame = document.createElement('iframe');
+        frame.src = wrap.dataset.demoUrl!;
+        frame.title = wrap.dataset.demoTitle!;
+        frame.loading = 'lazy';
+        frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+        screen.replaceChildren(frame);
+        wrap.classList.add('on');
+      };
+      document.querySelectorAll('[data-launch]').forEach((b) => b.addEventListener('click', launch));
+    }
+  </script>
+</section>

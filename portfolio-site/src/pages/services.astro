@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { SITE } from '../data/site';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE.url}/services` },
+    ],
+  },
+];
+
+const offers = [
+  {
+    ic: '📱',
+    title: 'Mobile & web apps',
+    text: 'Android and iOS apps from one Flutter codebase, built offline-first and ready for the stores, plus web apps in Flutter or React.',
+    list: ['Flutter and Dart', 'React web apps', 'Offline storage and sync', 'Camera, OCR, biometrics, notifications', 'Store release'],
+  },
+  {
+    ic: '☁️',
+    title: 'Backend & data',
+    text: 'The server side: sign-in, a database with proper security rules, and APIs the app can rely on.',
+    list: ['Supabase: Postgres, Auth, RLS, Edge Functions', 'Firebase', 'Node.js and Express APIs', 'FastAPI (Python) APIs', 'Caching and rate limits'],
+  },
+  {
+    ic: '⚡',
+    title: 'Rescue & speed',
+    text: 'Already have a Flutter app that is slow, buggy or hard to change? I can audit it and fix the worst problems first.',
+    list: ['Performance and layout fixes', 'Bug fixing', 'Code cleanup and tests', 'Technical advice'],
+  },
+];
+
+jsonLd.push({
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${SITE.url}/services#service`,
+  name: 'Sarankumar G, mobile and web app development',
+  url: `${SITE.url}/services`,
+  provider: { '@id': `${SITE.url}/#person` },
+  areaServed: 'Worldwide',
+  address: { '@type': 'PostalAddress', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
+  email: SITE.email,
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Services',
+    itemListElement: offers.map((o) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: o.title, description: o.text },
+    })),
+  },
+});
+
+const engage = [
+  { title: 'Fixed scope', text: 'A clear feature list, a fixed price and a date. Best when you know what you want.' },
+  { title: 'Hourly', text: 'Pay for the time used. Best for fixes, advice and work that is hard to scope.' },
+  { title: 'Ongoing', text: 'A regular amount of time each month for updates and support after launch.' },
+];
+
+const faqs = [
+  ['How long does an app take?', 'It depends on the scope. After a short call I give you an estimate in writing.'],
+  ['Will you publish it to the Play Store and App Store?', 'Yes. Store release is part of the work, and I can walk you through the accounts you need.'],
+  ['Who owns the code?', 'You do, once the work is paid for.'],
+  ['What happens after launch?', 'I can fix bugs and add features on an hourly or monthly basis.'],
+  ['Do you work with international clients?', 'Yes. I work remotely from Tamil Nadu, India.'],
+];
+---
+
+<Base
+  title="Flutter, React & Backend Development Services | Sarankumar G"
+  description="Mobile and web apps, backend and data, and app rescue. Flutter, React, Supabase, Firebase, Node.js and FastAPI, from Tamil Nadu, India, for clients anywhere."
+  jsonLd={jsonLd}
+>
+  <div class="page">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
+      <h1 class="page-title">Apps, and the <em>systems behind them.</em></h1>
+      <p class="page-lede">Clients come for the app and stay because the backend, the release and the speed are handled too.</p>
+
+      <section>
+        <div class="offers">
+          {
+            offers.map((o) => (
+              <div class="offer">
+                <span class="ic" aria-hidden="true">{o.ic}</span>
+                <h2>{o.title}</h2>
+                <p>{o.text}</p>
+                <ul>{o.list.map((l) => <li>{l}</li>)}</ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sec-h">How we can <em>work together.</em></h2>
+        <p class="lede"><span class="note-draft">draft, confirm what you actually offer</span></p>
+        <div class="engage">
+          {engage.map((e) => <div class="box"><h3>{e.title}</h3><p>{e.text}</p></div>)}
+        </div>
+        <p class="lede" style="margin-top:20px">There is no public price list. Tell me about the project and I'll send a quote.</p>
+      </section>
+
+      <section>
+        <h2 class="sec-h">Common <em>questions.</em></h2>
+        <p class="lede"><span class="note-draft">draft answers, confirm or edit each one</span></p>
+        <div class="faq">
+          {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+        </div>
+      </section>
+
+      <div class="cta-band">
+        <h2>Have an app in <em>mind?</em></h2>
+        <p>Tell me what you need, who it is for and roughly when. I'll reply with next steps.</p>
+        <a class="btn solid" href="/contact">Get a quote</a>
+      </div>
+    </div>
+  </div>
+</Base>

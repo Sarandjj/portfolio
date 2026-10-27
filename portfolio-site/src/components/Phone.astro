@@ -1,0 +1,143 @@
+---
+import Kili from './Kili.astro';
+import { STATUS_LABEL, SITE } from '../data/site';
+import { getProjects } from '../lib/projects';
+const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
+---
+
+<div class="device">
+  <div class="say hide" id="say" role="status" aria-live="polite"></div>
+  <button class="kili-hero" id="kiliBtn" type="button" aria-label="Talk to Kili the parrot">
+    <Kili />
+  </button>
+
+  <div class="phone">
+    <div class="screen" id="screen">
+      <div class="island"></div>
+      <div class="sbar" aria-hidden="true"><span id="pTime">9:41</span><span>●●● ▮</span></div>
+
+      <svg class="sky" viewBox="0 0 278 598" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <g class="stars" id="stars" fill="#fff">
+          <circle cx="30" cy="60" r="1.2"></circle><circle cx="80" cy="110" r="1"></circle><circle cx="140" cy="48" r="1.4"></circle>
+          <circle cx="200" cy="96" r="1"></circle><circle cx="250" cy="58" r="1.3"></circle><circle cx="110" cy="170" r="1"></circle>
+          <circle cx="230" cy="190" r="1.2"></circle><circle cx="50" cy="210" r="1"></circle><circle cx="170" cy="240" r="1.1"></circle>
+          <circle cx="20" cy="140" r=".9"></circle>
+        </g>
+        <g class="sun" id="sun" style="transform:translateY(425px)">
+          <circle cx="200" cy="0" r="26" fill="#ffd34d"></circle>
+          <circle cx="200" cy="0" r="40" fill="#ffd34d" opacity=".25"></circle>
+        </g>
+        <g class="moon" id="moon" style="transform:translateY(700px);opacity:0">
+          <circle cx="210" cy="0" r="20" fill="#f4f1e6"></circle>
+          <circle cx="220" cy="-6" r="18" fill="var(--sky-top)"></circle>
+        </g>
+        <g fill="#fff" opacity=".85">
+          <g class="cloud" style="animation-duration:46s"><ellipse cx="0" cy="440" rx="34" ry="11"></ellipse><ellipse cx="18" cy="432" rx="20" ry="12"></ellipse></g>
+          <g class="cloud" style="animation-duration:70s;animation-delay:-30s"><ellipse cx="0" cy="412" rx="26" ry="9"></ellipse><ellipse cx="12" cy="405" rx="15" ry="10"></ellipse></g>
+        </g>
+        <g class="hills">
+          <path d="M0 470 C60 430 120 440 160 462 C200 484 240 450 278 440 V598 H0Z" style="opacity:.7"></path>
+          <path d="M0 500 C70 470 130 505 190 492 C230 484 260 478 278 482 V598 H0Z"></path>
+        </g>
+      </svg>
+
+      <div class="homegrid" id="home">
+        {
+          PROJECTS.map((p) => (
+            <button class="app" type="button" data-app={p.slug}>
+              <i style={`background:linear-gradient(135deg,${p.c1},${p.c2})`} aria-hidden="true">{p.emoji}</i>
+              <span>{p.name}</span>
+            </button>
+          ))
+        }
+        <button class="app" type="button" data-app="about"><i style="background:#fbfaf6" aria-hidden="true">🙋🏽‍♂️</i><span>About</span></button>
+        <button class="app" type="button" data-app="stack"><i style="background:#141412" aria-hidden="true">⚙️</i><span>Stack</span></button>
+        <button class="app" type="button" data-app="writing"><i style="background:#fff3d6" aria-hidden="true">✍️</i><span>Writing</span></button>
+      </div>
+
+      <div class="widget">
+        <span id="wLabel">Tamil Nadu</span>
+        <b id="wTime">--:--</b>
+        <span id="wNote">Probably building something</span>
+      </div>
+
+      <div class="dock">
+        <a class="app" href={`mailto:${SITE.email}`} aria-label="Email"><i style="background:#2f80ff" aria-hidden="true">✉️</i><span>Mail</span></a>
+        <a class="app" href={SITE.github} target="_blank" rel="noopener" aria-label="GitHub"><i style="background:#141412" aria-hidden="true">🐙</i><span>GitHub</span></a>
+        <a class="app" href={SITE.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><i class="glyph-in" style="background:#0a66c2;font-weight:700;font-size:20px" aria-hidden="true"></i><span>LinkedIn</span></a>
+      </div>
+
+      <div class="win" id="win" aria-hidden="true" role="dialog" aria-label="App">
+        {
+          PROJECTS.map((p) => (
+            <div class="win-page" id={`app-${p.slug}`}>
+              <header style={`background:linear-gradient(135deg,${p.c1},${p.c2})`}>
+                <small>{p.kind}</small>
+                <h3 tabindex="-1">{p.name}</h3>
+              </header>
+              <div class="body">
+                <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
+                <p>{p.summary}</p>
+                <div class="chips">{p.stack.map((s) => <span>{s}</span>)}</div>
+                <div class="row">Platforms<span>{p.platforms}</span></div>
+                <ul>{p.works.map((w) => <li>{w}</li>)}</ul>
+                <a class="go" href={`/projects/${p.slug}`}>Read the case study</a>
+              </div>
+            </div>
+          ))
+        }
+
+        <div class="win-page" id="app-about">
+          <header style="background:linear-gradient(135deg,#141412,#3a3a36)">
+            <small>About</small>
+            <h3 tabindex="-1">Hi, I'm Saran</h3>
+          </header>
+          <div class="body">
+            <p>Mobile and full-stack developer from Tamil Nadu, India.</p>
+            <p>I build Flutter and React apps and the Supabase, Firebase, Node.js and FastAPI systems behind them.</p>
+            <div class="row">Based in<span>Tamil Nadu</span></div>
+            <div class="row">Open to<span>Freelance work</span></div>
+            <a class="go" href="#contact">Say hello</a>
+          </div>
+        </div>
+
+        <div class="win-page" id="app-stack">
+          <header style="background:linear-gradient(135deg,#141412,#2bb673)">
+            <small>Toolbox</small>
+            <h3 tabindex="-1">My stack</h3>
+          </header>
+          <div class="body">
+            <div class="row">Mobile<span>Flutter, Dart</span></div>
+            <div class="row">Web<span>React, Flutter Web</span></div>
+            <div class="row">Data<span>Drift, Supabase, Firebase</span></div>
+            <div class="row">Backend<span>Node.js, Express, FastAPI</span></div>
+            <div class="row">Device<span>ML Kit, biometrics</span></div>
+            <div class="row">Hosting<span>Firebase, Render</span></div>
+          </div>
+        </div>
+
+        <div class="win-page" id="app-writing">
+          <header style="background:linear-gradient(135deg,#ffb020,#ff4f1f)">
+            <small>Writing</small>
+            <h3 tabindex="-1">Notes from building</h3>
+          </header>
+          <div class="body">
+            <p>Posts about building these apps are on the way.</p>
+            <a class="go" href="#writing">See what's planned</a>
+          </div>
+        </div>
+
+        <button class="homebar-hit" id="closeApp" type="button" aria-label="Close app"></button>
+        <div class="homebar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="skypick" id="skypick" role="group" aria-label="Preview the phone wallpaper at a time of day">
+    <button type="button" data-t="live" aria-pressed="true">Live</button>
+    <button type="button" data-t="morning" aria-pressed="false">Morning</button>
+    <button type="button" data-t="day" aria-pressed="false">Day</button>
+    <button type="button" data-t="evening" aria-pressed="false">Evening</button>
+    <button type="button" data-t="night" aria-pressed="false">Night</button>
+  </div>
+</div>

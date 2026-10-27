@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: G; src: url('../../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2'); font-weight: 100 900; }
+@font-face { font-family: GM; src: url('../../node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2'); font-weight: 100 900; }
+@font-face { font-family: IS; src: url('../../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2'); font-style: italic; }
+* { margin: 0; box-sizing: border-box; }
+body { width: 1200px; height: 630px; background: #f3f0e8; color: #141412; font-family: G; position: relative; overflow: hidden; }
+.glow { position: absolute; right: -140px; top: -160px; width: 800px; height: 800px; border-radius: 50%; opacity: .35; }
+.tag { position: absolute; left: 72px; top: 64px; font-family: GM; font-size: 22px; letter-spacing: .06em; text-transform: uppercase; color: #605c53; }
+.status { position: absolute; left: 72px; top: 120px; font-family: GM; font-size: 20px; letter-spacing: .05em; text-transform: uppercase; color: #605c53; border: 1px solid #dcd7c9; background: #fbfaf6; border-radius: 999px; padding: 6px 18px; }
+h1 { font-size: 140px; line-height: 1; letter-spacing: -.05em; font-weight: 600; }
+h2 { margin-top: 14px; font-family: IS; font-style: italic; font-weight: 400; font-size: 54px; color: #c93a10; line-height: 1.1; }
+.col { position: absolute; left: 72px; top: 190px; width: 680px; }
+.stack { position: absolute; left: 72px; bottom: 64px; font-family: GM; font-size: 24px; color: #605c53; }
+.icon { position: absolute; right: 90px; top: 150px; width: 330px; height: 330px; border-radius: 80px; display: grid; place-items: center; font-size: 170px; box-shadow: 0 40px 70px -30px rgba(20,20,18,.45); }
+.by { position: absolute; right: 72px; bottom: 64px; font-family: GM; font-size: 22px; color: #605c53; }
+</style>
+</head>
+<body>
+<div class="glow" id="glow"></div>
+<div class="tag">Case study · Sarankumar G</div>
+<div class="status" id="status"></div>
+<div class="col"><h1 id="name"></h1>
+<h2 id="kind"></h2></div>
+<div class="icon" id="icon"></div>
+<div class="stack" id="stack"></div>
+<div class="by">sarankumar.dev</div>
+<script>
+const q = new URLSearchParams(location.search);
+const c1 = q.get('c1'), c2 = q.get('c2');
+const nm = q.get('name'); const h1 = document.getElementById('name'); h1.textContent = nm; h1.style.fontSize = (nm.length > 9 ? 100 : 140) + 'px';
+document.getElementById('kind').textContent = q.get('kind');
+document.getElementById('status').textContent = q.get('status');
+document.getElementById('stack').textContent = q.get('stack');
+const icon = document.getElementById('icon');
+icon.textContent = q.get('emoji');
+icon.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+document.getElementById('glow').style.background = `radial-gradient(circle, ${c1}, transparent 65%)`;
+</script>
+</body>
+</html>

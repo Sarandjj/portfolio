@@ -1,0 +1,110 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import ArchDiagram from '../../components/ArchDiagram.astro';
+import ShotFrame from '../../components/ShotFrame.astro';
+import DemoPhone from '../../components/DemoPhone.astro';
+import { getProjects } from '../../lib/projects';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  const all = await getProjects();
+  return all.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, prev: all[i - 1], next: all[i + 1] },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const p = entry.data;
+const { Content } = await render(entry);
+const url = `${SITE.url}/projects/${entry.id}`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: p.name,
+    description: p.summary,
+    url,
+    applicationCategory: 'MobileApplication',
+    operatingSystem: p.platforms,
+    author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Projects', item: `${SITE.url}/projects` },
+      { '@type': 'ListItem', position: 3, name: p.name, item: url },
+    ],
+  },
+];
+---
+
+<Base title={`${p.name}: ${p.kind} | ${SITE.name}`} description={p.summary} image={`/og/projects/${entry.id}.png`} jsonLd={jsonLd}>
+  <div class="page" style={`--c1:${p.c1};--c2:${p.c2}`}>
+    <div class="wrap">
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: p.name }]} />
+
+      <header class="cs-hero">
+        <div>
+          <p class="label" style="margin:22px 0 0">{p.kind}</p>
+          <h1 class="page-title">{p.name}</h1>
+          <p class="page-lede">{p.summary}</p>
+          <div class="meta-row">
+            <StatusBadge status={p.status} />
+            <span class="mono" style="font-size:13px;color:var(--muted)">{p.platforms}</span>
+          </div>
+          <div class="chips" style="margin-top:16px">{p.stack.map((s) => <span class="chip">{s}</span>)}</div>
+          <div class="page-cta">
+            <a class="btn solid" href={`/contact?topic=${entry.id}`}>Get notified when it ships</a>
+            <a class="btn ghost" href="/projects">All projects</a>
+          </div>
+        </div>
+        <div class="shots" aria-label="Screenshots (placeholders)">
+          <ShotFrame c1={p.c1} c2={p.c2} />
+          <ShotFrame c1={p.c2} c2={p.c1} />
+          <ShotFrame c1={p.c1} c2={p.c2} />
+        </div>
+      </header>
+
+      {p.demo && <DemoPhone url={p.demo.url} name={p.name} c1={p.c1} c2={p.c2} note={p.demo.note} />}
+
+      <section>
+        <div class="cs-grid">
+          <article class="prose"><Content /></article>
+          <aside class="aside">
+            <div class="box">
+              <h3>Works today</h3>
+              <ul>{p.works.map((w) => <li>{w}</li>)}</ul>
+            </div>
+            {
+              p.numbers.length > 0 && (
+                <div class="box">
+                  <h3>By the numbers</h3>
+                  <div class="nums">{p.numbers.map((n) => <div><b>{n.value}</b><span>{n.label}</span></div>)}</div>
+                </div>
+              )
+            }
+          </aside>
+        </div>
+      </section>
+
+      {p.architecture && <section><ArchDiagram title={p.architecture.title} steps={p.architecture.steps} /></section>}
+
+      <nav class="pager" aria-label="More projects">
+        {prev ? <a href={`/projects/${prev.id}`}><small>Previous</small><b>{prev.data.name}</b></a> : <span></span>}
+        {next ? <a href={`/projects/${next.id}`}><small>Next</small><b>{next.data.name}</b></a> : <span></span>}
+      </nav>
+
+      <div class="cta-band">
+        <h2>Want something like this?</h2>
+        <p>Tell me what you need and I'll get back to you.</p>
+        <a class="btn solid" href="/contact">Start a project</a>
+      </div>
+    </div>
+  </div>
+</Base>

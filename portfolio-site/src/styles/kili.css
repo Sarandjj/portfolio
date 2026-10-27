@@ -1,0 +1,15 @@
+/* ---------- kili the parrot ---------- */
+.kili { display: block; filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.12)); }
+.kili .bob { animation: bob 3.2s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-3px); } }
+.kili .open { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+.kili .wing { transform-box: view-box; transform-origin: 88px 80px; animation: flap 4s ease-in-out infinite; }
+@keyframes flap { 0%, 70%, 100% { transform: rotate(0); } 76%, 88% { transform: rotate(-38deg); } 82%, 94% { transform: rotate(-18deg); } }
+.kili .closed, .kili .zz { display: none; }
+.kili.sleep .open, .kili.sleep .pupil { display: none; }
+.kili.sleep .closed, .kili.sleep .zz { display: block; }
+.kili.sleep .wing { animation: none; }
+.kili .zz text { animation: zz 2.4s ease-in-out infinite; opacity: 0; }
+.kili .zz text:nth-child(2) { animation-delay: 1.2s; }
+@keyframes zz { 0% { opacity: 0; transform: translate(0, 0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(8px, -16px); } }
