@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept 5 · The Workshop Desk · Sarankumar G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font:16px/1.6 Outfit,system-ui,sans-serif;background:#2a1f1a;color:#2a1f1a;min-height:100vh}
+a{color:inherit}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;color:#f3e6d4}
+header b{font-weight:600}header small{color:#c9b49b;margin-left:10px}
+header a{font-size:14px;color:#f3e6d4;border:1px solid #6b5444;padding:6px 12px;border-radius:999px;text-decoration:none}
+.room{max-width:1100px;margin:0 auto;padding:0 16px}
+.scene{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -30px #000}
+.scene svg{display:block;width:100%;height:auto}
+.hot{cursor:pointer;transition:transform .2s;transform-box:fill-box;transform-origin:center}
+.hot:hover,.hot:focus{transform:translateY(-6px)}
+.hot:focus{outline:none}
+.hot:focus-visible .ring{stroke:#fff;stroke-width:3}
+.spark{animation:sp 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.found .spark{display:none}
+@keyframes sp{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1)}}
+.steam{animation:st 3s ease-in-out infinite;opacity:.6}
+@keyframes st{50%{transform:translateY(-6px);opacity:.2}}
+.bar{display:flex;justify-content:space-between;align-items:center;margin:14px 4px;color:#f3e6d4;font-size:14px;gap:12px;flex-wrap:wrap}
+.bar .tip{background:#f3e6d4;color:#2a1f1a;padding:6px 12px;border-radius:8px}
+.count{font-weight:600}
+.panel{position:fixed;right:0;top:0;bottom:0;width:min(420px,100%);background:#fbf5ec;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:20;padding:26px 24px;overflow:auto;box-shadow:-20px 0 40px rgba(0,0,0,.3)}
+.panel.on{transform:none}
+.panel .x{position:absolute;right:16px;top:14px;border:0;background:#eadfcd;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer}
+.panel small{font-weight:600;letter-spacing:.1em;color:#b4562e;font-size:12px}
+.panel h2{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.panel p{color:#5b4a3d;margin-bottom:10px}
+.panel ul{padding-left:18px;color:#5b4a3d}
+.panel li{margin:6px 0}
+.panel .btn{display:inline-block;background:#2a1f1a;color:#fbf5ec;padding:10px 16px;border-radius:999px;text-decoration:none;margin-top:10px;font-weight:500}
+.chip{display:inline-block;background:#eadfcd;border-radius:999px;padding:2px 10px;font-size:13px;margin:2px}
+.done{position:fixed;left:50%;bottom:24px;transform:translate(-50%,80px);opacity:0;visibility:hidden;background:#ffd166;color:#2a1f1a;padding:12px 18px;border-radius:14px;font-weight:600;transition:.4s;z-index:30}
+.done.on{transform:translate(-50%,0);opacity:1;visibility:visible}
+footer{text-align:center;color:#8f7a66;font-size:13px;padding:30px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div><b>Saran's workshop</b><small>Mobile and full-stack developer · Thoothukudi</small></div><a href="#" id="plain">Plain site</a></header>
+<main class="room">
+<div class="scene">
+<svg viewBox="0 0 1100 600" role="img" aria-label="A developer's desk with a laptop, phone, notebook, chai, a CV and a postcard. Click each to explore.">
+  <rect width="1100" height="600" fill="#f2dcc0"/>
+  <rect width="1100" height="360" fill="#e9cfae"/>
+  <rect x="80" y="40" width="300" height="220" rx="8" fill="#9fd3e6" stroke="#7a5a44" stroke-width="10"/>
+  <path d="M90 200 Q160 150 230 190 T370 180 L370 250 L90 250Z" fill="#2c6e7f"/>
+  <circle cx="300" cy="100" r="22" fill="#fff3c4"/>
+  <path d="M230 50 L230 250 M85 150 L375 150" stroke="#7a5a44" stroke-width="6"/>
+  <g transform="translate(800 70)"><rect width="180" height="120" rx="6" fill="#fffaf0" stroke="#c9b49b" stroke-width="3"/><text x="90" y="52" text-anchor="middle" font-family="Outfit" font-size="22" font-weight="700" fill="#2a1f1a">SHIP IT</text><text x="90" y="80" text-anchor="middle" font-family="Outfit" font-size="13" fill="#7a5a44">then make it better</text></g>
+  <path d="M960 330 Q1000 250 980 180 Q1030 240 1010 330Z" fill="#3a8a5a"/><path d="M980 330 Q940 260 950 200 Q1000 260 1000 330Z" fill="#4fa36c"/><rect x="950" y="320" width="70" height="44" rx="6" fill="#c4553a"/>
+  <rect y="360" width="1100" height="240" fill="#a6764f"/>
+  <rect y="360" width="1100" height="14" fill="#8c603e"/>
+
+  <g class="hot" tabindex="0" role="button" aria-label="Laptop: projects" data-k="projects">
+    <rect x="300" y="250" width="300" height="190" rx="12" fill="#2b2f3a"/><rect class="ring" x="312" y="262" width="276" height="166" rx="6" fill="#0e7c86" stroke="none"/>
+    <g fill="#fff" opacity=".9"><rect x="330" y="282" width="110" height="12" rx="4"/><rect x="330" y="304" width="200" height="8" rx="4" opacity=".6"/><rect x="330" y="330" width="70" height="70" rx="10" fill="#1f9d63"/><rect x="410" y="330" width="70" height="70" rx="10" fill="#f08a3c"/><rect x="490" y="330" width="70" height="70" rx="10" fill="#e0a91e"/></g>
+    <path d="M270 440 L630 440 L650 462 L250 462Z" fill="#3b4150"/>
+    <g class="spark" fill="#fff"><path d="M590 250 l5 -14 l5 14 l14 5 l-14 5 l-5 14 l-5 -14 l-14 -5z"/></g>
+  </g>
+  <g class="hot" tabindex="0" role="button" aria-label="Phone: live demos" data-k="demos">
+    <rect class="ring" x="680" y="380" width="70" height="128" rx="12" fill="#1c1f26" stroke="none"/><rect x="686" y="392" width="58" height="104" rx="6" fill="#bfe0ef"/>
+    <rect x="696" y="404" width="38" height="8" rx="3" fill="#0b2a3a"/><rect x="696" y="420" width="18" height="18" rx="4" fill="#1f9d63"/><rect x="718" y="420" width="18" height="18" rx="4" fill="#0e7c86"/>
+    <g class="spark" fill="#fff"><path d="M752 382 l4 -11 l4 11 l11 4 l-11 4 l-4 11 l-4 -11 l-11 -4z"/></g>
+  </g>
+  <g class="hot" tabindex="0" role="button" aria-label="Notebook: blog" data-k="blog">
+    <path class="ring" d="M90 470 L250 452 L268 548 L106 566Z" fill="#2c6e7f" stroke="none"/><path d="M100 472 L240 456" stroke="#fff" stroke-width="3" opacity=".5"/><path d="M120 500 L230 488 M124 520 L210 510" stroke="#fff" stroke-width="3" opacity=".7"/>
+    <g class="spark" fill="#fff"><path d="M250 444 l4 -11 l4 11 l11 4 l-11 4 l-4 11 l-4 -11 l-11 -4z"/></g>
+  </g>
+  <g class="hot" tabindex="0" role="button" aria-label="Chai: about me" data-k="about">
+    <path class="steam" d="M834 400 Q824 386 834 372 M850 398 Q840 384 850 370" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path class="ring" d="M818 410 L870 410 L864 476 L824 476Z" fill="#c9803a" stroke="none"/><path d="M818 410 L870 410 L869 420 L819 420Z" fill="#f3e3c2"/><ellipse cx="844" cy="480" rx="36" ry="7" fill="#d9d3c4"/>
+    <g class="spark" fill="#fff"><path d="M878 400 l4 -11 l4 11 l11 4 l-11 4 l-4 11 l-4 -11 l-11 -4z"/></g>
+  </g>
+  <g class="hot" tabindex="0" role="button" aria-label="CV: recruiter view" data-k="cv">
+    <path class="ring" d="M900 430 L1010 418 L1024 552 L914 564Z" fill="#fffaf0" stroke="none"/><path d="M916 446 L990 438 M918 466 L1000 458 M920 486 L980 480 M922 506 L996 498" stroke="#c9b49b" stroke-width="5" stroke-linecap="round"/><text x="958" y="540" text-anchor="middle" font-family="Outfit" font-size="18" font-weight="700" fill="#b4562e" transform="rotate(-6 958 540)">CV</text>
+    <g class="spark" fill="#b4562e"><path d="M1016 410 l4 -11 l4 11 l11 4 l-11 4 l-4 11 l-4 -11 l-11 -4z"/></g>
+  </g>
+  <g class="hot" tabindex="0" role="button" aria-label="Postcard: contact" data-k="contact">
+    <rect class="ring" x="520" y="500" width="130" height="80" rx="4" fill="#ffe7c2" stroke="none" transform="rotate(4 585 540)"/><path d="M590 510 L590 570" stroke="#d9a35b" stroke-width="2" transform="rotate(4 585 540)"/><rect x="610" y="512" width="26" height="30" fill="#e4572e" transform="rotate(4 585 540)"/>
+    <g class="spark" fill="#fff"><path d="M652 496 l4 -11 l4 11 l11 4 l-11 4 l-4 11 l-4 -11 l-11 -4z"/></g>
+  </g>
+</svg>
+</div>
+<div class="bar"><span class="tip">Click anything that sparkles. Each thing on the desk opens a part of the site.</span><span class="count">Found <span id="n">0</span> / 6</span></div>
+</main>
+
+<aside class="panel" id="panel" aria-live="polite"><button class="x" id="x" aria-label="Close">×</button><div id="pc"></div></aside>
+<div class="done" id="done">You found everything. Now let's build something together.</div>
+<footer>Concept 5 of 7 · The Workshop Desk · prototype</footer>
+
+<script>
+const C={
+projects:`<small>THE LAPTOP · PROJECTS</small><h2>Seven apps</h2><p>Two client apps live on Google Play and the App Store, and five of my own.</p><ul><li><b>NallHub</b>: one school app, each role sees only what it needs. 447 tests.</li><li><b>Nirai</b>: tasks synced through your own Google Drive. 0 servers.</li><li><b>FinWise</b>: offline money tracker with trip splitting. 300+ tests.</li><li><b>Coin18</b>: a small server guards the API key. 300 KB to 2 KB.</li><li><b>Clean Scanner</b>: documents never leave the phone. 42.5 of 60 MB.</li><li><b>Sports Booking</b> and <b>Weather Monitoring</b>: client apps, live.</li></ul><a class="btn" href="#">See all case studies</a>`,
+demos:`<small>THE PHONE · LIVE DEMOS</small><h2>Try the real apps</h2><p>FinWise, Nirai and NallHub run right here in your browser with made-up data. Nothing is sent anywhere.</p><a class="btn" href="#">Launch a demo</a>`,
+blog:`<small>THE NOTEBOOK · WRITING</small><h2>Notes from building</h2><ul><li>7 things to have ready before you hire an app developer</li><li>Why you should never put an API key inside a mobile app</li><li>Offline-first sync to Google Drive with no backend</li></ul><a class="btn" href="#">Read the blog</a>`,
+about:`<small>THE CHAI · ABOUT</small><h2>Hi, I'm Saran</h2><p>A software developer from Thoothukudi, Tamil Nadu, who enjoys turning ideas into real, usable products. Flutter is my main focus, with React, Node.js and FastAPI for the rest.</p><span class="chip">Neural Schema IT</span><span class="chip">Digisailor</span><span class="chip">B.Sc CS, Sattur</span>`,
+cv:`<small>THE CV · RECRUITER VIEW</small><h2>Everything on one page</h2><p><b>Full Stack Developer</b>, Neural Schema IT · Feb 2026 to now<br><b>Mobile App Developer</b>, Digisailor · Nov 2023 to Jan 2026</p><p>Flutter · Dart · React · Next.js · Node.js · TypeScript · FastAPI · PostgreSQL · Supabase · Firebase · AWS</p><a class="btn" href="#">Download CV</a>`,
+contact:`<small>THE POSTCARD · CONTACT</small><h2>Got an idea?</h2><p>Tell me what you need. I reply with a short plan and the next steps.</p><a class="btn" href="mailto:sarankumarg.in@gmail.com">sarankumarg.in@gmail.com</a>`};
+const found=new Set();
+function open(k,el){pc.innerHTML=C[k];panel.classList.add('on');el.classList.add('found');found.add(k);n.textContent=found.size;if(found.size===6)setTimeout(()=>done.classList.add('on'),500)}
+document.querySelectorAll('.hot').forEach(el=>{el.onclick=()=>open(el.dataset.k,el);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(el.dataset.k,el)}}});
+x.onclick=()=>panel.classList.remove('on');addEventListener('keydown',e=>e.key==='Escape'&&panel.classList.remove('on'));
+plain.onclick=e=>{e.preventDefault();open('cv',document.querySelector('[data-k=cv]'))};
+</script>
+</body>
+</html>

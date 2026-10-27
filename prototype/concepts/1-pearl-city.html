@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept 1 · Pearl City · Sarankumar G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--pearl:#f6f3ee;--sand:#ebe3d5;--ink:#0b2a3a;--ink2:#3d5560;--teal:#0e7c86;--coral:#ff7a59;--line:#d9d1c2;--card:#fffdf9}
+*{box-sizing:border-box;margin:0}
+body{background:var(--pearl);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.mono{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em}
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--pearl) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+nav .brand{font-family:Fraunces,serif;font-weight:600;font-size:19px;text-decoration:none}
+nav ul{display:flex;gap:22px;list-style:none;padding:0;font-size:14px}
+nav ul a{text-decoration:none;color:var(--ink2)}
+nav ul a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 18px;font-weight:500;font-size:14px;text-decoration:none;border:1px solid var(--ink);cursor:pointer;background:none;color:var(--ink)}
+.btn.solid{background:var(--ink);color:var(--pearl)}
+/* scene */
+.scene{position:relative;height:min(62vh,520px);min-height:340px;overflow:hidden;border-bottom:1px solid var(--line)}
+.scene>svg{position:absolute;inset:0;width:100%;height:100%}
+.sky{transition:fill 1.2s}
+.waves{animation:drift 14s linear infinite}
+.waves2{animation:drift 22s linear infinite reverse}
+@keyframes drift{to{transform:translateX(-200px)}}
+.beam{transform-origin:236px 216px;animation:sweep 6s ease-in-out infinite;opacity:0}
+.night .beam,.evening .beam{opacity:.55}
+@keyframes sweep{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+.boat{animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(4px)}}
+.stars{opacity:0;transition:opacity 1.2s}.night .stars{opacity:1}
+.tw{animation:tw 3s ease-in-out infinite}.tw:nth-child(2n){animation-delay:1.3s}
+@keyframes tw{50%{opacity:.3}}
+.timeswitch{position:absolute;right:16px;top:14px;display:flex;gap:6px;z-index:3}
+.timeswitch button{border:1px solid rgba(11,42,58,.25);background:rgba(255,255,255,.65);border-radius:999px;font:500 12px Inter;padding:5px 10px;cursor:pointer;color:var(--ink)}
+.timeswitch button[aria-pressed=true]{background:var(--ink);color:#fff}
+/* shell */
+.shell{position:absolute;right:9%;bottom:9%;width:96px;cursor:pointer;z-index:3;border:0;background:none;padding:0}
+.shell svg{display:block;width:100%;height:auto;aspect-ratio:96/80}
+.shell .lid{transform-origin:48px 52px;transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
+.shell.open .lid{transform:rotate(-38deg)}
+.bubble{position:absolute;right:calc(9% + 70px);bottom:calc(9% + 92px);background:#fff;border:1px solid var(--line);border-radius:14px 14px 4px 14px;padding:8px 12px;font-size:13px;max-width:200px;opacity:0;transform:translateY(6px);transition:.3s;z-index:3;pointer-events:none}
+.bubble.on{opacity:1;transform:none}
+/* hero text */
+.hero{padding:34px 0 10px}
+.status{color:var(--teal)}
+.status i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--teal);margin-right:6px;box-shadow:0 0 0 4px color-mix(in srgb,var(--teal) 20%,transparent)}
+h1{font-family:Fraunces,serif;font-weight:600;font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.02em;margin:14px 0 12px}
+h1 em{font-style:italic;font-weight:400;color:var(--teal)}
+.lede{font-size:clamp(17px,2vw,20px);color:var(--ink2);max-width:640px}
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0 8px}
+.way{border:1px solid var(--ink);border-radius:20px;padding:18px 20px;text-decoration:none;display:block;transition:transform .2s}
+.way:hover{transform:translateY(-3px)}
+.way.dark{background:var(--ink);color:var(--pearl)}
+.way b{display:block;font-size:20px;font-family:Fraunces,serif;font-weight:600;margin:4px 0 2px}
+.way p{font-size:14px;opacity:.8}
+section{padding:64px 0}
+h2{font-family:Fraunces,serif;font-weight:600;font-size:clamp(28px,4vw,42px);letter-spacing:-.01em;line-height:1.1;margin-bottom:8px}
+.sub{color:var(--ink2);max-width:620px}
+/* shelf */
+.shelf{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-end;margin-top:26px;padding:0 8px 10px;border-bottom:10px solid var(--sand);box-shadow:0 14px 18px -14px rgba(11,42,58,.35)}
+.icon{width:72px;height:72px;border-radius:18px;display:grid;place-items:center;color:#fff;position:relative;transition:transform .2s;text-decoration:none;box-shadow:inset 0 -3px 0 rgba(0,0,0,.12),0 8px 14px -8px rgba(0,0,0,.4)}
+.icon:hover{transform:translateY(-6px) rotate(-3deg)}
+.icon svg{width:34px;height:34px}
+.icon span{position:absolute;bottom:-26px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:11px;color:var(--ink2);font-family:"JetBrains Mono",monospace;opacity:0;transition:.2s}
+.icon:hover span{opacity:1}
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:8px;text-decoration:none;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:var(--ink)}
+.card .top{display:flex;justify-content:space-between;align-items:center}
+.pill{font:500 11px "JetBrains Mono",monospace;padding:4px 9px;border-radius:999px;background:var(--sand)}
+.pill.live{background:#d7f0e6;color:#0b6b45}
+.card h3{font-family:Fraunces,serif;font-weight:600;font-size:22px}
+.proof{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line)}
+.proof b{font-family:Fraunces,serif;font-size:30px;color:var(--teal);display:block;line-height:1}
+.proof small{color:var(--ink2);font-size:13px}
+/* chapters */
+.chapters{margin-top:30px;border-left:2px solid var(--line);padding-left:26px;display:grid;gap:30px}
+.ch{position:relative}
+.ch::before{content:"";position:absolute;left:-34px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--pearl);border:2px solid var(--teal)}
+.ch .num{font-family:Fraunces,serif;font-style:italic;color:var(--teal);font-size:20px}
+.ch h3{font-family:Fraunces,serif;font-size:24px;font-weight:600}
+.ch q{display:block;font-family:Fraunces,serif;font-style:italic;color:var(--ink2);margin-top:6px;quotes:none}
+.cta{background:var(--ink);color:var(--pearl);border-radius:28px;padding:44px 32px;text-align:center}
+.cta h2{color:var(--pearl)}
+.cta .btn{border-color:var(--pearl);color:var(--pearl);margin-top:14px}
+footer{padding:30px 0;color:var(--ink2);font-size:13px}
+@media (max-width:860px){.grid{grid-template-columns:1fr 1fr}nav ul{display:none}}
+@media (max-width:560px){.grid,.ways{grid-template-columns:1fr}.shell{width:72px}.icon{width:58px;height:58px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a class="brand" href="#">Sarankumar G</a><ul><li><a href="#work">Work</a></li><li><a href="#story">Story</a></li><li><a href="#">Blog</a></li><li><a href="#contact">Contact</a></li></ul><a class="btn solid" href="#contact">Work with me</a></div></nav>
+
+<div class="scene" id="scene">
+  <div class="timeswitch" role="group" aria-label="Time of day">
+    <button data-t="morning">Morning</button><button data-t="day">Day</button><button data-t="evening">Evening</button><button data-t="night">Night</button>
+  </div>
+  <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax slice" aria-label="A harbour in Thoothukudi, the Pearl City" role="img">
+    <rect class="sky" id="sky1" width="1200" height="420"/>
+    <rect class="sky" id="sky2" y="150" width="1200" height="130" opacity=".7"/>
+    <g class="stars" fill="#fff">
+      <circle class="tw" cx="120" cy="60" r="1.6"/><circle class="tw" cx="260" cy="40" r="1.2"/><circle class="tw" cx="420" cy="80" r="1.8"/><circle class="tw" cx="640" cy="34" r="1.3"/><circle class="tw" cx="760" cy="90" r="1.6"/><circle class="tw" cx="980" cy="50" r="1.4"/><circle class="tw" cx="1100" cy="100" r="1.2"/><circle class="tw" cx="540" cy="120" r="1"/>
+    </g>
+    <circle id="orb" cx="900" cy="110" r="44"/>
+    <path d="M0 250 Q140 220 280 244 T560 240 T840 248 T1200 236 L1200 420 L0 420Z" fill="#9fb8b6" opacity=".55"/>
+    <rect id="sea" y="262" width="1200" height="160"/>
+    <g class="waves" stroke="#ffffff" stroke-opacity=".45" stroke-width="2.5" fill="none" stroke-linecap="round">
+      <path d="M0 300 q30 -8 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0"/>
+    </g>
+    <g class="waves2" stroke="#ffffff" stroke-opacity=".3" stroke-width="2" fill="none" stroke-linecap="round">
+      <path d="M0 350 q40 -10 80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0"/>
+    </g>
+    <path class="beam" d="M236 216 L520 170 L520 262Z" fill="#ffd98a"/>
+    <g>
+      <path d="M212 300 L222 216 L250 216 L260 300Z" fill="#f7f2ea"/>
+      <path d="M216 268 L256 268 L258 284 L214 284Z" fill="#e4572e"/>
+      <path d="M220 234 L252 234 L253 248 L219 248Z" fill="#e4572e"/>
+      <rect x="220" y="196" width="32" height="20" rx="3" fill="#ffd166"/>
+      <path d="M214 196 L236 172 L258 196Z" fill="#e4572e"/>
+      <path d="M190 300 L282 300 L290 312 L182 312Z" fill="#6b5a4a"/>
+    </g>
+    <g class="boat">
+      <path d="M600 300 L700 300 L686 318 L614 318Z" fill="#5a3b2e"/>
+      <path d="M650 300 L650 236 L690 294Z" fill="#fff4e0"/>
+      <path d="M646 300 L646 250 L618 294Z" fill="#ffe2c2"/>
+    </g>
+    <g class="boat" style="animation-delay:-2s">
+      <path d="M880 330 L940 330 L932 342 L888 342Z" fill="#4a3226"/>
+      <path d="M910 330 L910 292 L934 326Z" fill="#fff4e0"/>
+    </g>
+  </svg>
+  <button class="shell" id="shell" aria-label="Open the shell to meet Muthu the pearl">
+    <svg viewBox="0 0 96 80"><g class="lid"><path d="M10 52 Q2 18 34 8 Q48 4 62 8 Q94 18 86 52Z" fill="#f2b8b1" stroke="#0b2a3a" stroke-width="2"/><path d="M48 8 V50 M30 12 L26 50 M66 12 L70 50" stroke="#c97b78" stroke-width="1.6"/></g><circle cx="48" cy="54" r="17" fill="#fbf8f2" stroke="#0b2a3a" stroke-width="2"/><circle cx="42" cy="48" r="4" fill="#fff"/><circle cx="42" cy="56" r="2.2" fill="#0b2a3a"/><circle cx="54" cy="56" r="2.2" fill="#0b2a3a"/><path d="M44 62 Q48 65 52 62" stroke="#0b2a3a" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M6 56 Q48 68 90 56 Q90 78 48 78 Q6 78 6 56Z" fill="#e9a29b" stroke="#0b2a3a" stroke-width="2"/></svg>
+  </button>
+  <div class="bubble" id="bubble">Vanakkam! I'm Muthu. Thoothukudi is the Pearl City. Saran turns ideas into finished apps.</div>
+</div>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="mono status"><i></i>Open to work · Thoothukudi, Tamil Nadu · <span id="clock">--:--</span> IST</div>
+    <h1>I turn ideas into <em>finished</em> apps.</h1>
+    <p class="lede">I'm Saran, a mobile and full-stack developer. Flutter apps for Android, iOS and web, React on the web, and the Supabase, Firebase, Node.js and FastAPI systems behind them.</p>
+    <div class="ways">
+      <a class="way" href="#work"><span class="mono">FULL TOUR · ABOUT 3 MIN</span><b>Take the tour →</b><p>Projects, live demos and the story behind them.</p></a>
+      <a class="way dark" href="#"><span class="mono">RECRUITER VIEW · 1 MIN</span><b>Everything on one page →</b><p>Role, stack, the two store apps, CV download.</p></a>
+    </div>
+  </div>
+
+  <section id="work">
+    <h2>The app shelf</h2>
+    <p class="sub">Seven apps. Two are live on Google Play and the App Store, five are my own and in development.</p>
+    <div class="shelf">
+      <a class="icon" style="background:#2b5ea7" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 4l2.5 4.5L12 13l-2.5-4.5zM4.5 10l5 1.5M19.5 10l-5 1.5M8 19l2-4.5M16 19l-2-4.5"/></svg><span>Sports Booking</span></a>
+      <a class="icon" style="background:#3a8fd6" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M7 16a4 4 0 010-8 5 5 0 019.6 1.5A3.5 3.5 0 0117 16z"/><path d="M9 19l-1 2M13 19l-1 2M17 19l-1 2"/></svg><span>Weather Monitoring</span></a>
+      <a class="icon" style="background:#1f9d63" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M5 19C5 10 11 5 19 5c0 8-5 14-14 14z"/><path d="M5 19l8-8"/></svg><span>FinWise</span></a>
+      <a class="icon" style="background:#0e7c86" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M8 12.5l2.8 2.8L16.5 9.5"/></svg><span>Nirai</span></a>
+      <a class="icon" style="background:#f08a3c" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M6 20c0-8 2-12 6-12s6 4 6 12z"/><circle cx="9.5" cy="12" r="1.6"/><circle cx="14.5" cy="12" r="1.6"/><path d="M11 15l1 1 1-1M8 8l-2-3M16 8l2-3"/></svg><span>NallHub</span></a>
+      <a class="icon" style="background:#e0a91e;color:#3b2a00" href="#"><b style="font:600 22px Fraunces,serif">18</b><span>Coin18</span></a>
+      <a class="icon" style="background:#24b39a" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"/><path d="M8 9h8M8 12h8M8 15h5"/></svg><span>Clean Scanner</span></a>
+    </div>
+
+    <div class="grid">
+      <a class="card" href="#"><div class="top"><span class="pill live">● LIVE · CLIENT</span><span class="mono">Android + iOS</span></div><h3>Sports Booking App</h3><p>Court booking, matches and player profiles, with payments and push notifications.</p><div class="proof"><b>2 stores</b><small>Google Play and the App Store</small></div></a>
+      <a class="card" href="#"><div class="top"><span class="pill live">● LIVE · CLIENT</span><span class="mono">Android + iOS</span></div><h3>Weather Monitoring App</h3><p>Real-time and historical weather data, chart dashboards and station maps.</p><div class="proof"><b>PDF + CSV</b><small>export for offline use</small></div></a>
+      <a class="card" href="#"><div class="top"><span class="pill">IN PROGRESS</span><span class="mono">Mobile + web</span></div><h3>FinWise</h3><p>A money tracker that lives on your phone first, with trip splitting and sync.</p><div class="proof"><b>300+</b><small>automated tests</small></div></a>
+      <a class="card" href="#"><div class="top"><span class="pill">IN PROGRESS</span><span class="mono">Android + macOS</span></div><h3>Nirai</h3><p>Tasks on your phone, synced through your own Google Drive. No server.</p><div class="proof"><b>14.8 → 4.2 ms</b><small>slowest frame, fixed on a 120 Hz phone</small></div></a>
+      <a class="card" href="#"><div class="top"><span class="pill">IN PROGRESS</span><span class="mono">Android + web</span></div><h3>NallHub</h3><p>One school app where each role sees only what it needs. English and Tamil.</p><div class="proof"><b>447</b><small>tests passing</small></div></a>
+      <a class="card" href="#"><div class="top"><span class="pill">IN PROGRESS</span><span class="mono">Android</span></div><h3>Clean Scanner</h3><p>Documents never leave the phone. No ads, no login, no watermark.</p><div class="proof"><b>42.5 / 60 MB</b><small>app size against its budget</small></div></a>
+    </div>
+  </section>
+
+  <section id="story">
+    <h2>The journey, in four chapters</h2>
+    <p class="sub">Sample lesson lines. Saran would write his own.</p>
+    <div class="chapters">
+      <div class="ch"><span class="num">I</span><h3>Learning</h3><p class="mono">B.Sc Computer Science · Sri S. Ramasamy Naidu Memorial College, Sattur</p><q>Every app I admired, I tried to rebuild.</q></div>
+      <div class="ch"><span class="num">II</span><h3>Shipping</h3><p class="mono">Mobile App Developer · Digisailor · Nov 2023 to Jan 2026</p><q>An app is not finished until it is in someone's hand.</q></div>
+      <div class="ch"><span class="num">III</span><h3>Full stack</h3><p class="mono">Full Stack Developer · Neural Schema IT · Feb 2026 to now</p><q>The screen is half the work. The data is the other half.</q></div>
+      <div class="ch"><span class="num">IV</span><h3>My own products</h3><p class="mono">FinWise · Nirai · NallHub · Coin18 · Clean Scanner</p><q>Build it for one real person first.</q></div>
+    </div>
+  </section>
+
+  <section id="contact"><div class="cta"><h2>Got an idea? Let's make it a pearl.</h2><p>Tell me what you need and I'll get back to you.</p><a class="btn" href="mailto:sarankumarg.in@gmail.com">sarankumarg.in@gmail.com</a></div></section>
+</main>
+<footer><div class="wrap">Concept 1 of 7 · Pearl City · prototype with sample copy</div></footer>
+
+<script>
+const P={morning:{s1:'#bfe0ef',s2:'#ffd9c2',orb:'#fff1c9',sea:'#3d8ea0',cy:150},day:{s1:'#8fd0ec',s2:'#d9f0f7',orb:'#fff6d6',sea:'#2f7f94',cy:80},evening:{s1:'#e9a98e',s2:'#f6c39f',orb:'#ffe7c2',sea:'#2c6e7f',cy:150},night:{s1:'#0f2236',s2:'#1d3a55',orb:'#f4f1e6',sea:'#123446',cy:90}};
+const scene=document.getElementById('scene');
+function setT(t){const p=P[t];sky1.style.fill=p.s1;sky2.style.fill=p.s2;orb.setAttribute('fill',p.orb);orb.setAttribute('cy',p.cy);sea.setAttribute('fill',p.sea);scene.className='scene '+t;document.querySelectorAll('.timeswitch button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t))}
+const h=+new Intl.DateTimeFormat('en-GB',{hour:'numeric',hour12:false,timeZone:'Asia/Kolkata'}).format(new Date());
+setT(h<6||h>=20?'night':h<10?'morning':h<17?'day':'evening');
+document.querySelectorAll('.timeswitch button').forEach(b=>b.onclick=()=>setT(b.dataset.t));
+const tick=()=>clock.textContent=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kolkata'}).format(new Date());tick();setInterval(tick,30000);
+shell.onclick=()=>{shell.classList.toggle('open');bubble.classList.toggle('on',shell.classList.contains('open'))};
+</script>
+</body>
+</html>

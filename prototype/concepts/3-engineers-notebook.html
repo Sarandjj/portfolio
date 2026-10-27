@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept 3 · Engineer's Notebook · Sarankumar G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f12;--grid:rgba(255,255,255,.045);--ink:#e8eaed;--muted:#8a9099;--line:#2a2f36;--acc:#9cff6e;--red:#ff5d5d}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg) ;color:var(--ink);font:15px/1.6 "IBM Plex Sans",system-ui,sans-serif;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px;position:relative}
+.mono{font:500 11.5px "IBM Plex Mono",monospace;letter-spacing:.06em;color:var(--muted)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+nav .links{display:flex;gap:18px;font-size:13px}
+nav .links a{text-decoration:none;color:var(--muted)}nav .links a:hover{color:var(--ink)}
+kbd{font:500 11px "IBM Plex Mono",monospace;border:1px solid var(--line);border-radius:4px;padding:2px 6px;color:var(--muted)}
+.frame{position:relative;border:1px solid var(--line);padding:22px}
+.frame::before,.frame::after,.frame>.c1,.frame>.c2{content:"";position:absolute;width:9px;height:9px;border:1px solid var(--acc);background:var(--bg)}
+.frame::before{left:-5px;top:-5px}.frame::after{right:-5px;top:-5px}.frame>.c1{left:-5px;bottom:-5px}.frame>.c2{right:-5px;bottom:-5px}
+.coord{position:absolute;font:10.5px "IBM Plex Mono",monospace;color:#555c66}
+.hero{margin-top:34px;padding:44px 26px 30px}
+h1{font:600 clamp(34px,6vw,64px)/1.02 "IBM Plex Sans",sans-serif;letter-spacing:-.03em}
+h1 em{font:italic 500 1.05em "Newsreader",serif;color:var(--acc)}
+.dim{display:flex;align-items:center;gap:8px;margin:14px 0 4px;color:var(--muted);font:11px "IBM Plex Mono",monospace}
+.dim::before,.dim::after{content:"";flex:1;height:1px;background:repeating-linear-gradient(90deg,#555c66 0 6px,transparent 6px 10px)}
+.callouts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.callouts div{border-left:1px solid var(--acc);padding-left:10px;font-size:13.5px;color:#c4c8ce}
+.callouts b{display:block;font:500 11px "IBM Plex Mono",monospace;color:var(--acc);letter-spacing:.08em}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{font:500 12.5px "IBM Plex Mono",monospace;border:1px solid var(--line);padding:9px 14px;text-decoration:none;color:var(--ink);background:#14171b}
+.btn.go{border-color:var(--acc);color:var(--bg);background:var(--acc)}
+.views{position:absolute;right:22px;top:16px}
+h2{font:600 26px "IBM Plex Sans";letter-spacing:-.01em;margin:70px 0 6px}
+h2 small{font:500 12px "IBM Plex Mono";color:var(--muted);margin-left:10px}
+.snapshot{display:grid;grid-template-columns:1fr 1fr;gap:6px 26px;margin-top:16px;font:13px "IBM Plex Mono",monospace;color:#c4c8ce}
+.snapshot span::before{content:"› ";color:var(--acc)}
+.filters{display:flex;gap:6px;margin:14px 0}
+.filters button{font:500 12px "IBM Plex Mono";background:none;border:1px solid var(--line);color:var(--muted);padding:5px 10px;cursor:pointer}
+.filters button[aria-pressed=true]{color:var(--bg);background:var(--ink);border-color:var(--ink)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vf{position:relative;border:1px solid var(--line);background:#111418;padding:12px;text-decoration:none;display:block;transition:border-color .2s}
+.vf:hover{border-color:#4a525c}
+.screen{position:relative;aspect-ratio:16/9;background:#0b0d10;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.screen .br{position:absolute;width:16px;height:16px;border-color:#e8eaed;border-style:solid}
+.br.tl{left:8px;top:8px;border-width:1px 0 0 1px}.br.tr{right:8px;top:8px;border-width:1px 1px 0 0}.br.bl{left:8px;bottom:8px;border-width:0 0 1px 1px}.br.bri{right:8px;bottom:8px;border-width:0 1px 1px 0}
+.rec{position:absolute;left:30px;top:12px;font:500 10px "IBM Plex Mono";color:var(--red)}.rec i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:5px;animation:bl 1.2s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.iso{position:absolute;right:30px;top:12px;font:10px "IBM Plex Mono";color:var(--muted)}
+.big{font:600 34px "IBM Plex Sans";letter-spacing:-.02em;color:var(--acc);text-align:center;line-height:1}
+.big small{display:block;font:500 11px "IBM Plex Mono";color:var(--muted);letter-spacing:.06em;margin-top:6px}
+.vf h3{font:600 18px "IBM Plex Sans";margin-top:10px;display:flex;justify-content:space-between}
+.vf h3 span{font:500 11px "IBM Plex Mono";color:var(--muted)}
+.vf p{font-size:13.5px;color:#aeb3ba}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.tags span{font:11px "IBM Plex Mono";color:var(--muted);border:1px solid var(--line);padding:1px 6px}
+/* bug game */
+pre{background:#111418;border:1px solid var(--line);padding:16px;font:13px/1.7 "IBM Plex Mono",monospace;overflow-x:auto;color:#c4c8ce}
+.ln{cursor:pointer;display:block;border-radius:3px;padding:0 4px}
+.ln:hover{background:#1b2027}
+.ln.found{background:rgba(156,255,110,.12);color:var(--acc)}
+.ln.wrong{background:rgba(255,93,93,.12)}
+.k{color:#c58cff}.s{color:#ffd479}.c{color:#5d6670}
+#bugmsg{margin-top:8px;font:13px "IBM Plex Mono";color:var(--muted)}
+.contact{margin:80px 0 30px}
+footer{border-top:1px solid var(--line);padding:18px 0 40px;color:var(--muted);font:12px "IBM Plex Mono"}
+@media(max-width:720px){.cards,.snapshot,.callouts{grid-template-columns:1fr}nav .links{display:none}.views{position:static;margin-bottom:10px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><b style="font:600 14px 'IBM Plex Mono'">saran.dev/notebook</b><div class="links"><a href="#work">work</a><a href="#bug">play</a><a href="#">writing</a><a href="#contact">contact</a></div><kbd>⌘K</kbd></nav>
+
+<div class="frame hero"><i class="c1"></i><i class="c2"></i>
+  <span class="coord" style="left:8px;top:6px">x:0 y:0</span><span class="coord" style="right:8px;bottom:6px">sheet 01 / 04</span>
+  <div class="mono views">● 10:42 IST · Thoothukudi, IN</div>
+  <div class="mono">FIG 0 · THE DEVELOPER</div>
+  <h1>Sarankumar G<br>builds apps that <em>hold up.</em></h1>
+  <div class="dim">full stack · from screen to database</div>
+  <p style="color:#c4c8ce;max-width:620px">Flutter for Android, iOS and web, React on the web, and the Supabase, Firebase, Node.js and FastAPI systems behind them. Full Stack Developer at Neural Schema IT.</p>
+  <div class="callouts"><div><b>SHIPPED</b>2 client apps live on Google Play and the App Store</div><div><b>BUILDING</b>5 of my own apps, offline-first and private</div><div><b>MEASURED</b>Every claim on this site is a real number from a repo</div></div>
+  <div class="row"><a class="btn go" href="#work">Read the notebook →</a><a class="btn" href="#">Recruiter view · 1 page</a><a class="btn" href="#">CV.pdf</a></div>
+</div>
+
+<h2>Developer snapshot <small>// now</small></h2>
+<div class="frame"><i class="c1"></i><i class="c2"></i><div class="snapshot"><span>Building full-stack products at Neural Schema IT</span><span>Finishing FinWise and Nirai for the stores</span><span>Flutter · React · Next.js · FastAPI · Node.js</span><span>PostgreSQL · Supabase RLS · Firebase · AWS</span></div></div>
+
+<h2 id="work">Projects <small>// 7 entries</small></h2>
+<div class="filters" role="group" aria-label="Filter"><button aria-pressed="true" data-f="all">all</button><button data-f="live">live</button><button data-f="mine">my own</button><button data-f="backend">backend</button></div>
+<div class="cards">
+  <a class="vf" href="#" data-t="mine backend"><div class="screen"><i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br bri"></i><span class="rec"><i></i>REC</span><span class="iso">ISO 400 · LIVE</span><div class="big">447<small>TESTS PASSING</small></div></div><h3>NallHub <span>2026 · android + web</span></h3><p>One school app where each role sees only what it needs. Row-level security per school.</p><div class="tags"><span>Flutter</span><span>Supabase</span><span>RLS</span><span>Tamil</span></div></a>
+  <a class="vf" href="#" data-t="mine"><div class="screen"><i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br bri"></i><span class="rec"><i></i>REC</span><span class="iso">ISO 400 · LIVE</span><div class="big">0<small>SERVERS TO RUN</small></div></div><h3>Nirai <span>2026 · android + macos</span></h3><p>Tasks synced through your own Google Drive, merged field by field.</p><div class="tags"><span>Flutter</span><span>Drift</span><span>Drive API</span></div></a>
+  <a class="vf" href="#" data-t="mine backend"><div class="screen"><i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br bri"></i><span class="rec"><i></i>REC</span><span class="iso">ISO 400 · LIVE</span><div class="big">300 KB → 2 KB<small>PER RESPONSE</small></div></div><h3>Coin18 <span>2026 · mobile</span></h3><p>A small Node.js server holds the provider key and caches market data.</p><div class="tags"><span>Flutter</span><span>Node.js</span><span>Express</span></div></a>
+  <a class="vf" href="#" data-t="mine"><div class="screen"><i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br bri"></i><span class="rec"><i></i>REC</span><span class="iso">ISO 400 · LIVE</span><div class="big">300+<small>AUTOMATED TESTS</small></div></div><h3>FinWise <span>2026 · mobile + web</span></h3><p>Offline money tracker with trip splitting and sync across your own devices.</p><div class="tags"><span>Flutter</span><span>Drift</span><span>Supabase</span></div></a>
+  <a class="vf" href="#" data-t="live"><div class="screen"><i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br bri"></i><span class="rec"><i></i>REC</span><span class="iso">CLIENT · LIVE</span><div class="big">2 STORES<small>PLAY + APP STORE</small></div></div><h3>Sports Booking App <span>client · android + ios</span></h3><p>Court booking, matches, player profiles, Razorpay and push notifications.</p><div class="tags"><span>Flutter</span><span>Firebase</span><span>Razorpay</span></div></a>
+  <a class="vf" href="#" data-t="live"><div class="screen"><i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br bri"></i><span class="rec"><i></i>REC</span><span class="iso">CLIENT · LIVE</span><div class="big">PDF + CSV<small>WEATHER DATA EXPORT</small></div></div><h3>Weather Monitoring App <span>client · android + ios</span></h3><p>Dashboards, station maps and alerts for threshold breaches.</p><div class="tags"><span>Flutter</span><span>GetX</span><span>Maps</span></div></a>
+</div>
+
+<h2 id="bug">Play: find the bug <small>// click the line</small></h2>
+<p style="color:#aeb3ba">One line below would leak a secret to every user. Which one?</p>
+<pre><span class="ln" data-ok="0"><span class="k">final</span> api = ApiService(baseUrl: <span class="s">'https://api.coin18.app/v1'</span>);</span><span class="ln" data-ok="1"><span class="k">const</span> apiKey = <span class="s">'cg-live-9f2a...'</span>; <span class="c">// shipped inside the app</span></span><span class="ln" data-ok="0"><span class="k">final</span> coins = <span class="k">await</span> api.get(<span class="s">'/coins?page=1'</span>);</span><span class="ln" data-ok="0">cache.put(<span class="s">'coins:1'</span>, coins, ttl: Duration(seconds: <span class="s">60</span>));</span></pre>
+<div id="bugmsg">0 / 1 found</div>
+
+<div class="contact frame" id="contact"><i class="c1"></i><i class="c2"></i><div class="mono">FIG 9 · NEXT STEP</div><h2 style="margin-top:6px">Have an app in mind?</h2><p style="color:#c4c8ce">Send a short description. I reply with a plan.</p><div class="row"><a class="btn go" href="mailto:sarankumarg.in@gmail.com">sarankumarg.in@gmail.com</a></div></div>
+<footer>Concept 3 of 7 · Engineer's Notebook · prototype</footer>
+</div>
+<script>
+document.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));const f=b.dataset.f;document.querySelectorAll('.vf').forEach(c=>c.hidden=!(f==='all'||c.dataset.t.includes(f)))});
+document.querySelectorAll('.ln').forEach(l=>l.onclick=()=>{if(l.dataset.ok==='1'){l.classList.add('found');bugmsg.textContent='1 / 1 found. A key inside an app can be pulled out by anyone. Coin18 keeps it on its own server.';bugmsg.style.color='#9cff6e'}else{l.classList.add('wrong');setTimeout(()=>l.classList.remove('wrong'),500)}});
+</script>
+</body>
+</html>

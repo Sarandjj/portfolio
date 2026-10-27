@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept 2 · Night Harbour · Sarankumar G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#120d0a;--bg2:#1b1410;--ink:#efe4d2;--muted:#a8977f;--gold:#d9a35b;--line:#3a2c21}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
+a{color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+.mono{font:500 11.5px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;justify-content:center;gap:28px;padding:18px 0;position:sticky;top:0;z-index:10;background:linear-gradient(var(--bg),transparent)}
+nav a{text-decoration:none;font:500 11.5px "IBM Plex Mono",monospace;letter-spacing:.14em;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.painting{position:relative;margin:10px auto 0;max-width:980px;aspect-ratio:16/7;border-radius:4px;overflow:hidden;box-shadow:0 30px 60px -30px #000}
+.painting svg{width:100%;height:100%;display:block}
+.shimmer{animation:sh 5s ease-in-out infinite}.shimmer:nth-child(2n){animation-delay:-2.5s}
+@keyframes sh{50%{opacity:.25}}
+.caption{text-align:right;font:italic 13px "Cormorant Garamond",serif;color:var(--muted);padding:6px 4px 0}
+.id{display:flex;gap:18px;align-items:center;margin-top:28px}
+.avatar{width:64px;height:64px;border-radius:12px;background:#3a2c21;display:grid;place-items:center;font:600 28px "Cormorant Garamond",serif;color:var(--gold);border:1px solid var(--line)}
+h1{font:600 clamp(36px,5vw,52px)/1 "Cormorant Garamond",serif}
+.role{color:var(--muted)}
+.open{margin-left:auto;font-size:13px;color:var(--muted)}.open i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e2725b;margin-right:6px;box-shadow:0 0 10px #e2725b}
+.intro{margin:18px 0;max-width:640px;color:#d6c8b2}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--line);background:none;color:var(--ink);padding:9px 14px;border-radius:6px;font:500 13px Inter;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+.btn.light{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn small{font:500 11px "IBM Plex Mono",monospace;color:var(--muted);border-left:1px solid var(--line);padding-left:8px}
+.btn.light small{color:#6e5e48;border-color:#c9b99f}
+.rule{display:flex;align-items:center;gap:14px;margin:90px 0 10px}.rule::after{content:"";flex:1;height:1px;background:var(--line)}
+h2{font:600 clamp(30px,4.4vw,44px)/1.1 "Cormorant Garamond",serif;margin-bottom:30px}
+h2 .rn{float:right;color:var(--gold);font-style:italic;font-size:.9em}
+/* chapters */
+.ch{display:grid;grid-template-columns:120px 1fr;gap:22px;padding:22px 0;border-top:1px solid var(--line);position:relative}
+.ch .yr{font:500 11px "IBM Plex Mono",monospace;color:var(--muted);letter-spacing:.1em}
+.ch h3{font:600 26px "Cormorant Garamond",serif}.ch h3 em{color:var(--gold);margin-right:10px}
+.ch .row{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:#d6c8b2;margin-top:8px;flex-wrap:wrap}
+.ch .row span:last-child{color:var(--muted);font:12px "IBM Plex Mono",monospace}
+.ch blockquote{margin-top:12px;padding-left:14px;border-left:2px solid var(--gold);font:italic 18px "Cormorant Garamond",serif;color:#d6c8b2}
+.quote{text-align:center;font:italic 24px "Cormorant Garamond",serif;margin:50px 0 0;color:#d6c8b2}
+/* figs */
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fig{border:1px solid var(--line);background:var(--bg2);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:8px;text-decoration:none;transition:border-color .2s}
+.fig:hover{border-color:var(--gold)}
+.fig .head{display:flex;justify-content:space-between}
+.fig svg{width:100%;height:auto;background:#160f0b;border-radius:4px}
+.fig svg *{vector-effect:non-scaling-stroke}
+.fig h3{font:600 22px "Cormorant Garamond",serif}
+.fig p{font-size:14px;color:#cbbba3}
+.fig .measure{margin-top:auto;padding-top:10px;border-top:1px dashed var(--line);font:500 11px "IBM Plex Mono",monospace;color:var(--gold);letter-spacing:.08em}
+.draw{stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.6s ease}
+.fig:hover .draw,.fig.seen .draw{stroke-dashoffset:0}
+footer{margin:100px 0 40px;text-align:center;color:var(--muted);font-size:13px}
+@media(max-width:820px){.figs{grid-template-columns:1fr 1fr}.ch{grid-template-columns:1fr}.open{margin-left:0}.id{flex-wrap:wrap}}
+@media(max-width:520px){.figs{grid-template-columns:1fr}nav{gap:14px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.draw{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<nav><a href="#journey">I · Journey</a><a href="#work">II · Work</a><a href="#">III · Writing</a><a href="#contact">IV · Contact</a></nav>
+<div class="wrap">
+  <div class="painting">
+    <svg viewBox="0 0 980 430" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A moonlit sea at Thoothukudi harbour, drawn in code">
+      <rect width="980" height="430" fill="#0f1a24"/>
+      <rect width="980" height="240" fill="#1a2733"/>
+      <rect y="120" width="980" height="120" fill="#24323c" opacity=".6"/>
+      <circle cx="640" cy="110" r="38" fill="#f3ead3"/>
+      <circle cx="640" cy="110" r="70" fill="#f3ead3" opacity=".08"/>
+      <path d="M0 236 Q120 206 240 226 T470 220 L470 240 L0 240Z" fill="#141c22"/>
+      <path d="M760 240 L760 180 Q800 150 860 170 L980 160 L980 240Z" fill="#141c22"/>
+      <rect y="240" width="980" height="190" fill="#0c141b"/>
+      <g fill="#f3ead3">
+        <rect class="shimmer" x="600" y="252" width="80" height="2" opacity=".7"/><rect class="shimmer" x="585" y="268" width="110" height="2" opacity=".55"/><rect class="shimmer" x="610" y="286" width="60" height="2" opacity=".5"/><rect class="shimmer" x="570" y="304" width="140" height="2" opacity=".35"/><rect class="shimmer" x="600" y="326" width="80" height="2" opacity=".3"/><rect class="shimmer" x="560" y="350" width="160" height="2" opacity=".2"/>
+      </g>
+      <g fill="#0a0f13"><path d="M300 262 L380 262 L370 274 L310 274Z"/><path d="M340 262 L340 214 L370 258Z"/><path d="M820 290 L870 290 L864 298 L826 298Z"/><path d="M845 290 L845 262 L864 286Z"/></g>
+      <g><path d="M120 236 L126 176 L140 176 L146 236Z" fill="#2a2620"/><rect x="124" y="164" width="18" height="12" fill="#f4c77a"/><path d="M121 164 L133 150 L145 164Z" fill="#2a2620"/><path d="M142 168 L320 140 L320 196Z" fill="#f4c77a" opacity=".12"/></g>
+      <g fill="#f4c77a"><circle cx="840" cy="176" r="2"/><circle cx="870" cy="172" r="2"/><circle cx="900" cy="168" r="1.6"/></g>
+    </svg>
+  </div>
+  <div class="caption">A moonlit night over the Pearl City harbour · drawn in code</div>
+
+  <div class="id">
+    <div class="avatar">S</div>
+    <div><h1>Sarankumar G</h1><div class="role">A builder of finished apps. Full Stack Developer at Neural Schema IT.</div></div>
+    <div class="open"><i></i>Open to new work</div>
+  </div>
+  <p class="intro">I build mobile and web apps from the screen to the database, then I find out what breaks. Lately that means apps that work offline, keep data private, and survive real phones.</p>
+  <div class="actions">
+    <a class="btn light" href="#contact">Book a call <small id="slot">next slot</small></a>
+    <a class="btn" href="#">Resume</a>
+    <a class="btn" href="#">GitHub</a>
+    <a class="btn" href="#">LinkedIn</a>
+  </div>
+
+  <div class="rule mono" id="journey">I · The journey</div>
+  <h2>From rebuilding apps to finishing my own <span class="rn">I</span></h2>
+  <div class="ch"><div class="yr">STUDY</div><div><h3><em>I</em>Learning</h3><p>B.Sc Computer Science, where I learned to build by rebuilding apps I liked.</p><div class="row"><span>Sri S. Ramasamy Naidu Memorial College, Sattur</span><span>B.Sc CS</span></div><blockquote>Copying a screen teaches you what it does, never why. (sample line)</blockquote></div></div>
+  <div class="ch"><div class="yr">NOV 2023 TO JAN 2026</div><div><h3><em>II</em>Shipping</h3><p>Production Flutter apps, Node.js and TypeScript backends, and releases to both stores.</p><div class="row"><span>Digisailor · Mobile App Developer</span><span>2 apps live on both stores</span></div><blockquote>An app is not finished until it is in someone's hand. (sample line)</blockquote></div></div>
+  <div class="ch"><div class="yr">FEB 2026 TO NOW</div><div><h3><em>III</em>Full stack</h3><p>Flutter, React and FastAPI apps, PostgreSQL design and AWS services for client projects.</p><div class="row"><span>Neural Schema IT · Full Stack Developer</span><span>current</span></div><blockquote>The screen is half the work. The data is the other half. (sample line)</blockquote></div></div>
+  <div class="ch"><div class="yr">ALONGSIDE</div><div><h3><em>IV</em>My own products</h3><p>Five apps of my own, built offline-first and tested on real phones.</p><div class="row"><span>FinWise · Nirai · NallHub · Coin18 · Clean Scanner</span><span>in development</span></div><blockquote>Build it for one real person first. (sample line)</blockquote></div></div>
+  <p class="quote">"Every new beginning comes from some other beginning's end." <br><span class="mono">Seneca</span></p>
+
+  <div class="rule mono" id="work">II · Work</div>
+  <h2>Systems I built and shipped <span class="rn">II</span></h2>
+  <div class="figs">
+    <a class="fig" href="#"><div class="head"><span class="mono">FIG 1</span><span class="mono">OFFLINE SYNC</span></div>
+      <svg viewBox="0 0 200 110"><g fill="none" stroke="#d9a35b" stroke-width="1"><rect class="draw" x="14" y="36" width="40" height="40"/><rect class="draw" x="146" y="36" width="40" height="40"/><path class="draw" d="M54 50 L146 50 M146 62 L54 62"/><circle class="draw" cx="100" cy="22" r="12"/><path class="draw" d="M100 34 L100 50"/></g><g font-family="IBM Plex Mono" font-size="7" fill="#a8977f"><text x="16" y="88">PHONE A</text><text x="148" y="88">PHONE B</text><text x="80" y="8">YOUR DRIVE</text></g></svg>
+      <h3>Nirai</h3><p>Tasks on your phone, merged field by field through one file in your own Google Drive.</p><div class="measure">0 SERVERS · 14.8 → 4.2 MS FRAME</div></a>
+    <a class="fig" href="#"><div class="head"><span class="mono">FIG 2</span><span class="mono">MULTI-TENANT</span></div>
+      <svg viewBox="0 0 200 110"><g fill="none" stroke="#d9a35b" stroke-width="1"><rect class="draw" x="70" y="14" width="60" height="26"/><path class="draw" d="M100 40 L40 70 M100 40 L100 70 M100 40 L160 70"/><rect class="draw" x="18" y="70" width="44" height="24"/><rect class="draw" x="78" y="70" width="44" height="24"/><rect class="draw" x="138" y="70" width="44" height="24"/></g><g font-family="IBM Plex Mono" font-size="7" fill="#a8977f"><text x="78" y="30">POSTGRES+RLS</text><text x="24" y="85">ADMIN</text><text x="80" y="85">TEACHER</text><text x="142" y="85">PARENT</text></g></svg>
+      <h3>NallHub</h3><p>One school app where each role sees only what it needs, in English and Tamil.</p><div class="measure">447 TESTS · 4 ROLES</div></a>
+    <a class="fig" href="#"><div class="head"><span class="mono">FIG 3</span><span class="mono">KEY GUARD</span></div>
+      <svg viewBox="0 0 200 110"><g fill="none" stroke="#d9a35b" stroke-width="1"><rect class="draw" x="12" y="40" width="40" height="30"/><rect class="draw" x="80" y="34" width="44" height="42"/><rect class="draw" x="152" y="40" width="40" height="30"/><path class="draw" d="M52 55 L80 55 M124 55 L152 55"/><circle class="draw" cx="102" cy="55" r="7"/></g><g font-family="IBM Plex Mono" font-size="7" fill="#a8977f"><text x="18" y="84">APP</text><text x="82" y="90">API+CACHE</text><text x="152" y="84">PROVIDER</text></g></svg>
+      <h3>Coin18</h3><p>A small server holds the key, caches market data and trims every response.</p><div class="measure">300 KB → 2 KB · 0 KEYS IN THE APP</div></a>
+    <a class="fig" href="#"><div class="head"><span class="mono">FIG 4</span><span class="mono">LOCAL FIRST</span></div>
+      <svg viewBox="0 0 200 110"><g fill="none" stroke="#d9a35b" stroke-width="1"><rect class="draw" x="20" y="20" width="60" height="70" rx="6"/><path class="draw" d="M30 40 L70 40 M30 52 L70 52 M30 64 L60 64"/><path class="draw" d="M80 55 L130 55"/><ellipse class="draw" cx="160" cy="40" rx="24" ry="8"/><path class="draw" d="M136 40 L136 74 Q160 86 184 74 L184 40"/></g><g font-family="IBM Plex Mono" font-size="7" fill="#a8977f"><text x="140" y="100">SUPABASE</text><text x="30" y="100">SQLITE FIRST</text></g></svg>
+      <h3>FinWise</h3><p>Your money app works offline, then syncs to your own devices, with trip splitting.</p><div class="measure">300+ TESTS · 8 SYNCED TABLES</div></a>
+    <a class="fig" href="#"><div class="head"><span class="mono">FIG 5</span><span class="mono">ON DEVICE</span></div>
+      <svg viewBox="0 0 200 110"><g fill="none" stroke="#d9a35b" stroke-width="1"><path class="draw" d="M70 20 L130 20 L130 90 L70 90Z"/><path class="draw" d="M60 14 L60 28 M60 14 L74 14 M140 14 L140 28 M140 14 L126 14 M60 96 L60 82 M60 96 L74 96 M140 96 L140 82 M140 96 L126 96"/><path class="draw" d="M80 40 L120 40 M80 52 L120 52 M80 64 L106 64"/></g><g font-family="IBM Plex Mono" font-size="7" fill="#a8977f"><text x="146" y="58">NO NETWORK</text></g></svg>
+      <h3>Clean Scanner</h3><p>Scan, OCR and export PDFs with no ads, no login and no upload.</p><div class="measure">42.5 OF 60 MB · 0 NETWORK CALLS</div></a>
+    <a class="fig" href="#"><div class="head"><span class="mono">FIG 6</span><span class="mono">CLIENT · LIVE</span></div>
+      <svg viewBox="0 0 200 110"><g fill="none" stroke="#d9a35b" stroke-width="1"><rect class="draw" x="40" y="14" width="44" height="80" rx="8"/><rect class="draw" x="116" y="14" width="44" height="80" rx="8"/><path class="draw" d="M84 54 L116 54"/></g><g font-family="IBM Plex Mono" font-size="7" fill="#a8977f"><text x="44" y="104">PLAY STORE</text><text x="118" y="104">APP STORE</text></g></svg>
+      <h3>Two client apps</h3><p>A sports booking app and a weather monitoring app, both live on both stores.</p><div class="measure">2 APPS · 2 STORES</div></a>
+  </div>
+
+  <div class="rule mono" id="contact">IV · Contact</div>
+  <h2>Have an app in mind?</h2>
+  <p class="intro">Tell me what you need. I reply with a short plan and the next steps.</p>
+  <a class="btn light" href="mailto:sarankumarg.in@gmail.com">sarankumarg.in@gmail.com</a>
+  <footer>Concept 2 of 7 · Night Harbour · prototype with sample copy</footer>
+</div>
+<script>
+// next weekday 10:00 IST, shown as an example of "next free slot"
+const now=new Date();const d=new Date(now);d.setDate(d.getDate()+1);while([0,6].includes(d.getDay()))d.setDate(d.getDate()+1);
+slot.textContent=d.toLocaleDateString('en-IN',{weekday:'short'})+' · 10:00 IST';
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('seen')),{threshold:.4});document.querySelectorAll('.fig').forEach(f=>io.observe(f));
+</script>
+</body>
+</html>
