@@ -1,7 +1,7 @@
 ---
-name: Jawo Al Fujairah
-kind: weather monitoring app, live on both stores
-summary: A weather and environmental monitoring app associated with the Fujairah Environment Authority, live on Google Play and the App Store. I worked on its Flutter features, including data dashboards, station maps and push alerts.
+name: Weather Monitoring App
+kind: weather monitoring app, live on both stores (client project)
+summary: A weather and environmental monitoring app associated with a government environmental authority, live on Google Play and the App Store. I worked on its Flutter features, including data dashboards, station maps and push alerts.
 role: Flutter developer, working on specific features of the app
 status: live
 platforms: Android + iOS
@@ -29,7 +29,7 @@ todo:
 
 ## What it is
 
-Jawo Al Fujairah is a weather and environmental monitoring app associated with the Fujairah Environment Authority (FEA). It shows environmental data in real time and as history, and it is on Google Play and the Apple App Store.
+This is a weather and environmental monitoring app associated with a government environmental authority. It shows environmental data in real time and as history, and it is on Google Play and the Apple App Store.
 
 ## My role
 

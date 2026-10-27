@@ -32,8 +32,8 @@ Time zone: Asia/Kolkata (IST, UTC+5:30)
 
 ## Projects (case studies)
 
-- [RAK Sports](https://sarankumar.dev/projects/rak-sports): sports app for booking courts, joining matches and managing player profiles, live on Google Play and the App Store. Flutter, Riverpod, Firebase, Razorpay. Sarankumar developed the Flutter app and its Firebase, push-notification and payment integrations.
-- [Jawo Al Fujairah](https://sarankumar.dev/projects/jawo-al-fujairah): weather and environmental monitoring app associated with the Fujairah Environment Authority, live on both stores. Flutter, GetX, Firebase, Google Maps. Sarankumar worked on specific Flutter features: data dashboards, station maps and push alerts.
+- [Sports Booking App](https://sarankumar.dev/projects/sports-booking-app): sports app for booking courts, joining matches and managing player profiles, live on Google Play and the App Store. Flutter, Riverpod, Firebase, Razorpay. Sarankumar developed the Flutter app and its Firebase, push-notification and payment integrations.
+- [Weather Monitoring App](https://sarankumar.dev/projects/weather-monitoring-app): weather and environmental monitoring app associated with a government environmental authority, live on both stores. Flutter, GetX, Firebase, Google Maps. Sarankumar worked on specific Flutter features: data dashboards, station maps and push alerts.
 
 - [FinWise](https://sarankumar.dev/projects/finwise): offline-first personal finance tracker with trips and group expense splitting. Flutter, Riverpod, Drift, Supabase. Has a live web demo with sample data.
 - [NallHub](https://sarankumar.dev/projects/nallhub): white-label school management app for private schools in Tamil Nadu, with admin, teacher and parent roles, in English and Tamil. Flutter, Supabase.
@@ -41,7 +41,7 @@ Time zone: Asia/Kolkata (IST, UTC+5:30)
 - [Coin18](https://sarankumar.dev/projects/coin18): market-research app for coins, charts and a watchlist, with its own Node.js API that caches data and hides provider keys.
 - [Clean Scanner](https://sarankumar.dev/projects/clean-scanner): offline document and ID scanner with no ads, no login and no network for core features.
 
-RAK Sports and Jawo Al Fujairah are live on Google Play and the Apple App Store. The other five apps are his own and are currently in development. Each case study states what works today and what is still planned.
+The Sports Booking App and the Weather Monitoring App are live client apps on Google Play and the Apple App Store. The other five apps are his own and are currently in development. Each case study states what works today and what is still planned.
 
 ## Facts for citation
 

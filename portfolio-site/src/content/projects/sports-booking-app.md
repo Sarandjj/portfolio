@@ -1,6 +1,6 @@
 ---
-name: RAK Sports
-kind: sports app, live on both stores
+name: Sports Booking App
+kind: sports app, live on both stores (client project)
 summary: A sports app for booking courts, joining matches and managing player profiles, live on Google Play and the App Store. I built the Flutter app and its Firebase, push-notification and payment integrations.
 role: Mobile application developer, responsible for the Flutter app across its development lifecycle
 status: live
@@ -30,7 +30,7 @@ todo:
 
 ## What it is
 
-RAK Sports is a sports app on Google Play and the Apple App Store. Players use it to book courts, join matches and manage their player profile.
+This is a sports app on Google Play and the Apple App Store, built for a client. Players use it to book courts, join matches and manage their player profile.
 
 <span class="note-draft">confirm: earlier notes also mention coach, learning, video and social modules. Say which of those are in the app you shipped.</span>
 
