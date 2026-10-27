@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept 9 · Calm · Sarankumar G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<script>try{const t=localStorage.getItem('c9-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>
+:root{--bg:#fbfaf7;--fg:#151515;--muted:#6b6b6b;--faint:#a3a3a3;--line:#ebe8e2;--hover:#f2efe9;--acc:#0e7c86;--chip:#eef6f5;--chipfg:#0b5e66}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#111213;--fg:#ededec;--muted:#a1a1a0;--faint:#6e6e6d;--line:#252627;--hover:#1a1b1c;--acc:#5cc6cf;--chip:#16292b;--chipfg:#8fdde3}}
+:root[data-theme=dark]{--bg:#111213;--fg:#ededec;--muted:#a1a1a0;--faint:#6e6e6d;--line:#252627;--hover:#1a1b1c;--acc:#5cc6cf;--chip:#16292b;--chipfg:#8fdde3}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:6px}
+.page{max-width:1080px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:minmax(0,620px) minmax(0,1fr);gap:64px}
+header{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600}
+.logo i{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#efe6d6 55%,#cdbfa6);box-shadow:0 0 0 1px var(--line)}
+header nav{display:flex;gap:4px;align-items:center}
+header nav a,.ghost{font-size:14px;color:var(--muted);padding:8px 10px;border-radius:8px;transition:color .15s,background .15s;border:0;background:none;cursor:pointer;font-family:inherit}
+header nav a:hover,.ghost:hover{color:var(--fg);background:var(--hover)}
+main{padding:40px 0 80px;grid-column:1;grid-row:2}
+h1{font-size:20px;font-weight:600;letter-spacing:-.01em}
+.role{color:var(--muted)}
+.bio-switch{display:inline-flex;gap:2px;background:var(--hover);padding:3px;border-radius:9px;margin:22px 0 12px}
+.bio-switch button{border:0;background:none;font:500 13px Inter;color:var(--muted);padding:9px 16px;min-height:38px;border-radius:7px;cursor:pointer}
+.bio-switch button[aria-pressed=true]{background:var(--bg);color:var(--fg);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.bio p{margin-bottom:12px;max-width:62ch}
+.bio em{font-family:Newsreader,serif;font-style:italic;font-size:1.08em}
+.bio [data-long]{display:none}
+.bio.long [data-long]{display:block}
+.status{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);margin-top:4px}
+.status i{width:7px;height:7px;border-radius:50%;background:#2fb37b}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.pill{display:inline-flex;align-items:center;gap:6px;font:500 13.5px Inter;border:1px solid var(--line);padding:7px 12px;border-radius:999px;background:none;color:var(--fg);cursor:pointer;transition:border-color .15s,background .15s}
+.pill:hover{border-color:var(--faint)}
+.pill.primary{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.pill.primary:hover{opacity:.88}
+section{margin-top:56px}
+h2{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:10px}
+.list{list-style:none;padding:0;margin:0 -12px}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:10px 12px;border-radius:10px;transition:background .15s}
+.row:hover{background:var(--hover)}
+.row .t{font-weight:500}
+.row .t small{font:500 11px Inter;margin-left:8px;padding:2px 7px;border-radius:999px;background:var(--chip);color:var(--chipfg);vertical-align:2px}
+.row .d{color:var(--muted);font-size:14.5px;grid-column:1}
+.row .m{grid-row:1/3;grid-column:2;align-self:center;text-align:right;font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.row .m b{display:block;color:var(--fg);font-weight:500;font-size:14px}
+.cv{display:grid;grid-template-columns:auto 1fr auto;gap:2px 14px;font-size:15px}
+.cv span:nth-child(3n+1){color:var(--faint);font-variant-numeric:tabular-nums;font-size:14px}
+.cv span:nth-child(3n){color:var(--muted);text-align:right;font-size:14px}
+.cv{row-gap:10px}
+.now{color:var(--fg);max-width:62ch}
+.now em{font-family:Newsreader,serif;font-style:italic}
+.contact p{max-width:62ch}
+footer{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+/* the one picture */
+aside{padding-top:40px;grid-column:2;grid-row:2}
+.art{position:sticky;top:24px;border-radius:20px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/5.2;background:#f3c9a8}
+.art svg{width:100%;height:100%;display:block}
+.art figcaption{position:absolute;left:12px;bottom:10px;font:italic 14px Newsreader,serif;color:rgba(255,255,255,.9)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,10px);background:var(--fg);color:var(--bg);font-size:14px;padding:8px 14px;border-radius:999px;opacity:0;transition:.2s;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.fade{animation:fade .5s ease both}
+@keyframes fade{from{opacity:0}}
+@media (max-width:900px){.page{grid-template-columns:1fr;gap:0}main,aside{grid-column:1;grid-row:auto}main{padding-top:28px}aside{padding-top:0}.art{position:relative;top:0;aspect-ratio:16/9;margin-top:4px}header{order:-2}}
+@media (max-width:520px){header nav a.hide{display:none}.row{grid-template-columns:1fr}.row .m{grid-row:auto;grid-column:1;text-align:left}.row .m b{display:inline;margin-right:6px}.cv{grid-template-columns:1fr}.cv span:nth-child(3n){text-align:left;margin-bottom:6px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <a class="logo" href="#"><i aria-hidden="true"></i>Sarankumar G</a>
+  <nav aria-label="Main"><a class="hide" href="#work">Work</a><a class="hide" href="#writing">Writing</a><a href="#contact">Contact</a><button class="ghost" id="theme" type="button" aria-label="Switch light or dark">◐</button></nav>
+</header>
+
+<aside aria-label="Illustration"><figure class="art fade">
+  <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Evening at the Thoothukudi harbour">
+    <rect width="400" height="520" fill="#f3c9a8"/><rect width="400" height="220" fill="#eaa98f"/><rect y="150" width="400" height="120" fill="#f1bb9c" opacity=".8"/>
+    <circle cx="290" cy="170" r="34" fill="#fff1d6"/>
+    <path d="M0 300 Q100 284 200 296 T400 290 L400 520 L0 520Z" fill="#2c6e7f"/>
+    <path d="M0 360 Q100 348 200 358 T400 352 L400 520 L0 520Z" fill="#245d6c"/>
+    <path d="M0 430 Q100 420 200 428 T400 424 L400 520 L0 520Z" fill="#1d4f5d"/>
+    <path d="M30 330 q20 -6 40 0 t40 0 M150 380 q20 -6 40 0 t40 0 M260 336 q20 -6 40 0 t40 0 M60 450 q20 -6 40 0 t40 0 M250 470 q20 -6 40 0 t40 0" stroke="#fff" stroke-opacity=".35" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M60 300 L66 236 L82 236 L88 300Z" fill="#fbf8f2"/><path d="M62 276 L86 276 L87 288 L61 288Z" fill="#e4572e"/><path d="M64 252 L84 252 L85 262 L63 262Z" fill="#e4572e"/><rect x="65" y="222" width="18" height="14" rx="2" fill="#ffd166"/><path d="M62 222 L74 208 L86 222Z" fill="#e4572e"/><path d="M84 228 L180 210 L180 246Z" fill="#ffe2a6" opacity=".45"/>
+    <path d="M200 316 L270 316 L260 330 L210 330Z" fill="#5a3b2e"/><path d="M236 316 L236 262 L266 312Z" fill="#fff4e0"/>
+    <path d="M300 488 Q320 474 340 488Z" fill="#e9a29b"/><circle cx="320" cy="482" r="7" fill="#fbf8f2"/><circle cx="318" cy="480" r="2" fill="#fff"/>
+  </svg>
+  <figcaption>Thoothukudi, the Pearl City</figcaption>
+</figure></aside>
+
+<main class="fade">
+  <h1>Sarankumar G</h1>
+  <div class="role">Mobile and full-stack developer · Thoothukudi, Tamil Nadu</div>
+  <div class="status"><i aria-hidden="true"></i>Full Stack Developer at Neural Schema IT · open to selected freelance work</div>
+
+  <div class="bio-switch" role="group" aria-label="Bio length"><button type="button" aria-pressed="true" data-b="short">Short</button><button type="button" aria-pressed="false" data-b="long">Long</button></div>
+  <div class="bio" id="bio">
+    <p>I turn ideas into <em>finished</em> apps. Flutter for Android, iOS and web, React on the web, and the Supabase, Firebase, Node.js and FastAPI systems behind them.</p>
+    <p data-long>My journey started with a B.Sc in Computer Science in Sattur and grew through shipping production apps at Digisailor, where two of my client apps went live on Google Play and the App Store.</p>
+    <p data-long>Today I build full-stack products at Neural Schema IT, and alongside that I'm building my own apps: a money tracker, a to-do app with no server, a school app in English and Tamil, a crypto research tool and an offline scanner.</p>
+    <p data-long>I care about apps that work offline, keep people's data private, and feel smooth on the phones people actually own.</p>
+  </div>
+  <div class="links"><button class="pill primary" id="copy" type="button">Copy email</button><a class="pill" href="#">Download CV</a><a class="pill" href="#">GitHub ↗</a><a class="pill" href="#">LinkedIn ↗</a></div>
+
+  <section id="work" aria-labelledby="h-live">
+    <h2 id="h-live">Live on the stores</h2>
+    <ul class="list">
+      <li><a class="row" href="#"><span class="t">Sports Booking App<small>Live</small></span><span class="d">Court booking, matches and player profiles. Client project.</span><span class="m"><b>2 stores</b>Android + iOS</span></a></li>
+      <li><a class="row" href="#"><span class="t">Weather Monitoring App<small>Live</small></span><span class="d">Weather dashboards, station maps and alerts. Client project.</span><span class="m"><b>PDF + CSV</b>data export</span></a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-own">
+    <h2 id="h-own">My own apps</h2>
+    <ul class="list">
+      <li><a class="row" href="#"><span class="t">NallHub</span><span class="d">One school app where each role sees only what it needs. English and Tamil.</span><span class="m"><b>447</b>tests passing</span></a></li>
+      <li><a class="row" href="#"><span class="t">Nirai</span><span class="d">Tasks on your phone, synced through your own Google Drive. No server.</span><span class="m"><b>0</b>servers</span></a></li>
+      <li><a class="row" href="#"><span class="t">FinWise</span><span class="d">A money tracker that works offline, with trip splitting and sync.</span><span class="m"><b>300+</b>tests</span></a></li>
+      <li><a class="row" href="#"><span class="t">Coin18</span><span class="d">Crypto research with a small server that keeps the API key off the phone.</span><span class="m"><b>300 KB → 2 KB</b>per response</span></a></li>
+      <li><a class="row" href="#"><span class="t">Clean Scanner</span><span class="d">Scan and export PDFs. No ads, no login, no upload.</span><span class="m"><b>42.5 / 60 MB</b>size budget</span></a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-exp">
+    <h2 id="h-exp">Experience</h2>
+    <div class="cv">
+      <span>2026 –</span><span>Full Stack Developer, Neural Schema IT</span><span>Flutter · React · FastAPI</span>
+      <span>2023 – 2026</span><span>Mobile App Developer, Digisailor</span><span>Flutter · Node.js</span>
+      <span>Before</span><span>B.Sc Computer Science, Sattur</span><span>Sri S. Ramasamy Naidu Memorial College</span>
+    </div>
+  </section>
+
+  <section id="writing" aria-labelledby="h-wr">
+    <h2 id="h-wr">Writing</h2>
+    <ul class="list">
+      <li><a class="row" href="#"><span class="t">7 things to have ready before you hire an app developer</span><span class="m">Oct 2026</span></a></li>
+      <li><a class="row" href="#"><span class="t">Why you should never put an API key inside a mobile app</span><span class="m">Oct 2026</span></a></li>
+      <li><a class="row" href="#"><span class="t">Offline-first sync to Google Drive with no backend</span><span class="m">Oct 2026</span></a></li>
+      <li><a class="row" href="#"><span class="t">Soft deletes in Drift: onDelete does not fire on UPDATE</span><span class="m">Oct 2026</span></a></li>
+      <li><a class="row" href="#"><span class="t">I built my own document scanner, then went back to ML Kit</span><span class="m">Oct 2026</span></a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-now">
+    <h2 id="h-now">Now</h2>
+    <p class="now">Getting FinWise and Nirai ready for the Play Store, and writing about what I learn along the way. <em>(sample text)</em></p>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="h-c">
+    <h2 id="h-c">Contact</h2>
+    <p>The fastest way to reach me is email. Tell me what you want to build, and I'll reply with a short plan.</p>
+    <div class="links"><button class="pill primary" id="copy2" type="button">Copy sarankumarg.in@gmail.com</button><a class="pill" href="mailto:sarankumarg.in@gmail.com">Open mail app</a></div>
+  </section>
+
+  <footer><span>Concept 9 · Calm · prototype</span><span>No pop-ups, no tracking until you allow it, no scroll tricks.</span></footer>
+</main>
+</div>
+<div class="toast" id="toast" role="status">Email copied</div>
+<script>
+const bio=document.getElementById('bio');
+document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-b]').forEach(x=>x.setAttribute('aria-pressed',x===b));bio.classList.toggle('long',b.dataset.b==='long')});
+async function copyEmail(){try{await navigator.clipboard.writeText('sarankumarg.in@gmail.com');toast.textContent='Email copied'}catch{toast.textContent='sarankumarg.in@gmail.com'}toast.classList.add('on');setTimeout(()=>toast.classList.remove('on'),1600)}
+copy.onclick=copyEmail;copy2.onclick=copyEmail;
+theme.onclick=()=>{const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');const next=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('c9-theme',next)}catch(e){}};
+</script>
+</body>
+</html>
