@@ -8,6 +8,8 @@ const projects = defineCollection({
     name: z.string(),
     kind: z.string(),
     summary: z.string(),
+    /** what Saran did on it, shown under the title. Used for client work. */
+    role: z.string().optional(),
     status: z.enum(['live', 'beta', 'progress']),
     platforms: z.string(),
     stack: z.array(z.string()),
@@ -27,6 +29,8 @@ const projects = defineCollection({
         steps: z.array(z.object({ label: z.string(), note: z.string() })),
       })
       .optional(),
+    /** store or product links; when present they replace the "get notified" button */
+    links: z.array(z.object({ label: z.string(), url: z.string() })).default([]),
     /** A live Flutter web build with fake data, shown inside a phone on the case study page */
     demo: z
       .object({

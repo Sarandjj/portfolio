@@ -34,14 +34,14 @@ const FILTERS = [
 
 <Base
   title="Projects | Sarankumar G"
-  description="Five apps in different stages: FinWise, Nirai, NallHub, Coin18 and Clean Scanner. Flutter, Supabase, Firebase and Node.js."
+  description="Two live apps, RAK Sports and Jawo Al Fujairah, plus five of my own in development: FinWise, Nirai, NallHub, Coin18 and Clean Scanner. Flutter, Supabase, Firebase and Node.js."
   jsonLd={jsonLd}
 >
   <div class="page">
     <div class="wrap">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Projects' }]} />
       <h1 class="page-title">Things I'm <em>building.</em></h1>
-      <p class="page-lede">Five real apps in different stages. Each one has a case study with the problem, the build, the hard parts and where it stands.</p>
+      <p class="page-lede">Seven apps: two live on the Play Store and App Store, and five of my own in development. Each one has a case study with the problem, the build, the hard parts and where it stands.</p>
 
       <div class="filters" id="filters" role="group" aria-label="Filter projects">
         {FILTERS.map(([key, label], i) => <button type="button" data-f={key} aria-pressed={String(i === 0)}>{label}</button>)}

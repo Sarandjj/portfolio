@@ -13,7 +13,7 @@ works:
 emoji: "✅"
 c1: "#4f7bff"
 c2: "#7a4dff"
-order: 2
+order: 4
 tags: [mobile]
 numbers:
   - { value: "38", label: "specified features" }

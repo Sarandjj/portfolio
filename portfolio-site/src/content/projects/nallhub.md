@@ -13,7 +13,7 @@ works:
 emoji: "🏫"
 c1: "#ff6a3d"
 c2: "#ff3d77"
-order: 3
+order: 5
 tags: [mobile, web, backend]
 numbers:
   - { value: "860+", label: "automated tests" }

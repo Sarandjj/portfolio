@@ -13,7 +13,7 @@ works:
 emoji: "💸"
 c1: "#2bb673"
 c2: "#0e8a7a"
-order: 1
+order: 3
 tags: [mobile, web]
 numbers:
   - { value: "300+", label: "automated tests" }

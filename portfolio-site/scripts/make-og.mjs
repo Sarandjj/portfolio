@@ -1,6 +1,7 @@
 // Renders share images (1200x630) with headless Chrome:
 //   public/og/default.png          from scripts/og/default.html
 //   public/og/projects/<slug>.png  from scripts/og/project.html + each project's frontmatter
+//   public/og/blog/<slug>.png      from scripts/og/post.html + each post's frontmatter (blog.png for the index)
 import { execFileSync } from 'node:child_process';
 import { readFileSync, readdirSync, mkdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
@@ -34,3 +35,18 @@ for (const file of readdirSync(dir).filter((f) => f.endsWith('.md'))) {
     status: STATUS[fm.status], stack: fm.stack.slice(0, 4).join(' · '),
   }, join(root, 'public/og/projects', file.replace(/\.md$/, '.png')));
 }
+
+// Blog posts: the colours and emoji come from the project the post is about.
+mkdirSync(join(root, 'public/og/blog'), { recursive: true });
+const front = (path) => YAML.parse(readFileSync(path, 'utf8').split('---')[1]);
+const projects = Object.fromEntries(
+  readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => [f.replace(/\.md$/, ''), front(join(dir, f))]),
+);
+const postDir = join(root, 'src/content/posts');
+for (const file of readdirSync(postDir).filter((f) => f.endsWith('.md'))) {
+  const fm = front(join(postDir, file));
+  const pr = projects[fm.project];
+  shot('post.html', { title: fm.title, project: pr.name, emoji: pr.emoji, c1: pr.c1, c2: pr.c2 },
+    join(root, 'public/og/blog', file.replace(/\.md$/, '.png')));
+}
+shot('post.html', { title: 'Notes from building apps', project: 'Blog', emoji: '✍️', c1: '#ff6a3d', c2: '#7a4dff' }, join(root, 'public/og/blog.png'));

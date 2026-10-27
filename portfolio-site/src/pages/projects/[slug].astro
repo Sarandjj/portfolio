@@ -20,6 +20,8 @@ export async function getStaticPaths() {
 const { entry, prev, next } = Astro.props;
 const p = entry.data;
 const { Content } = await render(entry);
+// Client apps (they have store links) show no screenshots until the client gives permission.
+const hasShots = p.links.length === 0;
 const url = `${SITE.url}/projects/${entry.id}`;
 const jsonLd = [
   {
@@ -30,6 +32,7 @@ const jsonLd = [
     url,
     applicationCategory: 'MobileApplication',
     operatingSystem: p.platforms,
+    ...(p.links[0] ? { installUrl: p.links[0].url } : {}),
     author: { '@type': 'Person', name: SITE.name, url: SITE.url },
   },
   {
@@ -49,26 +52,35 @@ const jsonLd = [
     <div class="wrap">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: p.name }]} />
 
-      <header class="cs-hero">
+      <header class="cs-hero" style={hasShots ? undefined : 'grid-template-columns:1fr'}>
         <div>
           <p class="label" style="margin:22px 0 0">{p.kind}</p>
           <h1 class="page-title">{p.name}</h1>
           <p class="page-lede">{p.summary}</p>
+          {p.role && <p class="page-lede" style="margin-top:10px;font-size:15px"><b>Role:</b> {p.role}</p>}
           <div class="meta-row">
             <StatusBadge status={p.status} />
             <span class="mono" style="font-size:13px;color:var(--muted)">{p.platforms}</span>
           </div>
           <div class="chips" style="margin-top:16px">{p.stack.map((s) => <span class="chip">{s}</span>)}</div>
           <div class="page-cta">
-            <a class="btn solid" href={`/contact?topic=${entry.id}`}>Get notified when it ships</a>
+            {
+              p.links.length > 0
+                ? p.links.map((l, i) => <a class={`btn ${i === 0 ? 'solid' : 'ghost'}`} href={l.url} target="_blank" rel="noopener">{l.label} ↗</a>)
+                : <a class="btn solid" href={`/contact?topic=${entry.id}`}>Get notified when it ships</a>
+            }
             <a class="btn ghost" href="/projects">All projects</a>
           </div>
         </div>
-        <div class="shots" aria-label="Screenshots (placeholders)">
-          <ShotFrame c1={p.c1} c2={p.c2} />
-          <ShotFrame c1={p.c2} c2={p.c1} />
-          <ShotFrame c1={p.c1} c2={p.c2} />
-        </div>
+        {
+          hasShots && (
+            <div class="shots" aria-label="Screenshots (placeholders)">
+              <ShotFrame c1={p.c1} c2={p.c2} />
+              <ShotFrame c1={p.c2} c2={p.c1} />
+              <ShotFrame c1={p.c1} c2={p.c2} />
+            </div>
+          )
+        }
       </header>
 
       {p.demo && <DemoPhone url={p.demo.url} name={p.name} c1={p.c1} c2={p.c2} note={p.demo.note} />}

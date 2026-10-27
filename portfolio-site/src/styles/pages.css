@@ -102,7 +102,8 @@
 
 /* ---------- about ---------- */
 .about-hero { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: center; }
-.photo { aspect-ratio: 4 / 5; border-radius: 28px; border: 2px dashed #d97706; background: var(--card); display: grid; place-items: center; text-align: center; padding: 18px; }
+.photo { aspect-ratio: 4 / 5; border-radius: 28px; border: 1px solid var(--line); background: var(--card); overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .photo .note-draft { font-size: 12px; }
 .timeline { list-style: none; padding: 0; border-left: 2px solid var(--line); margin-left: 6px; }
 .timeline li { position: relative; padding: 0 0 28px 28px; }

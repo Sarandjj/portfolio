@@ -29,6 +29,7 @@ const jsonLd = [
     dateModified: p.date.toISOString(),
     mainEntityOfPage: url,
     url,
+    image: `${SITE.url}/og/blog/${entry.id}.png`,
     keywords: p.tags.join(', '),
     author: { '@id': `${SITE.url}/#person` },
     publisher: { '@id': `${SITE.url}/#person` },
@@ -45,7 +46,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title={`${p.title} | ${SITE.name}`} description={p.description} jsonLd={jsonLd}>
+<Base title={`${p.title} | ${SITE.name}`} description={p.description} image={`/og/blog/${entry.id}.png`} jsonLd={jsonLd}>
   <div class="page">
     <div class="wrap">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: p.title }]} />
