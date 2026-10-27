@@ -35,14 +35,13 @@ This is a weather and environmental monitoring app associated with a government 
 
 I worked on the app as a Flutter developer, building features and connecting them to the backend services and APIs behind them.
 
-<span class="note-draft">confirm: your CV says you developed the app, and your notes say specific features. Tell me which features you personally built and I will name them exactly, without claiming the whole product.</span>
 
 ## What I worked on
 
 - Chart dashboards and map-based station views for parameters such as temperature, humidity and rainfall.
 - Push notifications through Firebase for alert threshold breaches and stations going offline.
 - Integration with the app's REST APIs.
-- <span class="note-draft">confirm: exporting weather data as PDF and CSV, for offline use and sharing</span>
+- Exporting weather data as PDF and CSV, for offline use and sharing.
 - Fixing bugs and refining the experience in the released app.
 
 ## Why it is here

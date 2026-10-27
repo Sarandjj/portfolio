@@ -11,6 +11,9 @@ export const SITE = {
   timeZone: 'Asia/Kolkata',
 } as const;
 
+/** Google Analytics 4 / Firebase web app measurement ID (portfolio web app). Loaded only after a visitor accepts. */
+export const GA_ID = 'G-8YMR3RP8RJ';
+
 export const NAV = [
   { label: 'Work', href: '/projects' },
   { label: 'Services', href: '/services' },

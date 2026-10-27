@@ -1,0 +1,16 @@
+---
+// Analytics consent. Hidden until analytics.ts decides it is needed (no stored choice,
+// no Global Privacy Control). Nothing is tracked until "Allow analytics" is pressed.
+---
+
+<div class="consent" id="consent" role="dialog" aria-labelledby="consent-title" aria-describedby="consent-text" hidden>
+  <p id="consent-title" class="consent-title">Anonymous visit counts?</p>
+  <p id="consent-text">
+    With your OK I use Google Analytics to count visits and which buttons get clicked, so I can improve this site.
+    Nothing is tracked until you allow it. <a href="/privacy">Details</a>
+  </p>
+  <div class="consent-actions">
+    <button type="button" class="btn solid sm" data-consent="yes">Allow analytics</button>
+    <button type="button" class="btn ghost sm" data-consent="no">No thanks</button>
+  </div>
+</div>

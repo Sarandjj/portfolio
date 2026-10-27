@@ -118,6 +118,7 @@ const jsonLd = [
       try {
         const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
         if (!res.ok) throw new Error(String(res.status));
+        window.dispatchEvent(new CustomEvent('site:track', { detail: { name: 'contact_submit', params: { topic: String(data.get('topic') ?? '') } } }));
         form.hidden = true;
         success.classList.add('on');
         success.focus();

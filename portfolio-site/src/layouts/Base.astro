@@ -5,6 +5,7 @@ import { SITE } from '../data/site';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CommandMenu from '../components/CommandMenu.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 import geistFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
 import serifFont from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
 
@@ -88,8 +89,10 @@ const imageUrl = new URL(image, Astro.site).href;
     </main>
     <Footer />
     <CommandMenu />
+    <ConsentBanner />
     <script>
       import '../scripts/ui';
+      import '../scripts/analytics';
     </script>
   </body>
 </html>

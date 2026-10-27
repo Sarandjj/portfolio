@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { SITE } from '../data/site';
+---
+
+<Base
+  title="Privacy | Sarankumar G"
+  description="What this site collects: nothing for analytics until you allow it, and only what you type in the contact form."
+>
+  <div class="page">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Privacy' }]} />
+      <h1 class="page-title">Privacy, <em>in plain words.</em></h1>
+      <p class="page-lede">Short version: no ads, no selling data, and no analytics until you say yes.</p>
+
+      <div class="prose" style="margin-top:32px">
+        <h2>Analytics (only if you allow it)</h2>
+        <p>When you press "Allow analytics" on the banner, the site loads Google Analytics, through the Firebase project that hosts this site. It counts page views and a few clicks (the contact form being sent, the CV download, email copied, demo launches and links to other sites). Google also receives your browser type, device type, approximate location from your IP address and the page you came from, and sets cookies.</p>
+        <p>I have switched off Google's advertising features for this property. If you press "No thanks", or your browser sends a Global Privacy Control signal, nothing is loaded and nothing is sent. You can change your mind at any time with "Cookie settings" in the footer.</p>
+
+        <h2>The contact form</h2>
+        <p>If you write to me, your name, email and message are sent through Formspree to my inbox. I use them to reply to you and for nothing else. Ask me and I will delete the conversation.</p>
+
+        <h2>The live demos</h2>
+        <p>The demos on the project pages run in your browser with made-up data. They are built so that what you do in them is not sent to a server of mine.</p>
+
+        <h2>Hosting and fonts</h2>
+        <p>The site is served by Firebase Hosting (Google), which keeps standard server logs, such as your IP address, for a short time. Fonts are served from this site, not from Google Fonts.</p>
+
+        <h2>Contact about privacy</h2>
+        <p>Write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+      </div>
+    </div>
+  </div>
+</Base>

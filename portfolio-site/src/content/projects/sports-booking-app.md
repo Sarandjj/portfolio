@@ -32,20 +32,18 @@ todo:
 
 This is a sports app on Google Play and the Apple App Store, built for a client. Players use it to book courts, join matches and manage their player profile.
 
-<span class="note-draft">confirm: earlier notes also mention coach, learning, video and social modules. Say which of those are in the app you shipped.</span>
 
 ## My role
 
 I developed the Flutter application and its core user-facing features, and I was responsible for it across its development lifecycle: how the app is structured, building the features, connecting it to backend services, fixing bugs, and releasing it to both stores.
 
-<span class="note-draft">confirm: edit this to say exactly what you owned, without implying you owned the business or every service.</span>
 
 ## What I built
 
 - The Flutter app, with Riverpod for state management and Firebase for its backend services.
 - Payments with the Razorpay gateway.
 - Push notifications with Firebase Cloud Messaging, including handling the device tokens that notifications are sent to.
-- <span class="note-draft">confirm: Firebase Cloud Functions that deliver notifications to users, tokens and topics</span>
+- Firebase Cloud Functions that deliver notifications to users, device tokens and topics.
 - Releases to Google Play and the Apple App Store, and fixes after release.
 
 ## The problem, in plain terms
@@ -62,7 +60,6 @@ The aim was a simple, habit-friendly mobile experience, not a long list of featu
 
 Mistakes I tried to avoid on mobile: too many features at once, complicated navigation, and no clear feedback or sense of progress. The goal was clarity and consistency, not complexity.
 
-<span class="note-draft">confirm: this describes your approach in general terms. Edit anything that does not match how you worked on the app. I left out the "impact" claims (better consistency, more engagement) because there are no numbers behind them yet. Add real figures if you have them.</span>
 
 ## Why it is here
 
