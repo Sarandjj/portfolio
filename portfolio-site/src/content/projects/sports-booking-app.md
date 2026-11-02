@@ -1,6 +1,6 @@
 ---
 name: Sports Booking App
-kind: sports app, live on both stores (client project)
+kind: court booking and matches
 summary: A sports app for booking courts, joining matches and managing player profiles, live on Google Play and the App Store. I built the Flutter app and its Firebase, push-notification and payment integrations.
 role: Mobile application developer, responsible for the Flutter app across its development lifecycle
 status: live
@@ -16,6 +16,7 @@ emoji: "🏟️"
 c1: "#0891b2"
 c2: "#2563eb"
 order: 1
+proof: { value: "2 stores", label: "live on Play and App Store" }
 tags: [mobile, backend]
 links:
   - { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.raq.sportz" }

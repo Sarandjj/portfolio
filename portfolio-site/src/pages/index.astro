@@ -6,6 +6,8 @@ import { SITE, STATUS_LABEL } from '../data/site';
 import { getPosts } from '../lib/posts';
 import { getProjects } from '../lib/projects';
 const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
+const LIVE = PROJECTS.filter((p) => p.links.length > 0);
+const OWN = PROJECTS.filter((p) => p.links.length === 0);
 
 const codeSample = `<span class="k">class</span> <span class="f">YourApp</span> <span class="k">extends</span> <span class="f">StatelessWidget</span> {
   <span class="d">// idea → store, one codebase</span>
@@ -52,8 +54,9 @@ const jsonLd = [
     <div class="wrap">
       <div>
         <div class="status">
-          <span class="live"><b>Available</b> for freelance</span>
-          <span>Tamil Nadu, India</span>
+          <span class="live"><b>Full Stack Developer</b> at Neural Schema IT</span>
+          <span>Open to selected freelance work</span>
+          <span>Thoothukudi, Tamil Nadu</span>
           <span id="istSmall">IST --:--</span>
         </div>
         <h1>
@@ -66,12 +69,20 @@ const jsonLd = [
           Node.js and FastAPI underneath. Fast, private, offline-first apps, from idea to release.
         </p>
         <div class="cta">
-          <a class="btn solid" href="#work">See selected work ↓</a>
-          <a class="btn ghost" href="#contact">Start a project</a>
+          <a class="btn solid" href="#work">See my work ↓</a>
+          <a class="btn ghost" href="/recruiter" data-track="recruiter_view">Recruiter view <small class="cta-time">1 min</small></a>
           <span class="hint" aria-hidden="true">psst, the phone works →</span>
         </div>
       </div>
       <Phone />
+    </div>
+    <div class="wrap">
+      <ul class="proofbar" aria-label="In numbers">
+        <li><b>2</b> client apps live on both stores</li>
+        <li><b>447</b> tests in NallHub</li>
+        <li><b>0</b> servers behind Nirai</li>
+        <li><b>100</b> Lighthouse accessibility score</li>
+      </ul>
     </div>
   </section>
 
@@ -103,20 +114,23 @@ const jsonLd = [
 
         <div class="tile reveal">
           <span class="tag">Web · Speed</span>
-          <div class="scores" role="img" aria-label="Lighthouse target: 95 or higher for performance, accessibility, best practices and SEO">
+          <div class="scores" role="img" aria-label="Lighthouse scores measured on this site: performance 97, accessibility 100, best practices 100">
             {
-              [0, 1, 2, 3].map(() => (
-                <div class="score">
-                  <svg viewBox="0 0 52 52">
-                    <circle cx="26" cy="26" r="22" stroke="#d6f0df" stroke-width="5" fill="none"></circle>
-                    <circle class="arc" cx="26" cy="26" r="22" stroke="#1a9d5b" stroke-width="5" fill="none" stroke-linecap="round"></circle>
-                  </svg>
-                  <b>95+</b>
+              [['97', 'Speed'], ['100', 'Access'], ['100', 'Practice']].map(([v, l]) => (
+                <div class="score-wrap">
+                  <div class="score">
+                    <svg viewBox="0 0 52 52">
+                      <circle cx="26" cy="26" r="22" stroke="#d6f0df" stroke-width="5" fill="none"></circle>
+                      <circle class="arc" cx="26" cy="26" r="22" stroke="#1a9d5b" stroke-width="5" fill="none" stroke-linecap="round"></circle>
+                    </svg>
+                    <b>{v}</b>
+                  </div>
+                  <small>{l}</small>
                 </div>
               ))
             }
           </div>
-          <p>The Lighthouse target for every page I ship.</p>
+          <p>Measured with Lighthouse on this site, on a simulated phone, at the last check.</p>
         </div>
 
         <div class="tile t-stack reveal">
@@ -147,13 +161,27 @@ const jsonLd = [
 
       <p class="reveal" style="margin-top:20px"><a class="btn ghost sm" href="/projects">All projects →</a></p>
 
+      <h3 class="group">Live on the stores <span>client projects</span></h3>
       <div class="work">
         {
-          PROJECTS.map((p, i) => (
+          LIVE.map((p) => (
             <a class="wrow reveal" href={`/projects/${p.slug}`} data-c1={p.c1} data-c2={p.c2} data-t={p.name}>
-              <span class="n">{String(i + 1).padStart(2, '0')}</span>
+              <span class="n" aria-hidden="true">{p.emoji}</span>
               <h3>{p.name} <em>{p.kind}</em></h3>
-              <span class="st">{p.stack.slice(0, 3).join(' · ')}</span>
+              {p.proof && <span class="st"><b>{p.proof.value}</b> {p.proof.label}</span>}
+              <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
+            </a>
+          ))
+        }
+      </div>
+      <h3 class="group">My own apps <span>built end to end</span></h3>
+      <div class="work">
+        {
+          OWN.map((p) => (
+            <a class="wrow reveal" href={`/projects/${p.slug}`} data-c1={p.c1} data-c2={p.c2} data-t={p.name}>
+              <span class="n" aria-hidden="true">{p.emoji}</span>
+              <h3>{p.name} <em>{p.kind}</em></h3>
+              {p.proof && <span class="st"><b>{p.proof.value}</b> {p.proof.label}</span>}
               <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
             </a>
           ))
@@ -170,7 +198,7 @@ const jsonLd = [
     <div class="wrap">
       <div class="label reveal">03 / How I work</div>
       <h2 class="reveal">Simple process, <em>no surprises.</em></h2>
-      <p class="lede reveal"><span class="note-draft">draft copy, to be confirmed</span></p>
+      <p class="lede reveal">From the first call to the store release, you always know what happens next.</p>
       <div class="steps">
         <div class="step reveal"><span class="mono">01</span><h3>Discover</h3><p>A short call to understand the goal, the users and the budget. You get the scope in writing.</p></div>
         <div class="step reveal"><span class="mono">02</span><h3>Design</h3><p>Key screens and flows agreed before any code is written.</p></div>

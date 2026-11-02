@@ -21,6 +21,7 @@ Time zone: Asia/Kolkata (IST, UTC+5:30)
 - [Services](https://sarankumar.dev/services): what he offers, how an engagement works, and common questions.
 - [About](https://sarankumar.dev/about): background, how he builds, and his stack.
 - [Projects](https://sarankumar.dev/projects): case studies of seven apps: two live client apps and five of his own.
+- [Recruiter view](https://sarankumar.dev/recruiter): experience, skills and apps on one page.
 - [Blog](https://sarankumar.dev/blog): engineering notes from building the apps below.
 - [Contact](https://sarankumar.dev/contact): a form and the email address; replies come with next steps.
 

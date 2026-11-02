@@ -23,6 +23,8 @@ const projects = defineCollection({
     tags: z.array(z.enum(['mobile', 'web', 'backend'])),
     /** only numbers that can be checked in the repo or its docs */
     numbers: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
+    /** the one number shown next to the project in lists */
+    proof: z.object({ value: z.string(), label: z.string() }).optional(),
     architecture: z
       .object({
         title: z.string(),

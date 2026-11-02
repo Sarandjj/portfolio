@@ -234,3 +234,21 @@
 .consent-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
 .linklike { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 700px) { .consent { right: auto; } }
+
+/* ---------- recruiter view ---------- */
+.rv-kicker { margin-top: 22px; color: var(--accent-text); font-size: 12.5px; }
+.rv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.rv section { margin-top: 48px; }
+.rv-h { font-size: 15px; font-weight: 500; display: flex; gap: 10px; align-items: baseline; margin-bottom: 12px; }
+.rv-h span { font-family: var(--mono); font-size: 12px; color: var(--muted); font-weight: 400; }
+.rv-list div { display: grid; grid-template-columns: 150px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line); }
+.rv-list dt { font-family: var(--mono); font-size: 12.5px; color: var(--muted); padding-top: 3px; }
+.rv-list dd { margin: 0; color: var(--muted); font-size: 15px; }
+.rv-list dd b { display: block; color: var(--ink); font-weight: 500; font-size: 16px; }
+.rv-apps { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.rv-apps a { display: grid; grid-template-columns: 200px 1fr auto; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.rv-apps a:hover b { color: var(--accent-text); }
+.rv-apps b { font-weight: 500; }
+.rv-apps span { color: var(--muted); font-size: 15px; }
+.rv-apps em { font-style: normal; font-family: var(--mono); font-size: 12.5px; white-space: nowrap; }
+@media (max-width: 820px) { .rv-grid { grid-template-columns: 1fr; gap: 0; } .rv-apps a { grid-template-columns: 1fr; gap: 4px; } .rv-list div { grid-template-columns: 1fr; gap: 2px; } }

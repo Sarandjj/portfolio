@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { getProjects } from '../lib/projects';
+import { SITE, STATUS_LABEL } from '../data/site';
+
+const projects = await getProjects();
+const live = projects.filter((p) => p.data.links.length > 0);
+const own = projects.filter((p) => p.data.links.length === 0);
+---
+
+<Base
+  title="Recruiter view | Sarankumar G, Flutter and full-stack developer"
+  description="Everything about Sarankumar G on one page: current role, experience, education, skills, apps live on both stores, and how to reach him."
+>
+  <div class="page">
+    <div class="wrap rv">
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Recruiter view' }]} />
+      <p class="mono rv-kicker">Recruiter view · about 1 minute</p>
+      <h1 class="page-title" style="margin-top:6px">Sarankumar G</h1>
+      <p class="page-lede">Mobile and full-stack developer in Thoothukudi, Tamil Nadu. Flutter for Android, iOS and web, React and Next.js on the web, Node.js, FastAPI, PostgreSQL, Supabase and Firebase behind them.</p>
+      <div class="page-cta">
+        <a class="btn solid" href="/Sarankumar-G-CV.pdf" download data-track="cv_download">Download CV</a>
+        <a class="btn ghost" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <a class="btn ghost" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn ghost" href={SITE.github} target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+
+      <div class="rv-grid">
+        <section>
+          <h2 class="rv-h">Experience</h2>
+          <dl class="rv-list">
+            <div><dt>Feb 2026 to now</dt><dd><b>Full Stack Developer, Neural Schema IT</b>Flutter, React/Next.js and FastAPI apps, REST APIs, PostgreSQL design and AWS services across client projects.</dd></div>
+            <div><dt>Nov 2023 to Jan 2026</dt><dd><b>Mobile App Developer, Digisailor</b>Production Flutter apps, Node.js and TypeScript backends with TypeORM and PostgreSQL, Firebase and Razorpay, releases to Google Play and the App Store.</dd></div>
+            <div><dt>Education</dt><dd><b>B.Sc Computer Science</b>Sri S. Ramasamy Naidu Memorial College, Sattur</dd></div>
+          </dl>
+        </section>
+
+        <section>
+          <h2 class="rv-h">Skills</h2>
+          <dl class="rv-list">
+            <div><dt>Mobile</dt><dd>Flutter, Dart, Riverpod, GetX, Provider, BLoC, iOS and Android release</dd></div>
+            <div><dt>Web</dt><dd>React, Next.js, Flutter Web, Astro</dd></div>
+            <div><dt>Backend</dt><dd>Node.js, TypeScript, Express, TypeORM, FastAPI, Python, REST APIs</dd></div>
+            <div><dt>Data and cloud</dt><dd>PostgreSQL, Supabase (row-level security, Edge Functions), Firebase, MongoDB, Drift (SQLite), AWS, Google Cloud</dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <section>
+        <h2 class="rv-h">Apps live on both stores <span>client projects</span></h2>
+        <ul class="rv-apps">
+          {live.map((p) => (
+            <li><a href={`/projects/${p.id}`}><b>{p.data.name}</b><span>{p.data.summary}</span>{p.data.proof && <em>{p.data.proof.value} · {p.data.proof.label}</em>}</a></li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="rv-h">My own apps <span>{STATUS_LABEL.progress.toLowerCase()}</span></h2>
+        <ul class="rv-apps">
+          {own.map((p) => (
+            <li><a href={`/projects/${p.id}`}><b>{p.data.name}</b><span>{p.data.summary}</span>{p.data.proof && <em>{p.data.proof.value} · {p.data.proof.label}</em>}</a></li>
+          ))}
+        </ul>
+      </section>
+
+      <div class="cta-band">
+        <h2>Want to talk?</h2>
+        <p>Email is fastest. I usually reply within a day.</p>
+        <a class="btn solid" href="/contact">Send a message</a>
+      </div>
+    </div>
+  </div>
+</Base>

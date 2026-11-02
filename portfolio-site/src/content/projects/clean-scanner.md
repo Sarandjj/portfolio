@@ -14,6 +14,7 @@ emoji: "📄"
 c1: "#0ea58f"
 c2: "#22d3b6"
 order: 7
+proof: { value: "42.5 / 60 MB", label: "size budget" }
 tags: [mobile]
 numbers:
   - { value: "42.5 MB", label: "app size at last check, 60 MB budget" }

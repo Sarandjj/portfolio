@@ -15,6 +15,7 @@ emoji: "✅"
 c1: "#4f7bff"
 c2: "#7a4dff"
 order: 4
+proof: { value: "0", label: "servers to run" }
 tags: [mobile]
 numbers:
   - { value: "38", label: "specified features" }

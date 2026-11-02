@@ -1,6 +1,6 @@
 ---
 name: Weather Monitoring App
-kind: weather monitoring app, live on both stores (client project)
+kind: weather data and alerts
 summary: A weather and environmental monitoring app associated with a government environmental authority, live on Google Play and the App Store. I worked on its Flutter features, including data dashboards, station maps and push alerts.
 role: Flutter developer, working on specific features of the app
 status: live
@@ -16,6 +16,7 @@ emoji: "🌦️"
 c1: "#0ea5e9"
 c2: "#22c55e"
 order: 2
+proof: { value: "PDF + CSV", label: "data export" }
 tags: [mobile]
 links:
   - { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.jawo.fea.gov.ae" }

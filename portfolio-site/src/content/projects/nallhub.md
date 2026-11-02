@@ -15,6 +15,7 @@ emoji: "🏫"
 c1: "#ff6a3d"
 c2: "#ff3d77"
 order: 5
+proof: { value: "447", label: "tests passing" }
 tags: [mobile, web, backend]
 numbers:
   - { value: "447", label: "automated tests passing" }

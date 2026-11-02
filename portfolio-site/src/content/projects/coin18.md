@@ -14,6 +14,7 @@ emoji: "🪙"
 c1: "#ffb020"
 c2: "#ff7a1a"
 order: 6
+proof: { value: "300 KB → 2 KB", label: "per response" }
 tags: [mobile, backend]
 numbers:
   - { value: "60-300 s", label: "cache lifetimes" }
