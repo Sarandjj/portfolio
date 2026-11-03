@@ -304,3 +304,22 @@ if (fills.length && !reduce) {
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   update();
 }
+
+/* ---------- clock tile: place the sun or moon on the day arc ---------- */
+const arc = document.querySelector<SVGSVGElement>('.dayarc');
+function placeOrb() {
+  if (!arc) return;
+  const t = istNow();
+  const h = t.h + Number(t.m) / 60;
+  const day = h >= 6 && h < 18;
+  // 6:00 → left end, 12:00 → top, 18:00 → right end; the night runs the same arc from 18:00 to 6:00
+  const p = day ? (h - 6) / 12 : ((h + 6) % 24) / 12;
+  const a = Math.PI * (1 - p);
+  const orb = arc.querySelector<SVGCircleElement>('.orb')!;
+  orb.setAttribute('cx', (60 + 52 * Math.cos(a)).toFixed(1));
+  orb.setAttribute('cy', (40 - 36 * Math.sin(a)).toFixed(1));
+  arc.style.setProperty('--dp', String(Math.round(p * 100)));
+  arc.classList.toggle('night', !day);
+}
+placeOrb();
+setInterval(placeOrb, 60000);

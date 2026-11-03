@@ -816,3 +816,22 @@ h1 .ul { position: relative; display: inline-block; }
 .totop i { font-style: normal; transition: transform 0.25s; }
 .totop:hover i { transform: translateY(-3px); }
 @media (max-width: 560px) { .needs a { width: 100%; justify-content: center; } .totop { margin: 10px 0 0; } }
+/* phone app tiles: a soft top gloss, like real app icons */
+.app i { position: relative; overflow: hidden; }
+.app i::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 55%); pointer-events: none; }
+.demo-btn span .appicon { width: 70%; height: 70%; }
+
+/* ---------- v9: What I do ---------- */
+.groups .chips { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.groups .chips li { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 13px; background: var(--paper2); border: 1px solid var(--line); transition: transform 0.2s, border-color 0.2s; }
+.groups .chips li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--g); }
+.groups .chips li:hover { transform: translateY(-2px); border-color: var(--g); }
+.t-stack { grid-row: span 1; }
+.bento { grid-auto-rows: minmax(210px, auto); }
+/* day arc on the clock tile: the sun (or moon) sits where the day is in Tamil Nadu */
+.dayarc { display: block; width: 120px; height: 44px; margin-top: 12px; overflow: visible; }
+.dayarc .track { fill: none; stroke: var(--line); stroke-width: 3; stroke-dasharray: 2 5; stroke-linecap: round; }
+.dayarc .done { fill: none; stroke: var(--zari); stroke-width: 3; stroke-linecap: round; stroke-dasharray: var(--dp, 0) 100; transition: stroke-dasharray 1s; }
+.dayarc .orb { fill: #ffb300; filter: drop-shadow(0 0 6px rgba(255, 179, 0, 0.8)); transition: cx 1s, cy 1s; }
+.dayarc.night .orb { fill: #c9c3f2; stroke: #6e66b8; stroke-width: 1.5; filter: drop-shadow(0 0 6px rgba(140, 130, 230, 0.6)); }
+.clock { margin-top: 4px; }

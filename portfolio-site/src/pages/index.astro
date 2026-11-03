@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Phone from '../components/Phone.astro';
 import Kolam from '../components/Kolam.astro';
+import AppIcon from '../components/AppIcon.astro';
 import TempleBorder from '../components/TempleBorder.astro';
 import Skyline from '../components/Skyline.astro';
 import Thoranam from '../components/festival/Thoranam.astro';
@@ -145,7 +146,7 @@ const jsonLd = [
             <a class="pcard reveal" href={`/projects/${p.slug}`} style={`--c1:${p.c1};--c2:${p.c2}`} data-tags={tagsOf(p)} data-slug={p.slug}>
               <span class="corners" aria-hidden="true"></span>
               <div class="pc-top">
-                <span class="icon" aria-hidden="true">{p.emoji}</span>
+                <span class="icon" aria-hidden="true"><AppIcon name={p.slug} /></span>
                 <span class="fig mono">FIG. {String(p.order).padStart(2, '0')}<span class="seen" hidden> · ✓ read</span></span>
                 <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
               </div>
@@ -169,7 +170,7 @@ const jsonLd = [
             <span class="corners" aria-hidden="true"></span>
             <div class="feat-text">
               <div class="pc-top">
-                <span class="icon" aria-hidden="true">{FEATURED.emoji}</span>
+                <span class="icon" aria-hidden="true"><AppIcon name={FEATURED.slug} /></span>
                 <span class="fig mono">FIG. {String(FEATURED.order).padStart(2, '0')} · featured<span class="seen" hidden> · ✓ read</span></span>
                 <span class="badge" data-status={FEATURED.status}>{STATUS_LABEL[FEATURED.status]}</span>
               </div>
@@ -199,7 +200,7 @@ const jsonLd = [
             <a class="pcard reveal" href={`/projects/${p.slug}`} style={`--c1:${p.c1};--c2:${p.c2}`} data-tags={tagsOf(p)} data-slug={p.slug}>
               <span class="corners" aria-hidden="true"></span>
               <div class="pc-top">
-                <span class="icon" aria-hidden="true">{p.emoji}</span>
+                <span class="icon" aria-hidden="true"><AppIcon name={p.slug} /></span>
                 <span class="fig mono">FIG. {String(p.order).padStart(2, '0')}<span class="seen" hidden> · ✓ read</span></span>
                 <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
               </div>
@@ -223,7 +224,7 @@ const jsonLd = [
         <div class="tryit-btns">
           {DEMOS.map((p) => (
             <a class="demo-btn" href={p.demo!.url} target="_blank" rel="noopener" data-track="demo_open" data-track-item={p.slug} style={`--c1:${p.c1};--c2:${p.c2}`}>
-              <span aria-hidden="true">{p.emoji}</span>{p.name} <small>↗</small>
+              <span aria-hidden="true"><AppIcon name={p.slug} /></span>{p.name} <small>↗</small>
             </a>
           ))}
         </div>
@@ -255,6 +256,11 @@ const jsonLd = [
 
         <div class="tile reveal">
           <span class="tag">Right now in Tamil Nadu</span>
+          <svg class="dayarc" viewBox="0 0 120 44" aria-hidden="true">
+            <path d="M8 40 A52 36 0 0 1 112 40" class="track" />
+            <path d="M8 40 A52 36 0 0 1 112 40" class="done" pathLength="100" />
+            <circle r="5" class="orb" cx="8" cy="40" />
+          </svg>
           <div class="clock" id="clock">--:--</div>
           <p id="clockNote">Awake right now</p>
         </div>
@@ -283,10 +289,17 @@ const jsonLd = [
         <div class="tile t-stack reveal">
           <span class="tag">Toolbox</span>
           <div class="groups">
-            <div><b>Mobile</b>Flutter, Dart, Riverpod, camera, ML Kit and biometrics plugins</div>
-            <div><b>Data &amp; backend</b>Drift (SQLite), Supabase, Firebase, Node.js with Express, FastAPI (Python)</div>
-            <div><b>Web</b>React, Flutter Web, Astro (this site), Firebase Hosting</div>
-            <div><b>Shipping</b>Google Play Console, Render, Git</div>
+            {[
+              ['Mobile', ['Flutter', 'Dart', 'Riverpod', 'ML Kit', 'Camera', 'Biometrics'], '#13b9fd'],
+              ['Data & backend', ['Drift (SQLite)', 'Supabase', 'Firebase', 'Node.js', 'Express', 'FastAPI'], '#2bb673'],
+              ['Web', ['React', 'Flutter Web', 'Astro', 'Firebase Hosting'], '#ff8a3d'],
+              ['Shipping', ['Google Play Console', 'App Store', 'Render', 'Git'], '#a855f7'],
+            ].map(([g, items, c]) => (
+              <div style={`--g:${c}`}>
+                <b>{g}</b>
+                <ul class="chips">{(items as string[]).map((t) => <li>{t}</li>)}</ul>
+              </div>
+            ))}
           </div>
         </div>
 

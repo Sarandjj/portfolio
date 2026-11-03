@@ -1,5 +1,6 @@
 ---
 import Mayil from './Mayil.astro';
+import AppIcon from './AppIcon.astro';
 import { STATUS_LABEL, SITE } from '../data/site';
 import { getProjects } from '../lib/projects';
 const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
@@ -45,14 +46,14 @@ const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
         {
           PROJECTS.map((p) => (
             <button class="app" type="button" data-app={p.slug}>
-              <i style={`background:linear-gradient(135deg,${p.c1},${p.c2})`} aria-hidden="true">{p.emoji}</i>
+              <i style={`background:linear-gradient(135deg,${p.c1},${p.c2})`} aria-hidden="true"><AppIcon name={p.slug} /></i>
               <span>{p.name}</span>
             </button>
           ))
         }
-        <button class="app" type="button" data-app="about"><i style="background:#fbfaf6" aria-hidden="true">🙋🏽‍♂️</i><span>About</span></button>
-        <button class="app" type="button" data-app="stack"><i style="background:#141412" aria-hidden="true">⚙️</i><span>Stack</span></button>
-        <button class="app" type="button" data-app="writing"><i style="background:#fff3d6" aria-hidden="true">✍️</i><span>Writing</span></button>
+        <button class="app" type="button" data-app="about"><i style="background:linear-gradient(135deg,#ff8a5c,#ff4f1f)" aria-hidden="true"><AppIcon name="about" /></i><span>About</span></button>
+        <button class="app" type="button" data-app="stack"><i style="background:linear-gradient(135deg,#3a3a36,#141412)" aria-hidden="true"><AppIcon name="stack" /></i><span>Stack</span></button>
+        <button class="app" type="button" data-app="writing"><i style="background:linear-gradient(135deg,#e2b33c,#a8781c)" aria-hidden="true"><AppIcon name="writing" /></i><span>Writing</span></button>
       </div>
 
       <div class="widget">
@@ -62,8 +63,8 @@ const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
       </div>
 
       <div class="dock">
-        <a class="app" href={`mailto:${SITE.email}`} aria-label="Email"><i style="background:#2f80ff" aria-hidden="true">✉️</i><span>Mail</span></a>
-        <a class="app" href={SITE.github} target="_blank" rel="noopener" aria-label="GitHub"><i style="background:#141412" aria-hidden="true">🐙</i><span>GitHub</span></a>
+        <a class="app" href={`mailto:${SITE.email}`} aria-label="Email"><i style="background:linear-gradient(135deg,#5aa0ff,#1f6fe5)" aria-hidden="true"><AppIcon name="mail" /></i><span>Mail</span></a>
+        <a class="app" href={SITE.github} target="_blank" rel="noopener" aria-label="GitHub"><i style="background:linear-gradient(135deg,#3a3a36,#141412)" aria-hidden="true"><AppIcon name="github" /></i><span>GitHub</span></a>
         <a class="app" href={SITE.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><i class="glyph-in" style="background:#0a66c2;font-weight:700;font-size:20px" aria-hidden="true"></i><span>LinkedIn</span></a>
       </div>
 
