@@ -271,7 +271,7 @@ a.pcard:hover, .pcard.feat:hover { transform: translateY(-4px); border-color: co
 .feat-nums b { display: block; font-size: 26px; color: var(--ink); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
 .feat-cta { margin-top: auto; padding-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
 .feat-shots { position: relative; min-height: 340px; }
-.feat-shots img {
+.feat-shots .ph {
   position: absolute; width: 46%; max-width: 210px; height: auto; border-radius: 22px; border: 5px solid #0c0c0c;
   box-shadow: 0 30px 50px -24px rgba(0, 0, 0, 0.45); transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -332,15 +332,15 @@ a.pcard:hover, .pcard.feat:hover { transform: translateY(-4px); border-color: co
 @media (max-width: 560px) {
   .hello { font-size: 13px; }
   .feat-shots { min-height: 250px; }
-  .feat-shots img { width: 44%; }
+  .feat-shots .ph { width: 44%; }
   .tryit { padding: 22px; }
 }
-@media (prefers-reduced-motion: reduce) { .pcard, .feat-shots img, .pcell { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .pcard, .feat-shots .ph, .pcell { transition: none; } }
 /* v2 tuning */
 h1 { font-size: clamp(38px, 6.4vw, 88px); }
 .feat .pc-top { justify-content: flex-start; align-items: center; gap: 14px; }
 .pcard.feat { min-height: 440px; }
-.feat-shots img { max-width: 190px; }
+.feat-shots .ph { max-width: 190px; }
 .feat-shots .a { top: 4px; }
 .feat-shots .b { top: 50px; }
 .tryit { background: linear-gradient(135deg, #22221f, #141412 70%); border: 1px solid #2e2d28; }
@@ -513,7 +513,7 @@ a.pcard:hover, .door:hover, .tile:hover { transform: perspective(900px) rotateX(
 .feat-shots .b { animation: shotB 8s ease-in-out infinite; }
 @keyframes shotA { 50% { translate: 0 -8px; } }
 @keyframes shotB { 50% { translate: 0 8px; } }
-@media (prefers-reduced-motion: reduce) { .feat-shots img { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .feat-shots .ph { animation: none; } }
 
 /* contact: glass panel over the colour light */
 .contact .wrap { position: relative; padding: 70px 24px; border-radius: 36px; background: var(--glass); border: 1px solid var(--glass-edge); backdrop-filter: blur(20px) saturate(1.4); box-shadow: var(--glass-shadow); max-width: 1100px; }
@@ -726,3 +726,93 @@ h1 em { padding-right: 0; }
 .doorstep .floor-edge { stroke: rgba(255, 220, 200, 0.25); stroke-width: 1.2; }
 .doorstep .floor-sheen { stroke: rgba(255, 255, 255, 0.12); stroke-width: 6; stroke-linecap: round; }
 .doorstep .ground { fill: rgba(0, 0, 0, 0.3); }
+
+/* ---------- v8: hero ---------- */
+/* a pulli (kolam dot) grid behind the hero; the dots near the pointer glow in the accent colour */
+.pulli-field { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--ink) 22%, transparent) 1.3px, transparent 1.6px);
+  background-size: 30px 30px; background-position: 15px 15px;
+  -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 70%, transparent); mask-image: linear-gradient(transparent, #000 18%, #000 70%, transparent); }
+.pulli-field::after { content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, var(--accent) 2px, transparent 2.6px); background-size: 30px 30px; background-position: 15px 15px;
+  -webkit-mask-image: radial-gradient(220px circle at var(--hx, -500px) var(--hy, -500px), #000, transparent 75%);
+  mask-image: radial-gradient(220px circle at var(--hx, -500px) var(--hy, -500px), #000, transparent 75%); transition: opacity 0.4s; }
+/* a rice-flour stroke drawn under "your pocket" */
+h1 .ul { position: relative; display: inline-block; }
+.scribble { position: absolute; left: -2%; bottom: -0.12em; width: 104%; height: 0.32em; overflow: visible; pointer-events: none; }
+.scribble path { fill: none; stroke: var(--zari); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 320; stroke-dashoffset: 320; animation: scribble 1.1s 0.7s cubic-bezier(0.6, 0, 0.3, 1) forwards; vector-effect: non-scaling-stroke; }
+@keyframes scribble { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .scribble path { animation: none; stroke-dashoffset: 0; } }
+
+/* ---------- v8: projects ---------- */
+/* FinWise phones: each frame holds two real screens that cross-fade */
+.feat-shots .ph { aspect-ratio: 540 / 979; overflow: hidden; background: #0c0c0c; }
+.feat-shots .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.feat-shots .ph img + img { animation: shotfade 9s ease-in-out infinite; }
+.feat-shots .ph.b img + img { animation-delay: -4.5s; }
+@keyframes shotfade { 0%, 40% { opacity: 0; } 50%, 90% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .feat-shots .ph img + img { animation: none; opacity: 0; } }
+
+/* filter counts */
+.filters .cnt { display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-left: 4px; padding: 0 5px; border-radius: 999px; font-family: var(--mono); font-size: 11px; background: var(--paper2); color: var(--muted); }
+.filters button[aria-pressed='true'] .cnt { background: color-mix(in srgb, var(--paper) 20%, transparent); color: var(--paper); }
+
+/* project cards: the top becomes a coloured cover with kolam dots, the icon sits on glass */
+.pcard:not(.feat) .pc-top {
+  position: relative; margin: -24px -24px 16px; height: 116px; padding: 16px 18px; align-items: flex-end; overflow: hidden;
+  border-radius: 23px 23px 0 0; background: linear-gradient(135deg, var(--c1), var(--c2));
+}
+.pcard:not(.feat) .pc-top::before { content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.35) 1.2px, transparent 1.6px); background-size: 18px 18px;
+  -webkit-mask-image: linear-gradient(120deg, transparent 20%, #000); mask-image: linear-gradient(120deg, transparent 20%, #000); transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.pcard:not(.feat) .pc-top::after { content: ''; position: absolute; right: -30px; top: -40px; width: 160px; height: 160px; border-radius: 50%; border: 18px solid rgba(255, 255, 255, 0.12); }
+.pcard:not(.feat):hover .pc-top::before { transform: translate(9px, -9px); }
+.pcard:not(.feat) .pc-top > * { position: relative; z-index: 1; }
+.pcard:not(.feat) .icon { background: rgba(255, 255, 255, 0.22); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.45); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.45); transition: transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.pcard:not(.feat):hover .icon { transform: translateY(-4px) rotate(-6deg); }
+.pcard:not(.feat) .fig { color: rgba(255, 255, 255, 0.85); }
+.pcard:not(.feat) .fig .seen { color: #fff; }
+.pcard:not(.feat) .pc-top .badge { background: rgba(255, 255, 255, 0.92); border-color: transparent; color: #333; align-self: flex-start; }
+.pcard:not(.feat) .corners { display: none; }
+
+/* ---------- v8: middle sections ---------- */
+/* journey: a line runs across the four chapters and fills as you scroll past */
+.chapters { position: relative; padding-top: 26px; }
+.chapters::before, .chapters::after { content: ''; position: absolute; top: 6px; left: 22px; right: 22px; height: 3px; border-radius: 3px; }
+.chapters::before { background: var(--line); }
+.chapters::after { background: linear-gradient(90deg, var(--accent), var(--zari), #1aa59a); transform-origin: 0 50%; }
+.chapters li::before { content: ''; position: absolute; top: -26px; left: 22px; width: 15px; height: 15px; border-radius: 50%; background: var(--paper); border: 3px solid var(--zari); z-index: 1; }
+/* process: same idea, the line between the steps fills */
+.steps::before { content: ''; position: absolute; top: 9px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--zari)); transform-origin: 0 50%; z-index: 1; }
+.step::after { z-index: 2; }
+/* the fill follows scrolling (src/scripts/home.ts sets --fill from 0 to 1); without the script the line is simply full */
+.chapters::after, .steps::before { transform: scaleX(var(--fill, 1)); transition: transform 0.15s linear; }
+
+@media (max-width: 960px) { .chapters::before, .chapters::after, .chapters li::before { display: none; } .chapters { padding-top: 0; } }
+@media (max-width: 860px) { .steps::before { display: none; } }
+
+/* writing cards: a coloured edge per topic, and a soft wash on hover */
+.pcell { position: relative; overflow: hidden; --t1: var(--zari); --t2: var(--accent); }
+.pcell[data-tag='flutter'] { --t1: #027dfd; --t2: #13b9fd; }
+.pcell[data-tag='hiring'] { --t1: #ff6a3d; --t2: #ffb020; }
+.pcell::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: linear-gradient(90deg, var(--t1), var(--t2)); }
+.pcell::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, color-mix(in srgb, var(--t1) 12%, transparent), transparent 55%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.pcell:hover::after { opacity: 1; }
+.pcell .mono { color: color-mix(in srgb, var(--t1) 75%, var(--ink)); }
+.chapters li { overflow: visible; }
+
+/* ---------- v8: contact and bottom ---------- */
+.needs { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin: 30px auto 0; max-width: 760px; }
+.needs-q { width: 100%; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 2px; }
+.needs a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 16px; border: 1px solid var(--line); background: var(--card);
+  font-size: 15px; transition: transform 0.25s cubic-bezier(0.2, 1.4, 0.4, 1), border-color 0.2s, box-shadow 0.2s; }
+.needs a b { font-weight: 500; }
+.needs a span { font-size: 18px; transition: transform 0.3s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.needs a:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 12px 26px -16px color-mix(in srgb, var(--accent) 70%, transparent); }
+.needs a:hover span { transform: scale(1.25) rotate(-8deg); }
+.thanks { text-align: center; margin: 26px auto 0; color: var(--muted); font-size: 15px; }
+.thanks > [lang='ta'] { font-size: 18px; color: var(--zari); margin-right: 4px; }
+.totop { display: inline-flex; align-items: center; gap: 6px; margin-left: 10px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); font-size: 14px; }
+.totop i { font-style: normal; transition: transform 0.25s; }
+.totop:hover i { transform: translateY(-3px); }
+@media (max-width: 560px) { .needs a { width: 100%; justify-content: center; } .totop { margin: 10px 0 0; } }

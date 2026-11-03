@@ -275,3 +275,32 @@ document.querySelectorAll<SVGGElement>('[data-lamp]').forEach((l) =>
     l.classList.toggle('on');
   }),
 );
+
+/* ---------- hero: kolam dots glow around the pointer ---------- */
+const hero = document.querySelector<HTMLElement>('.hero');
+const field = document.querySelector<HTMLElement>('.pulli-field');
+if (hero && field && !reduce && matchMedia('(hover: hover)').matches) {
+  hero.addEventListener('pointermove', (e) => {
+    const r = hero.getBoundingClientRect();
+    field.style.setProperty('--hx', `${e.clientX - r.left}px`);
+    field.style.setProperty('--hy', `${e.clientY - r.top}px`);
+  }, { passive: true });
+  hero.addEventListener('pointerleave', () => field.style.setProperty('--hx', '-500px'));
+}
+
+/* ---------- journey and process lines fill as they scroll through the screen ---------- */
+const fills = $$('.chapters, .steps');
+if (fills.length && !reduce) {
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    for (const el of fills) {
+      const r = el.getBoundingClientRect();
+      // 0 when the block's top reaches 85% of the screen height, 1 when it reaches 35%
+      const p = Math.min(1, Math.max(0, (innerHeight * 0.85 - r.top) / (innerHeight * 0.5)));
+      el.style.setProperty('--fill', p.toFixed(3));
+    }
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+}

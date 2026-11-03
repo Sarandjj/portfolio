@@ -65,6 +65,7 @@ const jsonLd = [
 <Base jsonLd={jsonLd}>
   <section class="hero" id="top" style="padding-bottom:40px">
     <Thoranam />
+    <div class="pulli-field" aria-hidden="true"></div>
     <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
     <div class="wrap">
       <div>
@@ -76,7 +77,7 @@ const jsonLd = [
         <p class="kicker" data-ta="வணக்கம், நான் சரண்குமார்."><span lang="ta">வணக்கம்</span>, I'm Sarankumar.</p>
         <h1 data-ta="&lt;span class=&quot;line&quot;&gt;&lt;span&gt;உங்கள் &lt;em&gt;கைபேசிக்கான&lt;/em&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;&lt;span&gt;&lt;em&gt;செயலிகளையும்,&lt;/em&gt; அவற்றின்&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;&lt;span&gt;பின்னணி அமைப்புகளையும்&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;&lt;span&gt;உருவாக்குகிறேன்.&lt;/span&gt;&lt;/span&gt;">
           <span class="line"><span>I build <em>apps for</em></span></span>
-          <span class="line"><span><em>your pocket</em> and the</span></span>
+          <span class="line"><span><span class="ul"><em>your pocket</em><svg class="scribble" viewBox="0 0 300 22" preserveAspectRatio="none" aria-hidden="true"><path d="M4 15 C50 5 96 19 150 10 S250 4 296 13" /></svg></span> and the</span></span>
           <span class="line"><span>systems behind them.</span></span>
         </h1>
         <p class="intro" data-ta="Flutter, React கொண்டு வேகமான, தனியுரிமை காக்கும், இணையம் இல்லாதபோதும் இயங்கும் செயலிகளையும் அவற்றின் backend-ஐயும், யோசனை முதல் ஸ்டோர் வெளியீடு வரை உருவாக்கும் &lt;b&gt;மொபைல் &amp;amp; ஃபுல்-ஸ்டாக் டெவலப்பர்&lt;/b&gt;.">
@@ -129,7 +130,11 @@ const jsonLd = [
       </p>
 
       <div class="filters reveal" role="group" aria-label="Filter projects">
-        {FILTERS.map(([v, l], i) => <button type="button" data-f={v} aria-pressed={i === 0 ? 'true' : 'false'}>{l}</button>)}
+        {FILTERS.map(([v, l], i) => (
+          <button type="button" data-f={v} aria-pressed={i === 0 ? 'true' : 'false'}>
+            {l} <span class="cnt">{v === 'all' ? PROJECTS.length : PROJECTS.filter((p) => tagsOf(p).split(' ').includes(v)).length}</span>
+          </button>
+        ))}
         <span class="seen-count" id="seenCount" hidden></span>
       </div>
 
@@ -180,7 +185,12 @@ const jsonLd = [
               </div>
             </div>
             <div class="feat-shots" aria-hidden="true">
-              {FEATURED.screens.slice(0, 2).map((sh, i) => <img src={sh.src} alt="" width="540" height="979" loading="lazy" decoding="async" class={i ? 'b' : 'a'} />)}
+              {/* two phones, each slowly cross-fading between two real screens */}
+              {[FEATURED.screens.slice(0, 2), FEATURED.screens.slice(2, 4)].map((pair, i) => (
+                <div class={`ph ${i ? 'b' : 'a'}`}>
+                  {pair.map((sh) => <img src={sh.src} alt="" width="540" height="979" loading="lazy" decoding="async" />)}
+                </div>
+              ))}
             </div>
           </article>
         )}
@@ -395,7 +405,7 @@ const jsonLd = [
       <div class="pgrid">
         {
           posts.slice(0, 3).map((p) => (
-            <a class="pcell reveal" href={`/blog/${p.id}`}>
+            <a class="pcell reveal" href={`/blog/${p.id}`} data-tag={p.data.tags[0].toLowerCase()}>
               <span class="mono">{p.data.tags[0]} · {readingMinutes(p.body)} min read</span>
               <h3>{p.data.title}</h3>
               <p>{p.data.description}</p>
@@ -414,6 +424,13 @@ const jsonLd = [
     <div class="wrap">
       <div class="big reveal" data-ta="யோசனை இருக்கா?&lt;em&gt;சேர்ந்து உருவாக்குவோம்.&lt;/em&gt;">Got an idea?<em>Let's build it.</em></div>
       <p class="lede reveal" style="margin:20px auto 0" data-ta="உங்களுக்கு என்ன வேண்டும் என்று சொல்லுங்கள், நான் பதில் அனுப்புகிறேன்.">Tell me what you need and I'll get back to you.</p>
+      <div class="needs reveal">
+        <span class="needs-q" data-ta="உங்களுக்கு என்ன வேண்டும்?">What do you need?</span>
+        <a href="/contact?need=app" data-track="need_click" data-track-item="app"><span aria-hidden="true">📱</span><b data-ta="மொபைல் செயலி">A mobile app</b></a>
+        <a href="/contact?need=web" data-track="need_click" data-track-item="web"><span aria-hidden="true">🌐</span><b data-ta="இணையதளம் / வெப் செயலி">A website or web app</b></a>
+        <a href="/contact?need=backend" data-track="need_click" data-track-item="backend"><span aria-hidden="true">🧩</span><b data-ta="Backend அல்லது API">A backend or API</b></a>
+        <a href="/contact?need=hire" data-track="need_click" data-track-item="hire"><span aria-hidden="true">💼</span><b data-ta="ஒரு பணிக்கு ஆள் தேடுகிறேன்">Hiring for a role</b></a>
+      </div>
       <button class="mail reveal" type="button" data-copy-email>{SITE.email} <small data-copy-label>click to copy</small></button>
       <div class="socials reveal">
         <a class="btn solid sm" href="/contact" data-track="contact_open" data-ta="செய்தி அனுப்புங்கள்">Send a message</a>
@@ -426,6 +443,7 @@ const jsonLd = [
     <Banana side="right" />
     <DoorstepKolam />
     <div class="wrap-sky"><Skyline /></div>
+    <p class="thanks reveal"><span lang="ta">நன்றி!</span> <span data-ta="இறுதிவரை பார்த்ததற்கு நன்றி.">Thanks for scrolling all the way down.</span> <a href="#top" class="totop"><span data-ta="மேலே செல்ல">Back to top</span> <i aria-hidden="true">↑</i></a></p>
   </section>
 
   <script>

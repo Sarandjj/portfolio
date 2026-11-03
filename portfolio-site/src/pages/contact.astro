@@ -97,6 +97,19 @@ const jsonLd = [
       if (!message.value) message.value = `I'd like to hear when ${label} is available.`;
     }
 
+    // /contact?need=app (from the home page's "What do you need?" buttons) picks the topic and starts the message
+    const NEEDS: Record<string, [string, string]> = {
+      app: ['project', 'I need a mobile app. Here is the idea: '],
+      web: ['project', 'I need a website or web app. It should: '],
+      backend: ['project', 'I need a backend or API for my app. Details: '],
+      hire: ['other', 'I am hiring for a role and would like to talk. The role: '],
+    };
+    const need = NEEDS[new URLSearchParams(location.search).get('need') ?? ''];
+    if (need) {
+      topic.value = need[0];
+      if (!message.value) message.value = need[1];
+    }
+
     const setErr = (field: string, text: string) => {
       const el = form.querySelector<HTMLElement>(`[data-err="${field}"]`);
       if (el) el.textContent = text;
