@@ -145,15 +145,37 @@ async function runTerm() {
 }
 runTerm();
 
-/* ---------- project cards: soft light follows the pointer ---------- */
+/* ---------- glass cards: light follows the pointer, with a small 3D tilt ---------- */
 if (matchMedia('(hover: hover)').matches && !reduce) {
-  $$('.pcard').forEach((c) => {
+  $$('.pcard, .door, .tile, .chapters li').forEach((c) => {
+    const tilt = !c.classList.contains('feat');
     c.addEventListener('pointermove', (e) => {
       const r = c.getBoundingClientRect();
-      c.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      c.style.setProperty('--my', `${e.clientY - r.top}px`);
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      c.style.setProperty('--mx', `${x}px`);
+      c.style.setProperty('--my', `${y}px`);
+      if (tilt) c.style.setProperty('--rx', `${((y / r.height) - 0.5) * -5}deg`), c.style.setProperty('--ry', `${((x / r.width) - 0.5) * 5}deg`);
     });
+    c.addEventListener('pointerleave', () => { c.style.setProperty('--rx', '0deg'); c.style.setProperty('--ry', '0deg'); });
   });
+}
+
+/* ---------- proof numbers count up once when seen ---------- */
+const counters = $$('[data-count]');
+if (!reduce && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    const el = e.target as HTMLElement, end = Number(el.dataset.count), t0 = performance.now();
+    if (end === 0) return;
+    const step = (t: number) => {
+      const k = Math.min(1, (t - t0) / 1200);
+      el.textContent = String(Math.round(end * (1 - Math.pow(1 - k, 3))));
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }), { threshold: 0.6 });
+  counters.forEach((c) => io.observe(c));
 }
 
 /* ---------- short / long bio ---------- */

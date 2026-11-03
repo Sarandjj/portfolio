@@ -461,3 +461,81 @@ h1 { font-size: clamp(38px, 6.4vw, 88px); }
 .pearl .ridge { fill: none; stroke: var(--accent-text); stroke-width: 1; opacity: 0.6; }
 .pearl .pearl-dot { fill: #f6f1e4; stroke: #cfc3a9; }
 @media (max-width: 640px) { .say { display: none; } }
+
+/* ---------- v4: glass + motion ---------- */
+.hero { padding-top: 40px; }
+.status { align-items: center; }
+.status .vanakkam { font-family: var(--serif); font-style: italic; font-size: 20px; text-transform: none; letter-spacing: 0; color: var(--accent-text); }
+/* headline keeps the simple slide from the refresh: no blur or fade, so a paused animation can never hide it */
+h1 em {
+  background: linear-gradient(100deg, var(--accent-text) 10%, #f59e0b 35%, #ec4899 55%, var(--accent-text) 80%);
+  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: sheen 9s ease-in-out infinite alternate; padding-right: 0.06em;
+}
+@keyframes sheen { to { background-position: 100% 0; } }
+@media (prefers-reduced-motion: reduce) { h1 .line span, h1 em { animation: none; } }
+
+/* glass surfaces */
+.door, .proofbar, .now, .pearl, .pcard, .tile:not(.t-term):not(.t-cta), .chapters li:not(:last-child), .pcell, .biotog, .filters button, .marquee {
+  background: var(--glass); border-color: var(--glass-edge);
+  backdrop-filter: blur(16px) saturate(1.4);
+}
+.door, .pcard, .tile, .chapters li, .pcell, .now, .pearl { box-shadow: var(--glass-shadow); }
+.proofbar { border: 1px solid var(--glass-edge); border-radius: 22px; padding: 20px 26px; box-shadow: var(--glass-shadow); }
+.proofbar li + li { border-left: 1px solid var(--line); padding-left: 24px; }
+.proofbar b { font-variant-numeric: tabular-nums; }
+@media (max-width: 900px) { .proofbar li + li { border-left: 0; padding-left: 0; } }
+.marquee { border: 1px solid var(--glass-edge); border-radius: 999px; margin: 22px 24px 0; }
+@media (min-width: 1248px) { .marquee { max-width: 1152px; margin-inline: auto; } }
+.door.hot { background: color-mix(in srgb, var(--ink) 88%, transparent); }
+
+/* 3D tilt + pointer light on glass cards */
+.pcard, .door, .tile, .chapters li {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+a.pcard:hover, .door:hover, .tile:hover { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px); }
+.pcard.feat:hover { transform: translateY(-4px); }
+.door::after, .tile::after, .chapters li::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.35), transparent 70%);
+}
+.door:hover::after, .tile:hover::after, .chapters li:hover::after { opacity: 1; }
+.door, .chapters li { overflow: hidden; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .door::after, :root:not([data-theme='light']) .tile::after, :root:not([data-theme='light']) .chapters li::after { background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.08), transparent 70%); } }
+:root[data-theme='dark'] .door::after, :root[data-theme='dark'] .tile::after, :root[data-theme='dark'] .chapters li::after { background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.08), transparent 70%); }
+
+/* phone gets a soft glow and a slow float */
+.device::before { content: ''; position: absolute; inset: 22% -10% -4%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 35%, transparent), transparent); filter: blur(30px); z-index: -1; }
+.phone { animation: bob 7s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-10px); } }
+@media (prefers-reduced-motion: reduce) { .phone { animation: none; } }
+
+/* FinWise shots drift apart gently */
+.feat-shots .a { animation: shotA 8s ease-in-out infinite; }
+.feat-shots .b { animation: shotB 8s ease-in-out infinite; }
+@keyframes shotA { 50% { translate: 0 -8px; } }
+@keyframes shotB { 50% { translate: 0 8px; } }
+@media (prefers-reduced-motion: reduce) { .feat-shots img { animation: none; } }
+
+/* contact: glass panel over the colour light */
+.contact .wrap { position: relative; padding: 70px 24px; border-radius: 36px; background: var(--glass); border: 1px solid var(--glass-edge); backdrop-filter: blur(20px) saturate(1.4); box-shadow: var(--glass-shadow); max-width: 1100px; }
+.contact { padding: 110px 16px 90px; }
+.big em { background: linear-gradient(100deg, var(--accent-text), #ec4899); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 0.06em; }
+
+/* section reveal: a little blur makes it feel softer */
+.js .reveal { filter: blur(6px); transition-property: opacity, transform, filter; }
+.js .reveal.in { filter: none; }
+@media (prefers-reduced-motion: reduce) { .js .reveal { filter: none; } }
+.js .reveal.in:is(.pcard, .tile, .chapters li) {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.9s, filter 0.9s, border-color 0.3s, box-shadow 0.3s;
+}
+.js .reveal.in:is(a.pcard, .tile):hover { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px); }
+.js .reveal.in.feat:hover { transform: translateY(-4px); }
+/* never clip the headline: if the slide is paused it is only 14px lower, still fully readable */
+h1 .line { overflow: visible; }
+.fig { white-space: nowrap; }
+.feat .pc-top { flex-wrap: wrap; row-gap: 8px; }
+.status .vanakkam { display: inline-block; height: 22px; line-height: 22px; overflow: hidden; }
+h1 em { padding-right: 0; }

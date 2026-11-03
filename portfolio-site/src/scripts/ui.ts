@@ -16,7 +16,12 @@ $('#theme')?.addEventListener('click', toggleTheme);
 
 /* ---------- nav border once scrolled ---------- */
 const nav = $('#nav');
-const onScroll = () => nav?.classList.toggle('scrolled', scrollY > 10);
+const bar = $('#progress');
+const onScroll = () => {
+  nav?.classList.toggle('scrolled', scrollY > 10);
+  const max = document.documentElement.scrollHeight - innerHeight;
+  if (bar) bar.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
+};
 addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 

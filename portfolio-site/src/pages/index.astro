@@ -58,13 +58,11 @@ const jsonLd = [
 
 <Base jsonLd={jsonLd}>
   <section class="hero" id="top" style="padding-bottom:40px">
+    <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
     <div class="wrap">
       <div>
-        <div class="hello">
-          <img src="/saran-sm.jpg" alt="Sarankumar G" width="44" height="44" />
-          <span><span lang="ta" class="vanakkam">வணக்கம்</span> Hi, I'm <b>Sarankumar</b>. Full Stack Developer at Neural Schema IT.</span>
-        </div>
         <div class="status">
+          <span lang="ta" class="vanakkam">வணக்கம்</span>
           <span class="live"><b>Open to selected freelance work</b></span>
           <span>Thoothukudi, the Pearl City</span>
           <span id="istSmall">IST --:--</span>
@@ -98,10 +96,10 @@ const jsonLd = [
     </div>
     <div class="wrap">
       <ul class="proofbar" aria-label="In numbers">
-        <li><b>2</b> client apps live on both stores</li>
-        <li><b>447</b> tests in NallHub</li>
-        <li><b>0</b> servers behind Nirai</li>
-        <li><b>100</b> Lighthouse accessibility score</li>
+        <li><b data-count="2">2</b> client apps live on both stores</li>
+        <li><b data-count="447">447</b> tests in NallHub</li>
+        <li><b data-count="0">0</b> servers behind Nirai</li>
+        <li><b data-count="100">100</b> Lighthouse accessibility score</li>
       </ul>
     </div>
     <div class="marquee" aria-label="Tools I use">
@@ -132,7 +130,7 @@ const jsonLd = [
       <aside class="side reveal">
         <div class="now">
           <span class="mono">Now</span>
-          <p>Full Stack Developer at Neural Schema IT. On the side, building FinWise, Nirai and NallHub.</p>
+          <p>Building FinWise, Nirai and NallHub, and open to selected freelance work.</p>
         </div>
         <div class="pearl">
           <svg viewBox="0 0 64 52" width="64" height="52" aria-hidden="true">
@@ -192,7 +190,7 @@ const jsonLd = [
               ))
             }
           </div>
-          <p>Measured with Lighthouse on this site, on a simulated phone, at the last check.</p>
+          <p>Lighthouse, on a simulated phone.</p>
         </div>
 
         <div class="tile t-stack reveal">
@@ -213,7 +211,8 @@ const jsonLd = [
     </div>
   </section>
 
-  <section id="work" style="padding-top:20px">
+  <section id="work" style="padding-top:20px" class="has-aurora">
+    <div class="aurora soft" aria-hidden="true"><i class="a1"></i><i class="a3"></i></div>
     <div class="wrap">
       <div class="label reveal">02 / Selected work</div>
       <h2 class="reveal">Things I've <em>shipped and built.</em></h2>
@@ -327,11 +326,11 @@ const jsonLd = [
         </li>
         <li class="reveal">
           <span class="ch">II</span>
-          <div><span class="when">Nov 2023 – Jan 2026 · Digisailor</span><h3>Shipping</h3><p>Mobile App Developer. Production Flutter apps, Node.js and TypeScript backends on PostgreSQL, and releases to Google Play and the App Store.</p></div>
+          <div><span class="when">Nov 2023 – Jan 2026</span><h3>Shipping</h3><p>Mobile App Developer. Production Flutter apps, Node.js and TypeScript backends on PostgreSQL, and releases to Google Play and the App Store.</p></div>
         </li>
         <li class="reveal">
           <span class="ch">III</span>
-          <div><span class="when">Feb 2026 – Present · Neural Schema IT</span><h3>Full stack</h3><p>Full Stack Developer. Mobile and web apps with Flutter, React/Next.js and FastAPI, REST APIs, PostgreSQL and AWS, across several client projects.</p></div>
+          <div><span class="when">Feb 2026 – Present</span><h3>Full stack</h3><p>Full Stack Developer. Mobile and web apps with Flutter, React/Next.js and FastAPI, REST APIs, PostgreSQL and AWS, across several client projects.</p></div>
         </li>
         <li class="reveal">
           <span class="ch">IV</span>
@@ -381,7 +380,8 @@ const jsonLd = [
     </div>
   </section>
 
-  <section class="contact" id="contact">
+  <section class="contact has-aurora" id="contact">
+    <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
     <div class="wrap">
       <div class="big reveal">Got an idea?<em>Let's build it.</em></div>
       <p class="lede reveal" style="margin:20px auto 0">Tell me what you need and I'll get back to you.</p>
