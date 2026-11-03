@@ -145,25 +145,13 @@ async function runTerm() {
 }
 runTerm();
 
-/* ---------- work list hover preview ---------- */
-const peek = $('#peek');
-let px = 0, py = 0, tx = 0, ty = 0;
-$$('.wrow').forEach((r) => {
-  r.addEventListener('mouseenter', () => {
-    $('#peekTop').style.background = `linear-gradient(135deg,${r.dataset.c1},${r.dataset.c2})`;
-    $('#peekTop').textContent = r.dataset.t ?? '';
-    peek.classList.add('on');
+/* ---------- project cards: soft light follows the pointer ---------- */
+if (matchMedia('(hover: hover)').matches && !reduce) {
+  $$('.pcard').forEach((c) => {
+    c.addEventListener('pointermove', (e) => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      c.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
   });
-  r.addEventListener('mouseleave', () => peek.classList.remove('on'));
-});
-if (matchMedia('(hover: hover)').matches) {
-  const ease = reduce ? 1 : 0.15;
-  addEventListener('mousemove', (e) => { tx = e.clientX + 130; ty = e.clientY; }, { passive: true });
-  (function loop() {
-    px += (tx - px) * ease;
-    py += (ty - py) * ease;
-    peek.style.left = px + 'px';
-    peek.style.top = py + 'px';
-    requestAnimationFrame(loop);
-  })();
 }

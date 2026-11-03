@@ -3,11 +3,14 @@ import Base from '../layouts/Base.astro';
 import Phone from '../components/Phone.astro';
 import '../styles/home.css';
 import { SITE, STATUS_LABEL } from '../data/site';
-import { getPosts } from '../lib/posts';
+import { getPosts, readingMinutes } from '../lib/posts';
 import { getProjects } from '../lib/projects';
 const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
 const LIVE = PROJECTS.filter((p) => p.links.length > 0);
 const OWN = PROJECTS.filter((p) => p.links.length === 0);
+const FEATURED = OWN.find((p) => p.screens.length > 0);
+const REST = OWN.filter((p) => p !== FEATURED);
+const DEMOS = PROJECTS.filter((p) => p.demo);
 
 const codeSample = `<span class="k">class</span> <span class="f">YourApp</span> <span class="k">extends</span> <span class="f">StatelessWidget</span> {
   <span class="d">// idea → store, one codebase</span>
@@ -53,9 +56,12 @@ const jsonLd = [
   <section class="hero" id="top" style="padding-bottom:40px">
     <div class="wrap">
       <div>
+        <div class="hello">
+          <img src="/saran-sm.jpg" alt="Sarankumar G" width="44" height="44" />
+          <span>Hi, I'm <b>Sarankumar</b>. Full Stack Developer at Neural Schema IT.</span>
+        </div>
         <div class="status">
-          <span class="live"><b>Full Stack Developer</b> at Neural Schema IT</span>
-          <span>Open to selected freelance work</span>
+          <span class="live"><b>Open to selected freelance work</b></span>
           <span>Thoothukudi, Tamil Nadu</span>
           <span id="istSmall">IST --:--</span>
         </div>
@@ -114,9 +120,9 @@ const jsonLd = [
 
         <div class="tile reveal">
           <span class="tag">Web · Speed</span>
-          <div class="scores" role="img" aria-label="Lighthouse scores measured on this site: performance 97, accessibility 100, best practices 100">
+          <div class="scores" role="img" aria-label="Lighthouse scores measured on this site: performance 99, accessibility 100, best practices 100">
             {
-              [['97', 'Speed'], ['100', 'Access'], ['100', 'Practice']].map(([v, l]) => (
+              [['99', 'Speed'], ['100', 'Access'], ['100', 'Practice']].map(([v, l]) => (
                 <div class="score-wrap">
                   <div class="score">
                     <svg viewBox="0 0 52 52">
@@ -154,49 +160,122 @@ const jsonLd = [
   <section id="work" style="padding-top:20px">
     <div class="wrap">
       <div class="label reveal">02 / Selected work</div>
-      <h2 class="reveal">Things I'm <em>building.</em></h2>
+      <h2 class="reveal">Things I've <em>shipped and built.</em></h2>
       <p class="lede reveal">
-        Seven apps: two shipped to the Play Store and App Store, and five of my own in development. Each gets a case study: the problem, the build, what was hard, and where it stands.
+        Two client apps live on the Play Store and App Store, and five of my own. Each one has a short case study: the problem, the build, the hard part, and where it stands.
       </p>
 
-      <p class="reveal" style="margin-top:20px"><a class="btn ghost sm" href="/projects">All projects →</a></p>
-
-      <h3 class="group">Live on the stores <span>client projects</span></h3>
-      <div class="work">
+      <h3 class="group reveal">Live on the stores <span>client projects</span></h3>
+      <div class="cards">
         {
           LIVE.map((p) => (
-            <a class="wrow reveal" href={`/projects/${p.slug}`} data-c1={p.c1} data-c2={p.c2} data-t={p.name}>
-              <span class="n" aria-hidden="true">{p.emoji}</span>
-              <h3>{p.name} <em>{p.kind}</em></h3>
-              {p.proof && <span class="st"><b>{p.proof.value}</b> {p.proof.label}</span>}
-              <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
+            <a class="pcard reveal" href={`/projects/${p.slug}`} style={`--c1:${p.c1};--c2:${p.c2}`}>
+              <div class="pc-top">
+                <span class="icon" aria-hidden="true">{p.emoji}</span>
+                <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
+              </div>
+              <h3>{p.name}</h3>
+              <p class="kind">{p.kind} · {p.platforms}</p>
+              <p class="sum">{p.summary}</p>
+              <div class="pc-foot">
+                <span class="stores">{p.links.map((l) => <i>{l.label}</i>)}</span>
+                <span class="more">Case study <b aria-hidden="true">→</b></span>
+              </div>
             </a>
           ))
         }
       </div>
-      <h3 class="group">My own apps <span>built end to end</span></h3>
-      <div class="work">
+
+      <h3 class="group reveal">My own apps <span>built end to end</span></h3>
+      <div class="cards">
+        {FEATURED && (
+          <article class="pcard feat reveal" style={`--c1:${FEATURED.c1};--c2:${FEATURED.c2}`}>
+            <div class="feat-text">
+              <div class="pc-top">
+                <span class="icon" aria-hidden="true">{FEATURED.emoji}</span>
+                <span class="badge" data-status={FEATURED.status}>{STATUS_LABEL[FEATURED.status]}</span>
+              </div>
+              <h3>{FEATURED.name}</h3>
+              <p class="kind">{FEATURED.kind} · {FEATURED.platforms}</p>
+              <p class="sum">{FEATURED.summary}</p>
+              <ul class="feat-nums">
+                {FEATURED.numbers.map((n) => <li><b>{n.value}</b>{n.label}</li>)}
+              </ul>
+              <div class="feat-cta">
+                <a class="btn solid sm" href={`/projects/${FEATURED.slug}`}>Read the case study</a>
+                {FEATURED.demo && <a class="btn ghost sm" href={FEATURED.demo.url} target="_blank" rel="noopener" data-track="demo_open" data-track-item={FEATURED.slug}>Try the live demo ↗</a>}
+              </div>
+            </div>
+            <div class="feat-shots" aria-hidden="true">
+              {FEATURED.screens.slice(0, 2).map((sh, i) => <img src={sh.src} alt="" width="540" height="979" loading="lazy" decoding="async" class={i ? 'b' : 'a'} />)}
+            </div>
+          </article>
+        )}
         {
-          OWN.map((p) => (
-            <a class="wrow reveal" href={`/projects/${p.slug}`} data-c1={p.c1} data-c2={p.c2} data-t={p.name}>
-              <span class="n" aria-hidden="true">{p.emoji}</span>
-              <h3>{p.name} <em>{p.kind}</em></h3>
-              {p.proof && <span class="st"><b>{p.proof.value}</b> {p.proof.label}</span>}
-              <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
+          REST.map((p) => (
+            <a class="pcard reveal" href={`/projects/${p.slug}`} style={`--c1:${p.c1};--c2:${p.c2}`}>
+              <div class="pc-top">
+                <span class="icon" aria-hidden="true">{p.emoji}</span>
+                <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
+              </div>
+              <h3>{p.name}</h3>
+              <p class="kind">{p.kind} · {p.platforms}</p>
+              <p class="sum">{p.summary}</p>
+              <div class="pc-foot">
+                {p.proof && <span class="proof"><b>{p.proof.value}</b> {p.proof.label}</span>}
+                <span class="more">{p.demo ? 'Case study + demo' : 'Case study'} <b aria-hidden="true">→</b></span>
+              </div>
             </a>
           ))
         }
       </div>
+
+      <div class="tryit reveal">
+        <div>
+          <h3>Try them in your browser.</h3>
+          <p>{DEMOS.length} of my apps run live on the web with made-up data. No sign-up, nothing is saved.</p>
+        </div>
+        <div class="tryit-btns">
+          {DEMOS.map((p) => (
+            <a class="demo-btn" href={p.demo!.url} target="_blank" rel="noopener" data-track="demo_open" data-track-item={p.slug} style={`--c1:${p.c1};--c2:${p.c2}`}>
+              <span aria-hidden="true">{p.emoji}</span>{p.name} <small>↗</small>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <p class="reveal" style="margin-top:28px"><a class="btn ghost sm" href="/projects">All projects →</a></p>
     </div>
   </section>
-  <div class="peek" id="peek" aria-hidden="true">
-    <div class="ptop" id="peekTop">Project</div>
-    <div class="pb"><i></i><i></i><i style="width:70%"></i><i></i></div>
-  </div>
+
+  <section id="experience" style="padding-top:20px">
+    <div class="wrap">
+      <div class="label reveal">03 / Experience</div>
+      <h2 class="reveal">Where I've <em>worked.</em></h2>
+      <ol class="xp">
+        <li class="reveal">
+          <span class="when">Feb 2026 – Present</span>
+          <div><h3>Full Stack Developer <span>Neural Schema IT</span></h3><p>Mobile and web apps with Flutter, React/Next.js and FastAPI, REST APIs, PostgreSQL and AWS, across several client projects.</p></div>
+        </li>
+        <li class="reveal">
+          <span class="when">Nov 2023 – Jan 2026</span>
+          <div><h3>Mobile App Developer <span>Digisailor</span></h3><p>Production Flutter apps, Node.js and TypeScript backends on PostgreSQL, and releases to Google Play and the App Store.</p></div>
+        </li>
+        <li class="reveal">
+          <span class="when">Education</span>
+          <div><h3>B.Sc Computer Science <span>Sri S. Ramasamy Naidu Memorial College, Sattur</span></h3></div>
+        </li>
+      </ol>
+      <p class="reveal" style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn ghost sm" href="/Sarankumar-G-CV.pdf" data-track="cv_download">Download CV (PDF)</a>
+        <a class="btn ghost sm" href="/about">More about me →</a>
+      </p>
+    </div>
+  </section>
 
   <section id="process" style="background:var(--paper2)">
     <div class="wrap">
-      <div class="label reveal">03 / How I work</div>
+      <div class="label reveal">04 / How I work</div>
       <h2 class="reveal">Simple process, <em>no surprises.</em></h2>
       <p class="lede reveal">From the first call to the store release, you always know what happens next.</p>
       <div class="steps">
@@ -210,19 +289,22 @@ const jsonLd = [
 
   <section id="writing">
     <div class="wrap">
-      <div class="label reveal">04 / Writing</div>
+      <div class="label reveal">05 / Writing</div>
       <h2 class="reveal">Notes from <em>building.</em></h2>
       <p class="lede reveal">Short engineering notes from the apps above: the problem, the decision, and the trade-off.</p>
-      <div class="posts">
+      <div class="pgrid">
         {
-          posts.map((p) => (
-            <a class="post reveal" href={`/blog/${p.id}`}>
+          posts.slice(0, 3).map((p) => (
+            <a class="pcell reveal" href={`/blog/${p.id}`}>
+              <span class="mono">{p.data.tags[0]} · {readingMinutes(p.body)} min read</span>
               <h3>{p.data.title}</h3>
-              <span class="mono">{p.data.tags[0]} · read the post</span>
+              <p>{p.data.description}</p>
+              <span class="more">Read <b aria-hidden="true">→</b></span>
             </a>
           ))
         }
       </div>
+      <p class="reveal" style="margin-top:24px"><a class="btn ghost sm" href="/blog">All posts →</a></p>
     </div>
   </section>
 
@@ -232,6 +314,7 @@ const jsonLd = [
       <p class="lede reveal" style="margin:20px auto 0">Tell me what you need and I'll get back to you.</p>
       <button class="mail reveal" type="button" data-copy-email>{SITE.email} <small data-copy-label>click to copy</small></button>
       <div class="socials reveal">
+        <a class="btn solid sm" href="/contact" data-track="contact_open">Send a message</a>
         <a class="btn ghost sm" href={`mailto:${SITE.email}`}>Email</a>
         <a class="btn ghost sm" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn ghost sm" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
