@@ -125,4 +125,11 @@ const jsonLd = [
       </div>
     </div>
   </div>
+  <script is:inline define:vars={{ slug: entry.id }}>
+    try {
+      const k = 'seen-projects';
+      const seen = JSON.parse(localStorage.getItem(k) || '[]');
+      if (!seen.includes(slug)) localStorage.setItem(k, JSON.stringify([...seen, slug]));
+    } catch {}
+  </script>
 </Base>

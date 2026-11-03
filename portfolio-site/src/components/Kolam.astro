@@ -1,0 +1,10 @@
+---
+// A small kolam line: dots with a loop woven around them. It draws itself once when scrolled into view.
+---
+<div class="kolam reveal" aria-hidden="true">
+  <svg viewBox="0 0 220 40" width="220" height="40">
+    <path d="M10 20 C20 2 40 2 50 20 S80 38 90 20 S120 2 130 20 S160 38 170 20 S200 2 210 20" />
+    <path d="M10 20 C20 38 40 38 50 20 S80 2 90 20 S120 38 130 20 S160 2 170 20 S200 38 210 20" />
+    {[30, 70, 110, 150, 190].map((x) => <circle cx={x} cy="20" r="2.6" />)}
+  </svg>
+</div>

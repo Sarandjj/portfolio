@@ -155,3 +155,44 @@ if (matchMedia('(hover: hover)').matches && !reduce) {
     });
   });
 }
+
+/* ---------- short / long bio ---------- */
+$$('.biotog button').forEach((b) =>
+  b.addEventListener('click', () => {
+    $$('.biotog button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $$('[data-bio]').forEach((el) => (el.hidden = el.dataset.bio !== b.dataset.len));
+  }),
+);
+
+/* ---------- project filters ---------- */
+$$('.filters button').forEach((b) =>
+  b.addEventListener('click', () => {
+    const f = b.dataset.f!;
+    $$('.filters button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $$('[data-cards]').forEach((grid) => {
+      let shown = 0;
+      grid.querySelectorAll<HTMLElement>('[data-tags]').forEach((c) => {
+        const on = f === 'all' || c.dataset.tags!.split(' ').includes(f);
+        c.hidden = !on;
+        if (on) shown++;
+      });
+      grid.hidden = shown === 0;
+      const head = grid.previousElementSibling as HTMLElement | null;
+      if (head?.hasAttribute('data-group')) head.hidden = shown === 0;
+    });
+  }),
+);
+
+/* ---------- case studies already read (stored in this browser only) ---------- */
+let seen: string[] = [];
+try { seen = JSON.parse(localStorage.getItem('seen-projects') ?? '[]'); } catch {}
+const cards = $$('[data-slug]');
+cards.forEach((c) => {
+  if (seen.includes(c.dataset.slug!)) c.querySelector<HTMLElement>('.seen')!.hidden = false;
+});
+const read = cards.filter((c) => seen.includes(c.dataset.slug!)).length;
+if (read > 0) {
+  const sc = $('#seenCount');
+  sc.textContent = `You've read ${read} of ${cards.length}`;
+  sc.hidden = false;
+}
