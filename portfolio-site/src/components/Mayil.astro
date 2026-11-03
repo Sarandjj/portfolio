@@ -1,0 +1,62 @@
+---
+// Mayil, the peacock mascot, drawn in code. Eyes follow the cursor, the tail fans out now and then,
+// and it sleeps at night (see src/scripts/mayil.ts). Use one Mayil per page: the gradient ids are fixed.
+import '../styles/mayil.css';
+
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+// seven tail feathers fanned behind the body, each with an eye spot
+const FEATHERS = [-84, -60, -36, -12, 12, 36, 60, 84];
+---
+
+<svg class:list={['mayil', cls]} viewBox="0 0 120 140" role="img" aria-label="Mayil the peacock, the site mascot">
+  <defs>
+    <linearGradient id="mayil-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f7de1"></stop>
+      <stop offset="1" stop-color="#0f3f8c"></stop>
+    </linearGradient>
+    <linearGradient id="mayil-feather" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#1f7a4f"></stop>
+      <stop offset="1" stop-color="#3fb27f"></stop>
+    </linearGradient>
+  </defs>
+  <g class="tail">
+    {
+      FEATHERS.map((a) => (
+        <g transform={`rotate(${a} 60 104)`}>
+          <path d="M60 104 Q49 60 60 12 Q71 60 60 104Z" fill="url(#mayil-feather)" />
+          <ellipse cx="60" cy="20" rx="8" ry="10" fill="#e9b949" />
+          <ellipse cx="60" cy="21" rx="5.2" ry="7" fill="#1aa59a" />
+          <ellipse cx="60" cy="22" rx="2.6" ry="3.8" fill="#122a6b" />
+        </g>
+      ))
+    }
+  </g>
+  <g class="bob">
+    <path d="M60 46 C76 46 82 66 80 88 C78 110 70 120 60 120 C50 120 42 110 40 88 C38 66 44 46 60 46Z" fill="url(#mayil-body)"></path>
+    <path d="M44 84 Q38 100 46 114 Q52 102 52 88Z" fill="#1b5bb5"></path>
+    <path class="wing" d="M76 84 Q82 100 74 114 Q68 102 68 88Z" fill="#1b5bb5"></path>
+    <g class="crest" stroke="#0f3f8c" stroke-width="1.4" stroke-linecap="round">
+      <path d="M54 26 L50 14 M60 24 V11 M66 26 L70 14"></path>
+      <circle cx="50" cy="13" r="2.6" fill="#1aa59a" stroke="none"></circle>
+      <circle cx="60" cy="10" r="2.8" fill="#1aa59a" stroke="none"></circle>
+      <circle cx="70" cy="13" r="2.6" fill="#1aa59a" stroke="none"></circle>
+    </g>
+    <path d="M60 24 C74 24 80 36 80 50 C80 62 72 70 60 70 C48 70 40 62 40 50 C40 36 46 24 60 24Z" fill="url(#mayil-body)"></path>
+    <g class="open"><ellipse cx="49" cy="48" rx="8.5" ry="9" fill="#fff"></ellipse></g>
+    <g class="open"><ellipse cx="71" cy="48" rx="8.5" ry="9" fill="#fff"></ellipse></g>
+    <circle class="pupil" data-eye="l" cx="49" cy="48" r="4.4" fill="#141412"></circle>
+    <circle class="pupil" data-eye="r" cx="71" cy="48" r="4.4" fill="#141412"></circle>
+    <path class="closed" d="M42 49 Q49 54 56 49 M64 49 Q71 54 78 49" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"></path>
+    <ellipse cx="44" cy="60" rx="4.5" ry="3" fill="#ff8fa3" opacity=".55"></ellipse>
+    <ellipse cx="76" cy="60" rx="4.5" ry="3" fill="#ff8fa3" opacity=".55"></ellipse>
+    <path d="M55 57 Q60 54 65 57 L60 66Z" fill="#e8c27a"></path>
+  </g>
+  <path d="M53 119 v14 M49 133 h8 M67 119 v14 M63 133 h8" stroke="#8a8a80" stroke-width="3.5" stroke-linecap="round"></path>
+  <g class="zz" font-family="Geist Mono Variable, monospace" font-weight="600" fill="#605c53">
+    <text x="94" y="30" font-size="12">z</text>
+    <text x="102" y="20" font-size="9">z</text>
+  </g>
+</svg>

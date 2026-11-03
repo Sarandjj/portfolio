@@ -1,0 +1,35 @@
+---
+// A colour kolam at the doorstep with agal vilakku (clay oil lamps) around it, as for Karthigai Deepam.
+const LAMPS = [
+  [26, 160], [76, 138], [124, 162], [396, 162], [444, 138], [494, 160],
+];
+// 5 x 5 pulli (dot) grid at the centre
+const DOTS = Array.from({ length: 25 }, (_, i) => [212 + (i % 5) * 24, 32 + Math.floor(i / 5) * 24]);
+---
+<div class="doorstep reveal" aria-hidden="true">
+  <svg viewBox="0 0 520 190">
+    <g class="kolam-color">
+      <path d="M260 20 Q300 60 260 104 Q220 60 260 20Z" fill="#e91e63" />
+      <path d="M260 188 Q300 148 260 104 Q220 148 260 188Z" fill="#e91e63" />
+      <path d="M164 104 Q204 64 260 104 Q204 144 164 104Z" fill="#ffb300" />
+      <path d="M356 104 Q316 64 260 104 Q316 144 356 104Z" fill="#ffb300" />
+      <circle cx="260" cy="104" r="16" fill="#43a047" />
+      <circle cx="260" cy="104" r="7" fill="#fff" />
+    </g>
+    <g class="kolam-line">
+      <path d="M200 44 Q260 -6 320 44 Q370 104 320 164 Q260 214 200 164 Q150 104 200 44Z" />
+      <path d="M224 68 Q260 40 296 68 Q324 104 296 140 Q260 168 224 140 Q196 104 224 68Z" />
+    </g>
+    {DOTS.map(([x, y]) => <circle cx={x} cy={y} r="1.8" class="pulli" />)}
+    {
+      LAMPS.map(([x, y], i) => (
+        <g class="lamp" transform={`translate(${x} ${y})`}>
+          <ellipse cx="0" cy="-14" rx="10" ry="16" class="glow" />
+          <path class="flame" style={`animation-delay:${-i * 0.27}s`} d="M0 -26 Q7 -14 0 -6 Q-7 -14 0 -26Z" />
+          <path d="M-16 -4 Q0 -2 16 -4 Q12 10 0 12 Q-12 10 -16 -4Z" class="clay" />
+          <path d="M-16 -4 Q0 2 16 -4" class="rim" />
+        </g>
+      ))
+    }
+  </svg>
+</div>

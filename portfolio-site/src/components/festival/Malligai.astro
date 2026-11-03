@@ -1,0 +1,18 @@
+---
+// A hanging string of malligai (jasmine) buds.
+interface Props { side: 'left' | 'right' }
+const { side } = Astro.props;
+const BUDS = Array.from({ length: 14 }, (_, i) => 10 + i * 14);
+---
+<div class:list={['malligai', side]} aria-hidden="true">
+  <svg viewBox="0 0 24 220">
+    <path d="M12 0 V210" class="thread" />
+    {BUDS.map((y, i) => (
+      <g>
+        <ellipse cx={i % 2 ? 8 : 16} cy={y} rx="4" ry="6" class="bud" transform={`rotate(${i % 2 ? -25 : 25} ${i % 2 ? 8 : 16} ${y})`} />
+        {i % 3 === 0 && <circle cx="12" cy={y + 6} r="2" class="leafdot" />}
+      </g>
+    ))}
+    <circle cx="12" cy="212" r="4" class="tassel" />
+  </svg>
+</div>

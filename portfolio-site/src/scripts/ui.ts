@@ -150,3 +150,25 @@ addEventListener('keydown', (e) => {
   }
   if (e.key === 'Enter') runK(sel);
 });
+
+/* ---------- English / Tamil switch ----------
+   Elements carry their Tamil text in data-ta; the English stays in the HTML for search engines. */
+type Lang = 'en' | 'ta';
+function setLang(l: Lang) {
+  $$('[data-ta]').forEach((el) => {
+    if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+    el.innerHTML = l === 'ta' ? el.dataset.ta! : el.dataset.en;
+    if (l === 'ta') el.setAttribute('lang', 'ta');
+    else el.removeAttribute('lang');
+  });
+  root.dataset.lang = l;
+  $('#langSw')?.setAttribute('aria-pressed', String(l === 'ta'));
+  try {
+    localStorage.setItem('lang', l);
+  } catch {}
+  dispatchEvent(new CustomEvent('site:lang', { detail: l }));
+}
+$('#langSw')?.addEventListener('click', () => setLang(root.dataset.lang === 'ta' ? 'en' : 'ta'));
+try {
+  if (localStorage.getItem('lang') === 'ta') setLang('ta');
+} catch {}

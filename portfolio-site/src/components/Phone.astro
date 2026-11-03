@@ -1,5 +1,5 @@
 ---
-import Kili from './Kili.astro';
+import Mayil from './Mayil.astro';
 import { STATUS_LABEL, SITE } from '../data/site';
 import { getProjects } from '../lib/projects';
 const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
@@ -7,8 +7,8 @@ const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
 
 <div class="device">
   <div class="say hide" id="say" role="status" aria-live="polite"></div>
-  <button class="kili-hero" id="kiliBtn" type="button" aria-label="Talk to Kili the parrot">
-    <Kili />
+  <button class="mayil-hero" id="mayilBtn" type="button" aria-label="Talk to Mayil the peacock">
+    <Mayil />
   </button>
 
   <div class="phone">

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import Kili from '../components/Kili.astro';
+import Mayil from '../components/Mayil.astro';
 import { getProjects } from '../lib/projects';
 import { SITE, FORM_ENDPOINT } from '../data/site';
 
@@ -62,7 +62,7 @@ const jsonLd = [
           </form>
 
           <div class="success" id="success" role="status" tabindex="-1">
-            <Kili />
+            <Mayil />
             <h2 class="sec-h" style="margin-top:14px">Message sent. <em>Thank you!</em></h2>
             <p class="lede" style="margin:8px auto 0">I'll get back to you soon. You can also reach me at {SITE.email}.</p>
           </div>
@@ -79,7 +79,7 @@ const jsonLd = [
   </div>
 
   <script>
-    import '../scripts/kili';
+    import '../scripts/mayil';
     import { FORM_ENDPOINT } from '../data/site';
 
     const form = document.querySelector<HTMLFormElement>('#form')!;

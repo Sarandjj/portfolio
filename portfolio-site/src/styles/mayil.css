@@ -1,0 +1,23 @@
+/* ---------- mayil the peacock ---------- */
+.mayil { display: block; overflow: visible; filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.12)); }
+.mayil .bob { animation: bob 3.2s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-3px); } }
+.mayil .open { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+.mayil .wing { transform-box: view-box; transform-origin: 72px 88px; animation: flap 5s ease-in-out infinite; }
+@keyframes flap { 0%, 70%, 100% { transform: rotate(0); } 76%, 88% { transform: rotate(-30deg); } 82%, 94% { transform: rotate(-12deg); } }
+/* the tail opens like a fan every few seconds, and fully when Mayil is tapped */
+.mayil .tail { transform-box: view-box; transform-origin: 60px 104px; animation: fan 7s ease-in-out infinite; }
+@keyframes fan { 0%, 55%, 100% { transform: scale(0.88); } 65%, 85% { transform: scale(1); } }
+.mayil.show .tail { animation: none; transform: scale(1.06); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.mayil .crest { transform-box: view-box; transform-origin: 60px 26px; animation: crest 3.2s ease-in-out infinite; }
+@keyframes crest { 50% { transform: rotate(4deg); } }
+.mayil .closed, .mayil .zz { display: none; }
+.mayil.sleep .open, .mayil.sleep .pupil { display: none; }
+.mayil.sleep .closed, .mayil.sleep .zz { display: block; }
+.mayil.sleep .wing, .mayil.sleep .tail, .mayil.sleep .crest { animation: none; }
+.mayil.sleep .tail { transform: scale(0.75); }
+.mayil .zz text { animation: zz 2.4s ease-in-out infinite; opacity: 0; }
+.mayil .zz text:nth-child(2) { animation-delay: 1.2s; }
+@keyframes zz { 0% { opacity: 0; transform: translate(0, 0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(8px, -16px); } }
+@media (prefers-reduced-motion: reduce) { .mayil .bob, .mayil .open, .mayil .wing, .mayil .tail, .mayil .crest { animation: none; } }

@@ -159,7 +159,7 @@
 :root[data-theme='dark'] .form-status[data-state='error'] { color: #fca5a5; }
 .success { display: none; text-align: center; background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 40px 24px; }
 .success.on { display: block; }
-.success .kili { width: 130px; margin: 0 auto; animation: hop 0.9s ease-out 2; }
+.success .mayil { width: 130px; margin: 0 auto; animation: hop 0.9s ease-out 2; }
 @keyframes hop { 40% { transform: translateY(-18px) rotate(-4deg); } 70% { transform: translateY(0); } }
 .direct { display: grid; gap: 14px; }
 .direct a.row { display: flex; justify-content: space-between; gap: 12px; padding: 16px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; transition: border-color 0.3s; }

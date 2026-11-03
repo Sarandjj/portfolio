@@ -1,0 +1,23 @@
+---
+// Vazhai maram: banana plants with a bunch, tied on both sides of the entrance for festivals and weddings.
+interface Props { side: 'left' | 'right' }
+const { side } = Astro.props;
+---
+<div class:list={['banana', side]} aria-hidden="true">
+  <svg viewBox="0 0 140 380">
+    <path d="M62 380 Q60 250 68 150 L78 150 Q82 250 80 380Z" class="stem" />
+    <g class="leaves">
+      <!-- broad leaves arching out from the top of the stem, each with a midrib -->
+      <path d="M72 150 C40 150 8 120 2 70 C30 72 60 110 74 146Z" /><path d="M72 148 C50 128 22 100 6 74" class="rib" />
+      <path d="M72 146 C52 110 46 50 58 6 C76 40 82 100 76 144Z" /><path d="M74 144 C64 100 60 50 60 10" class="rib" />
+      <path d="M76 148 C96 110 120 70 138 50 C142 96 112 140 78 154Z" /><path d="M78 150 C100 120 122 86 136 56" class="rib" />
+      <path d="M78 168 C108 174 132 160 140 128 C120 136 96 150 76 160Z" /><path d="M78 164 C104 164 126 152 138 132" class="rib" />
+      <path d="M70 176 C40 192 14 182 2 154 C26 160 50 166 72 168Z" /><path d="M70 172 C44 182 22 176 6 158" class="rib" />
+    </g>
+    <g class="bunch">
+      <path d="M78 196 Q96 206 100 222" class="stalk" />
+      {[0, 1, 2, 3].map((r) => [0, 1, 2].map((c) => <path d={`M${88 + c * 7} ${204 + r * 14} q10 4 14 -6`} class="fruit" />))}
+      <path d="M100 222 Q102 248 98 262 Q92 248 100 222Z" class="flower" />
+    </g>
+  </svg>
+</div>

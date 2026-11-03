@@ -238,3 +238,24 @@ body::after {
 .navr .btn.solid { position: relative; overflow: hidden; }
 .navr .btn.solid::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%); transform: translateX(-120%); }
 .navr .btn.solid:hover::after { transform: translateX(120%); transition: transform 0.7s ease; }
+
+/* ---------- language switch ---------- */
+.langsw { display: inline-flex; align-items: center; height: 36px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 12.5px; }
+.langsw span { display: grid; place-items: center; min-width: 30px; height: 28px; padding: 0 6px; border-radius: 999px; color: var(--muted); transition: background 0.2s, color 0.2s; }
+.langsw span:first-child { font-family: var(--mono); }
+.langsw span[lang='ta'] { font-size: 15px; }
+.langsw[aria-pressed='false'] span:first-child, .langsw[aria-pressed='true'] span:last-child { background: var(--ink); color: var(--paper); }
+/* translated text keeps the page's own fonts; the system Tamil font fills in the Tamil letters */
+[data-ta][lang='ta'] { font-family: inherit; }
+[data-ta][lang='ta'] em, [data-ta][lang='ta'] i { font-style: normal; }
+[data-lang='ta'] h1[lang='ta'] { font-size: clamp(26px, 3.4vw, 46px); line-height: 1.3; letter-spacing: 0; }
+[data-lang='ta'] h2[lang='ta'] { font-size: clamp(22px, 2.8vw, 36px); line-height: 1.25; letter-spacing: -0.01em; }
+[data-lang='ta'] .big[lang='ta'] { font-size: clamp(30px, 4.6vw, 64px); line-height: 1.15; letter-spacing: -0.01em; }
+[data-lang='ta'] .navlinks { gap: 18px; font-size: 13.5px; }
+.mark { white-space: nowrap; }
+.navr .btn.solid { white-space: nowrap; }
+@media (max-width: 480px) {
+  .navr { gap: 6px; }
+  .navr .btn.solid { display: none; } /* the hero's two doors already lead to contact */
+  .langsw span { min-width: 26px; padding: 0 4px; }
+}

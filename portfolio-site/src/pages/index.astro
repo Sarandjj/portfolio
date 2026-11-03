@@ -4,6 +4,10 @@ import Phone from '../components/Phone.astro';
 import Kolam from '../components/Kolam.astro';
 import TempleBorder from '../components/TempleBorder.astro';
 import Skyline from '../components/Skyline.astro';
+import Thoranam from '../components/festival/Thoranam.astro';
+import DoorstepKolam from '../components/festival/DoorstepKolam.astro';
+import Banana from '../components/festival/Banana.astro';
+import Malligai from '../components/festival/Malligai.astro';
 import '../styles/home.css';
 import { SITE, STATUS_LABEL } from '../data/site';
 import { getPosts, readingMinutes } from '../lib/posts';
@@ -40,7 +44,7 @@ const jsonLd = [
     jobTitle: 'Mobile and full-stack developer',
     image: `${SITE.url}/saran.jpg`,
     email: SITE.email,
-    address: { '@type': 'PostalAddress', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
+    address: { '@type': 'PostalAddress', addressLocality: 'Kovilpatti', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
     worksFor: { '@type': 'Organization', name: 'Neural Schema IT' },
     alumniOf: { '@type': 'CollegeOrUniversity', name: 'Sri S. Ramasamy Naidu Memorial College, Sattur' },
     sameAs: [SITE.github, SITE.linkedin],
@@ -60,35 +64,36 @@ const jsonLd = [
 
 <Base jsonLd={jsonLd}>
   <section class="hero" id="top" style="padding-bottom:40px">
+    <Thoranam />
     <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
     <div class="wrap">
       <div>
         <div class="pill-status">
-          <span class="live"><b>Open to selected freelance work</b></span>
+          <span class="live"><b data-ta="தேர்ந்தெடுத்த ஃப்ரீலான்ஸ் பணிகளுக்குத் தயார்">Open to selected freelance work</b></span>
           <span class="sep" aria-hidden="true"></span>
-          <span>Thoothukudi · <span id="istSmall">IST --:--</span></span>
+          <span>Kovilpatti · <span id="istSmall">IST --:--</span></span>
         </div>
-        <p class="kicker"><span lang="ta">வணக்கம்</span>, I'm Sarankumar.</p>
-        <h1>
+        <p class="kicker" data-ta="வணக்கம், நான் சரண்குமார்."><span lang="ta">வணக்கம்</span>, I'm Sarankumar.</p>
+        <h1 data-ta="&lt;span class=&quot;line&quot;&gt;&lt;span&gt;உங்கள் &lt;em&gt;கைபேசிக்கான&lt;/em&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;&lt;span&gt;&lt;em&gt;செயலிகளையும்,&lt;/em&gt; அவற்றின்&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;&lt;span&gt;பின்னணி அமைப்புகளையும்&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;&lt;span&gt;உருவாக்குகிறேன்.&lt;/span&gt;&lt;/span&gt;">
           <span class="line"><span>I build <em>apps for</em></span></span>
           <span class="line"><span><em>your pocket</em> and the</span></span>
           <span class="line"><span>systems behind them.</span></span>
         </h1>
-        <p class="intro">
+        <p class="intro" data-ta="Flutter, React கொண்டு வேகமான, தனியுரிமை காக்கும், இணையம் இல்லாதபோதும் இயங்கும் செயலிகளையும் அவற்றின் backend-ஐயும், யோசனை முதல் ஸ்டோர் வெளியீடு வரை உருவாக்கும் &lt;b&gt;மொபைல் &amp;amp; ஃபுல்-ஸ்டாக் டெவலப்பர்&lt;/b&gt;.">
           A <b>mobile &amp; full-stack developer</b> making fast, private, offline-first apps in Flutter and React, with the backend behind them, from idea to store release.
         </p>
         <div class="doors">
           <a class="door" href="/recruiter" data-track="recruiter_view">
-            <small>Hiring or recruiting?</small>
-            <b>Recruiter view</b>
-            <span>Experience, skills and CV on one page · 1 min</span>
+            <small data-ta="பணியமர்த்துகிறீர்களா?">Hiring or recruiting?</small>
+            <b data-ta="பணியமர்த்துவோர் பார்வை">Recruiter view</b>
+            <span data-ta="அனுபவம், திறன்கள், CV ஒரே பக்கத்தில் · 1 நிமிடம்">Experience, skills and CV on one page · 1 min</span>
             <i aria-hidden="true">→</i>
           </a>
           <a class="door hot beam" href="#contact" data-track="door_client">
             <span class="beam-line" aria-hidden="true"></span>
-            <small>Have an app in mind?</small>
-            <b>Let's build it</b>
-            <span>Scope, timeline and budget, in writing</span>
+            <small data-ta="செயலி யோசனை இருக்கிறதா?">Have an app in mind?</small>
+            <b data-ta="சேர்ந்து உருவாக்குவோம்">Let's build it</b>
+            <span data-ta="வேலை அளவு, காலம், செலவு: எழுத்தில்">Scope, timeline and budget, in writing</span>
             <i aria-hidden="true">→</i>
           </a>
         </div>
@@ -99,10 +104,10 @@ const jsonLd = [
     </div>
     <div class="wrap">
       <ul class="proofbar" aria-label="In numbers">
-        <li><b data-count="2">2</b> client apps live on both stores</li>
-        <li><b data-count="447">447</b> tests in NallHub</li>
-        <li><b data-count="0">0</b> servers behind Nirai</li>
-        <li><b data-count="100">100</b> Lighthouse accessibility score</li>
+        <li><b data-count="2">2</b> <span data-ta="இரண்டு ஸ்டோர்களிலும் உள்ள வாடிக்கையாளர் செயலிகள்">client apps live on both stores</span></li>
+        <li><b data-count="447">447</b> <span data-ta="NallHub-இல் தானியங்கி சோதனைகள்">tests in NallHub</span></li>
+        <li><b data-count="0">0</b> <span data-ta="Nirai-க்குப் பின்னால் சர்வர்கள்">servers behind Nirai</span></li>
+        <li><b data-count="100">100</b> <span data-ta="Lighthouse அணுகல்தன்மை மதிப்பெண்">Lighthouse accessibility score</span></li>
       </ul>
     </div>
     <a class="scrollcue" href="#work" aria-label="Scroll to my work"><span></span></a>
@@ -118,8 +123,8 @@ const jsonLd = [
     <div class="aurora soft" aria-hidden="true"><i class="a1"></i><i class="a3"></i></div>
     <div class="wrap">
       <div class="label reveal">01 / Selected work<span class="ta-label" lang="ta">௧ · படைப்புகள்</span></div>
-      <h2 class="reveal">Things I've <em>shipped and built.</em></h2>
-      <p class="lede reveal">
+      <h2 class="reveal" data-ta="நான் &lt;em&gt;வெளியிட்டவையும் உருவாக்கியவையும்.&lt;/em&gt;">Things I've <em>shipped and built.</em></h2>
+      <p class="lede reveal" data-ta="Play Store, App Store இரண்டிலும் உள்ள இரண்டு வாடிக்கையாளர் செயலிகள், என் சொந்த ஐந்து செயலிகள். ஒவ்வொன்றுக்கும் ஒரு சிறு case study: பிரச்சனை, உருவாக்கம், கடினமான பகுதி, இப்போதைய நிலை.">
         Two client apps live on the Play Store and App Store, and five of my own. Each one has a short case study: the problem, the build, the hard part, and where it stands.
       </p>
 
@@ -128,7 +133,7 @@ const jsonLd = [
         <span class="seen-count" id="seenCount" hidden></span>
       </div>
 
-      <h3 class="group reveal" data-group>Live on the stores <span>client projects</span></h3>
+      <h3 class="group reveal" data-group data-ta="ஸ்டோர்களில் நேரலையில் &lt;span&gt;வாடிக்கையாளர் திட்டங்கள்&lt;/span&gt;">Live on the stores <span>client projects</span></h3>
       <div class="cards" data-cards>
         {
           LIVE.map((p) => (
@@ -151,7 +156,7 @@ const jsonLd = [
         }
       </div>
 
-      <h3 class="group reveal" data-group>My own apps <span>built end to end</span></h3>
+      <h3 class="group reveal" data-group data-ta="என் சொந்த செயலிகள் &lt;span&gt;முழுமையாக நானே உருவாக்கியவை&lt;/span&gt;">My own apps <span>built end to end</span></h3>
       <div class="cards" data-cards>
         {FEATURED && (
           <article class="pcard feat beam reveal" style={`--c1:${FEATURED.c1};--c2:${FEATURED.c2}`} data-tags={tagsOf(FEATURED)} data-slug={FEATURED.slug}>
@@ -202,8 +207,8 @@ const jsonLd = [
 
       <div class="tryit reveal">
         <div>
-          <h3>Try them in your browser.</h3>
-          <p>{DEMOS.length} of my apps run live on the web with made-up data. No sign-up, nothing is saved.</p>
+          <h3 data-ta="உங்கள் உலாவியிலேயே முயற்சி செய்யுங்கள்.">Try them in your browser.</h3>
+          <p data-ta={`என் ${DEMOS.length} செயலிகள் போலித் தரவுடன் இணையத்தில் நேரலையாக இயங்குகின்றன. பதிவு தேவையில்லை, எதுவும் சேமிக்கப்படாது.`}>{DEMOS.length} of my apps run live on the web with made-up data. No sign-up, nothing is saved.</p>
         </div>
         <div class="tryit-btns">
           {DEMOS.map((p) => (
@@ -221,8 +226,8 @@ const jsonLd = [
   <section id="services">
     <div class="wrap">
       <div class="label reveal">02 / What I do<span class="ta-label" lang="ta">௨ · சேவைகள்</span></div>
-      <h2 class="reveal">Not just Flutter. <em>The whole product,</em> front to back.</h2>
-      <p class="lede reveal">The app, the data layer, the backend and the release, handled by one developer.</p>
+      <h2 class="reveal" data-ta="Flutter மட்டுமல்ல. &lt;em&gt;முழு தயாரிப்பும்,&lt;/em&gt; முன்பக்கம் முதல் பின்பக்கம் வரை.">Not just Flutter. <em>The whole product,</em> front to back.</h2>
+      <p class="lede reveal" data-ta="செயலி, தரவு அடுக்கு, backend, வெளியீடு: அனைத்தையும் ஒரே டெவலப்பராக நானே கையாள்கிறேன்.">The app, the data layer, the backend and the release, handled by one developer.</p>
 
       <div class="bento">
         <div class="tile t-code reveal">
@@ -290,11 +295,11 @@ const jsonLd = [
       <div class="bio reveal">
         <div class="label">03 / About me<span class="ta-label" lang="ta">௩ · என்னைப் பற்றி</span></div>
         <div class="biotog" role="group" aria-label="How much to read">
-          <button type="button" data-len="short" aria-pressed="true">Short</button>
-          <button type="button" data-len="long" aria-pressed="false">Long</button>
+          <button type="button" data-len="short" aria-pressed="true" data-ta="சுருக்கம்">Short</button>
+          <button type="button" data-len="long" aria-pressed="false" data-ta="விரிவாக">Long</button>
         </div>
         <div data-bio="short">
-          <p class="bio-big">I'm a software developer from Tamil Nadu who enjoys turning ideas into <em>real, usable products,</em> from the first screen to the database.</p>
+          <p class="bio-big" data-ta="தமிழ்நாட்டைச் சேர்ந்த மென்பொருள் டெவலப்பர் நான். யோசனைகளை முதல் திரையிலிருந்து database வரை &lt;em&gt;உண்மையான, பயன்படும் தயாரிப்புகளாக&lt;/em&gt; மாற்றுவது எனக்குப் பிடிக்கும்.">I'm a software developer from Tamil Nadu who enjoys turning ideas into <em>real, usable products,</em> from the first screen to the database.</p>
         </div>
         <div data-bio="long" hidden>
           <p class="bio-big">I'm a software developer from Tamil Nadu who enjoys turning ideas into <em>real, usable products.</em></p>
@@ -305,17 +310,16 @@ const jsonLd = [
       </div>
       <aside class="side reveal">
         <div class="now">
-          <span class="mono">Now</span>
-          <p>Building FinWise, Nirai and NallHub, and open to selected freelance work.</p>
+          <span class="mono" data-ta="இப்போது">Now</span>
+          <p data-ta="FinWise, Nirai, NallHub உருவாக்கி வருகிறேன்; தேர்ந்தெடுத்த ஃப்ரீலான்ஸ் பணிகளுக்கும் தயார்.">Building FinWise, Nirai and NallHub, and open to selected freelance work.</p>
         </div>
-        <div class="pearl">
-          <svg viewBox="0 0 64 52" width="64" height="52" aria-hidden="true">
-            <g class="shell"><path d="M8 22 Q32 -6 56 22 Q32 16 8 22 Z" /><path d="M20 16 L32 4 M32 18 V4 M44 16 L32 4" class="ridge" /></g>
-            <g class="shell"><path d="M6 34 Q32 54 58 34 Q32 28 6 34 Z" /><path d="M20 40 L32 48 M32 38 V48 M44 40 L32 48" class="ridge" /></g>
-            <circle cx="32" cy="30" r="7.5" class="pearl-dot" />
-            <circle cx="29.5" cy="27.5" r="2" fill="#fff" opacity=".9" />
+        <div class="pearl mittai">
+          <svg viewBox="0 0 64 48" width="64" height="48" aria-hidden="true">
+            <rect x="6" y="14" width="52" height="24" rx="5" class="bar" />
+            {[[14,22],[24,28],[33,21],[43,27],[51,22],[19,32],[38,32],[28,19],[47,33]].map(([x, y]) => <ellipse cx={x} cy={y} rx="3.4" ry="2.4" class="nut" />)}
+            <path d="M10 16 Q32 10 54 16" class="shine" />
           </svg>
-          <p><b>From Thoothukudi, the Pearl City.</b> Divers here went deep into the Gulf of Mannar and came back with pearls. That's how I like to build: go deep into one problem, come back with something finished.</p>
+          <p data-ta="<b>கோவில்பட்டியிலிருந்து, கடலை மிட்டாயின் ஊர்.</b> நிலக்கடலையும் வெல்லமும் மட்டுமே, ஆனால் கவனமாகச் செய்வதால் 2020-இல் புவிசார் குறியீடு பெற்றது. நானும் செயலிகளை அப்படித்தான் உருவாக்க விரும்புகிறேன்: எளிய பொருட்கள், சரியான செய்முறை."><b>From Kovilpatti, home of kadalai mittai.</b> Just groundnuts and jaggery, made with care, and it earned a GI tag in 2020. That's how I like to build apps: simple ingredients, done properly.</p>
         </div>
       </aside>
     </div>
@@ -325,6 +329,8 @@ const jsonLd = [
     <div class="tiles" aria-hidden="true"></div>
     <div class="wrap">
       <figure class="kural reveal">
+        <Malligai side="left" />
+        <Malligai side="right" />
         <span class="kural-tag mono">From the Thirukkural, on effort</span>
         <blockquote lang="ta">
           <p>தெய்வத்தான் ஆகா தெனினும் முயற்சிதன்</p>
@@ -339,23 +345,23 @@ const jsonLd = [
   <section id="experience" style="padding-top:56px">
     <div class="wrap">
       <div class="label reveal">04 / Journey<span class="ta-label" lang="ta">௪ · பயணம்</span></div>
-      <h2 class="reveal">The journey, <em>in four chapters.</em></h2>
+      <h2 class="reveal" data-ta="என் பயணம், &lt;em&gt;நான்கு அத்தியாயங்களில்.&lt;/em&gt;">The journey, <em>in four chapters.</em></h2>
       <ol class="chapters">
         <li class="reveal">
           <span class="ch">I</span>
-          <div><span class="when">Education</span><h3>Learning</h3><p>B.Sc Computer Science, Sri S. Ramasamy Naidu Memorial College, Sattur.</p></div>
+          <div><span class="when">Education</span><h3 data-ta="கற்றல்">Learning</h3><p>B.Sc Computer Science, Sri S. Ramasamy Naidu Memorial College, Sattur.</p></div>
         </li>
         <li class="reveal">
           <span class="ch">II</span>
-          <div><span class="when">Nov 2023 – Jan 2026</span><h3>Shipping</h3><p>Mobile App Developer. Production Flutter apps, Node.js and TypeScript backends on PostgreSQL, and releases to Google Play and the App Store.</p></div>
+          <div><span class="when">Nov 2023 – Jan 2026</span><h3 data-ta="வெளியீடு">Shipping</h3><p>Mobile App Developer. Production Flutter apps, Node.js and TypeScript backends on PostgreSQL, and releases to Google Play and the App Store.</p></div>
         </li>
         <li class="reveal">
           <span class="ch">III</span>
-          <div><span class="when">Feb 2026 – Present</span><h3>Full stack</h3><p>Full Stack Developer. Mobile and web apps with Flutter, React/Next.js and FastAPI, REST APIs, PostgreSQL and AWS, across several client projects.</p></div>
+          <div><span class="when">Feb 2026 – Present</span><h3 data-ta="ஃபுல் ஸ்டாக்">Full stack</h3><p>Full Stack Developer. Mobile and web apps with Flutter, React/Next.js and FastAPI, REST APIs, PostgreSQL and AWS, across several client projects.</p></div>
         </li>
         <li class="reveal">
           <span class="ch">IV</span>
-          <div><span class="when">Alongside</span><h3>My own products</h3><p>FinWise, Nirai, NallHub, Coin18 and Clean Scanner, each designed and built end to end.</p></div>
+          <div><span class="when">Alongside</span><h3 data-ta="என் சொந்த தயாரிப்புகள்">My own products</h3><p>FinWise, Nirai, NallHub, Coin18 and Clean Scanner, each designed and built end to end.</p></div>
         </li>
       </ol>
       <p class="reveal" style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
@@ -368,13 +374,13 @@ const jsonLd = [
   <section id="process" style="background:var(--paper2)">
     <div class="wrap">
       <div class="label reveal">05 / How I work<span class="ta-label" lang="ta">௫ · செயல்முறை</span></div>
-      <h2 class="reveal">Simple process, <em>no surprises.</em></h2>
-      <p class="lede reveal">From the first call to the store release, you always know what happens next.</p>
+      <h2 class="reveal" data-ta="எளிய செயல்முறை, &lt;em&gt;எதிர்பாராத திருப்பங்கள் இல்லை.&lt;/em&gt;">Simple process, <em>no surprises.</em></h2>
+      <p class="lede reveal" data-ta="முதல் அழைப்பிலிருந்து ஸ்டோர் வெளியீடு வரை, அடுத்து என்ன நடக்கும் என்பது உங்களுக்கு எப்போதும் தெரியும்.">From the first call to the store release, you always know what happens next.</p>
       <div class="steps">
-        <div class="step reveal"><span class="mono">01</span><h3>Discover</h3><p>A short call to understand the goal, the users and the budget. You get the scope in writing.</p></div>
-        <div class="step reveal"><span class="mono">02</span><h3>Design</h3><p>Key screens and flows agreed before any code is written.</p></div>
-        <div class="step reveal"><span class="mono">03</span><h3>Build</h3><p>Regular builds you can install and try, so feedback comes early.</p></div>
-        <div class="step reveal"><span class="mono">04</span><h3>Ship &amp; support</h3><p>Store release, analytics, and fixes after launch.</p></div>
+        <div class="step reveal"><span class="mono">01</span><h3 data-ta="புரிந்துகொள்ளல்">Discover</h3><p>A short call to understand the goal, the users and the budget. You get the scope in writing.</p></div>
+        <div class="step reveal"><span class="mono">02</span><h3 data-ta="வடிவமைப்பு">Design</h3><p>Key screens and flows agreed before any code is written.</p></div>
+        <div class="step reveal"><span class="mono">03</span><h3 data-ta="உருவாக்கம்">Build</h3><p>Regular builds you can install and try, so feedback comes early.</p></div>
+        <div class="step reveal"><span class="mono">04</span><h3 data-ta="வெளியீடும் ஆதரவும்">Ship &amp; support</h3><p>Store release, analytics, and fixes after launch.</p></div>
       </div>
     </div>
   </section>
@@ -384,8 +390,8 @@ const jsonLd = [
   <section id="writing">
     <div class="wrap">
       <div class="label reveal">06 / Writing<span class="ta-label" lang="ta">௬ · எழுத்து</span></div>
-      <h2 class="reveal">Notes from <em>building.</em></h2>
-      <p class="lede reveal">Short engineering notes from the apps above: the problem, the decision, and the trade-off.</p>
+      <h2 class="reveal" data-ta="உருவாக்கத்திலிருந்து &lt;em&gt;குறிப்புகள்.&lt;/em&gt;">Notes from <em>building.</em></h2>
+      <p class="lede reveal" data-ta="மேலே உள்ள செயலிகளிலிருந்து சிறு பொறியியல் குறிப்புகள்: பிரச்சனை, எடுத்த முடிவு, அதற்கான சமரசம்.">Short engineering notes from the apps above: the problem, the decision, and the trade-off.</p>
       <div class="pgrid">
         {
           posts.slice(0, 3).map((p) => (
@@ -406,21 +412,24 @@ const jsonLd = [
   <section class="contact has-aurora" id="contact">
     <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
     <div class="wrap">
-      <div class="big reveal">Got an idea?<em>Let's build it.</em></div>
-      <p class="lede reveal" style="margin:20px auto 0">Tell me what you need and I'll get back to you.</p>
+      <div class="big reveal" data-ta="யோசனை இருக்கா?&lt;em&gt;சேர்ந்து உருவாக்குவோம்.&lt;/em&gt;">Got an idea?<em>Let's build it.</em></div>
+      <p class="lede reveal" style="margin:20px auto 0" data-ta="உங்களுக்கு என்ன வேண்டும் என்று சொல்லுங்கள், நான் பதில் அனுப்புகிறேன்.">Tell me what you need and I'll get back to you.</p>
       <button class="mail reveal" type="button" data-copy-email>{SITE.email} <small data-copy-label>click to copy</small></button>
       <div class="socials reveal">
-        <a class="btn solid sm" href="/contact" data-track="contact_open">Send a message</a>
+        <a class="btn solid sm" href="/contact" data-track="contact_open" data-ta="செய்தி அனுப்புங்கள்">Send a message</a>
         <a class="btn ghost sm" href={`mailto:${SITE.email}`}>Email</a>
         <a class="btn ghost sm" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn ghost sm" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
+    <Banana side="left" />
+    <Banana side="right" />
+    <DoorstepKolam />
     <div class="wrap-sky"><Skyline /></div>
   </section>
 
   <script>
-    import '../scripts/kili';
+    import '../scripts/mayil';
     import '../scripts/home';
   </script>
 </Base>
