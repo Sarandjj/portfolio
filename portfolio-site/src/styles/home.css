@@ -580,3 +580,54 @@ h1 em { padding-right: 0; }
 .door.hot::before { background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.14), transparent 70%); }
 .pcard > .beam-line { position: absolute; z-index: 3; }
 @media (max-width: 560px) { .pill-status .sep, .pill-status > span:last-child { display: none; } }
+
+/* ---------- v6: Tamil Nadu touches ---------- */
+:root { --zari: #a8781c; --kumkum: #b4232c; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --zari: #d9b45a; --kumkum: #e0525a; } }
+:root[data-theme='dark'] { --zari: #d9b45a; --kumkum: #e0525a; }
+[lang='ta'] { font-family: 'Noto Serif Tamil', 'Tamil Sangam MN', 'Latha', 'Noto Sans Tamil', serif; font-style: normal; }
+
+/* section labels: English on the left, Tamil numeral and word on the right, in zari gold */
+.label .ta-label { order: 2; font-family: 'Noto Serif Tamil', 'Tamil Sangam MN', 'Latha', serif; text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--zari); }
+.label::after { order: 1; }
+
+/* Kanchipuram temple border */
+.temple-border { color: var(--zari); padding: 0 24px; max-width: 1248px; margin: 0 auto; opacity: 0.85; }
+.temple-border svg { display: block; }
+.temple-border path { fill: color-mix(in srgb, var(--zari) 22%, transparent); stroke: currentColor; stroke-width: 1; stroke-linejoin: round; }
+.temple-border .bead { fill: var(--kumkum); stroke: none; }
+.temple-border line { stroke: currentColor; stroke-width: 1; }
+.temple-border.flip { transform: scaleY(-1); }
+
+/* Thirukkural over an Athangudi tile floor */
+.kural-sec { padding: 90px 0; overflow: hidden; }
+.kural-sec .tiles { position: absolute; inset: 0; z-index: -1; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2772%27%20height%3D%2772%27%20viewBox%3D%270%200%2072%2072%27%3E%3Crect%20width%3D%2772%27%20height%3D%2772%27%20fill%3D%27%23f3e6cc%27/%3E%3Cpath%20d%3D%27M0%200h36v36H0zM36%2036h36v36H36z%27%20fill%3D%27%23ecdcb9%27/%3E%3Cg%20fill%3D%27%23b5532a%27%3E%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%2710%27/%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%270%27%20r%3D%2710%27/%3E%3Ccircle%20cx%3D%270%27%20cy%3D%2772%27%20r%3D%2710%27/%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%2772%27%20r%3D%2710%27/%3E%3C/g%3E%3Cg%20fill%3D%27%231f6f6a%27%3E%3Cellipse%20cx%3D%2736%27%20cy%3D%2724%27%20rx%3D%275%27%20ry%3D%2710%27/%3E%3Cellipse%20cx%3D%2736%27%20cy%3D%2748%27%20rx%3D%275%27%20ry%3D%2710%27/%3E%3Cellipse%20cx%3D%2724%27%20cy%3D%2736%27%20rx%3D%2710%27%20ry%3D%275%27/%3E%3Cellipse%20cx%3D%2748%27%20cy%3D%2736%27%20rx%3D%2710%27%20ry%3D%275%27/%3E%3C/g%3E%3Ccircle%20cx%3D%2736%27%20cy%3D%2736%27%20r%3D%275%27%20fill%3D%27%23d29a2b%27/%3E%3Cg%20fill%3D%27%23d29a2b%27%3E%3Cpath%20d%3D%27M36%200l4%206h-8zM36%2072l4-6h-8zM0%2036l6%204v-8zM72%2036l-6%204v-8z%27/%3E%3C/g%3E%3C/svg%3E") center / 72px; opacity: 0.32;
+  -webkit-mask-image: radial-gradient(75% 85% at 50% 50%, #000 30%, transparent 78%); mask-image: radial-gradient(75% 85% at 50% 50%, #000 30%, transparent 78%); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .kural-sec .tiles { opacity: 0.12; } }
+:root[data-theme='dark'] .kural-sec .tiles { opacity: 0.12; }
+.kural { max-width: 760px; margin: 0 auto; text-align: center; padding: 40px 32px; border-radius: 30px; border: 1px solid var(--lg-edge);
+  background: var(--lg-fill), color-mix(in srgb, var(--paper) 55%, transparent); backdrop-filter: blur(14px) saturate(1.4); box-shadow: var(--lg-shadow); position: relative; }
+.kural::before, .kural::after { content: '❋'; position: absolute; top: 18px; color: var(--zari); font-size: 16px; }
+.kural::before { left: 22px; } .kural::after { right: 22px; }
+.kural-tag { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.kural blockquote { margin: 18px 0 0; font-size: clamp(22px, 3.2vw, 34px); line-height: 1.5; color: var(--ink); font-weight: 500; }
+.kural-en { margin: 18px auto 0; max-width: 520px; font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--accent-text); }
+.kural figcaption { margin-top: 16px; font-size: 12px; color: var(--muted); }
+.kural figcaption [lang='ta'] { color: var(--zari); font-size: 13px; }
+
+/* Thoothukudi skyline: a single line that draws itself once */
+.wrap-sky { max-width: 1100px; margin: 36px auto 0; padding: 0 8px; }
+.skyline { margin: 0; color: var(--muted); }
+.skyline svg { width: 100%; height: auto; display: block; }
+.skyline .sk path { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1400; stroke-dashoffset: 0; }
+.skyline .sea { stroke: color-mix(in srgb, #22a3b6 70%, var(--muted)) !important; }
+.skyline .beam-ray { stroke: var(--zari) !important; }
+.skyline .pearl-dot { fill: #f6f1e4; stroke: #cfc3a9; }
+.js .skyline .sk path { stroke-dashoffset: 1400; transition: stroke-dashoffset 3s cubic-bezier(0.4, 0, 0.2, 1); }
+.js .skyline.in .sk path { stroke-dashoffset: 0; }
+.skyline figcaption { margin-top: 10px; text-align: center; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase; }
+.skyline figcaption [lang='ta'] { text-transform: none; color: var(--zari); font-size: 14px; letter-spacing: 0; }
+@media (prefers-reduced-motion: reduce) { .js .skyline .sk path { stroke-dashoffset: 0; transition: none; } }
+.contact { padding-bottom: 50px; }
+@media (max-width: 560px) { .kural { padding: 34px 20px; } .kural-en { font-size: 18px; } .label .ta-label { font-size: 12.5px; } }
+.mail small { white-space: nowrap; } @media (max-width: 560px) { .mail { flex-wrap: wrap; justify-content: center; gap: 8px; } }

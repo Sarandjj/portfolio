@@ -1,0 +1,18 @@
+---
+// Kanchipuram silk "temple border": stepped gopuram triangles with a small bead between, repeated across the width.
+interface Props { flip?: boolean }
+const { flip = false } = Astro.props;
+const id = `tb${Math.random().toString(36).slice(2, 7)}`;
+---
+<div class:list={['temple-border', { flip }]} aria-hidden="true">
+  <svg width="100%" height="22" preserveAspectRatio="none">
+    <defs>
+      <pattern id={id} width="32" height="22" patternUnits="userSpaceOnUse">
+        <path d="M2 21 L2 17 L6 17 L6 13 L10 13 L10 8 L13 8 L16 3 L19 8 L22 8 L22 13 L26 13 L26 17 L30 17 L30 21 Z" />
+        <circle cx="16" cy="15" r="1.6" class="bead" />
+      </pattern>
+    </defs>
+    <line x1="0" y1="21.5" x2="100%" y2="21.5" />
+    <rect width="100%" height="22" fill={`url(#${id})`} />
+  </svg>
+</div>
