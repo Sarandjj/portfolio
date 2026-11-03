@@ -147,14 +147,14 @@ runTerm();
 
 /* ---------- glass cards: light follows the pointer, with a small 3D tilt ---------- */
 if (matchMedia('(hover: hover)').matches && !reduce) {
-  $$('.pcard, .door, .tile, .chapters li').forEach((c) => {
+  $$('.pcard, .door').forEach((c) => {
     const tilt = !c.classList.contains('feat');
     c.addEventListener('pointermove', (e) => {
       const r = c.getBoundingClientRect();
       const x = e.clientX - r.left, y = e.clientY - r.top;
       c.style.setProperty('--mx', `${x}px`);
       c.style.setProperty('--my', `${y}px`);
-      if (tilt) c.style.setProperty('--rx', `${((y / r.height) - 0.5) * -5}deg`), c.style.setProperty('--ry', `${((x / r.width) - 0.5) * 5}deg`);
+      if (tilt) c.style.setProperty('--rx', `${((y / r.height) - 0.5) * -3}deg`), c.style.setProperty('--ry', `${((x / r.width) - 0.5) * 3}deg`);
     });
     c.addEventListener('pointerleave', () => { c.style.setProperty('--rx', '0deg'); c.style.setProperty('--ry', '0deg'); });
   });

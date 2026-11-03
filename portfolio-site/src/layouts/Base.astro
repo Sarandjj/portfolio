@@ -75,6 +75,10 @@ const imageUrl = new URL(image, Astro.site).href;
     <!-- set theme and the js flag before first paint so nothing flashes -->
     <script is:inline>
       document.documentElement.classList.add('js');
+      // safety net: if the main script never runs (blocked or failed download), show everything instead of a blank page
+      setTimeout(function () {
+        if (!document.documentElement.dataset.ui) document.documentElement.classList.remove('js');
+      }, 3000);
       try {
         var t = localStorage.getItem('theme');
         if (t) document.documentElement.dataset.theme = t;

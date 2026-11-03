@@ -476,17 +476,14 @@ h1 em {
 @media (prefers-reduced-motion: reduce) { h1 .line span, h1 em { animation: none; } }
 
 /* glass surfaces */
-.door, .proofbar, .now, .pearl, .pcard, .tile:not(.t-term):not(.t-cta), .chapters li:not(:last-child), .pcell, .biotog, .filters button, .marquee {
-  background: var(--glass); border-color: var(--glass-edge);
-  backdrop-filter: blur(16px) saturate(1.4);
-}
-.door, .pcard, .tile, .chapters li, .pcell, .now, .pearl { box-shadow: var(--glass-shadow); }
+/* glass only where it matters; everything else stays a calm solid card */
+.door:not(.hot), .proofbar, .pcard.feat, .pill-status, .tap-tag { background: var(--lg-fill); border-color: var(--lg-edge); backdrop-filter: blur(22px) saturate(1.7); box-shadow: var(--lg-shadow); }
 .proofbar { border: 1px solid var(--glass-edge); border-radius: 22px; padding: 20px 26px; box-shadow: var(--glass-shadow); }
 .proofbar li + li { border-left: 1px solid var(--line); padding-left: 24px; }
 .proofbar b { font-variant-numeric: tabular-nums; }
 @media (max-width: 900px) { .proofbar li + li { border-left: 0; padding-left: 0; } }
-.marquee { border: 1px solid var(--glass-edge); border-radius: 999px; margin: 22px 24px 0; }
-@media (min-width: 1248px) { .marquee { max-width: 1152px; margin-inline: auto; } }
+.marquee { border: 0; border-block: 1px solid var(--line); border-radius: 0; margin: 26px 0 0; }
+
 .door.hot { background: color-mix(in srgb, var(--ink) 88%, transparent); }
 
 /* 3D tilt + pointer light on glass cards */
@@ -539,3 +536,47 @@ h1 .line { overflow: visible; }
 .feat .pc-top { flex-wrap: wrap; row-gap: 8px; }
 .status .vanakkam { display: inline-block; height: 22px; line-height: 22px; overflow: hidden; }
 h1 em { padding-right: 0; }
+
+/* ---------- v5: balanced glass, cleaner hero ---------- */
+.pill-status { display: inline-flex; align-items: center; gap: 12px; padding: 7px 16px; border: 1px solid; border-radius: 999px; font-family: var(--mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.pill-status b { color: var(--ink); font-weight: 500; }
+.pill-status .live::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--green); margin-right: 8px; animation: pulse 2s infinite; box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 25%, transparent); }
+.pill-status .sep { width: 1px; height: 14px; background: var(--line); }
+.kicker { margin-top: 26px; font-family: var(--serif); font-style: italic; font-size: clamp(22px, 2.4vw, 28px); color: var(--accent-text); }
+.hero h1 { margin-top: 6px; }
+.intro { font-size: 19px; max-width: 500px; }
+.doors { margin-top: 28px; }
+.phone-col { position: relative; justify-self: center; }
+.tap-tag { position: absolute; left: -96px; top: 300px; z-index: 5; padding: 8px 14px; border: 1px solid; border-radius: 14px 14px 4px 14px; font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink); white-space: nowrap; animation: nudge 3.5s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateX(6px); } }
+.scrollcue { display: block; width: 26px; height: 40px; margin: 34px auto 0; border: 1.5px solid var(--muted); border-radius: 14px; position: relative; opacity: 0.7; }
+.scrollcue span { position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--ink); animation: wheel 1.8s ease-in-out infinite; }
+@keyframes wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { opacity: 0; } }
+.scrollcue:hover { opacity: 1; }
+@media (max-width: 960px) { .tap-tag, .scrollcue { display: none; } .kicker { margin-top: 20px; } }
+@media (max-width: 560px) { .pill-status { font-size: 10.5px; gap: 8px; padding: 6px 12px; } }
+
+/* border beam: a small light that travels around the edge */
+@property --ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.beam { position: relative; }
+.beam-line {
+  position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px; pointer-events: none; z-index: 3;
+  background: conic-gradient(from var(--ang), transparent 0 70%, color-mix(in srgb, var(--c1, #ff4f1f) 80%, #fff) 82%, #ffb020 90%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: beam 7s linear infinite;
+}
+.door.hot .beam-line { --c1: #ff4f1f; }
+@keyframes beam { to { --ang: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .beam-line { animation: none; opacity: 0.5; } .tap-tag, .scrollcue span { animation: none; } }
+
+/* calm cards: solid, soft shadow, brand wash only */
+.pcard:not(.feat), .tile:not(.t-term):not(.t-cta), .pcell, .now, .pearl, .chapters li:not(:last-child) { background: var(--card); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 14px 34px -26px rgba(40, 30, 10, 0.35); }
+.js .reveal.in:is(.tile, .chapters li) { transform: none; }
+.js .reveal.in.tile:hover { transform: translateY(-3px); }
+.door::after, .tile::after, .chapters li::after { display: none; }
+.door::before { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.3s; background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.5), transparent 70%); }
+.door:hover::before { opacity: 1; }
+.door.hot::before { background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.14), transparent 70%); }
+.pcard > .beam-line { position: absolute; z-index: 3; }
+@media (max-width: 560px) { .pill-status .sep, .pill-status > span:last-child { display: none; } }

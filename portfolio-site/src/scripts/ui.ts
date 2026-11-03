@@ -3,6 +3,7 @@ import { SITE } from '../data/site';
 const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s);
 const $$ = <T extends Element = HTMLElement>(s: string) => [...document.querySelectorAll<T>(s)];
 const root = document.documentElement;
+root.dataset.ui = '1';
 
 /* ---------- theme ---------- */
 function toggleTheme() {

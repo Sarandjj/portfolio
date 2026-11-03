@@ -61,20 +61,19 @@ const jsonLd = [
     <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
     <div class="wrap">
       <div>
-        <div class="status">
-          <span lang="ta" class="vanakkam">வணக்கம்</span>
+        <div class="pill-status">
           <span class="live"><b>Open to selected freelance work</b></span>
-          <span>Thoothukudi, the Pearl City</span>
-          <span id="istSmall">IST --:--</span>
+          <span class="sep" aria-hidden="true"></span>
+          <span>Thoothukudi · <span id="istSmall">IST --:--</span></span>
         </div>
+        <p class="kicker"><span lang="ta">வணக்கம்</span>, I'm Sarankumar.</p>
         <h1>
           <span class="line"><span>I build <em>apps for</em></span></span>
           <span class="line"><span><em>your pocket</em> and the</span></span>
           <span class="line"><span>systems behind them.</span></span>
         </h1>
         <p class="intro">
-          I'm Sarankumar, a <b>mobile &amp; full-stack developer</b>. Flutter for iOS, Android and web, React for the web, with Supabase, Firebase,
-          Node.js and FastAPI underneath. Fast, private, offline-first apps, from idea to release.
+          A <b>mobile &amp; full-stack developer</b> making fast, private, offline-first apps in Flutter and React, with the backend behind them, from idea to store release.
         </p>
         <div class="doors">
           <a class="door" href="/recruiter" data-track="recruiter_view">
@@ -83,16 +82,18 @@ const jsonLd = [
             <span>Experience, skills and CV on one page · 1 min</span>
             <i aria-hidden="true">→</i>
           </a>
-          <a class="door hot" href="#contact" data-track="door_client">
+          <a class="door hot beam" href="#contact" data-track="door_client">
+            <span class="beam-line" aria-hidden="true"></span>
             <small>Have an app in mind?</small>
             <b>Let's build it</b>
             <span>Scope, timeline and budget, in writing</span>
             <i aria-hidden="true">→</i>
           </a>
         </div>
-        <p class="below-doors"><a href="#work">or scroll to see my work ↓</a><span class="hint" aria-hidden="true">psst, the phone works →</span></p>
       </div>
-      <Phone />
+      <div class="phone-col">
+        <Phone />
+      </div>
     </div>
     <div class="wrap">
       <ul class="proofbar" aria-label="In numbers">
@@ -102,6 +103,7 @@ const jsonLd = [
         <li><b data-count="100">100</b> Lighthouse accessibility score</li>
       </ul>
     </div>
+    <a class="scrollcue" href="#work" aria-label="Scroll to my work"><span></span></a>
     <div class="marquee" aria-label="Tools I use">
       <ul class="track">
         {[...STACK, ...STACK].map((t, i) => <li aria-hidden={i >= STACK.length ? 'true' : undefined}>{t}</li>)}
@@ -109,112 +111,10 @@ const jsonLd = [
     </div>
   </section>
 
-  <section id="hello" class="hello-sec">
-    <div class="wrap hs">
-      <div class="bio reveal">
-        <div class="label">00 / Hello</div>
-        <div class="biotog" role="group" aria-label="How much to read">
-          <button type="button" data-len="short" aria-pressed="true">Short</button>
-          <button type="button" data-len="long" aria-pressed="false">Long</button>
-        </div>
-        <div data-bio="short">
-          <p class="bio-big">I'm a software developer from Tamil Nadu who enjoys turning ideas into <em>real, usable products,</em> from the first screen to the database.</p>
-        </div>
-        <div data-bio="long" hidden>
-          <p class="bio-big">I'm a software developer from Tamil Nadu who enjoys turning ideas into <em>real, usable products.</em></p>
-          <p>My journey started with a B.Sc. in Computer Science and grew through hands-on experience building mobile applications, web applications and backend systems. Flutter is my primary focus, but I also work with React, Node.js and modern backend technologies.</p>
-          <p>Working on production projects taught me that building an app is about more than writing code. It's about understanding users, making good technical decisions, testing carefully, and delivering something reliable.</p>
-          <p>Today I'm building and launching my own products, such as a personal finance manager and a school management platform. <a class="inline" href="/about">Read my full story →</a></p>
-        </div>
-      </div>
-      <aside class="side reveal">
-        <div class="now">
-          <span class="mono">Now</span>
-          <p>Building FinWise, Nirai and NallHub, and open to selected freelance work.</p>
-        </div>
-        <div class="pearl">
-          <svg viewBox="0 0 64 52" width="64" height="52" aria-hidden="true">
-            <g class="shell"><path d="M8 22 Q32 -6 56 22 Q32 16 8 22 Z" /><path d="M20 16 L32 4 M32 18 V4 M44 16 L32 4" class="ridge" /></g>
-            <g class="shell"><path d="M6 34 Q32 54 58 34 Q32 28 6 34 Z" /><path d="M20 40 L32 48 M32 38 V48 M44 40 L32 48" class="ridge" /></g>
-            <circle cx="32" cy="30" r="7.5" class="pearl-dot" />
-            <circle cx="29.5" cy="27.5" r="2" fill="#fff" opacity=".9" />
-          </svg>
-          <p><b>From Thoothukudi, the Pearl City.</b> Divers here went deep into the Gulf of Mannar and came back with pearls. That's how I like to build: go deep into one problem, come back with something finished.</p>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <Kolam />
-  <section id="services">
-    <div class="wrap">
-      <div class="label reveal">01 / What I do</div>
-      <h2 class="reveal">Not just Flutter. <em>The whole product,</em> front to back.</h2>
-      <p class="lede reveal">The app, the data layer, the backend and the release, handled by one developer.</p>
-
-      <div class="bento">
-        <div class="tile t-code reveal">
-          <span class="tag">Mobile · Flutter</span>
-          <h3>Apps that feel native on iOS, Android and the web</h3>
-          <p>One codebase, careful UI, smooth animation, and offline-first by default.</p>
-<div class="code" tabindex="0" role="region" aria-label="Flutter code sample" set:html={codeSample} />
-        </div>
-
-        <div class="tile t-term reveal">
-          <span class="tag">Backend · Cloud</span>
-          <h3>Supabase, Firebase, Node.js &amp; FastAPI</h3>
-          <div class="term" id="term" aria-hidden="true"></div>
-        </div>
-
-        <div class="tile reveal">
-          <span class="tag">Right now in Tamil Nadu</span>
-          <div class="clock" id="clock">--:--</div>
-          <p id="clockNote">Awake right now</p>
-        </div>
-
-        <div class="tile reveal">
-          <span class="tag">Web · Speed</span>
-          <div class="scores" role="img" aria-label="Lighthouse scores measured on this site: performance 98, accessibility 100, best practices 100">
-            {
-              [['98', 'Speed'], ['100', 'Access'], ['100', 'Practice']].map(([v, l]) => (
-                <div class="score-wrap">
-                  <div class="score">
-                    <svg viewBox="0 0 52 52">
-                      <circle cx="26" cy="26" r="22" stroke="#d6f0df" stroke-width="5" fill="none"></circle>
-                      <circle class="arc" cx="26" cy="26" r="22" stroke="#1a9d5b" stroke-width="5" fill="none" stroke-linecap="round"></circle>
-                    </svg>
-                    <b>{v}</b>
-                  </div>
-                  <small>{l}</small>
-                </div>
-              ))
-            }
-          </div>
-          <p>Lighthouse, on a simulated phone.</p>
-        </div>
-
-        <div class="tile t-stack reveal">
-          <span class="tag">Toolbox</span>
-          <div class="groups">
-            <div><b>Mobile</b>Flutter, Dart, Riverpod, camera, ML Kit and biometrics plugins</div>
-            <div><b>Data &amp; backend</b>Drift (SQLite), Supabase, Firebase, Node.js with Express, FastAPI (Python)</div>
-            <div><b>Web</b>React, Flutter Web, Astro (this site), Firebase Hosting</div>
-            <div><b>Shipping</b>Google Play Console, Render, Git</div>
-          </div>
-        </div>
-
-        <a class="tile t-cta reveal" href="#contact">
-          <span class="arrow" aria-hidden="true">→</span>
-          <div><h3>Have an app in mind?</h3><p>Let's talk scope, timeline and budget.</p></div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="work" style="padding-top:20px" class="has-aurora">
+  <section id="work" class="has-aurora" style="padding-top:60px">
     <div class="aurora soft" aria-hidden="true"><i class="a1"></i><i class="a3"></i></div>
     <div class="wrap">
-      <div class="label reveal">02 / Selected work</div>
+      <div class="label reveal">01 / Selected work</div>
       <h2 class="reveal">Things I've <em>shipped and built.</em></h2>
       <p class="lede reveal">
         Two client apps live on the Play Store and App Store, and five of my own. Each one has a short case study: the problem, the build, the hard part, and where it stands.
@@ -251,7 +151,8 @@ const jsonLd = [
       <h3 class="group reveal" data-group>My own apps <span>built end to end</span></h3>
       <div class="cards" data-cards>
         {FEATURED && (
-          <article class="pcard feat reveal" style={`--c1:${FEATURED.c1};--c2:${FEATURED.c2}`} data-tags={tagsOf(FEATURED)} data-slug={FEATURED.slug}>
+          <article class="pcard feat beam reveal" style={`--c1:${FEATURED.c1};--c2:${FEATURED.c2}`} data-tags={tagsOf(FEATURED)} data-slug={FEATURED.slug}>
+            <span class="beam-line" aria-hidden="true"></span>
             <span class="corners" aria-hidden="true"></span>
             <div class="feat-text">
               <div class="pc-top">
@@ -314,10 +215,112 @@ const jsonLd = [
     </div>
   </section>
 
-  <Kolam />
-  <section id="experience" style="padding-top:20px">
+  <section id="services">
     <div class="wrap">
-      <div class="label reveal">03 / Experience</div>
+      <div class="label reveal">02 / What I do</div>
+      <h2 class="reveal">Not just Flutter. <em>The whole product,</em> front to back.</h2>
+      <p class="lede reveal">The app, the data layer, the backend and the release, handled by one developer.</p>
+
+      <div class="bento">
+        <div class="tile t-code reveal">
+          <span class="tag">Mobile · Flutter</span>
+          <h3>Apps that feel native on iOS, Android and the web</h3>
+          <p>One codebase, careful UI, smooth animation, and offline-first by default.</p>
+<div class="code" tabindex="0" role="region" aria-label="Flutter code sample" set:html={codeSample} />
+        </div>
+
+        <div class="tile t-term reveal">
+          <span class="tag">Backend · Cloud</span>
+          <h3>Supabase, Firebase, Node.js &amp; FastAPI</h3>
+          <div class="term" id="term" aria-hidden="true"></div>
+        </div>
+
+        <div class="tile reveal">
+          <span class="tag">Right now in Tamil Nadu</span>
+          <div class="clock" id="clock">--:--</div>
+          <p id="clockNote">Awake right now</p>
+        </div>
+
+        <div class="tile reveal">
+          <span class="tag">Web · Speed</span>
+          <div class="scores" role="img" aria-label="Lighthouse scores measured on this site: performance 98, accessibility 100, best practices 100">
+            {
+              [['98', 'Speed'], ['100', 'Access'], ['100', 'Practice']].map(([v, l]) => (
+                <div class="score-wrap">
+                  <div class="score">
+                    <svg viewBox="0 0 52 52">
+                      <circle cx="26" cy="26" r="22" stroke="#d6f0df" stroke-width="5" fill="none"></circle>
+                      <circle class="arc" cx="26" cy="26" r="22" stroke="#1a9d5b" stroke-width="5" fill="none" stroke-linecap="round"></circle>
+                    </svg>
+                    <b>{v}</b>
+                  </div>
+                  <small>{l}</small>
+                </div>
+              ))
+            }
+          </div>
+          <p>Lighthouse, on a simulated phone.</p>
+        </div>
+
+        <div class="tile t-stack reveal">
+          <span class="tag">Toolbox</span>
+          <div class="groups">
+            <div><b>Mobile</b>Flutter, Dart, Riverpod, camera, ML Kit and biometrics plugins</div>
+            <div><b>Data &amp; backend</b>Drift (SQLite), Supabase, Firebase, Node.js with Express, FastAPI (Python)</div>
+            <div><b>Web</b>React, Flutter Web, Astro (this site), Firebase Hosting</div>
+            <div><b>Shipping</b>Google Play Console, Render, Git</div>
+          </div>
+        </div>
+
+        <a class="tile t-cta reveal" href="#contact">
+          <span class="arrow" aria-hidden="true">→</span>
+          <div><h3>Have an app in mind?</h3><p>Let's talk scope, timeline and budget.</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Kolam />
+
+  <section id="hello" class="hello-sec">
+    <div class="wrap hs">
+      <div class="bio reveal">
+        <div class="label">03 / About me</div>
+        <div class="biotog" role="group" aria-label="How much to read">
+          <button type="button" data-len="short" aria-pressed="true">Short</button>
+          <button type="button" data-len="long" aria-pressed="false">Long</button>
+        </div>
+        <div data-bio="short">
+          <p class="bio-big">I'm a software developer from Tamil Nadu who enjoys turning ideas into <em>real, usable products,</em> from the first screen to the database.</p>
+        </div>
+        <div data-bio="long" hidden>
+          <p class="bio-big">I'm a software developer from Tamil Nadu who enjoys turning ideas into <em>real, usable products.</em></p>
+          <p>My journey started with a B.Sc. in Computer Science and grew through hands-on experience building mobile applications, web applications and backend systems. Flutter is my primary focus, but I also work with React, Node.js and modern backend technologies.</p>
+          <p>Working on production projects taught me that building an app is about more than writing code. It's about understanding users, making good technical decisions, testing carefully, and delivering something reliable.</p>
+          <p>Today I'm building and launching my own products, such as a personal finance manager and a school management platform. <a class="inline" href="/about">Read my full story →</a></p>
+        </div>
+      </div>
+      <aside class="side reveal">
+        <div class="now">
+          <span class="mono">Now</span>
+          <p>Building FinWise, Nirai and NallHub, and open to selected freelance work.</p>
+        </div>
+        <div class="pearl">
+          <svg viewBox="0 0 64 52" width="64" height="52" aria-hidden="true">
+            <g class="shell"><path d="M8 22 Q32 -6 56 22 Q32 16 8 22 Z" /><path d="M20 16 L32 4 M32 18 V4 M44 16 L32 4" class="ridge" /></g>
+            <g class="shell"><path d="M6 34 Q32 54 58 34 Q32 28 6 34 Z" /><path d="M20 40 L32 48 M32 38 V48 M44 40 L32 48" class="ridge" /></g>
+            <circle cx="32" cy="30" r="7.5" class="pearl-dot" />
+            <circle cx="29.5" cy="27.5" r="2" fill="#fff" opacity=".9" />
+          </svg>
+          <p><b>From Thoothukudi, the Pearl City.</b> Divers here went deep into the Gulf of Mannar and came back with pearls. That's how I like to build: go deep into one problem, come back with something finished.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="experience" style="padding-top:56px">
+    <div class="wrap">
+      <div class="label reveal">04 / Journey</div>
       <h2 class="reveal">The journey, <em>in four chapters.</em></h2>
       <ol class="chapters">
         <li class="reveal">
@@ -346,7 +349,7 @@ const jsonLd = [
 
   <section id="process" style="background:var(--paper2)">
     <div class="wrap">
-      <div class="label reveal">04 / How I work</div>
+      <div class="label reveal">05 / How I work</div>
       <h2 class="reveal">Simple process, <em>no surprises.</em></h2>
       <p class="lede reveal">From the first call to the store release, you always know what happens next.</p>
       <div class="steps">
@@ -359,9 +362,10 @@ const jsonLd = [
   </section>
 
   <Kolam />
+
   <section id="writing">
     <div class="wrap">
-      <div class="label reveal">05 / Writing</div>
+      <div class="label reveal">06 / Writing</div>
       <h2 class="reveal">Notes from <em>building.</em></h2>
       <p class="lede reveal">Short engineering notes from the apps above: the problem, the decision, and the trade-off.</p>
       <div class="pgrid">
