@@ -239,3 +239,39 @@ if (read > 0) {
   sc.textContent = `You've read ${read} of ${cards.length}`;
   sc.hidden = false;
 }
+
+/* ---------- thoranam: leaves near the pointer flick and spring back ---------- */
+const thor = document.querySelector<SVGSVGElement>('.thoranam svg');
+if (thor && !reduce && matchMedia('(hover: hover)').matches) {
+  const pieces = [...thor.querySelectorAll<SVGGElement>('.sway')].map((g) => ({ x: Number(g.dataset.x), push: g.querySelector<SVGGElement>('.push')! }));
+  let lastX = 0, raf = 0, ev: PointerEvent | null = null;
+  addEventListener('pointermove', (e) => {
+    ev = e;
+    if (!raf) raf = requestAnimationFrame(() => {
+      raf = 0;
+      const r = thor.getBoundingClientRect();
+      if (!ev || ev.clientY > r.bottom + 30 || ev.clientY < r.top) { if (ev) lastX = ev.clientX; return; }
+      const vx = ev.clientX - lastX;
+      lastX = ev.clientX;
+      // map the pointer into the SVG's own coordinates (the viewBox is 1400 wide, sliced to fill)
+      const s = Math.max(r.width / 1400, r.height / 110);
+      const sx = (ev.clientX - r.left - (r.width - 1400 * s) / 2) / s;
+      for (const p of pieces) {
+        const d = Math.abs(p.x - sx);
+        if (d > 70) continue;
+        const angle = Math.max(-22, Math.min(22, -vx * 0.9 * (1 - d / 70)));
+        p.push.style.setProperty('--p', `${angle}deg`);
+        clearTimeout((p.push as any)._t);
+        (p.push as any)._t = setTimeout(() => p.push.style.setProperty('--p', '0deg'), 140);
+      }
+    });
+  }, { passive: true });
+}
+
+/* ---------- doorstep lamps: tap to light or put out ---------- */
+document.querySelectorAll<SVGGElement>('[data-lamp]').forEach((l) =>
+  l.addEventListener('click', () => {
+    l.classList.add('touched');
+    l.classList.toggle('on');
+  }),
+);
