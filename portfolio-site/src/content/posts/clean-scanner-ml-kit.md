@@ -48,8 +48,6 @@ When scanning felt worse after one session, I first blamed my own changes, and I
 
 ## What I'd do differently
 
-<span class="note-draft">draft: I wrote this section as a suggestion. Keep it only if it is what you would really say.</span>
-
 I would have run the side-by-side test on a real phone **before** building the frame pipeline, not after. A quick comparison would have told me the detector was not good enough. I'd still have built the detector, because of the gallery case, but not the live viewfinder around it.
 
 I'd also keep tracking size. Every dependency was measured against a 60 MB budget, and the last build I measured was about 42.5 MB.

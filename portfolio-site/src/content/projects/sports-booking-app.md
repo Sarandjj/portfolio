@@ -65,5 +65,3 @@ Mistakes I tried to avoid on mobile: too many features at once, complicated navi
 ## Why it is here
 
 This is a shipped product, not a demo: it is on both public stores, and the work covers the app, its payments, notifications and backend connections, not only screens.
-
-<span class="note-draft">placeholder: one or two sentences on a hard problem you solved here and what you decided</span>

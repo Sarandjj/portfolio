@@ -66,8 +66,6 @@ For each relationship in the table, a test that uses a **real in-memory database
 
 ## What I'd do differently
 
-<span class="note-draft">draft: I wrote this section as a suggestion. Keep it only if it is what you would really say.</span>
-
 I would have made every table soft-delete-ready from the first version. Retrofitting meant auditing every foreign key by hand. If you are building a local-first app now and think you will sync later, add `isDeleted`, `updatedAt` and a version column on day one, and route every delete through one place.
 
 FinWise is on its [project page](/projects/finwise), with a demo you can use in the browser.

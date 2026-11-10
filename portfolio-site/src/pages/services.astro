@@ -101,7 +101,7 @@ const faqs = [
     <div class="wrap">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
       <h1 class="page-title" data-ta="செயலிகளும், &lt;em&gt;அவற்றின் பின்னால் உள்ள அமைப்புகளும்.&lt;/em&gt;">Apps, and the <em>systems behind them.</em></h1>
-      <p class="page-lede" data-ta="வாடிக்கையாளர்கள் செயலிக்காக வருகிறார்கள்; backend, வெளியீடு, வேகம் எல்லாமும் கவனிக்கப்படுவதால் தொடர்கிறார்கள்.">Clients come for the app and stay because the backend, the release and the speed are handled too.</p>
+      <p class="page-lede" data-ta="ஒரு செயலி அதன் திரைகள் மட்டுமல்ல: backend, வெளியீடு, வேகம் ஆகியவையும் அதே அளவு முக்கியம்.">An app is more than its screens. The backend, the release and the speed matter just as much.</p>
       <div class="page-cta">
         <a class="btn solid" href="/contact?need=app">Start a project</a>
         <a class="btn ghost" href="#wired">See how an app is wired</a>
@@ -182,7 +182,7 @@ const faqs = [
       <section>
         <div class="kick reveal">04 / Working together<span class="ta-label" lang="ta">௪ · இணைந்து</span></div>
         <h2 class="sec-h reveal" data-ta="நாம் எப்படி &lt;em&gt;சேர்ந்து வேலை செய்யலாம்.&lt;/em&gt;">How we can <em>work together.</em></h2>
-        <p class="lede"><span class="note-draft">draft, confirm what you actually offer</span></p>
+        <p class="lede reveal">Three ways to work. Each one starts with a short call and a scope in writing.</p>
         <div class="vcards">
           {engage.map((e) => (
             <div class="vcard reveal" style={`--t1:${e.c1};--t2:${e.c2}`}>
@@ -198,7 +198,7 @@ const faqs = [
       <section>
         <div class="kick reveal">05 / Questions<span class="ta-label" lang="ta">௫ · கேள்விகள்</span></div>
         <h2 class="sec-h reveal" data-ta="பொதுவான &lt;em&gt;கேள்விகள்.&lt;/em&gt;">Common <em>questions.</em></h2>
-        <p class="lede"><span class="note-draft">draft answers, confirm or edit each one</span></p>
+        <p class="lede reveal">Short answers. Anything else, <a class="inline" href="/contact">just ask</a>.</p>
         <div class="faq">
           {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
         </div>

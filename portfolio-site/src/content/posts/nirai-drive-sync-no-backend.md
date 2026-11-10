@@ -83,8 +83,6 @@ Last write wins, the rule for same-field conflicts, uses each phone's own clock,
 
 ## What I'd do differently
 
-<span class="note-draft">draft: I wrote this section as a suggestion. Keep it only if it is what you would really say.</span>
-
 I would write the conflict tests before the sync engine, not after. Describing each conflict as a small test (title versus title, due date set versus cleared, delete versus edit) made the rules obvious. The three test files I ended up with (11 conflict tests, 8 deletion tests and 10 payload-compatibility tests) are the real specification of how Nirai syncs.
 
 You can see Nirai on its [project page](/projects/nirai), including a demo with made-up data.

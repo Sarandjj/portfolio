@@ -198,7 +198,8 @@
 /* about: story text with the kadalai mittai note beside it */
 .vcards.four { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 960px) { .vcards.four { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 520px) { .vcards.four { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .vcards.four { gap: 10px; } .vcards.four .vcard { padding: 16px; } .vcards.four .vcard h3 { font-size: 16.5px; } .vcards.four .vcard p { font-size: 14px; } .vcards.four .vcard .ic-tile { margin-bottom: 12px; } }
+@media (max-width: 340px) { .vcards.four { grid-template-columns: 1fr; } }
 .story { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; align-items: start; }
 .story .prose p { max-width: 64ch; }
 .mittai-card { position: sticky; top: 96px; padding: 22px; border-radius: 22px; border: 1px dashed color-mix(in srgb, var(--zari) 60%, var(--line));
@@ -355,3 +356,12 @@
   .cs-stats b { font-size: 21px; }
   .cs-stats span { font-size: 12px; line-height: 1.3; display: block; margin-top: 2px; }
 }
+
+/* Services offers: title, text and list sit on the same lines across the three cards */
+@media (min-width: 900px) {
+  .offers { grid-template-rows: auto auto auto 1fr; row-gap: 0; }
+  .offer { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 10px; align-content: start; }
+  .offer .ic-tile { margin-bottom: 0; }
+}
+/* the empty eighth slot on About becomes an invitation */
+.apptile.next { border-style: dashed; border-color: color-mix(in srgb, var(--zari) 55%, var(--line)); background: color-mix(in srgb, var(--zari) 6%, var(--card)); }

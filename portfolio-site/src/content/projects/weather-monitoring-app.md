@@ -48,5 +48,3 @@ I worked on the app as a Flutter developer, building features and connecting the
 ## Why it is here
 
 It shows how I work inside a larger, existing product: delivering specific features, connecting them to the wider system, and shipping them to both stores.
-
-<span class="note-draft">placeholder: one or two sentences on a feature you are proud of here and why</span>
