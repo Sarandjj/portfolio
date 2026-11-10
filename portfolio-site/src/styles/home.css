@@ -832,3 +832,58 @@ h1 .ul { position: relative; display: inline-block; }
   .contact { padding: 70px 12px 40px; }
   .kural-sec { padding: 60px 0; }
 }
+
+/* ---------- v10: process cards, contact glyphs, CTA art, cover watermarks ---------- */
+/* each step is a card under the line; its node and icon light up as the line reaches it */
+.steps { margin-top: 40px; }
+.step { margin-top: 30px; padding: 22px 22px 24px; border-radius: 22px; border: 1px solid var(--line); background: var(--card);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 14px 34px -26px rgba(40, 30, 10, 0.35);
+  transition: transform 0.35s cubic-bezier(0.2, 1.2, 0.4, 1), box-shadow 0.35s, border-color 0.35s; }
+.step::before { top: -21px; right: -28px; }
+.step:last-child::before { right: 0; }
+.step::after { top: -27px; transition: background 0.4s, transform 0.4s cubic-bezier(0.2, 1.6, 0.4, 1), box-shadow 0.4s; }
+.step .st-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--s1), var(--s2)); box-shadow: 0 12px 22px -12px var(--s1), 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+  transition: transform 0.5s cubic-bezier(0.2, 1.6, 0.4, 1), filter 0.5s; }
+.js .steps:not(.no-fill) .step:not(.lit) .st-icon { transform: scale(0.88); filter: saturate(0.45); }
+.step .mono { color: color-mix(in srgb, var(--s1) 80%, var(--ink)); }
+.step.lit::after { background: var(--s1); border-color: var(--s1); transform: scale(1.25); box-shadow: 0 0 0 6px color-mix(in srgb, var(--s1) 22%, transparent); }
+.step:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--s1) 45%, var(--line)); box-shadow: 0 22px 40px -26px var(--s1); }
+.step:hover .st-icon { transform: scale(1.06) rotate(-6deg); }
+.step .st-icon .appicon { width: 60%; height: 60%; }
+@media (max-width: 860px) { .step::after { display: none; } .step { margin-top: 0; } .steps { gap: 14px; } }
+
+/* contact: small coloured app tiles instead of emoji */
+.needs a .nd-icon { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; font-size: 0; }
+.needs a .nd-icon .appicon { width: 72%; height: 72%; }
+.nd-app { background: linear-gradient(135deg, #027dfd, #13b9fd); }
+.nd-web { background: linear-gradient(135deg, #ff6a3d, #ffb020); }
+.nd-api { background: linear-gradient(135deg, #0f9d58, #2bb673); }
+.nd-hire { background: linear-gradient(135deg, #a855f7, #ec4899); }
+
+/* the orange CTA tile gets a rocket waiting on a kolam-dot launch pad; it lifts off on hover */
+.t-cta { position: relative; overflow: hidden; isolation: isolate; }
+.t-cta::before { content: ''; position: absolute; inset: 0; z-index: -1;
+  background-image: radial-gradient(circle, rgba(20, 20, 18, 0.16) 1.3px, transparent 1.7px); background-size: 16px 16px;
+  -webkit-mask-image: radial-gradient(circle at 78% 30%, #000, transparent 65%); mask-image: radial-gradient(circle at 78% 30%, #000, transparent 65%); }
+.t-cta .cta-art { position: absolute; right: 18px; top: 14px; width: 92px; height: 92px; display: grid; place-items: center; z-index: -1;
+  transform: rotate(18deg); transition: transform 0.7s cubic-bezier(0.3, 1.3, 0.4, 1); }
+.t-cta .cta-art .appicon { width: 100%; height: 100%; filter: drop-shadow(0 8px 10px rgba(80, 20, 0, 0.35)); }
+.t-cta .cta-art .appicon .s, .t-cta .cta-art .appicon .f { stroke: #fff8ef; }
+.t-cta .cta-art .flamey { stroke: #ffe082; animation: flicker 0.5s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 50% 0; }
+@keyframes flicker { to { transform: scaleY(1.35); opacity: 0.7; } }
+.t-cta:hover .cta-art { transform: translate(10px, -16px) rotate(30deg); }
+
+/* project covers: a large, faint copy of the app's glyph that drifts on hover */
+.pcard:not(.feat) .pc-top .wm { position: absolute; right: 70px; bottom: -34px; width: 130px; height: 130px; display: grid; place-items: center;
+  opacity: 0.16; z-index: 0; transform: rotate(-14deg); transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s; }
+.pcard:not(.feat) .pc-top .wm .appicon { width: 100%; height: 100%; filter: none; }
+.pcard:not(.feat):hover .pc-top .wm { transform: rotate(-4deg) translate(-8px, -10px) scale(1.06); opacity: 0.24; }
+@media (max-width: 560px) { .pcard:not(.feat) .pc-top .wm { right: 40px; width: 110px; height: 110px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-cta .cta-art .flamey { animation: none; }
+  .step .st-icon { transform: none; filter: none; }
+}
+.needs { max-width: 860px; }
+.no-fill .step::after { background: var(--s1); border-color: var(--s1); }

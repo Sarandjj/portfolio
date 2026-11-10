@@ -147,6 +147,7 @@ const jsonLd = [
               <span class="corners" aria-hidden="true"></span>
               <div class="pc-top">
                 <span class="icon" aria-hidden="true"><AppIcon name={p.slug} /></span>
+                <span class="wm" aria-hidden="true"><AppIcon name={p.slug} /></span>
                 <span class="fig mono">FIG. {String(p.order).padStart(2, '0')}<span class="seen" hidden> · ✓ read</span></span>
                 <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
               </div>
@@ -201,6 +202,7 @@ const jsonLd = [
               <span class="corners" aria-hidden="true"></span>
               <div class="pc-top">
                 <span class="icon" aria-hidden="true"><AppIcon name={p.slug} /></span>
+                <span class="wm" aria-hidden="true"><AppIcon name={p.slug} /></span>
                 <span class="fig mono">FIG. {String(p.order).padStart(2, '0')}<span class="seen" hidden> · ✓ read</span></span>
                 <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
               </div>
@@ -305,6 +307,7 @@ const jsonLd = [
 
         <a class="tile t-cta reveal" href="#contact">
           <span class="arrow" aria-hidden="true">→</span>
+          <span class="cta-art" aria-hidden="true"><AppIcon name="ship" /></span>
           <div><h3>Have an app in mind?</h3><p>Let's talk scope, timeline and budget.</p></div>
         </a>
       </div>
@@ -400,10 +403,10 @@ const jsonLd = [
       <h2 class="reveal" data-ta="எளிய செயல்முறை, &lt;em&gt;எதிர்பாராத திருப்பங்கள் இல்லை.&lt;/em&gt;">Simple process, <em>no surprises.</em></h2>
       <p class="lede reveal" data-ta="முதல் அழைப்பிலிருந்து ஸ்டோர் வெளியீடு வரை, அடுத்து என்ன நடக்கும் என்பது உங்களுக்கு எப்போதும் தெரியும்.">From the first call to the store release, you always know what happens next.</p>
       <div class="steps">
-        <div class="step reveal"><span class="mono">01</span><h3 data-ta="புரிந்துகொள்ளல்">Discover</h3><p>A short call to understand the goal, the users and the budget. You get the scope in writing.</p></div>
-        <div class="step reveal"><span class="mono">02</span><h3 data-ta="வடிவமைப்பு">Design</h3><p>Key screens and flows agreed before any code is written.</p></div>
-        <div class="step reveal"><span class="mono">03</span><h3 data-ta="உருவாக்கம்">Build</h3><p>Regular builds you can install and try, so feedback comes early.</p></div>
-        <div class="step reveal"><span class="mono">04</span><h3 data-ta="வெளியீடும் ஆதரவும்">Ship &amp; support</h3><p>Store release, analytics, and fixes after launch.</p></div>
+        <div class="step reveal" style="--s1:#ff6a3d;--s2:#ffb020"><span class="st-icon" aria-hidden="true"><AppIcon name="discover" /></span><span class="mono">01</span><h3 data-ta="புரிந்துகொள்ளல்">Discover</h3><p data-ta="இலக்கு, பயனர்கள், பட்ஜெட் பற்றி ஒரு சிறிய அழைப்பு. வேலையின் வரம்பை எழுத்தில் தருவேன்.">A short call to understand the goal, the users and the budget. You get the scope in writing.</p></div>
+        <div class="step reveal" style="--s1:#a855f7;--s2:#ec4899"><span class="st-icon" aria-hidden="true"><AppIcon name="design" /></span><span class="mono">02</span><h3 data-ta="வடிவமைப்பு">Design</h3><p data-ta="எந்த code-ம் எழுதுவதற்கு முன், முக்கிய திரைகளையும் flow-களையும் சேர்ந்து முடிவு செய்வோம்.">Key screens and flows agreed before any code is written.</p></div>
+        <div class="step reveal" style="--s1:#027dfd;--s2:#13b9fd"><span class="st-icon" aria-hidden="true"><AppIcon name="build" /></span><span class="mono">03</span><h3 data-ta="உருவாக்கம்">Build</h3><p data-ta="நீங்கள் install செய்து பார்க்கக்கூடிய builds அடிக்கடி வரும், அதனால் கருத்துகள் சீக்கிரம் கிடைக்கும்.">Regular builds you can install and try, so feedback comes early.</p></div>
+        <div class="step reveal" style="--s1:#0f9d58;--s2:#2bb673"><span class="st-icon" aria-hidden="true"><AppIcon name="ship" /></span><span class="mono">04</span><h3 data-ta="வெளியீடும் ஆதரவும்">Ship &amp; support</h3><p data-ta="ஸ்டோர் வெளியீடு, analytics, launch-க்குப் பிறகு திருத்தங்கள்.">Store release, analytics, and fixes after launch.</p></div>
       </div>
     </div>
   </section>
@@ -439,10 +442,10 @@ const jsonLd = [
       <p class="lede reveal" style="margin:20px auto 0" data-ta="உங்களுக்கு என்ன வேண்டும் என்று சொல்லுங்கள், நான் பதில் அனுப்புகிறேன்.">Tell me what you need and I'll get back to you.</p>
       <div class="needs reveal">
         <span class="needs-q" data-ta="உங்களுக்கு என்ன வேண்டும்?">What do you need?</span>
-        <a href="/contact?need=app" data-track="need_click" data-track-item="app"><span aria-hidden="true">📱</span><b data-ta="மொபைல் செயலி">A mobile app</b></a>
-        <a href="/contact?need=web" data-track="need_click" data-track-item="web"><span aria-hidden="true">🌐</span><b data-ta="இணையதளம் / வெப் செயலி">A website or web app</b></a>
-        <a href="/contact?need=backend" data-track="need_click" data-track-item="backend"><span aria-hidden="true">🧩</span><b data-ta="Backend அல்லது API">A backend or API</b></a>
-        <a href="/contact?need=hire" data-track="need_click" data-track-item="hire"><span aria-hidden="true">💼</span><b data-ta="ஒரு பணிக்கு ஆள் தேடுகிறேன்">Hiring for a role</b></a>
+        <a href="/contact?need=app" data-track="need_click" data-track-item="app"><span class="nd-icon nd-app" aria-hidden="true"><AppIcon name="app" /></span><b data-ta="மொபைல் செயலி">A mobile app</b></a>
+        <a href="/contact?need=web" data-track="need_click" data-track-item="web"><span class="nd-icon nd-web" aria-hidden="true"><AppIcon name="web" /></span><b data-ta="இணையதளம் / வெப் செயலி">A website or web app</b></a>
+        <a href="/contact?need=backend" data-track="need_click" data-track-item="backend"><span class="nd-icon nd-api" aria-hidden="true"><AppIcon name="api" /></span><b data-ta="Backend அல்லது API">A backend or API</b></a>
+        <a href="/contact?need=hire" data-track="need_click" data-track-item="hire"><span class="nd-icon nd-hire" aria-hidden="true"><AppIcon name="hire" /></span><b data-ta="ஒரு பணிக்கு ஆள் தேடுகிறேன்">Hiring for a role</b></a>
       </div>
       <button class="mail reveal" type="button" data-copy-email>{SITE.email} <small data-copy-label>click to copy</small></button>
       <div class="socials reveal">

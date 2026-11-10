@@ -299,10 +299,18 @@ if (fills.length && !reduce) {
       // 0 when the block's top reaches 85% of the screen height, 1 when it reaches 35%
       const p = Math.min(1, Math.max(0, (innerHeight * 0.85 - r.top) / (innerHeight * 0.5)));
       el.style.setProperty('--fill', p.toFixed(3));
+      // process steps light up one by one as the line reaches them
+      if (el.classList.contains('steps')) {
+        const steps = el.children;
+        for (let i = 0; i < steps.length; i++) steps[i].classList.toggle('lit', p >= (i / steps.length) + 0.02);
+      }
     }
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   update();
+} else {
+  // no scroll effect: show every step lit
+  for (const el of $$('.steps')) el.classList.add('no-fill');
 }
 
 /* ---------- clock tile: place the sun or moon on the day arc ---------- */

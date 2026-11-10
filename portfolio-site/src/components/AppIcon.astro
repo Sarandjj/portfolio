@@ -89,6 +89,64 @@ const { name, class: cls = '' } = Astro.props;
       <path d="M30 49 V27 M30 36 Q30 27 39 27 Q47 27 47 36 V49" class="s" style="stroke-width:7;stroke-linecap:butt" />
     </g>
   )}
+  {name === 'discover' && (
+    <g>
+      <circle cx="28" cy="28" r="12" class="s" />
+      <path d="M37 37 L49 49" class="s" />
+      <path d="M22 26 Q24 21 29 20" class="s thin" />
+    </g>
+  )}
+  {name === 'design' && (
+    <g>
+      <rect x="12" y="14" width="26" height="36" rx="5" class="s" />
+      <path d="M18 23 H32 M18 30 H28" class="s thin" />
+      <path d="M44 16 L52 24 L36 40 L28 42 L30 34 Z" class="f" />
+    </g>
+  )}
+  {name === 'build' && (
+    <g>
+      <path d="M24 20 L12 32 L24 44 M40 20 L52 32 L40 44" class="s" />
+      <path d="M35 16 L29 48" class="s thin" />
+    </g>
+  )}
+  {name === 'ship' && (
+    <g>
+      <path d="M32 10 C42 16 45 28 41 42 H23 C19 28 22 16 32 10Z" class="s" />
+      <circle cx="32" cy="27" r="4" class="f" />
+      <path d="M23 36 L15 44 L22 46 M41 36 L49 44 L42 46" class="s thin" />
+      <path d="M28 48 L32 55 L36 48" class="s thin flamey" />
+    </g>
+  )}
+  {name === 'app' && (
+    <g>
+      <rect x="20" y="10" width="24" height="44" rx="6" class="s" />
+      <path d="M29 47 H35" class="s thin" />
+      <rect x="26" y="19" width="5" height="5" rx="1.5" class="f" />
+      <rect x="33" y="19" width="5" height="5" rx="1.5" class="f" />
+      <rect x="26" y="27" width="5" height="5" rx="1.5" class="f" />
+    </g>
+  )}
+  {name === 'web' && (
+    <g>
+      <circle cx="32" cy="32" r="18" class="s" />
+      <path d="M14 32 H50 M32 14 Q20 32 32 50 M32 14 Q44 32 32 50" class="s thin" />
+    </g>
+  )}
+  {name === 'api' && (
+    <g>
+      <circle cx="16" cy="32" r="5" class="f" />
+      <circle cx="48" cy="18" r="5" class="s" />
+      <circle cx="48" cy="46" r="5" class="s" />
+      <path d="M21 30 L43 20 M21 34 L43 44" class="s thin" />
+    </g>
+  )}
+  {name === 'hire' && (
+    <g>
+      <rect x="11" y="22" width="42" height="28" rx="6" class="s" />
+      <path d="M25 22 V17 Q25 14 28 14 H36 Q39 14 39 17 V22" class="s" />
+      <path d="M11 34 H53" class="s thin" />
+    </g>
+  )}
   {name === 'github' && (
     <g>
       <circle cx="22" cy="18" r="5" class="s" />
