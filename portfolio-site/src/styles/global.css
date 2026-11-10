@@ -292,3 +292,40 @@ body::after {
     linear-gradient(var(--line), var(--line)) 0 100% / 100% 1px no-repeat;
   opacity: 0.85; }
 .footer { padding-top: 34px; }
+
+/* ---------- current page in the nav ---------- */
+.navlinks a { position: relative; }
+.navlinks a[aria-current='page'] { color: var(--ink); }
+.navlinks a[aria-current='page']::after { content: ''; position: absolute; left: 50%; bottom: -8px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--accent); }
+
+/* ---------- phone menu: a button in the nav opens a sheet with every page ---------- */
+.menu-btn { display: none; flex-direction: column; justify-content: center; gap: 5px; }
+.menu-btn span { display: block; width: 16px; height: 1.6px; border-radius: 2px; background: currentColor; transition: transform 0.3s; }
+.menu-btn span:last-child { width: 11px; align-self: center; margin-left: 5px; }
+@media (max-width: 820px) { .menu-btn { display: inline-flex; align-items: center; } }
+.menu { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 18px 20px 28px; border: 0;
+  color: var(--ink); background: color-mix(in srgb, var(--paper) 97%, transparent); backdrop-filter: blur(24px) saturate(1.6); -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  display: none; flex-direction: column; gap: 22px; overflow-y: auto; }
+.menu[open] { display: flex; animation: menu-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.menu::backdrop { background: rgba(10, 10, 9, 0.25); }
+@keyframes menu-in { from { opacity: 0; transform: translateY(-14px); } }
+.menu-top { display: flex; align-items: center; justify-content: space-between; height: 44px; }
+.menu-top .mark { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.menu ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.menu li { animation: menu-li 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(0.05s + var(--i) * 0.05s); }
+@keyframes menu-li { from { opacity: 0; transform: translateY(12px); } }
+.menu li a { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 20px; border: 1px solid var(--line); background: var(--card); }
+.menu li a b { display: block; font-size: 19px; font-weight: 600; letter-spacing: -0.015em; }
+.menu li a small { display: block; font-size: 13px; color: var(--muted); }
+.menu li a i { margin-left: auto; font-style: normal; color: var(--muted); }
+.menu li a[aria-current='page'] { border-color: color-mix(in srgb, var(--t1) 55%, var(--line)); background: color-mix(in srgb, var(--t1) 8%, var(--card)); }
+.menu .ic-tile { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; background: linear-gradient(135deg, var(--t1), var(--t2)); }
+.menu .ic-tile .appicon { width: 58%; height: 58%; }
+.menu-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+.menu-foot .btn { justify-content: center; text-align: center; }
+.menu-note { text-align: center; font-size: 12px; color: var(--muted); }
+.menu-note [lang='ta'] { color: var(--zari); }
+@media (prefers-reduced-motion: reduce) { .menu[open], .menu li { animation: none; } }
+
+/* decorative loops pause while scrolled out of view (ui.ts toggles .is-off), to save battery on phones */
+.is-off, .is-off * { animation-play-state: paused !important; }

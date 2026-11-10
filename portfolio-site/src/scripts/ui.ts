@@ -15,6 +15,24 @@ function toggleTheme() {
 }
 $('#theme')?.addEventListener('click', toggleTheme);
 
+/* ---------- phone menu (a native dialog: Esc closes it and focus stays inside) ---------- */
+const menu = $<HTMLDialogElement>('#menu');
+const menuBtn = $('#menuBtn');
+if (menu && menuBtn) {
+  menuBtn.addEventListener('click', () => {
+    menu.showModal();
+    menuBtn.setAttribute('aria-expanded', 'true');
+  });
+  menu.addEventListener('close', () => menuBtn.setAttribute('aria-expanded', 'false'));
+  $('#menuClose')?.addEventListener('click', () => menu.close());
+  // a tap on a link (including /#contact on the home page) closes the sheet
+  menu.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) menu.close();
+  });
+  // if the screen grows past the phone layout, the menu is not needed any more
+  matchMedia('(min-width: 821px)').addEventListener('change', (m) => m.matches && menu.open && menu.close());
+}
+
 /* ---------- nav border once scrolled ---------- */
 const nav = $('#nav');
 const bar = $('#progress');
@@ -228,6 +246,13 @@ if (toc && article) {
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   update();
+}
+
+/* ---------- pause decorative loops while they are off screen ---------- */
+if ('IntersectionObserver' in window) {
+  const loops = $$('.thoranam, .device, .kural-sec, .doorstep, .wrap-sky, .lane, .t-cta, .shots, .aurora, .demo-phone');
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => e.target.classList.toggle('is-off', !e.isIntersecting)), { rootMargin: '120px' });
+  loops.forEach((el) => io.observe(el));
 }
 
 /* ---------- magnetic buttons: main buttons lean a few pixels towards the pointer ---------- */

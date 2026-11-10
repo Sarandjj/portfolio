@@ -1,21 +1,62 @@
 ---
 import { NAV, SITE } from '../data/site';
+import AppIcon from './AppIcon.astro';
 // Tamil labels for the language switch
 const NAV_TA: Record<string, string> = { '/projects': 'படைப்புகள்', '/services': 'சேவைகள்', '/blog': 'வலைப்பதிவு', '/about': 'என்னைப் பற்றி', '/contact': 'தொடர்பு' };
+// a glyph and colour for each link in the phone menu
+const NAV_LOOK: Record<string, [string, string, string, string]> = {
+  '/projects': ['stack', '#027dfd', '#13b9fd', 'Seven apps and their case studies'],
+  '/services': ['build', '#a855f7', '#ec4899', 'What I build and how an app is wired'],
+  '/blog': ['writing', '#c08a2b', '#d4501e', 'Notes from building'],
+  '/about': ['about', '#ff6a3d', '#ffb020', 'The journey, in four chapters'],
+  '/contact': ['mail', '#0f9d58', '#2bb673', 'Tell me what you need'],
+};
+// mark the page you are on (also its sub-pages, like a case study under Work)
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`);
 ---
 
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="mark" href="/" aria-label={`${SITE.name}, home`}><i></i>{SITE.name}</a>
     <nav class="navlinks" aria-label="Main">
-      {NAV.map((l) => <a href={l.href} data-ta={NAV_TA[l.href]}>{l.label}</a>)}
+      {NAV.map((l) => <a href={l.href} data-ta={NAV_TA[l.href]} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
     </nav>
     <div class="navr">
       <button class="kbd" id="openK" type="button" aria-label="⌘K: open command menu">⌘K</button>
       <button class="langsw" id="langSw" type="button" aria-pressed="false" title="English / தமிழ்"><span>EN</span><span lang="ta">த</span><span class="sr-only"> (switch between English and Tamil)</span></button>
       <button class="round" id="theme" type="button" aria-label="Toggle dark mode">◐</button>
-      <a class="btn solid sm" href="/#contact" data-track="hire_click" data-track-item="nav" data-ta="அணுகுங்கள்">Hire me</a>
+      <a class="btn solid sm hire" href="/#contact" data-track="hire_click" data-track-item="nav" data-ta="அணுகுங்கள்">Hire me</a>
+      <button class="round menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-controls="menu"><span></span><span></span></button>
     </div>
   </div>
   <div class="progress" aria-hidden="true"><i id="progress"></i></div>
 </header>
+
+<dialog class="menu" id="menu" aria-label="Menu">
+  <div class="menu-top">
+    <a class="mark" href="/"><i></i>{SITE.name}</a>
+    <button class="round" id="menuClose" type="button" aria-label="Close menu">✕</button>
+  </div>
+  <nav aria-label="Main (phone)">
+    <ul>
+      {NAV.map((l, i) => {
+        const [g, c1, c2, sub] = NAV_LOOK[l.href];
+        return (
+          <li style={`--i:${i}`}>
+            <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined} style={`--t1:${c1};--t2:${c2}`}>
+              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={g} /></span>
+              <span><b data-ta={NAV_TA[l.href]}>{l.label}</b><small>{sub}</small></span>
+              <i aria-hidden="true">→</i>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+  <div class="menu-foot">
+    <a class="btn solid" href="/#contact" data-track="hire_click" data-track-item="menu">Hire me</a>
+    <a class="btn ghost" href="/recruiter">Recruiter view</a>
+  </div>
+  <p class="menu-note mono"><span lang="ta">கோவில்பட்டி</span> · Kovilpatti, Tamil Nadu</p>
+</dialog>

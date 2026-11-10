@@ -9,6 +9,9 @@ const sag = (x: number) => {
 };
 const items = Array.from({ length: Math.floor(W / 28) }, (_, i) => {
   const x = 14 + i * 28;
+  // only about one piece in three sways on its own (cheaper to draw, and closer to real wind);
+  // every piece still flicks when the pointer passes
+  const live = i % 3 === 0 || i % 5 === 2;
   const kind = i % 5 === 2 ? 'flower' : 'leaf';
   return {
     x,
@@ -20,6 +23,7 @@ const items = Array.from({ length: Math.floor(W / 28) }, (_, i) => {
     flip: i % 2 ? -1 : 1,
     delay: -((i * 0.41) % 3.4).toFixed(2),
     yellow: i % 10 === 7,
+    live,
   };
 });
 const leaf = (L: number) => {
@@ -86,7 +90,7 @@ const PETALS_IN = Array.from({ length: 12 }, (_, i) => i * 30 + 15);
         if (it.kind === 'flower') {
           const id = it.yellow ? '#marigold-y' : '#marigold-o';
           return (
-            <g class="sway" style={`transform-origin:${it.x}px ${it.y}px;animation-delay:${it.delay}s`} data-x={it.x}>
+            <g class:list={['sway', { live: it.live }]} style={`transform-origin:${it.x}px ${it.y}px;animation-delay:${it.delay}s`} data-x={it.x}>
               <g class="push">
                 <path d={`M${it.x} ${it.y} V${it.y + 62}`} class="string" />
                 <use href={id} x={it.x - 11} y={it.y + 10} width="22" height="22" />
@@ -98,7 +102,7 @@ const PETALS_IN = Array.from({ length: 12 }, (_, i) => i * 30 + 15);
         }
         const l = leaf(it.len);
         return (
-          <g class="sway" style={`transform-origin:${it.x}px ${it.y}px;animation-delay:${it.delay}s`} data-x={it.x}>
+          <g class:list={['sway', { live: it.live }]} style={`transform-origin:${it.x}px ${it.y}px;animation-delay:${it.delay}s`} data-x={it.x}>
             <g class="push">
               <g transform={`translate(${it.x} ${it.y}) rotate(${it.tilt}) scale(${it.flip} 1)`}>
                 <path d={l.body} class="shadow" transform="translate(2.5 3)" />

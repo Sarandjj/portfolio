@@ -24,7 +24,6 @@ const p = entry.data;
 const { Content, headings } = await render(entry);
 const toc = headings.filter((h) => h.depth === 2);
 // Show the phone frames only when there are real screenshots. Placeholders look unfinished.
-const hasShots = p.screens.length > 0;
 const url = `${SITE.url}/projects/${entry.id}`;
 const jsonLd = [
   {
@@ -56,7 +55,7 @@ const jsonLd = [
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: p.name }]} />
 
       <div class="cs-cover" aria-hidden="true"><span class="ring"></span><span class="ring r2"></span></div>
-      <header class="cs-hero" style={hasShots ? undefined : 'grid-template-columns:1fr'}>
+      <header class="cs-hero">
         <div>
           <span class="cs-icon" style={`view-transition-name:ic-${entry.id}`} aria-hidden="true"><AppIcon name={entry.id} /></span>
           <p class="label" style="margin:22px 0 0">{p.kind}</p>
@@ -78,16 +77,16 @@ const jsonLd = [
           </div>
         </div>
         {
-          hasShots && (
+          (
             p.screens.length > 0 ? (
               <div class="shots shots-real" aria-label="Screenshots">
                 {p.screens.slice(0, 3).map((sc) => <img class="shot-img" src={sc.src} alt={sc.alt} width="540" height="979" loading="eager" />)}
               </div>
             ) : (
-              <div class="shots" aria-label="Screenshots (placeholders)">
-                <ShotFrame c1={p.c1} c2={p.c2} />
-                <ShotFrame c1={p.c2} c2={p.c1} />
-                <ShotFrame c1={p.c1} c2={p.c2} />
+              <div class="shots" aria-label="Screen previews">
+                <ShotFrame c1={p.c1} c2={p.c2} slug={entry.id} name={p.name} v={0} />
+                <ShotFrame c1={p.c1} c2={p.c2} slug={entry.id} name={p.name} v={1} />
+                <ShotFrame c1={p.c1} c2={p.c2} slug={entry.id} name={p.name} v={2} />
               </div>
             )
           )
@@ -102,7 +101,7 @@ const jsonLd = [
         )
       }
 
-      {p.demo && <DemoPhone url={p.demo.url} name={p.name} c1={p.c1} c2={p.c2} note={p.demo.note} />}
+      {p.demo && <DemoPhone url={p.demo.url} name={p.name} slug={entry.id} c1={p.c1} c2={p.c2} note={p.demo.note} />}
 
       <section>
         <div class="cs-grid">

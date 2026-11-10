@@ -1,12 +1,38 @@
 ---
-// Stand-in for a real screenshot. Every one is clearly marked until real images exist.
-interface Props { c1: string; c2: string; label?: string }
-const { c1, c2, label = 'placeholder: add screenshot' } = Astro.props;
+// Stand-in until real screenshots exist: a skeleton of an app screen in the app's own colours,
+// with its icon and name, honestly labelled. Three layouts (home, list, detail) so a row of
+// three does not look copy-pasted. Real screenshots replace these automatically (screens: in the
+// project's frontmatter).
+import AppIcon from './AppIcon.astro';
+interface Props { c1: string; c2: string; slug?: string; name?: string; v?: number; label?: string }
+const { c1, c2, slug = '', name = '', v = 0, label = 'Coming soon' } = Astro.props;
 ---
 
-<div class="shot" style={`--c1:${c1};--c2:${c2}`}>
-  <div class="shot-screen">
-    <i></i><i></i><i></i>
-    <span class="note-draft">{label}</span>
+<div class="shot" style={`--c1:${c1};--c2:${c2}`} role="img" aria-label={`${name} screen preview: real screenshots coming soon`}>
+  <div class:list={['shot-screen', `v${v}`]}>
+    <div class="sk-bar"><i></i><i></i></div>
+    <div class="sk-head">
+      {slug && <span class="sk-ic"><AppIcon name={slug} /></span>}
+      <b>{name}</b>
+    </div>
+    {v === 0 && (
+      <>
+        <div class="sk-hero"><i></i><i class="w60"></i></div>
+        <div class="sk-grid"><i></i><i></i><i></i><i></i></div>
+      </>
+    )}
+    {v === 1 && (
+      <div class="sk-list">
+        {[0, 1, 2, 3, 4].map(() => <div><span></span><i></i></div>)}
+      </div>
+    )}
+    {v === 2 && (
+      <>
+        <div class="sk-card"><i class="w40"></i><i></i><i class="w80"></i></div>
+        <div class="sk-chart">{[40, 70, 55, 90, 65, 80].map((h) => <i style={`height:${h}%`}></i>)}</div>
+      </>
+    )}
+    <div class="sk-tab"><i></i><i></i><i class="on"></i><i></i></div>
+    <span class="sk-label">{label}</span>
   </div>
 </div>

@@ -1,14 +1,16 @@
 ---
+import AppIcon from './AppIcon.astro';
 // Click-to-launch phone for a live Flutter web demo. The iframe is only created when the
 // visitor taps, so the page itself stays light (the demo is a separate multi-MB app).
 interface Props {
   url: string;
   name: string;
+  slug?: string;
   c1: string;
   c2: string;
   note: string;
 }
-const { url, name, c1, c2, note } = Astro.props;
+const { url, name, slug = '', c1, c2, note } = Astro.props;
 ---
 
 <section id="demo" class="demo" style={`--c1:${c1};--c2:${c2}`}>
@@ -27,7 +29,10 @@ const { url, name, c1, c2, note } = Astro.props;
 
   <div class="demo-phone" data-demo-url={url} data-demo-title={`${name} live demo`}>
     <div class="demo-screen">
-      <button class="demo-poster" type="button" data-launch aria-label={`Tap to launch the ${name} demo`}>
+      <button class="demo-poster" type="button" data-launch>
+        {slug && <span class="demo-ic" aria-hidden="true"><AppIcon name={slug} /></span>}
+        <b class="demo-name">{name}</b>
+        <span class="demo-sub">Live demo · made-up data</span>
         <span class="demo-play" aria-hidden="true">▶</span>
         <span>Tap to launch</span>
       </button>

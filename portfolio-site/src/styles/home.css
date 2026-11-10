@@ -646,7 +646,8 @@ h1 em { padding-right: 0; }
 .thoranam .shine { fill: none; stroke: rgba(255, 255, 255, 0.35); stroke-width: 1.4; stroke-linecap: round; }
 .thoranam .fold { fill: none; stroke: #2e7d32; stroke-width: 1.6; stroke-linecap: round; }
 /* each piece sways on its own; .push is the extra flick when the pointer passes */
-.thoranam .sway { animation: sway 4.2s ease-in-out infinite; transform-box: view-box; }
+.thoranam .sway { transform-box: view-box; }
+.thoranam .sway.live { animation: sway 4.2s ease-in-out infinite; }
 .thoranam .push { transform-box: view-box; transform-origin: inherit; transform: rotate(var(--p, 0deg)); transition: transform 1.2s cubic-bezier(0.2, 1.6, 0.35, 1); }
 @keyframes sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
 @media (max-width: 560px) { .hero { padding-top: 108px; } .thoranam { height: 92px; } }
