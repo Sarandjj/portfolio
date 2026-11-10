@@ -1,0 +1,60 @@
+/* ---------- first-visit welcome ---------- */
+#intro { display: none; }
+.intro #intro { display: grid; place-items: center; position: fixed; inset: 0; z-index: 9999; background: var(--paper); color: var(--ink);
+  clip-path: inset(0 0 0 0 round 0); transition: clip-path 0.6s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.6s; }
+.intro #intro::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 50% 46%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 42%); }
+.intro-out #intro { clip-path: inset(0 0 100% 0 round 0 0 40% 40%); }
+.intro-out #intro .intro-in { transform: translateY(-40px); opacity: 0; }
+.intro-in { position: relative; display: grid; justify-items: center; gap: 6px; transition: transform 0.5s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.35s; }
+.intro-kolam { width: 88px; height: 88px; margin-bottom: 12px; overflow: visible; }
+.intro-kolam path { fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.intro-kolam .k-loop { stroke: var(--accent); animation: k-draw 0.8s 0.1s cubic-bezier(0.6, 0, 0.3, 1) forwards; }
+.intro-kolam .k-lotus { stroke: var(--zari); animation: k-draw 0.7s 0.25s cubic-bezier(0.6, 0, 0.3, 1) forwards; }
+.intro-kolam circle { fill: var(--ink); opacity: 0; transform-box: fill-box; transform-origin: center; animation: k-dot 0.35s var(--d) cubic-bezier(0.2, 1.6, 0.4, 1) forwards; }
+.intro-name { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; opacity: 0; animation: k-rise 0.5s 0.3s ease forwards; }
+.intro-hi { font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 18px; opacity: 0; animation: k-rise 0.5s 0.45s ease forwards; }
+.intro-bar { display: block; width: 120px; height: 2px; margin-top: 14px; border-radius: 2px; overflow: hidden; background: color-mix(in srgb, var(--ink) 10%, transparent); }
+.intro-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), #ffb020, #22d3b6); transform: scaleX(0); transform-origin: 0 50%; animation: k-bar 0.9s ease-out forwards; }
+@keyframes k-draw { to { stroke-dashoffset: 0; } }
+@keyframes k-dot { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
+@keyframes k-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes k-bar { to { transform: scaleX(1); } }
+/* no scrolling behind the welcome */
+html.intro:not(.intro-out) { overflow: hidden; }
+
+/* ---------- page-to-page bar ---------- */
+.navload { position: fixed; left: 0; top: 0; z-index: 9998; height: 3px; width: 100%; pointer-events: none; transform: scaleX(0); transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--accent), #ffb020, #22d3b6); box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 60%, transparent); opacity: 0; }
+/* waits 150ms first, so a fast page change never shows it */
+.leaving .navload { opacity: 1; animation: nav-go 10s 0.15s cubic-bezier(0.05, 0.7, 0.1, 1) both; }
+@keyframes nav-go { from { transform: scaleX(0); } to { transform: scaleX(0.92); } }
+
+/* ---------- images: a soft shimmer until they arrive ---------- */
+img.img-wait { background: linear-gradient(105deg, color-mix(in srgb, var(--ink) 6%, transparent) 30%, color-mix(in srgb, var(--ink) 12%, transparent) 50%, color-mix(in srgb, var(--ink) 6%, transparent) 70%) 0 0 / 300% 100%;
+  animation: img-wait 1.4s linear infinite; }
+@keyframes img-wait { from { background-position: 100% 0; } to { background-position: 0 0; } }
+
+/* ---------- busy buttons (contact form) ---------- */
+.btn.busy { pointer-events: none; opacity: 0.85; }
+.btn.busy::before { content: ''; width: 14px; height: 14px; margin-right: 8px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent;
+  display: inline-block; vertical-align: -2px; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- live demo: loading screen while the app downloads and starts ---------- */
+.demo-load { position: absolute; inset: 0; z-index: 2; display: grid; place-content: center; justify-items: center; gap: 10px; color: #fff; text-align: center; padding: 24px;
+  background: linear-gradient(160deg, var(--c1), var(--c2)); transition: opacity 0.5s, transform 0.5s; }
+.demo-load.gone { opacity: 0; transform: scale(1.04); pointer-events: none; }
+.demo-load .demo-ic { animation: demo-breathe 1.6s ease-in-out infinite; }
+@keyframes demo-breathe { 50% { transform: scale(1.06); box-shadow: 0 24px 40px -14px rgba(0, 0, 0, 0.5); } }
+.demo-load .dl-msg { font-size: 14px; min-height: 2.6em; opacity: 0.95; }
+.demo-load .dl-bar { width: 160px; height: 4px; border-radius: 4px; background: rgba(255, 255, 255, 0.25); overflow: hidden; }
+.demo-load .dl-bar i { display: block; height: 100%; width: 0; background: #fff; border-radius: inherit; transition: width 14s cubic-bezier(0.05, 0.6, 0.1, 1); }
+.demo-load.go .dl-bar i { width: 90%; }
+.demo-load.done .dl-bar i { width: 100%; transition-duration: 0.3s; }
+.demo-load a { color: #fff; text-decoration: underline; font-size: 13px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .navload, img.img-wait, .demo-load .demo-ic { animation: none !important; }
+  .btn.busy::before { animation-duration: 1.6s; }
+}

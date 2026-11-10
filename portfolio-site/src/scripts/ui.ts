@@ -272,3 +272,24 @@ if (!reduce && matchMedia('(pointer: fine)').matches) {
     });
   });
 }
+
+/* ---------- page-change bar: starts when you follow a link to another page on this site ---------- */
+addEventListener('click', (e) => {
+  const a = (e.target as HTMLElement).closest('a');
+  if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  if (a.target && a.target !== '_self') return;
+  if (a.hasAttribute('download') || a.origin !== location.origin) return;
+  if (a.pathname === location.pathname && a.hash) return;
+  root.classList.add('leaving');
+});
+// coming back with the back button restores the old page from memory: clear the bar
+addEventListener('pageshow', () => root.classList.remove('leaving'));
+
+/* ---------- images: shimmer until each one has arrived ---------- */
+for (const img of $$<HTMLImageElement>('main img')) {
+  if (img.complete) continue;
+  img.classList.add('img-wait');
+  const done = () => img.classList.remove('img-wait');
+  img.addEventListener('load', done, { once: true });
+  img.addEventListener('error', done, { once: true });
+}

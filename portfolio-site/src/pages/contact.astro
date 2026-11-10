@@ -134,6 +134,8 @@ const jsonLd = [
       if (bad) return;
 
       send.disabled = true;
+      send.classList.add('busy');
+      send.textContent = 'Sending…';
       status.dataset.state = '';
       status.textContent = 'Sending…';
       try {
@@ -147,6 +149,8 @@ const jsonLd = [
         status.dataset.state = 'error';
         status.textContent = `Could not send. Please email me at ${'sarankumarg.in@gmail.com'} instead.`;
         send.disabled = false;
+        send.classList.remove('busy');
+        send.textContent = 'Send message';
       }
     });
   </script>

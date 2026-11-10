@@ -27,7 +27,7 @@ const { url, name, slug = '', c1, c2, note } = Astro.props;
     </p>
   </div>
 
-  <div class="demo-phone" data-demo-url={url} data-demo-title={`${name} live demo`}>
+  <div class="demo-phone" data-demo-url={url} data-demo-title={`${name} live demo`} data-demo-name={name}>
     <div class="demo-screen">
       <button class="demo-poster" type="button" data-launch>
         {slug && <span class="demo-ic" aria-hidden="true"><AppIcon name={slug} /></span>}
@@ -45,13 +45,45 @@ const { url, name, slug = '', c1, c2, note } = Astro.props;
       const launch = () => {
         const screen = wrap.querySelector('.demo-screen')!;
         if (screen.querySelector('iframe')) return;
+        // keep the app's icon on screen with honest progress while the demo downloads and starts
+        const ic = wrap.querySelector('.demo-ic')?.cloneNode(true);
+        const load = document.createElement('div');
+        load.className = 'demo-load';
+        load.setAttribute('role', 'status');
+        load.innerHTML = '<b class="demo-name"></b><p class="dl-msg">Downloading the app…</p><span class="dl-bar"><i></i></span>';
+        if (ic) load.prepend(ic);
+        load.querySelector('.demo-name')!.textContent = wrap.dataset.demoName ?? '';
+        const msg = load.querySelector('.dl-msg')!;
         const frame = document.createElement('iframe');
         frame.src = wrap.dataset.demoUrl!;
         frame.title = wrap.dataset.demoTitle!;
-        frame.loading = 'lazy';
         frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-        screen.replaceChildren(frame);
+        screen.replaceChildren(frame, load);
         wrap.classList.add('on');
+        requestAnimationFrame(() => requestAnimationFrame(() => load.classList.add('go')));
+        const timers = [
+          setTimeout(() => (msg.textContent = 'Starting Flutter…'), 2500),
+          setTimeout(() => (msg.textContent = 'Almost there. The first launch takes the longest.'), 6000),
+          setTimeout(() => {
+            msg.innerHTML = 'Still loading. On a slow connection? ';
+            const a = document.createElement('a');
+            a.href = wrap.dataset.demoUrl!;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.textContent = 'Open full screen ↗';
+            msg.append(a);
+          }, 20000),
+        ];
+        // the page arrives first, then Flutter needs a moment to start, so wait a little after load
+        frame.addEventListener('load', () => {
+          setTimeout(() => {
+            timers.forEach(clearTimeout);
+            msg.textContent = 'Ready';
+            load.classList.add('done');
+            setTimeout(() => load.classList.add('gone'), 300);
+            setTimeout(() => load.remove(), 900);
+          }, 2200);
+        }, { once: true });
       };
       document.querySelectorAll('[data-launch]').forEach((b) => b.addEventListener('click', launch));
     }

@@ -1,0 +1,55 @@
+---
+import { SITE } from '../data/site';
+// 1. A short welcome the first time someone opens the site in a tab: a kolam draws itself, then the
+//    sheet lifts. Under a second, once per visit, never with reduced motion. The page renders
+//    underneath the whole time, so nothing waits for it.
+// 2. A thin bar along the top while the next page is on its way (only seen on slow connections).
+---
+
+<div id="intro" aria-hidden="true">
+  <div class="intro-in">
+    <svg class="intro-kolam" viewBox="0 0 64 64">
+      <path class="k-loop" pathLength="1" d="M32 3 C48 3 61 16 61 32 C61 48 48 61 32 61 C16 61 3 48 3 32 C3 16 16 3 32 3 Z" />
+      <path class="k-lotus" pathLength="1" d="M32 13 C40 22 42 22 51 32 C42 42 40 42 32 51 C24 42 22 42 13 32 C22 22 24 22 32 13 Z" />
+      {[[22, 22], [32, 22], [42, 22], [22, 32], [32, 32], [42, 32], [22, 42], [32, 42], [42, 42]].map(([x, y], i) => (
+        <circle cx={x} cy={y} r="2.4" style={`--d:${i * 40}ms`} />
+      ))}
+    </svg>
+    <p class="intro-name">{SITE.name}</p>
+    <p class="intro-hi" lang="ta">வணக்கம்</p>
+    <span class="intro-bar"><i></i></span>
+  </div>
+</div>
+<div class="navload" aria-hidden="true"></div>
+
+<script is:inline>
+  (function () {
+    var d = document.documentElement;
+    var intro = document.getElementById('intro');
+    var show = false;
+    try {
+      show = !sessionStorage.getItem('intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      sessionStorage.setItem('intro', '1');
+    } catch (e) {}
+    if (!show) { intro.remove(); return; }
+    d.classList.add('intro');
+    var t0 = performance.now();
+    var done = false;
+    function out() {
+      if (done) return;
+      done = true;
+      d.classList.add('intro-out');
+      setTimeout(function () { d.classList.remove('intro', 'intro-out'); intro.remove(); }, 650);
+    }
+    // leave once the page and its fonts are ready, but never before the kolam has drawn (~0.9s)
+    // and never later than 1.8s, even on a slow connection
+    function ready() {
+      var wait = Math.max(0, 900 - (performance.now() - t0));
+      setTimeout(out, wait);
+    }
+    var fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    document.addEventListener('DOMContentLoaded', function () { fonts.then(ready); });
+    setTimeout(out, 1800);
+    intro.addEventListener('click', out);
+  })();
+</script>
