@@ -1,4 +1,5 @@
 ---
+import AppIcon from '../components/AppIcon.astro';
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Mayil from '../components/Mayil.astro';
@@ -69,9 +70,17 @@ const jsonLd = [
         </div>
 
         <div class="direct">
-          <a class="row" href={`mailto:${SITE.email}`}><span><small>Email</small>{SITE.email}</span><span aria-hidden="true">→</span></a>
-          <a class="row" href={SITE.linkedin} target="_blank" rel="noopener"><span><small>LinkedIn</small>sarankuamr-g</span><span aria-hidden="true">→</span></a>
-          <a class="row" href={SITE.github} target="_blank" rel="noopener"><span><small>GitHub</small>Sarandjj</span><span aria-hidden="true">→</span></a>
+          <a class="row" href={`mailto:${SITE.email}`}><span class="ct-icon ct-mail" aria-hidden="true"><AppIcon name="mail" /></span><span class="ct-text"><small>Email</small>{SITE.email}</span><span class="ct-go" aria-hidden="true">→</span></a>
+          <a class="row" href={SITE.linkedin} target="_blank" rel="noopener"><span class="ct-icon ct-li" aria-hidden="true"><AppIcon name="linkedin" /></span><span class="ct-text"><small>LinkedIn</small>sarankuamr-g</span><span class="ct-go" aria-hidden="true">→</span></a>
+          <a class="row" href={SITE.github} target="_blank" rel="noopener"><span class="ct-icon ct-gh" aria-hidden="true"><AppIcon name="github" /></span><span class="ct-text"><small>GitHub</small>Sarandjj</span><span class="ct-go" aria-hidden="true">→</span></a>
+          <div class="next-box">
+            <p class="mono">What happens next</p>
+            <ol>
+              <li><b>You send a note.</b> A few lines about the idea or the role is enough.</li>
+              <li><b>I reply by email</b> with questions, or a yes or no if it is a clear fit.</li>
+              <li><b>A short call</b> if it makes sense, then the scope in writing.</li>
+            </ol>
+          </div>
           <p class="lede" style="font-size:15px;margin:4px 0 0"><span class="note-draft">placeholder: add WhatsApp or a booking link if you want one</span></p>
         </div>
       </div>

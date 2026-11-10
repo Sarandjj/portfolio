@@ -280,3 +280,52 @@
   .cs-icon { width: 84px; height: 84px; border-radius: 24px; margin-left: 14px; }
   .pager a.nx { justify-content: flex-start; flex-direction: row-reverse; }
 }
+
+/* ---------- v10: links in long text, blog list, contact page, footer ---------- */
+.prose a { color: var(--accent-text); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); transition: text-decoration-color 0.2s; }
+.prose a:hover { text-decoration-color: var(--accent); }
+
+/* blog list: an icon tile and a coloured top edge per topic, like the home page's writing cards */
+.blog-list a { position: relative; overflow: hidden; display: grid; grid-template-columns: 56px 1fr; column-gap: 20px; align-items: start;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 14px 34px -26px rgba(40, 30, 10, 0.35); }
+.blog-list a > *:not(.bl-icon) { grid-column: 2; }
+.blog-list a::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: linear-gradient(90deg, var(--t1), var(--t2)); }
+.blog-list a::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, color-mix(in srgb, var(--t1) 10%, transparent), transparent 50%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.blog-list a:hover { border-color: color-mix(in srgb, var(--t1) 50%, var(--line)); }
+.blog-list a:hover::after { opacity: 1; }
+.blog-list .bl-icon { grid-row: 1 / span 4; grid-column: 1; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 17px;
+  background: linear-gradient(135deg, var(--t1), var(--t2)); box-shadow: 0 12px 22px -12px var(--t1); transition: transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.blog-list .bl-icon .appicon { width: 58%; height: 58%; }
+.blog-list a:hover .bl-icon { transform: rotate(-6deg) scale(1.05); }
+.blog-list .meta { color: color-mix(in srgb, var(--t1) 70%, var(--ink)); }
+.blog-list .bl-more { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 500; }
+.blog-list .bl-more b { display: inline-block; transition: transform 0.3s; }
+.blog-list a:hover .bl-more b { transform: translateX(4px); }
+@media (max-width: 560px) {
+  .blog-list a { grid-template-columns: 1fr; padding: 22px; }
+  .blog-list a > *:not(.bl-icon) { grid-column: 1; }
+  .blog-list .bl-icon { grid-row: auto; width: 46px; height: 46px; border-radius: 14px; margin-bottom: 12px; }
+}
+
+/* contact: app-style icon tiles on the direct links, and a short "what happens next" */
+.direct a.row { align-items: center; justify-content: flex-start; gap: 14px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 14px 34px -26px rgba(40, 30, 10, 0.35);
+  transition: border-color 0.3s, transform 0.3s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.direct a.row:hover { transform: translateY(-2px); }
+.direct .ct-icon { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; transition: transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.direct .ct-icon .appicon { width: 60%; height: 60%; }
+.direct a.row:hover .ct-icon { transform: rotate(-8deg) scale(1.06); }
+.ct-mail { background: linear-gradient(135deg, #4f8cff, #2f6bff); }
+.ct-li { background: linear-gradient(135deg, #2a8ed6, #0a66c2); }
+.ct-gh { background: linear-gradient(135deg, #3b3b39, #141412); }
+.direct .ct-text { min-width: 0; overflow-wrap: anywhere; }
+.direct .ct-go { margin-left: auto; transition: transform 0.3s; }
+.direct a.row:hover .ct-go { transform: translateX(4px); }
+.next-box { margin-top: 6px; padding: 20px 22px; border-radius: 20px; border: 1px dashed color-mix(in srgb, var(--zari) 60%, var(--line));
+  background: color-mix(in srgb, var(--zari) 7%, transparent); }
+.next-box .mono { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: color-mix(in srgb, var(--zari) 80%, var(--ink)); }
+.next-box ol { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 12px; counter-reset: n; }
+.next-box li { position: relative; padding-left: 36px; color: var(--muted); font-size: 15px; counter-increment: n; }
+.next-box li b { color: var(--ink); font-weight: 600; }
+.next-box li::before { content: counter(n); position: absolute; left: 0; top: -1px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+  font: 600 12px var(--mono); color: #fff; background: linear-gradient(135deg, var(--accent), var(--zari)); }

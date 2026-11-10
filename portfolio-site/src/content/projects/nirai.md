@@ -6,7 +6,7 @@ status: progress
 platforms: Android + macOS
 stack: [Flutter, Riverpod, Drift, Google Drive API, ML Kit]
 works:
-  - Natural-language quick add ("tomorrow 3pm #work p1")
+  - "Natural-language quick add (\"tomorrow 3pm #work p1\")"
   - Inbox, Today, Upcoming, board and calendar views
   - Pomodoro focus timer and habit streaks with reminders
   - Background sync to your own Google Drive
