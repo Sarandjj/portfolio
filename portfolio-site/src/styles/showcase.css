@@ -242,7 +242,7 @@
 .pcard.wk:hover .more { color: color-mix(in srgb, var(--c1) 70%, var(--ink)); }
 
 /* ---------- recruiter: facts strip and app rows with icons ---------- */
-.rv-facts { list-style: none; padding: 0; margin: 40px 0 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.rv-facts { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .rv-facts li { padding: 18px 20px; border-radius: 20px; border: 1px solid var(--line); background: var(--card); border-left: 3px solid var(--zari); }
 .rv-facts b { display: block; font-size: 28px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
 .rv-facts span { display: block; margin-top: 4px; color: var(--muted); font-size: 13.5px; line-height: 1.4; }
