@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { getProjects } from '../lib/projects';
 import { SITE } from '../data/site';
+import AppIcon from '../components/AppIcon.astro';
+import TempleBorder from '../components/TempleBorder.astro';
 
 const projects = await getProjects();
 const jsonLd = [
@@ -52,10 +54,10 @@ const jsonLd = [
       </header>
 
       <section>
-        <h2 class="sec-h">In <em>short.</em></h2>
-        <dl class="facts">
+        <div class="kick reveal">01 / In short<span class="ta-label" lang="ta">௧ · சுருக்கமாக</span></div>
+        <dl class="facts reveal">
           <div><dt>Who</dt><dd>Sarankumar G, a software developer at Neural Schema IT, open to software development opportunities and selected freelance projects.</dd></div>
-          <div><dt>Where</dt><dd>Tamil Nadu, India (IST). Works remotely with clients anywhere.</dd></div>
+          <div><dt>Where</dt><dd>Kovilpatti, Tamil Nadu, India (IST). Works remotely with clients anywhere.</dd></div>
           <div><dt>Builds</dt><dd>Android, iOS and web apps in Flutter and React, with the backends behind them.</dd></div>
           <div><dt>Stack</dt><dd>Flutter, Dart, Riverpod, React, Drift, Supabase, Firebase, Node.js, FastAPI.</dd></div>
           <div><dt>Known for</dt><dd>Offline-first, private apps, and security rules in the database.</dd></div>
@@ -63,90 +65,121 @@ const jsonLd = [
         </dl>
       </section>
 
+      <section id="journey">
+        <div class="kick reveal">02 / Journey<span class="ta-label" lang="ta">௨ · பயணம்</span></div>
+        <h2 class="sec-h reveal">The journey, <em>in four chapters.</em></h2>
+        <ol class="chapters">
+          <li class="reveal">
+            <span class="ch">I</span>
+            <div><span class="when">Education</span><h3>Learning</h3><p>B.Sc Computer Science, Sri S. Ramasamy Naidu Memorial College, Sattur.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="ch">II</span>
+            <div><span class="when">Nov 2023 – Jan 2026 · Digisailor</span><h3>Shipping</h3><p>Mobile App Developer. Built and maintained production Flutter apps, Node.js and TypeScript backends on PostgreSQL, and shipped apps to Google Play and the App Store.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="ch">III</span>
+            <div><span class="when">Feb 2026 – Present · Neural Schema IT</span><h3>Full stack</h3><p>Full Stack Developer. Mobile and web apps with Flutter, React/Next.js and FastAPI, REST APIs, PostgreSQL design and AWS services, across several client projects.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="ch">IV</span>
+            <div><span class="when">Alongside</span><h3>My own products</h3><p>FinWise, Nirai, NallHub, Coin18 and Clean Scanner, each designed and built end to end.</p></div>
+          </li>
+        </ol>
+      </section>
+
       <section>
-        <h2 class="sec-h">My <em>story.</em></h2>
-        <div class="prose" style="margin-top:20px">
-          <p>I started with a simple interest in building software and gradually developed a passion for creating applications that solve real problems. Working on production projects taught me that building an app is about more than writing code. It's about understanding users, making good technical decisions, testing carefully, and delivering something reliable.</p>
-          <p>Today, I'm focused on growing beyond client and company projects by building and launching my own products. I'm working on ideas such as a personal finance manager and a school management platform, with the goal of bringing useful applications to real users through the Google Play Store and Apple App Store.</p>
-          <p>I enjoy the entire process: shaping an idea, designing the architecture, building the interface, integrating APIs, handling data, fixing bugs, and preparing an application for release. My long-term goal is to become a stronger product-focused engineer and build software that people genuinely find useful.</p>
+        <div class="kick reveal">03 / My story<span class="ta-label" lang="ta">௩ · என் கதை</span></div>
+        <div class="story">
+          <div class="prose reveal">
+            <p>I started with a simple interest in building software and gradually developed a passion for creating applications that solve real problems. Working on production projects taught me that building an app is about more than writing code. It's about understanding users, making good technical decisions, testing carefully, and delivering something reliable.</p>
+            <p>Today, I'm focused on growing beyond client and company projects by building and launching my own products. I'm working on ideas such as a personal finance manager and a school management platform, with the goal of bringing useful applications to real users through the Google Play Store and Apple App Store.</p>
+            <p>I enjoy the entire process: shaping an idea, designing the architecture, building the interface, integrating APIs, handling data, fixing bugs, and preparing an application for release. My long-term goal is to become a stronger product-focused engineer and build software that people genuinely find useful.</p>
+            <p>I'm open to meaningful software development opportunities and selected freelance projects where I can help turn ideas into working products.</p>
+          </div>
+          <aside class="mittai-card reveal">
+            <svg viewBox="0 0 64 48" width="72" height="54" aria-hidden="true">
+              <rect x="6" y="14" width="52" height="24" rx="5" fill="#c98b3c" />
+              {[[14,22],[24,28],[33,21],[43,27],[51,22],[19,32],[38,32],[28,19],[47,33]].map(([x, y]) => <ellipse cx={x} cy={y} rx="3.4" ry="2.4" fill="#f1d7a6" />)}
+              <path d="M10 16 Q32 10 54 16" stroke="#fff" stroke-opacity=".45" stroke-width="1.5" fill="none" />
+            </svg>
+            <p><b>From Kovilpatti, home of kadalai mittai.</b> Just groundnuts and jaggery, made with care, and it earned a GI tag in 2020. That's how I like to build apps: simple ingredients, done properly.</p>
+          </aside>
         </div>
       </section>
 
       <section>
-        <h2 class="sec-h">What I <em>build.</em></h2>
-        <div class="skills">
-          <div><h3>Mobile applications</h3><p>Cross-platform apps with Flutter and Dart.</p></div>
-          <div><h3>Web applications</h3><p>Responsive web experiences using React and Flutter Web.</p></div>
-          <div><h3>Backend systems</h3><p>APIs and server-side applications with Node.js and Express.</p></div>
-          <div><h3>Data and cloud</h3><p>Supabase, Firebase, MongoDB and Google Cloud.</p></div>
+        <div class="kick reveal">04 / What I build<span class="ta-label" lang="ta">௪ · உருவாக்குவது</span></div>
+        <h2 class="sec-h reveal">What I <em>build.</em></h2>
+        <div class="vcards four">
+          {[
+            ['app', '#027dfd', '#13b9fd', 'Mobile applications', 'Cross-platform apps with Flutter and Dart.'],
+            ['web', '#ff6a3d', '#ffb020', 'Web applications', 'Responsive web experiences using React and Flutter Web.'],
+            ['api', '#0f9d58', '#2bb673', 'Backend systems', 'APIs and server-side applications with Node.js, Express and FastAPI.'],
+            ['cloud', '#7a4dff', '#4f7bff', 'Data and cloud', 'Supabase, Firebase, MongoDB and Google Cloud.'],
+          ].map(([ic, c1, c2, h, t]) => (
+            <div class="vcard reveal" style={`--t1:${c1};--t2:${c2}`}>
+              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={ic} /></span>
+              <h3>{h}</h3>
+              <p>{t}</p>
+            </div>
+          ))}
         </div>
-        <p class="lede" style="margin-top:18px">Product delivery too: API integration, testing, deployment, and preparing applications for the Play Store and App Store.</p>
+        <p class="lede reveal" style="margin-top:18px">Product delivery too: API integration, testing, deployment, and preparing applications for the Play Store and App Store. <a class="inline" href="/services#wired">See how an app is wired →</a></p>
       </section>
 
       <section>
-        <h2 class="sec-h">What I'm working <em>towards.</em></h2>
-        <div class="prose" style="margin-top:20px">
-          <p>I'm building my own products, improving my engineering skills, and learning what it takes to take an application from an initial idea to a successful launch. I want to combine strong technical execution with a product mindset: building, shipping, learning from users, and improving continuously.</p>
-          <p>I'm open to meaningful software development opportunities and selected freelance projects where I can help turn ideas into working products.</p>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="sec-h">How I like to <em>build.</em></h2>
+        <div class="kick reveal">05 / How I like to build<span class="ta-label" lang="ta">௫ · கொள்கைகள்</span></div>
+        <h2 class="sec-h reveal">How I like to <em>build.</em></h2>
         <p class="lede"><span class="note-draft">draft, based on the rules in my own projects. Confirm or edit.</span></p>
-        <div class="values">
-          <div class="box"><h3>Local first</h3><p>Data is written to the device first, so apps are instant and work without a connection. Sync comes on top.</p></div>
-          <div class="box"><h3>Private by default</h3><p>Clean Scanner never uses the network for its core features. Nirai syncs to your own Google Drive. No data goes where it doesn't need to.</p></div>
-          <div class="box"><h3>Tested on real phones</h3><p>Layouts are checked at small sizes, large text, dark mode and in Tamil, and scrolling is measured on a real phone.</p></div>
+        <div class="vcards">
+          {[
+            ['db', '#0ea58f', '#22d3b6', 'Local first', 'Data is written to the device first, so apps are instant and work without a connection. Sync comes on top.'],
+            ['lock', '#0f9d58', '#2bb673', 'Private by default', "Clean Scanner never uses the network for its core features. Nirai syncs to your own Google Drive. No data goes where it doesn't need to."],
+            ['app', '#a855f7', '#ec4899', 'Tested on real phones', 'Layouts are checked at small sizes, large text, dark mode and in Tamil, and scrolling is measured on a real phone.'],
+          ].map(([ic, c1, c2, h, t]) => (
+            <div class="vcard reveal" style={`--t1:${c1};--t2:${c2}`}>
+              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={ic} /></span>
+              <h3>{h}</h3>
+              <p>{t}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       <section>
-        <h2 class="sec-h">What I <em>work with.</em></h2>
-        <div class="skills">
-          <div><h3>Mobile</h3><p>Flutter, Dart, Riverpod, GetX, camera, ML Kit and biometrics plugins</p></div>
-          <div><h3>Data &amp; backend</h3><p>Drift (SQLite), Supabase (Postgres, Auth, Edge Functions, RLS), Firebase, Node.js with Express, FastAPI (Python)</p></div>
-          <div><h3>Web</h3><p>React, Flutter Web, Astro (this site), Firebase Hosting</p></div>
-          <div><h3>Shipping</h3><p>Google Play Console, Render, Git</p></div>
+        <div class="kick reveal">06 / What I work with<span class="ta-label" lang="ta">௬ · கருவிகள்</span></div>
+        <h2 class="sec-h reveal">What I <em>work with.</em></h2>
+        <div class="skillgroups">
+          {[
+            ['Mobile', '#13b9fd', ['Flutter', 'Dart', 'Riverpod', 'GetX', 'Camera', 'ML Kit', 'Biometrics']],
+            ['Data & backend', '#2bb673', ['Drift (SQLite)', 'Supabase', 'Postgres + RLS', 'Edge Functions', 'Firebase', 'Node.js', 'Express', 'FastAPI']],
+            ['Web', '#ff8a3d', ['React', 'Flutter Web', 'Astro (this site)', 'Firebase Hosting']],
+            ['Shipping', '#a855f7', ['Google Play Console', 'App Store', 'Render', 'Git']],
+          ].map(([g, c, items]) => (
+            <div class="reveal" style={`--g:${c}`}>
+              <b>{g}</b>
+              <ul>{(items as string[]).map((t) => <li>{t}</li>)}</ul>
+            </div>
+          ))}
         </div>
       </section>
 
       <section>
-        <h2 class="sec-h">Building <em>now.</em></h2>
-        <ul class="timeline" style="margin-top:28px">
-          {
-            projects.map((p) => (
-              <li>
-                <span class="when">In progress</span>
-                <h3><a href={`/projects/${p.id}`}>{p.data.name}</a></h3>
-                <p>{p.data.summary}</p>
-              </li>
-            ))
-          }
-        </ul>
+        <div class="kick reveal">07 / Building now<span class="ta-label" lang="ta">௭ · இப்போது</span></div>
+        <h2 class="sec-h reveal">The apps, <em>side by side.</em></h2>
+        <div class="apptiles">
+          {projects.map((p) => (
+            <a class="apptile reveal" href={`/projects/${p.id}`} style={`--t1:${p.data.c1};--t2:${p.data.c2}`}>
+              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={p.id} /></span>
+              <span><b>{p.data.name}</b><small>{p.data.kind}</small><span class:list={['st', { live: p.data.status === 'live' }]}>{p.data.status === 'live' ? 'Live on both stores' : 'In progress'}</span></span>
+              <i class="go" aria-hidden="true">→</i>
+            </a>
+          ))}
+        </div>
       </section>
 
-      <section>
-        <h2 class="sec-h">Experience &amp; <em>education.</em></h2>
-        <ul class="timeline" style="margin-top:28px">
-          <li>
-            <span class="when">Feb 2026 – Present</span>
-            <h3>Full Stack Developer, Neural Schema IT</h3>
-            <p>Full stack mobile and web apps with Flutter, React/Next.js and FastAPI, REST APIs, PostgreSQL design and AWS services, across several client projects.</p>
-          </li>
-          <li>
-            <span class="when">Nov 2023 – Jan 2026</span>
-            <h3>Mobile App Developer, Digisailor</h3>
-            <p>Built and maintained production Flutter apps, Node.js and TypeScript backends on PostgreSQL, and shipped apps to the Google Play Store and Apple App Store.</p>
-          </li>
-          <li>
-            <span class="when">Education</span>
-            <h3>B.Sc Computer Science</h3>
-            <p>Sri S. Ramasamy Naidu Memorial College, Sattur</p>
-          </li>
-        </ul>
-      </section>
-
+      <TempleBorder />
       <div class="cta-band">
         <h2>Let's talk about your <em>project.</em></h2>
         <p>Tell me what you need and I'll get back to you.</p>

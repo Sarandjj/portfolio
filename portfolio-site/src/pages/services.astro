@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { SITE } from '../data/site';
+import AppIcon from '../components/AppIcon.astro';
+import TempleBorder from '../components/TempleBorder.astro';
 
 const jsonLd = [
   {
@@ -16,19 +18,19 @@ const jsonLd = [
 
 const offers = [
   {
-    ic: '📱',
+    ic: 'app', c1: '#027dfd', c2: '#13b9fd',
     title: 'Mobile & web apps',
     text: 'Android and iOS apps from one Flutter codebase, built offline-first and ready for the stores, plus web apps in Flutter or React.',
     list: ['Flutter and Dart', 'React web apps', 'Offline storage and sync', 'Camera, OCR, biometrics, notifications', 'Store release'],
   },
   {
-    ic: '☁️',
+    ic: 'db', c1: '#0f9d58', c2: '#2bb673',
     title: 'Backend & data',
     text: 'The server side: sign-in, a database with proper security rules, and APIs the app can rely on.',
     list: ['Supabase: Postgres, Auth, RLS, Edge Functions', 'Firebase', 'Node.js and Express APIs', 'FastAPI (Python) APIs', 'Caching and rate limits'],
   },
   {
-    ic: '⚡',
+    ic: 'bolt', c1: '#ff6a3d', c2: '#ffb020',
     title: 'Rescue & speed',
     text: 'Already have a Flutter app that is slow, buggy or hard to change? I can audit it and fix the worst problems first.',
     list: ['Performance and layout fixes', 'Bug fixing', 'Code cleanup and tests', 'Technical advice'],
@@ -55,10 +57,30 @@ jsonLd.push({
   },
 });
 
+// how an app is wired: what runs on every tap, and what happens on every release
+const RUNTIME = [
+  { ic: 'app', c1: '#027dfd', c2: '#13b9fd', title: 'The app', note: 'Screens, state and animation, and it still works with no signal.', chips: ['Flutter', 'Dart', 'Riverpod', 'React'] },
+  { ic: 'db', c1: '#0ea58f', c2: '#22d3b6', title: 'On the phone', note: 'Every change is saved on the device first, so taps feel instant.', chips: ['Drift (SQLite)', 'Offline-first'] },
+  { ic: 'cloud', c1: '#7a4dff', c2: '#4f7bff', title: 'Sync and APIs', note: 'Keeps devices in step, holds secret keys, caches what is slow.', chips: ['Node.js', 'FastAPI', 'Edge Functions'] },
+  { ic: 'lock', c1: '#0f9d58', c2: '#2bb673', title: 'The database', note: 'Security rules in the database, so each user only sees their own rows.', chips: ['Postgres + RLS', 'Supabase', 'Firebase'] },
+];
+const RELEASE = [
+  { ic: 'git', c1: '#3b3b39', c2: '#141412', title: 'Code', note: 'Small changes, committed with a clear message.', chips: ['Git'] },
+  { ic: 'checks', c1: '#ff6a3d', c2: '#ffb020', title: 'Checks', note: 'Automated tests and analysis run before anything ships.', chips: ['flutter test', 'Lints'] },
+  { ic: 'build', c1: '#a855f7', c2: '#ec4899', title: 'Build', note: 'Android, iOS and web builds from one codebase, signed.', chips: ['Flutter build', 'Signing'] },
+  { ic: 'store', c1: '#0f9d58', c2: '#13b9fd', title: 'Stores', note: 'Store listing, release and the updates after it.', chips: ['Google Play', 'App Store', 'Firebase Hosting'] },
+];
+const STEPS = [
+  { n: '01', ic: 'discover', s1: '#ff6a3d', s2: '#ffb020', title: 'Discover', ta: 'புரிந்துகொள்ளல்', text: 'A short call to understand the goal, the users and the budget. You get the scope in writing.' },
+  { n: '02', ic: 'design', s1: '#a855f7', s2: '#ec4899', title: 'Design', ta: 'வடிவமைப்பு', text: 'Key screens and flows agreed before any code is written.' },
+  { n: '03', ic: 'build', s1: '#027dfd', s2: '#13b9fd', title: 'Build', ta: 'உருவாக்கம்', text: 'Regular builds you can install and try, so feedback comes early.' },
+  { n: '04', ic: 'ship', s1: '#0f9d58', s2: '#2bb673', title: 'Ship & support', ta: 'வெளியீடும் ஆதரவும்', text: 'Store release, analytics, and fixes after launch.' },
+];
+
 const engage = [
-  { title: 'Fixed scope', text: 'A clear feature list, a fixed price and a date. Best when you know what you want.' },
-  { title: 'Hourly', text: 'Pay for the time used. Best for fixes, advice and work that is hard to scope.' },
-  { title: 'Ongoing', text: 'A regular amount of time each month for updates and support after launch.' },
+  { ic: 'nirai', c1: '#4f7bff', c2: '#7a4dff', title: 'Fixed scope', text: 'A clear feature list, a fixed price and a date. Best when you know what you want.' },
+  { ic: 'bolt', c1: '#ff6a3d', c2: '#ffb020', title: 'Hourly', text: 'Pay for the time used. Best for fixes, advice and work that is hard to scope.' },
+  { ic: 'ship', c1: '#0f9d58', c2: '#2bb673', title: 'Ongoing', text: 'A regular amount of time each month for updates and support after launch.' },
 ];
 
 const faqs = [
@@ -80,13 +102,18 @@ const faqs = [
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
       <h1 class="page-title">Apps, and the <em>systems behind them.</em></h1>
       <p class="page-lede">Clients come for the app and stay because the backend, the release and the speed are handled too.</p>
+      <div class="page-cta">
+        <a class="btn solid" href="/contact?need=app">Start a project</a>
+        <a class="btn ghost" href="#wired">See how an app is wired</a>
+      </div>
 
       <section>
+        <div class="kick reveal">01 / What I offer<span class="ta-label" lang="ta">௧ · சேவைகள்</span></div>
         <div class="offers">
           {
             offers.map((o) => (
-              <div class="offer">
-                <span class="ic" aria-hidden="true">{o.ic}</span>
+              <div class="offer reveal" style={`--t1:${o.c1};--t2:${o.c2}`}>
+                <span class="ic-tile" aria-hidden="true"><AppIcon name={o.ic} /></span>
                 <h2>{o.title}</h2>
                 <p>{o.text}</p>
                 <ul>{o.list.map((l) => <li>{l}</li>)}</ul>
@@ -96,23 +123,88 @@ const faqs = [
         </div>
       </section>
 
+      <section id="wired">
+        <div class="kick reveal">02 / How an app is wired<span class="ta-label" lang="ta">௨ · அமைப்பு</span></div>
+        <h2 class="sec-h reveal">What runs on every tap, <em>and every release.</em></h2>
+        <p class="lede reveal">This is the shape most of my apps share. Hover a part to see what it does and what I use for it.</p>
+        <div class="wire">
+          <div class="lane reveal" style="--lc:#13b9fd">
+            <p class="lane-tag"><i></i>On every tap</p>
+            <div class="nodes">
+              {RUNTIME.map((n, i) => (
+                <>
+                  {i > 0 && <span class="wlink" style={`--k:${i}`} aria-hidden="true"><i class="pk"></i><i class="pk back"></i></span>}
+                  <div class="wnode" tabindex="0" style={`--t1:${n.c1};--t2:${n.c2}`}>
+                    <span class="ic-tile sm" aria-hidden="true"><AppIcon name={n.ic} /></span>
+                    <b>{n.title}</b>
+                    <span>{n.note}</span>
+                    <ul>{n.chips.map((c) => <li>{c}</li>)}</ul>
+                  </div>
+                </>
+              ))}
+            </div>
+          </div>
+          <div class="lane reveal" style="--lc:#a855f7">
+            <p class="lane-tag"><i></i>On every release</p>
+            <div class="nodes">
+              {RELEASE.map((n, i) => (
+                <>
+                  {i > 0 && <span class="wlink" style={`--k:${i}`} aria-hidden="true"><i class="pk"></i></span>}
+                  <div class="wnode" tabindex="0" style={`--t1:${n.c1};--t2:${n.c2}`}>
+                    <span class="ic-tile sm" aria-hidden="true"><AppIcon name={n.ic} /></span>
+                    <b>{n.title}</b>
+                    <span>{n.note}</span>
+                    <ul>{n.chips.map((c) => <li>{c}</li>)}</ul>
+                  </div>
+                </>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="process">
+        <div class="kick reveal">03 / How I work<span class="ta-label" lang="ta">௩ · செயல்முறை</span></div>
+        <h2 class="sec-h reveal" data-ta="எளிய செயல்முறை, &lt;em&gt;எதிர்பாராத திருப்பங்கள் இல்லை.&lt;/em&gt;">Simple process, <em>no surprises.</em></h2>
+        <p class="lede reveal">From the first call to the store release, you always know what happens next.</p>
+        <div class="steps">
+          {STEPS.map((st) => (
+            <div class="step reveal" style={`--s1:${st.s1};--s2:${st.s2}`}>
+              <span class="st-icon" aria-hidden="true"><AppIcon name={st.ic} /></span>
+              <span class="mono">{st.n}</span>
+              <h3 data-ta={st.ta}>{st.title}</h3>
+              <p>{st.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section>
-        <h2 class="sec-h">How we can <em>work together.</em></h2>
+        <div class="kick reveal">04 / Working together<span class="ta-label" lang="ta">௪ · இணைந்து</span></div>
+        <h2 class="sec-h reveal">How we can <em>work together.</em></h2>
         <p class="lede"><span class="note-draft">draft, confirm what you actually offer</span></p>
-        <div class="engage">
-          {engage.map((e) => <div class="box"><h3>{e.title}</h3><p>{e.text}</p></div>)}
+        <div class="vcards">
+          {engage.map((e) => (
+            <div class="vcard reveal" style={`--t1:${e.c1};--t2:${e.c2}`}>
+              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={e.ic} /></span>
+              <h3>{e.title}</h3>
+              <p>{e.text}</p>
+            </div>
+          ))}
         </div>
         <p class="lede" style="margin-top:20px">There is no public price list. Tell me about the project and I'll send a quote.</p>
       </section>
 
       <section>
-        <h2 class="sec-h">Common <em>questions.</em></h2>
+        <div class="kick reveal">05 / Questions<span class="ta-label" lang="ta">௫ · கேள்விகள்</span></div>
+        <h2 class="sec-h reveal">Common <em>questions.</em></h2>
         <p class="lede"><span class="note-draft">draft answers, confirm or edit each one</span></p>
         <div class="faq">
           {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
         </div>
       </section>
 
+      <TempleBorder />
       <div class="cta-band">
         <h2>Have an app in <em>mind?</em></h2>
         <p>Tell me what you need, who it is for and roughly when. I'll reply with next steps.</p>

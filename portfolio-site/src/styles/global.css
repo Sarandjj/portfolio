@@ -276,7 +276,7 @@ body::after {
 @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --zari: #d9b45a; --kumkum: #e0525a; } }
 :root[data-theme='dark'] { --zari: #d9b45a; --kumkum: #e0525a; }
 /* Kanchipuram temple border */
-.temple-border { color: var(--zari); padding: 0 24px; max-width: 1248px; margin: 0 auto; opacity: 0.85; }
+.temple-border { color: var(--zari); padding: 0 24px; max-width: 1200px; margin: 0 auto; opacity: 0.85; }
 .temple-border svg { display: block; }
 .temple-border path { fill: color-mix(in srgb, var(--zari) 22%, transparent); stroke: currentColor; stroke-width: 1; stroke-linejoin: round; }
 .temple-border .bead { fill: var(--kumkum); stroke: none; }

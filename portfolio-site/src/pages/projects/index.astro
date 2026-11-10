@@ -51,18 +51,29 @@ const FILTERS = [
       <div class="pgrid" id="pgrid">
         {
           projects.map((p) => (
-            <a class="pcard" href={`/projects/${p.id}`} data-tags={p.data.tags.join(' ')}>
-              <div class="pcard-top">
-                <span class="pcard-icon" style={`background:linear-gradient(135deg,${p.data.c1},${p.data.c2})`} aria-hidden="true"><AppIcon name={p.id} /></span>
+            <a class="pcard wk reveal" href={`/projects/${p.id}`} data-tags={p.data.tags.join(' ')} style={`--c1:${p.data.c1};--c2:${p.data.c2}`}>
+              <div class="wk-cover">
+                <span class="wk-icon" style={`view-transition-name:ic-${p.id}`} aria-hidden="true"><AppIcon name={p.id} /></span>
+                <span class="wm" aria-hidden="true"><AppIcon name={p.id} /></span>
                 <StatusBadge status={p.data.status} />
               </div>
-              <h2>{p.data.name} <em>{p.data.kind}</em></h2>
-              <p>{p.data.summary}</p>
-              <div class="chips">{p.data.stack.slice(0, 4).map((s) => <span class="chip">{s}</span>)}</div>
-              <span class="more">Read the case study →</span>
+              <div class="wk-body">
+                <h2>{p.data.name} <em>{p.data.kind}</em></h2>
+                <p>{p.data.summary}</p>
+                <div class="chips">{p.data.stack.slice(0, 4).map((s) => <span class="chip">{s}</span>)}</div>
+                <span class="more">Read the case study <b aria-hidden="true">→</b></span>
+              </div>
             </a>
           ))
         }
+        <a class="pcard wk wk-next reveal" href="/contact?need=app" data-tags="" style="--c1:#c08a2b;--c2:#d4501e">
+          <div class="wk-body">
+            <span class="ic-tile" aria-hidden="true"><AppIcon name="ship" /></span>
+            <h2>Your app <em>could be next</em></h2>
+            <p>Tell me the idea, who it is for and roughly when. You get a reply with questions and next steps.</p>
+            <span class="more">Start a project <b aria-hidden="true">→</b></span>
+          </div>
+        </a>
       </div>
       <p class="page-lede" id="none" hidden style="margin-top:28px">Nothing in this group yet.</p>
     </div>

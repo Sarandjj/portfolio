@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Phone from '../components/Phone.astro';
 import Kolam from '../components/Kolam.astro';
 import AppIcon from '../components/AppIcon.astro';
+import { postLook } from '../data/post-look';
 import TempleBorder from '../components/TempleBorder.astro';
 import Skyline from '../components/Skyline.astro';
 import Thoranam from '../components/festival/Thoranam.astro';
@@ -146,7 +147,7 @@ const jsonLd = [
             <a class="pcard reveal" href={`/projects/${p.slug}`} style={`--c1:${p.c1};--c2:${p.c2}`} data-tags={tagsOf(p)} data-slug={p.slug}>
               <span class="corners" aria-hidden="true"></span>
               <div class="pc-top">
-                <span class="icon" aria-hidden="true"><AppIcon name={p.slug} /></span>
+                <span class="icon" style={`view-transition-name:ic-${p.slug}`} aria-hidden="true"><AppIcon name={p.slug} /></span>
                 <span class="wm" aria-hidden="true"><AppIcon name={p.slug} /></span>
                 <span class="fig mono">FIG. {String(p.order).padStart(2, '0')}<span class="seen" hidden> · ✓ read</span></span>
                 <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
@@ -171,7 +172,7 @@ const jsonLd = [
             <span class="corners" aria-hidden="true"></span>
             <div class="feat-text">
               <div class="pc-top">
-                <span class="icon" aria-hidden="true"><AppIcon name={FEATURED.slug} /></span>
+                <span class="icon" style={`view-transition-name:ic-${FEATURED.slug}`} aria-hidden="true"><AppIcon name={FEATURED.slug} /></span>
                 <span class="fig mono">FIG. {String(FEATURED.order).padStart(2, '0')} · featured<span class="seen" hidden> · ✓ read</span></span>
                 <span class="badge" data-status={FEATURED.status}>{STATUS_LABEL[FEATURED.status]}</span>
               </div>
@@ -201,7 +202,7 @@ const jsonLd = [
             <a class="pcard reveal" href={`/projects/${p.slug}`} style={`--c1:${p.c1};--c2:${p.c2}`} data-tags={tagsOf(p)} data-slug={p.slug}>
               <span class="corners" aria-hidden="true"></span>
               <div class="pc-top">
-                <span class="icon" aria-hidden="true"><AppIcon name={p.slug} /></span>
+                <span class="icon" style={`view-transition-name:ic-${p.slug}`} aria-hidden="true"><AppIcon name={p.slug} /></span>
                 <span class="wm" aria-hidden="true"><AppIcon name={p.slug} /></span>
                 <span class="fig mono">FIG. {String(p.order).padStart(2, '0')}<span class="seen" hidden> · ✓ read</span></span>
                 <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
@@ -368,45 +369,21 @@ const jsonLd = [
     </div>
   </section>
 
-  <section id="experience" style="padding-top:56px">
+  <section id="explore" class="explore-sec">
     <div class="wrap">
-      <div class="label reveal">04 / Journey<span class="ta-label" lang="ta">௪ · பயணம்</span></div>
-      <h2 class="reveal" data-ta="என் பயணம், &lt;em&gt;நான்கு அத்தியாயங்களில்.&lt;/em&gt;">The journey, <em>in four chapters.</em></h2>
-      <ol class="chapters">
-        <li class="reveal">
-          <span class="ch">I</span>
-          <div><span class="when">Education</span><h3 data-ta="கற்றல்">Learning</h3><p>B.Sc Computer Science, Sri S. Ramasamy Naidu Memorial College, Sattur.</p></div>
-        </li>
-        <li class="reveal">
-          <span class="ch">II</span>
-          <div><span class="when">Nov 2023 – Jan 2026</span><h3 data-ta="வெளியீடு">Shipping</h3><p>Mobile App Developer. Production Flutter apps, Node.js and TypeScript backends on PostgreSQL, and releases to Google Play and the App Store.</p></div>
-        </li>
-        <li class="reveal">
-          <span class="ch">III</span>
-          <div><span class="when">Feb 2026 – Present</span><h3 data-ta="ஃபுல் ஸ்டாக்">Full stack</h3><p>Full Stack Developer. Mobile and web apps with Flutter, React/Next.js and FastAPI, REST APIs, PostgreSQL and AWS, across several client projects.</p></div>
-        </li>
-        <li class="reveal">
-          <span class="ch">IV</span>
-          <div><span class="when">Alongside</span><h3 data-ta="என் சொந்த தயாரிப்புகள்">My own products</h3><p>FinWise, Nirai, NallHub, Coin18 and Clean Scanner, each designed and built end to end.</p></div>
-        </li>
-      </ol>
-      <p class="reveal" style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn ghost sm" href="/Sarankumar-G-CV.pdf" data-track="cv_download">Download CV (PDF)</a>
-        <a class="btn ghost sm" href="/about">More about me →</a>
-      </p>
-    </div>
-  </section>
-
-  <section id="process" style="background:var(--paper2)">
-    <div class="wrap">
-      <div class="label reveal">05 / How I work<span class="ta-label" lang="ta">௫ · செயல்முறை</span></div>
-      <h2 class="reveal" data-ta="எளிய செயல்முறை, &lt;em&gt;எதிர்பாராத திருப்பங்கள் இல்லை.&lt;/em&gt;">Simple process, <em>no surprises.</em></h2>
-      <p class="lede reveal" data-ta="முதல் அழைப்பிலிருந்து ஸ்டோர் வெளியீடு வரை, அடுத்து என்ன நடக்கும் என்பது உங்களுக்கு எப்போதும் தெரியும்.">From the first call to the store release, you always know what happens next.</p>
-      <div class="steps">
-        <div class="step reveal" style="--s1:#ff6a3d;--s2:#ffb020"><span class="st-icon" aria-hidden="true"><AppIcon name="discover" /></span><span class="mono">01</span><h3 data-ta="புரிந்துகொள்ளல்">Discover</h3><p data-ta="இலக்கு, பயனர்கள், பட்ஜெட் பற்றி ஒரு சிறிய அழைப்பு. வேலையின் வரம்பை எழுத்தில் தருவேன்.">A short call to understand the goal, the users and the budget. You get the scope in writing.</p></div>
-        <div class="step reveal" style="--s1:#a855f7;--s2:#ec4899"><span class="st-icon" aria-hidden="true"><AppIcon name="design" /></span><span class="mono">02</span><h3 data-ta="வடிவமைப்பு">Design</h3><p data-ta="எந்த code-ம் எழுதுவதற்கு முன், முக்கிய திரைகளையும் flow-களையும் சேர்ந்து முடிவு செய்வோம்.">Key screens and flows agreed before any code is written.</p></div>
-        <div class="step reveal" style="--s1:#027dfd;--s2:#13b9fd"><span class="st-icon" aria-hidden="true"><AppIcon name="build" /></span><span class="mono">03</span><h3 data-ta="உருவாக்கம்">Build</h3><p data-ta="நீங்கள் install செய்து பார்க்கக்கூடிய builds அடிக்கடி வரும், அதனால் கருத்துகள் சீக்கிரம் கிடைக்கும்.">Regular builds you can install and try, so feedback comes early.</p></div>
-        <div class="step reveal" style="--s1:#0f9d58;--s2:#2bb673"><span class="st-icon" aria-hidden="true"><AppIcon name="ship" /></span><span class="mono">04</span><h3 data-ta="வெளியீடும் ஆதரவும்">Ship &amp; support</h3><p data-ta="ஸ்டோர் வெளியீடு, analytics, launch-க்குப் பிறகு திருத்தங்கள்.">Store release, analytics, and fixes after launch.</p></div>
+      <div class="explore">
+        <a class="xcard reveal" href="/about#journey" style="--x1:#c08a2b;--x2:#d4501e">
+          <span class="x-icon" aria-hidden="true"><AppIcon name="about" /></span>
+          <small data-ta="என் பயணம்">My journey</small>
+          <b data-ta="நான்கு அத்தியாயங்களில்">Four chapters, from Sattur to full stack</b>
+          <span class="x-go" aria-hidden="true">→</span>
+        </a>
+        <a class="xcard reveal" href="/services#process" style="--x1:#027dfd;--x2:#13b9fd">
+          <span class="x-icon" aria-hidden="true"><AppIcon name="build" /></span>
+          <small data-ta="நான் வேலை செய்யும் முறை">How I work</small>
+          <b data-ta="முதல் அழைப்பிலிருந்து ஸ்டோர் வரை">From the first call to the store, and how an app is wired</b>
+          <span class="x-go" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
@@ -415,13 +392,14 @@ const jsonLd = [
 
   <section id="writing">
     <div class="wrap">
-      <div class="label reveal">06 / Writing<span class="ta-label" lang="ta">௬ · எழுத்து</span></div>
+      <div class="label reveal">04 / Writing<span class="ta-label" lang="ta">௪ · எழுத்து</span></div>
       <h2 class="reveal" data-ta="உருவாக்கத்திலிருந்து &lt;em&gt;குறிப்புகள்.&lt;/em&gt;">Notes from <em>building.</em></h2>
       <p class="lede reveal" data-ta="மேலே உள்ள செயலிகளிலிருந்து சிறு பொறியியல் குறிப்புகள்: பிரச்சனை, எடுத்த முடிவு, அதற்கான சமரசம்.">Short engineering notes from the apps above: the problem, the decision, and the trade-off.</p>
       <div class="pgrid">
         {
           posts.slice(0, 3).map((p) => (
-            <a class="pcell reveal" href={`/blog/${p.id}`} data-tag={p.data.tags[0].toLowerCase()}>
+            <a class="pcell reveal" href={`/blog/${p.id}`} style={`--t1:${postLook(p.id).c1};--t2:${postLook(p.id).c2}`}>
+              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={postLook(p.id).g} /></span>
               <span class="mono">{p.data.tags[0]} · {readingMinutes(p.body)} min read</span>
               <h3>{p.data.title}</h3>
               <p>{p.data.description}</p>
@@ -455,9 +433,11 @@ const jsonLd = [
         <a class="btn ghost sm" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
-    <Banana side="left" />
-    <Banana side="right" />
-    <DoorstepKolam />
+    <div class="vaasal">
+      <Banana side="left" />
+      <DoorstepKolam />
+      <Banana side="right" />
+    </div>
     <div class="wrap-sky"><Skyline /></div>
     <p class="thanks reveal"><span lang="ta">நன்றி!</span> <span data-ta="இறுதிவரை பார்த்ததற்கு நன்றி.">Thanks for scrolling all the way down.</span> <a href="#top" class="totop"><span data-ta="மேலே செல்ல">Back to top</span> <i aria-hidden="true">↑</i></a></p>
   </section>

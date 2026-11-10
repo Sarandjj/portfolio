@@ -26,22 +26,59 @@ const onScroll = () => {
 addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-/* ---------- reveal on scroll ---------- */
+/* ---------- reveal on scroll ----------
+   Items that arrive together under the same parent come in one after another (a short stagger),
+   then the delay is cleared so hover effects stay instant. */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const items = $$('.reveal');
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver(
-    (entries) =>
+    (entries) => {
+      const seen = new Map<Element | null, number>();
       entries.forEach((e) => {
         if (!e.isIntersecting) return;
-        e.target.classList.add('in');
-        e.target.querySelectorAll('.arc').forEach((a) => ((a as SVGElement).style.strokeDashoffset = '0'));
-        io.unobserve(e.target);
-      }),
+        const el = e.target as HTMLElement;
+        const n = seen.get(el.parentElement) ?? 0;
+        seen.set(el.parentElement, n + 1);
+        if (n && !reduce) {
+          el.style.setProperty('--rd', `${Math.min(n, 6) * 90}ms`);
+          setTimeout(() => el.style.removeProperty('--rd'), 1400);
+        }
+        el.classList.add('in');
+        el.querySelectorAll('.arc').forEach((a) => ((a as SVGElement).style.strokeDashoffset = '0'));
+        io.unobserve(el);
+      });
+    },
     { threshold: 0.15 },
   );
   items.forEach((el) => io.observe(el));
 } else {
   items.forEach((el) => el.classList.add('in'));
+}
+
+/* ---------- journey and process lines fill as they scroll through the screen ---------- */
+const fills = $$('.chapters, .steps');
+if (fills.length && !reduce) {
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    for (const el of fills) {
+      const r = el.getBoundingClientRect();
+      // 0 when the block's top reaches 85% of the screen height, 1 when it reaches 35%
+      const p = Math.min(1, Math.max(0, (innerHeight * 0.85 - r.top) / (innerHeight * 0.5)));
+      el.style.setProperty('--fill', p.toFixed(3));
+      // process steps light up one by one as the line reaches them
+      if (el.classList.contains('steps')) {
+        const steps = el.children;
+        for (let i = 0; i < steps.length; i++) steps[i].classList.toggle('lit', p >= (i / steps.length) + 0.02);
+      }
+    }
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+} else {
+  // no scroll effect: show every step lit
+  for (const el of $$('.steps')) el.classList.add('no-fill');
 }
 
 /* ---------- copy email ---------- */

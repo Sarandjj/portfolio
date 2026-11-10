@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getPosts, readingMinutes } from '../../lib/posts';
 import { SITE } from '../../data/site';
+import AppIcon from '../../components/AppIcon.astro';
 
 export async function getStaticPaths() {
   const all = await getPosts();
@@ -50,12 +51,17 @@ const jsonLd = [
   <div class="page">
     <div class="wrap">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: p.title }]} />
-      <article class="post-page">
+      <article class="post-page" style={project ? `--c1:${project.data.c1};--c2:${project.data.c2}` : undefined}>
         <header>
           <p class="mono meta" style="margin:22px 0 0">
             <time datetime={p.date.toISOString()}>{fmt(p.date)}</time> · {readingMinutes(entry.body)} min read
-            {project && <> · From <a href={`/projects/${project.id}`}>{project.data.name}</a></>}
           </p>
+          {project && (
+            <a class="post-app" href={`/projects/${project.id}`}>
+              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={project.id} /></span>
+              <span><small>From the app</small>{project.data.name}</span>
+            </a>
+          )}
           <h1 class="page-title">{p.title}</h1>
           <p class="page-lede">{p.description}</p>
           {!p.reviewed && <p><span class="note-draft">draft: written from the project's own notes, not yet reviewed by Saran</span></p>}

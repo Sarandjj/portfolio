@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { getProjects } from '../lib/projects';
 import { SITE, STATUS_LABEL } from '../data/site';
+import AppIcon from '../components/AppIcon.astro';
 
 const projects = await getProjects();
 const live = projects.filter((p) => p.data.links.length > 0);
@@ -25,6 +26,14 @@ const own = projects.filter((p) => p.data.links.length === 0);
         <a class="btn ghost" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
         <a class="btn ghost" href={SITE.github} target="_blank" rel="noopener">GitHub ↗</a>
       </div>
+
+
+      <ul class="rv-facts" aria-label="At a glance">
+        <li class="reveal"><b>{live.length}</b><span>client apps live on Google Play and the App Store</span></li>
+        <li class="reveal"><b>{own.length}</b><span>apps of my own, each designed and built end to end</span></li>
+        <li class="reveal"><b>Nov 2023</b><span>shipping production Flutter apps since</span></li>
+        <li class="reveal"><b>IST</b><span>Kovilpatti, Tamil Nadu. Works remotely with clients anywhere</span></li>
+      </ul>
 
       <div class="rv-grid">
         <section>
@@ -51,7 +60,7 @@ const own = projects.filter((p) => p.data.links.length === 0);
         <h2 class="rv-h">Apps live on both stores <span>client projects</span></h2>
         <ul class="rv-apps">
           {live.map((p) => (
-            <li><a href={`/projects/${p.id}`}><b>{p.data.name}</b><span>{p.data.summary}</span>{p.data.proof && <em>{p.data.proof.value} · {p.data.proof.label}</em>}</a></li>
+            <li class="reveal"><a href={`/projects/${p.id}`} style={`--t1:${p.data.c1};--t2:${p.data.c2}`}><span class="ic-tile sm" aria-hidden="true"><AppIcon name={p.id} /></span><b>{p.data.name}</b><span>{p.data.summary}</span>{p.data.proof && <em>{p.data.proof.value} · {p.data.proof.label}</em>}</a></li>
           ))}
         </ul>
       </section>
@@ -60,7 +69,7 @@ const own = projects.filter((p) => p.data.links.length === 0);
         <h2 class="rv-h">My own apps <span>{STATUS_LABEL.progress.toLowerCase()}</span></h2>
         <ul class="rv-apps">
           {own.map((p) => (
-            <li><a href={`/projects/${p.id}`}><b>{p.data.name}</b><span>{p.data.summary}</span>{p.data.proof && <em>{p.data.proof.value} · {p.data.proof.label}</em>}</a></li>
+            <li class="reveal"><a href={`/projects/${p.id}`} style={`--t1:${p.data.c1};--t2:${p.data.c2}`}><span class="ic-tile sm" aria-hidden="true"><AppIcon name={p.id} /></span><b>{p.data.name}</b><span>{p.data.summary}</span>{p.data.proof && <em>{p.data.proof.value} · {p.data.proof.label}</em>}</a></li>
           ))}
         </ul>
       </section>
