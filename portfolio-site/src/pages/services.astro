@@ -100,8 +100,8 @@ const faqs = [
   <div class="page">
     <div class="wrap">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
-      <h1 class="page-title">Apps, and the <em>systems behind them.</em></h1>
-      <p class="page-lede">Clients come for the app and stay because the backend, the release and the speed are handled too.</p>
+      <h1 class="page-title" data-ta="செயலிகளும், &lt;em&gt;அவற்றின் பின்னால் உள்ள அமைப்புகளும்.&lt;/em&gt;">Apps, and the <em>systems behind them.</em></h1>
+      <p class="page-lede" data-ta="வாடிக்கையாளர்கள் செயலிக்காக வருகிறார்கள்; backend, வெளியீடு, வேகம் எல்லாமும் கவனிக்கப்படுவதால் தொடர்கிறார்கள்.">Clients come for the app and stay because the backend, the release and the speed are handled too.</p>
       <div class="page-cta">
         <a class="btn solid" href="/contact?need=app">Start a project</a>
         <a class="btn ghost" href="#wired">See how an app is wired</a>
@@ -125,7 +125,7 @@ const faqs = [
 
       <section id="wired">
         <div class="kick reveal">02 / How an app is wired<span class="ta-label" lang="ta">௨ · அமைப்பு</span></div>
-        <h2 class="sec-h reveal">What runs on every tap, <em>and every release.</em></h2>
+        <h2 class="sec-h reveal" data-ta="ஒவ்வொரு தொடுதலிலும், &lt;em&gt;ஒவ்வொரு வெளியீட்டிலும்.&lt;/em&gt;">What runs on every tap, <em>and every release.</em></h2>
         <p class="lede reveal">This is the shape most of my apps share. Hover a part to see what it does and what I use for it.</p>
         <div class="wire">
           <div class="lane reveal" style="--lc:#13b9fd">
@@ -181,7 +181,7 @@ const faqs = [
 
       <section>
         <div class="kick reveal">04 / Working together<span class="ta-label" lang="ta">௪ · இணைந்து</span></div>
-        <h2 class="sec-h reveal">How we can <em>work together.</em></h2>
+        <h2 class="sec-h reveal" data-ta="நாம் எப்படி &lt;em&gt;சேர்ந்து வேலை செய்யலாம்.&lt;/em&gt;">How we can <em>work together.</em></h2>
         <p class="lede"><span class="note-draft">draft, confirm what you actually offer</span></p>
         <div class="vcards">
           {engage.map((e) => (
@@ -197,7 +197,7 @@ const faqs = [
 
       <section>
         <div class="kick reveal">05 / Questions<span class="ta-label" lang="ta">௫ · கேள்விகள்</span></div>
-        <h2 class="sec-h reveal">Common <em>questions.</em></h2>
+        <h2 class="sec-h reveal" data-ta="பொதுவான &lt;em&gt;கேள்விகள்.&lt;/em&gt;">Common <em>questions.</em></h2>
         <p class="lede"><span class="note-draft">draft answers, confirm or edit each one</span></p>
         <div class="faq">
           {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
@@ -206,7 +206,7 @@ const faqs = [
 
       <TempleBorder />
       <div class="cta-band">
-        <h2>Have an app in <em>mind?</em></h2>
+        <h2 data-ta="மனதில் ஒரு &lt;em&gt;செயலி இருக்கிறதா?&lt;/em&gt;">Have an app in <em>mind?</em></h2>
         <p>Tell me what you need, who it is for and roughly when. I'll reply with next steps.</p>
         <a class="btn solid" href="/contact">Get a quote</a>
       </div>

@@ -39,7 +39,7 @@ const jsonLd = [
           <img src="/saran.jpg" alt="Portrait of Sarankumar G" width="640" height="800" fetchpriority="high" />
         </div>
         <div>
-          <h1 class="page-title" style="margin-top:0">Hi, I'm <em>Saran.</em></h1>
+          <h1 class="page-title" style="margin-top:0" data-ta="வணக்கம், நான் &lt;em&gt;சரண்.&lt;/em&gt;">Hi, I'm <em>Saran.</em></h1>
           <p class="page-lede">
             I'm a software developer from Tamil Nadu, India, who enjoys turning ideas into real, usable products.
           </p>
@@ -67,7 +67,7 @@ const jsonLd = [
 
       <section id="journey">
         <div class="kick reveal">02 / Journey<span class="ta-label" lang="ta">௨ · பயணம்</span></div>
-        <h2 class="sec-h reveal">The journey, <em>in four chapters.</em></h2>
+        <h2 class="sec-h reveal" data-ta="என் பயணம், &lt;em&gt;நான்கு அத்தியாயங்களில்.&lt;/em&gt;">The journey, <em>in four chapters.</em></h2>
         <ol class="chapters">
           <li class="reveal">
             <span class="ch">I</span>
@@ -110,7 +110,7 @@ const jsonLd = [
 
       <section>
         <div class="kick reveal">04 / What I build<span class="ta-label" lang="ta">௪ · உருவாக்குவது</span></div>
-        <h2 class="sec-h reveal">What I <em>build.</em></h2>
+        <h2 class="sec-h reveal" data-ta="நான் &lt;em&gt;உருவாக்குவது.&lt;/em&gt;">What I <em>build.</em></h2>
         <div class="vcards four">
           {[
             ['app', '#027dfd', '#13b9fd', 'Mobile applications', 'Cross-platform apps with Flutter and Dart.'],
@@ -130,7 +130,7 @@ const jsonLd = [
 
       <section>
         <div class="kick reveal">05 / How I like to build<span class="ta-label" lang="ta">௫ · கொள்கைகள்</span></div>
-        <h2 class="sec-h reveal">How I like to <em>build.</em></h2>
+        <h2 class="sec-h reveal" data-ta="நான் &lt;em&gt;உருவாக்கும் விதம்.&lt;/em&gt;">How I like to <em>build.</em></h2>
         <p class="lede"><span class="note-draft">draft, based on the rules in my own projects. Confirm or edit.</span></p>
         <div class="vcards">
           {[
@@ -149,7 +149,7 @@ const jsonLd = [
 
       <section>
         <div class="kick reveal">06 / What I work with<span class="ta-label" lang="ta">௬ · கருவிகள்</span></div>
-        <h2 class="sec-h reveal">What I <em>work with.</em></h2>
+        <h2 class="sec-h reveal" data-ta="நான் &lt;em&gt;பயன்படுத்தும் கருவிகள்.&lt;/em&gt;">What I <em>work with.</em></h2>
         <div class="skillgroups">
           {[
             ['Mobile', '#13b9fd', ['Flutter', 'Dart', 'Riverpod', 'GetX', 'Camera', 'ML Kit', 'Biometrics']],
@@ -167,7 +167,7 @@ const jsonLd = [
 
       <section>
         <div class="kick reveal">07 / Building now<span class="ta-label" lang="ta">௭ · இப்போது</span></div>
-        <h2 class="sec-h reveal">The apps, <em>side by side.</em></h2>
+        <h2 class="sec-h reveal" data-ta="என் செயலிகள், &lt;em&gt;ஒரே பார்வையில்.&lt;/em&gt;">The apps, <em>side by side.</em></h2>
         <div class="apptiles">
           {projects.map((p) => (
             <a class="apptile reveal" href={`/projects/${p.id}`} style={`--t1:${p.data.c1};--t2:${p.data.c2}`}>
@@ -181,7 +181,7 @@ const jsonLd = [
 
       <TempleBorder />
       <div class="cta-band">
-        <h2>Let's talk about your <em>project.</em></h2>
+        <h2 data-ta="உங்கள் &lt;em&gt;திட்டம் பற்றி பேசுவோம்.&lt;/em&gt;">Let's talk about your <em>project.</em></h2>
         <p>Tell me what you need and I'll get back to you.</p>
         <a class="btn solid" href="/contact">Get in touch</a>
       </div>

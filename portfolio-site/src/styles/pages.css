@@ -68,25 +68,7 @@
 .nums span { font-size: 12.5px; color: var(--muted); }
 @media (max-width: 960px) { .cs-grid { grid-template-columns: 1fr; gap: 36px; } .aside { position: static; } }
 
-.arch { margin: 0; }
-.arch-flow { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 8px; }
-.arch-flow li { position: relative; display: flex; flex-direction: column; gap: 6px; background: var(--card); border: 1px solid var(--line); padding: 18px; font-size: 14px; color: var(--muted); }
-.arch-flow li:first-child { border-radius: 20px 0 0 20px; }
-.arch-flow li:last-child { border-radius: 0 20px 20px 0; }
-.arch-flow li + li { margin-left: -1px; }
-.arch-flow li:not(:last-child)::after {
-  content: '→'; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); z-index: 2; width: 24px; height: 24px; border-radius: 50%;
-  background: var(--ink); color: var(--paper); display: grid; place-items: center; font-size: 13px;
-}
-.arch-flow strong { color: var(--ink); font-size: 16px; letter-spacing: -0.01em; }
-.arch-n { font-size: 11px; color: var(--accent-text); }
-@media (max-width: 860px) {
-  .arch-flow { grid-template-columns: 1fr; }
-  .arch-flow li:first-child { border-radius: 20px 20px 0 0; }
-  .arch-flow li:last-child { border-radius: 0 0 20px 20px; }
-  .arch-flow li + li { margin-left: 0; margin-top: -1px; }
-  .arch-flow li:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -12px; transform: translateX(-50%); }
-}
+
 
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 72px; }
 .pager a { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 22px; transition: border-color 0.3s; }

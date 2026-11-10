@@ -209,3 +209,41 @@ $('#langSw')?.addEventListener('click', () => setLang(root.dataset.lang === 'ta'
 try {
   if (localStorage.getItem('lang') === 'ta') setLang('ta');
 } catch {}
+
+/* ---------- case study "on this page": highlight the section being read, and show how far through you are ---------- */
+const toc = $('.toc');
+const article = $('.cs-grid .prose');
+if (toc && article) {
+  const links = $$<HTMLAnchorElement>('.toc a');
+  const heads = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter(Boolean) as HTMLElement[];
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const r = article.getBoundingClientRect();
+    const read = Math.min(1, Math.max(0, (innerHeight * 0.4 - r.top) / Math.max(1, r.height - innerHeight * 0.4)));
+    toc.style.setProperty('--read', read.toFixed(3));
+    let cur = -1;
+    heads.forEach((h, i) => { if (h.getBoundingClientRect().top < innerHeight * 0.35) cur = i; });
+    links.forEach((a, i) => a.setAttribute('aria-current', String(i === cur)));
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+}
+
+/* ---------- magnetic buttons: main buttons lean a few pixels towards the pointer ---------- */
+if (!reduce && matchMedia('(pointer: fine)').matches) {
+  $$('.btn.solid, .xcard .x-go, .t-cta .arrow').forEach((el) => {
+    const host = (el.closest('.xcard, .t-cta') as HTMLElement | null) ?? el;
+    host.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      const x = Math.max(-6, Math.min(6, (e.clientX - (r.left + r.width / 2)) * 0.18));
+      const y = Math.max(-5, Math.min(5, (e.clientY - (r.top + r.height / 2)) * 0.25));
+      el.style.translate = `${x.toFixed(1)}px ${y.toFixed(1)}px`;
+    });
+    host.addEventListener('pointerleave', () => {
+      const from = el.style.translate || '0px 0px';
+      el.style.translate = '';
+      el.animate([{ translate: from }, { translate: '0px 0px' }], { duration: 380, easing: 'cubic-bezier(0.2, 1.4, 0.4, 1)' });
+    });
+  });
+}

@@ -21,7 +21,8 @@ export async function getStaticPaths() {
 
 const { entry, prev, next } = Astro.props;
 const p = entry.data;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2);
 // Show the phone frames only when there are real screenshots. Placeholders look unfinished.
 const hasShots = p.screens.length > 0;
 const url = `${SITE.url}/projects/${entry.id}`;
@@ -107,6 +108,17 @@ const jsonLd = [
         <div class="cs-grid">
           <article class="prose"><Content /></article>
           <aside class="aside">
+            {toc.length > 2 && (
+              <nav class="toc" aria-label="On this page">
+                <p class="mono">On this page</p>
+                <ol>
+                  {toc.map((h, i) => (
+                    <li><a href={`#${h.slug}`}><span>{String(i + 1).padStart(2, '0')}</span>{h.text}</a></li>
+                  ))}
+                </ol>
+                <span class="toc-bar" aria-hidden="true"><i></i></span>
+              </nav>
+            )}
             <div class="box">
               <h3>Works today</h3>
               <ul>{p.works.map((w) => <li>{w}</li>)}</ul>
