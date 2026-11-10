@@ -58,7 +58,6 @@ h1 .line:nth-child(3) span { animation-delay: 0.16s; }
   width: 54px; height: 54px; border-radius: 15px; display: grid; place-items: center; font-style: normal;
   font-size: 24px; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18); transition: transform 0.2s;
 }
-.glyph-in::before { content: 'in'; }
 .app:hover i { transform: scale(1.08); }
 .app:active i { transform: scale(0.92); }
 .app:focus-visible { outline-color: #fff; }
@@ -582,22 +581,14 @@ h1 em { padding-right: 0; }
 @media (max-width: 560px) { .pill-status .sep, .pill-status > span:last-child { display: none; } }
 
 /* ---------- v6: Tamil Nadu touches ---------- */
-:root { --zari: #a8781c; --kumkum: #b4232c; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --zari: #d9b45a; --kumkum: #e0525a; } }
-:root[data-theme='dark'] { --zari: #d9b45a; --kumkum: #e0525a; }
+
 [lang='ta'] { font-family: 'Noto Serif Tamil', 'Tamil Sangam MN', 'Latha', 'Noto Sans Tamil', serif; font-style: normal; }
 
 /* section labels: English on the left, Tamil numeral and word on the right, in zari gold */
 .label .ta-label { order: 2; font-family: 'Noto Serif Tamil', 'Tamil Sangam MN', 'Latha', serif; text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--zari); }
 .label::after { order: 1; }
 
-/* Kanchipuram temple border */
-.temple-border { color: var(--zari); padding: 0 24px; max-width: 1248px; margin: 0 auto; opacity: 0.85; }
-.temple-border svg { display: block; }
-.temple-border path { fill: color-mix(in srgb, var(--zari) 22%, transparent); stroke: currentColor; stroke-width: 1; stroke-linejoin: round; }
-.temple-border .bead { fill: var(--kumkum); stroke: none; }
-.temple-border line { stroke: currentColor; stroke-width: 1; }
-.temple-border.flip { transform: scaleY(-1); }
+
 
 /* Thirukkural over an Athangudi tile floor */
 .kural-sec { padding: 90px 0; overflow: hidden; }
@@ -835,3 +826,9 @@ h1 .ul { position: relative; display: inline-block; }
 .dayarc .orb { fill: #ffb300; filter: drop-shadow(0 0 6px rgba(255, 179, 0, 0.8)); transition: cx 1s, cy 1s; }
 .dayarc.night .orb { fill: #c9c3f2; stroke: #6e66b8; stroke-width: 1.5; filter: drop-shadow(0 0 6px rgba(140, 130, 230, 0.6)); }
 .clock { margin-top: 4px; }
+/* phones: tighter vertical rhythm between sections */
+@media (max-width: 560px) {
+  section { padding: 72px 0; }
+  .contact { padding: 70px 12px 40px; }
+  .kural-sec { padding: 60px 0; }
+}

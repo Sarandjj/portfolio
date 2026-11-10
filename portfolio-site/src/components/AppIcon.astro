@@ -82,6 +82,13 @@ const { name, class: cls = '' } = Astro.props;
       <path d="M14 21 L32 34 L50 21" class="s" />
     </g>
   )}
+  {name === 'linkedin' && (
+    <g>
+      <rect x="15" y="27" width="7" height="22" rx="2" class="f" />
+      <circle cx="18.5" cy="18.5" r="4.2" class="f" />
+      <path d="M30 49 V27 M30 36 Q30 27 39 27 Q47 27 47 36 V49" class="s" style="stroke-width:7;stroke-linecap:butt" />
+    </g>
+  )}
   {name === 'github' && (
     <g>
       <circle cx="22" cy="18" r="5" class="s" />

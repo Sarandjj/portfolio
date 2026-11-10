@@ -1,4 +1,6 @@
 ---
+import AppIcon from '../../components/AppIcon.astro';
+import TempleBorder from '../../components/TempleBorder.astro';
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
@@ -52,8 +54,10 @@ const jsonLd = [
     <div class="wrap">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: p.name }]} />
 
+      <div class="cs-cover" aria-hidden="true"><span class="ring"></span><span class="ring r2"></span></div>
       <header class="cs-hero" style={hasShots ? undefined : 'grid-template-columns:1fr'}>
         <div>
+          <span class="cs-icon" aria-hidden="true"><AppIcon name={entry.id} /></span>
           <p class="label" style="margin:22px 0 0">{p.kind}</p>
           <h1 class="page-title">{p.name}</h1>
           <p class="page-lede">{p.summary}</p>
@@ -89,6 +93,14 @@ const jsonLd = [
         }
       </header>
 
+      {
+        p.numbers.length > 0 && (
+          <ul class="cs-stats" aria-label="By the numbers">
+            {p.numbers.map((n) => <li><b>{n.value}</b><span>{n.label}</span></li>)}
+          </ul>
+        )
+      }
+
       {p.demo && <DemoPhone url={p.demo.url} name={p.name} c1={p.c1} c2={p.c2} note={p.demo.note} />}
 
       <section>
@@ -99,14 +111,6 @@ const jsonLd = [
               <h3>Works today</h3>
               <ul>{p.works.map((w) => <li>{w}</li>)}</ul>
             </div>
-            {
-              p.numbers.length > 0 && (
-                <div class="box">
-                  <h3>By the numbers</h3>
-                  <div class="nums">{p.numbers.map((n) => <div><b>{n.value}</b><span>{n.label}</span></div>)}</div>
-                </div>
-              )
-            }
           </aside>
         </div>
       </section>
@@ -114,10 +118,11 @@ const jsonLd = [
       {p.architecture && <section><ArchDiagram title={p.architecture.title} steps={p.architecture.steps} /></section>}
 
       <nav class="pager" aria-label="More projects">
-        {prev ? <a href={`/projects/${prev.id}`}><small>Previous</small><b>{prev.data.name}</b></a> : <span></span>}
-        {next ? <a href={`/projects/${next.id}`}><small>Next</small><b>{next.data.name}</b></a> : <span></span>}
+        {prev ? <a href={`/projects/${prev.id}`}><span class="pg-icon" style={`background:linear-gradient(135deg,${prev.data.c1},${prev.data.c2})`} aria-hidden="true"><AppIcon name={prev.id} /></span><span><small>Previous</small><b>{prev.data.name}</b></span></a> : <span></span>}
+        {next ? <a href={`/projects/${next.id}`} class="nx"><span><small>Next</small><b>{next.data.name}</b></span><span class="pg-icon" style={`background:linear-gradient(135deg,${next.data.c1},${next.data.c2})`} aria-hidden="true"><AppIcon name={next.id} /></span></a> : <span></span>}
       </nav>
 
+      <TempleBorder />
       <div class="cta-band">
         <h2>Want something like this?</h2>
         <p>Tell me what you need and I'll get back to you.</p>

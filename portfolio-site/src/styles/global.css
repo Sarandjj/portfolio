@@ -270,3 +270,15 @@ body::after {
 .appicon .scan { stroke: #fff; opacity: 0.9; animation: scanline 2.6s ease-in-out infinite; }
 @keyframes scanline { 0%, 100% { transform: translateY(-18px); } 50% { transform: translateY(4px); } }
 @media (prefers-reduced-motion: reduce) { .appicon .scan { animation: none; } }
+
+/* ---------- Tamil Nadu tokens and the temple border (used on several pages) ---------- */
+:root { --zari: #a8781c; --kumkum: #b4232c; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --zari: #d9b45a; --kumkum: #e0525a; } }
+:root[data-theme='dark'] { --zari: #d9b45a; --kumkum: #e0525a; }
+/* Kanchipuram temple border */
+.temple-border { color: var(--zari); padding: 0 24px; max-width: 1248px; margin: 0 auto; opacity: 0.85; }
+.temple-border svg { display: block; }
+.temple-border path { fill: color-mix(in srgb, var(--zari) 22%, transparent); stroke: currentColor; stroke-width: 1; stroke-linejoin: round; }
+.temple-border .bead { fill: var(--kumkum); stroke: none; }
+.temple-border line { stroke: currentColor; stroke-width: 1; }
+.temple-border.flip { transform: scaleY(-1); }

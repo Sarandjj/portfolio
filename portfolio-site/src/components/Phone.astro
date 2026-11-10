@@ -65,7 +65,7 @@ const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
       <div class="dock">
         <a class="app" href={`mailto:${SITE.email}`} aria-label="Email"><i style="background:linear-gradient(135deg,#5aa0ff,#1f6fe5)" aria-hidden="true"><AppIcon name="mail" /></i><span>Mail</span></a>
         <a class="app" href={SITE.github} target="_blank" rel="noopener" aria-label="GitHub"><i style="background:linear-gradient(135deg,#3a3a36,#141412)" aria-hidden="true"><AppIcon name="github" /></i><span>GitHub</span></a>
-        <a class="app" href={SITE.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><i class="glyph-in" style="background:#0a66c2;font-weight:700;font-size:20px" aria-hidden="true"></i><span>LinkedIn</span></a>
+        <a class="app" href={SITE.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><i style="background:linear-gradient(135deg,#2d8cf0,#0a66c2)" aria-hidden="true"><AppIcon name="linkedin" /></i><span>LinkedIn</span></a>
       </div>
 
       <div class="win" id="win" aria-hidden="true" role="dialog" aria-label="App">
