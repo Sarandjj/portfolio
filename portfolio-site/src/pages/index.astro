@@ -1,14 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Phone from '../components/Phone.astro';
-import Kolam from '../components/Kolam.astro';
 import AppIcon from '../components/AppIcon.astro';
 import { postLook } from '../data/post-look';
 import TempleBorder from '../components/TempleBorder.astro';
 import Skyline from '../components/Skyline.astro';
 import Thoranam from '../components/festival/Thoranam.astro';
 import DoorstepKolam from '../components/festival/DoorstepKolam.astro';
-import Banana from '../components/festival/Banana.astro';
 import Malligai from '../components/festival/Malligai.astro';
 import '../styles/home.css';
 import { SITE, STATUS_LABEL } from '../data/site';
@@ -20,7 +18,6 @@ const OWN = PROJECTS.filter((p) => p.links.length === 0);
 const FEATURED = OWN.find((p) => p.screens.length > 0);
 const REST = OWN.filter((p) => p !== FEATURED);
 const DEMOS = PROJECTS.filter((p) => p.demo);
-const STACK = ['Flutter', 'Dart', 'Riverpod', 'Drift', 'Supabase', 'Firebase', 'Postgres', 'Node.js', 'Express', 'FastAPI', 'React', 'Astro', 'ML Kit', 'Google Drive API', 'Razorpay'];
 const FILTERS = [['all', 'All'], ['live', 'On the stores'], ['mobile', 'Mobile'], ['web', 'Web'], ['backend', 'Backend']];
 const tagsOf = (p: (typeof PROJECTS)[number]) => [...p.tags, ...(p.links.length ? ['live'] : [])].join(' ');
 
@@ -114,14 +111,8 @@ const jsonLd = [
       </ul>
     </div>
     <a class="scrollcue" href="#work" aria-label="Scroll to my work"><span></span></a>
-    <div class="marquee" aria-label="Tools I use">
-      <ul class="track">
-        {[...STACK, ...STACK].map((t, i) => <li aria-hidden={i >= STACK.length ? 'true' : undefined}>{t}</li>)}
-      </ul>
-    </div>
   </section>
 
-  <TempleBorder />
   <section id="work" class="has-aurora" style="padding-top:60px">
     <div class="aurora soft" aria-hidden="true"><i class="a1"></i><i class="a3"></i></div>
     <div class="wrap">
@@ -315,8 +306,6 @@ const jsonLd = [
     </div>
   </section>
 
-  <Kolam />
-
   <section id="hello" class="hello-sec">
     <div class="wrap hs">
       <div class="bio reveal">
@@ -388,8 +377,6 @@ const jsonLd = [
     </div>
   </section>
 
-  <Kolam />
-
   <section id="writing">
     <div class="wrap">
       <div class="label reveal">04 / Writing<span class="ta-label" lang="ta">௪ · எழுத்து</span></div>
@@ -433,11 +420,7 @@ const jsonLd = [
         <a class="btn ghost sm" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
-    <div class="vaasal">
-      <Banana side="left" />
-      <DoorstepKolam />
-      <Banana side="right" />
-    </div>
+    <DoorstepKolam />
     <div class="wrap-sky"><Skyline /></div>
     <p class="thanks reveal"><span lang="ta">நன்றி!</span> <span data-ta="இறுதிவரை பார்த்ததற்கு நன்றி.">Thanks for scrolling all the way down.</span> <a href="#top" class="totop"><span data-ta="மேலே செல்ல">Back to top</span> <i aria-hidden="true">↑</i></a></p>
   </section>

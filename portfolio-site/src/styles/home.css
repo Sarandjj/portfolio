@@ -592,7 +592,7 @@ h1 em { padding-right: 0; }
 
 /* Thirukkural over an Athangudi tile floor */
 .kural-sec { padding: 90px 0; overflow: hidden; }
-.kural-sec .tiles { position: absolute; inset: 0; z-index: -1; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2772%27%20height%3D%2772%27%20viewBox%3D%270%200%2072%2072%27%3E%3Crect%20width%3D%2772%27%20height%3D%2772%27%20fill%3D%27%23f3e6cc%27/%3E%3Cpath%20d%3D%27M0%200h36v36H0zM36%2036h36v36H36z%27%20fill%3D%27%23ecdcb9%27/%3E%3Cg%20fill%3D%27%23b5532a%27%3E%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%2710%27/%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%270%27%20r%3D%2710%27/%3E%3Ccircle%20cx%3D%270%27%20cy%3D%2772%27%20r%3D%2710%27/%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%2772%27%20r%3D%2710%27/%3E%3C/g%3E%3Cg%20fill%3D%27%231f6f6a%27%3E%3Cellipse%20cx%3D%2736%27%20cy%3D%2724%27%20rx%3D%275%27%20ry%3D%2710%27/%3E%3Cellipse%20cx%3D%2736%27%20cy%3D%2748%27%20rx%3D%275%27%20ry%3D%2710%27/%3E%3Cellipse%20cx%3D%2724%27%20cy%3D%2736%27%20rx%3D%2710%27%20ry%3D%275%27/%3E%3Cellipse%20cx%3D%2748%27%20cy%3D%2736%27%20rx%3D%2710%27%20ry%3D%275%27/%3E%3C/g%3E%3Ccircle%20cx%3D%2736%27%20cy%3D%2736%27%20r%3D%275%27%20fill%3D%27%23d29a2b%27/%3E%3Cg%20fill%3D%27%23d29a2b%27%3E%3Cpath%20d%3D%27M36%200l4%206h-8zM36%2072l4-6h-8zM0%2036l6%204v-8zM72%2036l-6%204v-8z%27/%3E%3C/g%3E%3C/svg%3E") center / 72px; opacity: 0.32;
+.kural-sec .tiles { position: absolute; inset: 0; z-index: -1; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2772%27%20height%3D%2772%27%20viewBox%3D%270%200%2072%2072%27%3E%3Crect%20width%3D%2772%27%20height%3D%2772%27%20fill%3D%27%23f3e6cc%27/%3E%3Cpath%20d%3D%27M0%200h36v36H0zM36%2036h36v36H36z%27%20fill%3D%27%23ecdcb9%27/%3E%3Cg%20fill%3D%27%23b5532a%27%3E%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%2710%27/%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%270%27%20r%3D%2710%27/%3E%3Ccircle%20cx%3D%270%27%20cy%3D%2772%27%20r%3D%2710%27/%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%2772%27%20r%3D%2710%27/%3E%3C/g%3E%3Cg%20fill%3D%27%231f6f6a%27%3E%3Cellipse%20cx%3D%2736%27%20cy%3D%2724%27%20rx%3D%275%27%20ry%3D%2710%27/%3E%3Cellipse%20cx%3D%2736%27%20cy%3D%2748%27%20rx%3D%275%27%20ry%3D%2710%27/%3E%3Cellipse%20cx%3D%2724%27%20cy%3D%2736%27%20rx%3D%2710%27%20ry%3D%275%27/%3E%3Cellipse%20cx%3D%2748%27%20cy%3D%2736%27%20rx%3D%2710%27%20ry%3D%275%27/%3E%3C/g%3E%3Ccircle%20cx%3D%2736%27%20cy%3D%2736%27%20r%3D%275%27%20fill%3D%27%23d29a2b%27/%3E%3Cg%20fill%3D%27%23d29a2b%27%3E%3Cpath%20d%3D%27M36%200l4%206h-8zM36%2072l4-6h-8zM0%2036l6%204v-8zM72%2036l-6%204v-8z%27/%3E%3C/g%3E%3C/svg%3E") center / 72px; opacity: 0.16;
   -webkit-mask-image: radial-gradient(75% 85% at 50% 50%, #000 30%, transparent 78%); mask-image: radial-gradient(75% 85% at 50% 50%, #000 30%, transparent 78%); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .kural-sec .tiles { opacity: 0.12; } }
 :root[data-theme='dark'] .kural-sec .tiles { opacity: 0.12; }
@@ -897,3 +897,47 @@ h1 .ul { position: relative; display: inline-block; }
 .explore-sec { padding-top: 20px; padding-bottom: 40px; }
 .pcell .ic-tile { width: 40px; height: 40px; border-radius: 12px; margin-bottom: 4px; }
 .pcell:hover .ic-tile { transform: rotate(-8deg) scale(1.05); }
+
+/* ---------- v12: the hero phone opens apps like a real phone ---------- */
+/* launch splash: the app's icon on its own colour, then the content slides in */
+.win-page { position: relative; }
+.win .splash { position: absolute; inset: 0; z-index: 5; display: grid; place-content: center; justify-items: center; gap: 12px; border-radius: 42px;
+  background: linear-gradient(160deg, var(--c1), var(--c2)); color: #fff; pointer-events: none; opacity: 0; }
+.win .splash i { display: grid; place-items: center; width: 84px; height: 84px; border-radius: 24px; background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.45); box-shadow: 0 18px 30px -14px rgba(0, 0, 0, 0.45); }
+.win .splash i .appicon { width: 58%; height: 58%; }
+.win .splash b { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.win.open .win-page.on .splash { animation: splash 1s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.win.open .win-page.on .splash i { animation: splash-ic 1s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+@keyframes splash { 0%, 55% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes splash-ic { 0% { transform: scale(0.6); } 30%, 55% { transform: scale(1); } 100% { transform: scale(1.25); } }
+.win.open .win-page.on header, .win.open .win-page.on .body > * { animation: wrise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.win.open .win-page.on header { animation-delay: 0.55s; }
+.win.open .win-page.on .body > * { animation-delay: 0.65s; }
+.win.open .win-page.on .body > :nth-child(2) { animation-delay: 0.7s; }
+.win.open .win-page.on .body > :nth-child(3) { animation-delay: 0.75s; }
+.win.open .win-page.on .body > :nth-child(n + 4) { animation-delay: 0.8s; }
+@keyframes wrise { from { opacity: 0; transform: translateY(12px); } }
+/* real screens, swipe sideways */
+.wscreens { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 14px -22px 4px; padding: 4px 22px 10px; scrollbar-width: none; }
+.wscreens::-webkit-scrollbar { display: none; }
+.wscreens img { flex: none; width: 46%; height: auto; border-radius: 14px; scroll-snap-align: start; border: 1px solid #e7e3d9; box-shadow: 0 10px 20px -14px rgba(0, 0, 0, 0.45); background: #f4f1ea; }
+/* the home screen steps back while an app is open */
+.homegrid, .widget, .dock { transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s, filter 0.35s; }
+.screen.app-open .homegrid, .screen.app-open .widget, .screen.app-open .dock { transform: scale(0.9); opacity: 0.35; filter: blur(3px); }
+.homegrid .app:active i { transform: scale(0.88); transition: transform 0.1s; }
+/* drag the home bar up to close */
+.homebar-hit { cursor: grab; touch-action: none; }
+.win.dragging { transition: none; }
+/* first visit: a soft pulse and a label on the first app, until one is opened */
+.taphint { position: absolute; left: -2px; top: -26px; font: 600 10px var(--mono); text-transform: uppercase; letter-spacing: 0.06em; color: #fff;
+  background: rgba(20, 20, 18, 0.55); backdrop-filter: blur(6px); padding: 3px 8px; border-radius: 999px; pointer-events: none; animation: hint-bob 2.4s ease-in-out infinite; }
+.homegrid:not(.used) .app:first-of-type i { animation: hint-ring 2.4s ease-out infinite; }
+.homegrid.used .taphint { opacity: 0; transition: opacity 0.3s; }
+@keyframes hint-bob { 50% { transform: translateY(-3px); } }
+@keyframes hint-ring { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.85); } 70%, 100% { box-shadow: 0 0 0 12px rgba(255, 255, 255, 0); } }
+@media (prefers-reduced-motion: reduce) {
+  .win.open .win-page.on .splash { animation: none; display: none; }
+  .win.open .win-page.on header, .win.open .win-page.on .body > * { animation: none; }
+  .taphint, .homegrid:not(.used) .app:first-of-type i { animation: none; }
+}

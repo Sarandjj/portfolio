@@ -97,12 +97,15 @@ const win = $('#win');
 const pages = $$('.win-page');
 let openedFrom: HTMLElement | null = null;
 
+const phoneScreen = $('#screen');
 function closeApp() {
   if (!win.classList.contains('open')) return;
   win.classList.remove('open');
+  win.style.removeProperty('transform');
+  phoneScreen.classList.remove('app-open');
   win.setAttribute('aria-hidden', 'true');
   win.setAttribute('inert', '');
-  openedFrom?.focus();
+  openedFrom?.focus({ preventScroll: true });
 }
 function openApp(btn: HTMLElement) {
   const id = btn.dataset.app!;
@@ -114,14 +117,45 @@ function openApp(btn: HTMLElement) {
   win.removeAttribute('inert');
   win.setAttribute('aria-hidden', 'false');
   win.classList.add('open');
-  win.querySelector<HTMLElement>('.win-page.on .go, .win-page.on h3')?.focus?.();
+  phoneScreen.classList.add('app-open');
+  $('#home').classList.add('used');
+  win.querySelector<HTMLElement>('.win-page.on .go, .win-page.on h3')?.focus?.({ preventScroll: true });
 }
 win.setAttribute('inert', '');
+
+/* drag the home bar up to close the app, like iOS (a plain tap still closes it) */
+const hit = $('#closeApp');
+let dragY: number | null = null;
+let dragged = false;
+hit.addEventListener('pointerdown', (e) => {
+  dragY = e.clientY;
+  dragged = false;
+  hit.setPointerCapture(e.pointerId);
+  win.classList.add('dragging');
+});
+hit.addEventListener('pointermove', (e) => {
+  if (dragY === null) return;
+  const up = Math.max(0, dragY - e.clientY);
+  if (up > 4) dragged = true;
+  const k = Math.min(1, up / 220);
+  win.style.transform = `translateY(${-up * 0.6}px) scale(${1 - k * 0.35})`;
+});
+const endDrag = (e: PointerEvent) => {
+  if (dragY === null) return;
+  const up = dragY - e.clientY;
+  dragY = null;
+  win.classList.remove('dragging');
+  if (!dragged || up > 60) closeApp();
+  else win.style.removeProperty('transform');
+};
+hit.addEventListener('pointerup', endDrag);
+hit.addEventListener('pointercancel', endDrag);
 $('#home').addEventListener('click', (e) => {
   const b = (e.target as HTMLElement).closest<HTMLElement>('.app[data-app]');
   if (b) openApp(b);
 });
-$('#closeApp').addEventListener('click', closeApp);
+// keyboard: Enter or Space on the home bar button still closes the app
+hit.addEventListener('keydown', (e) => (e.key === 'Enter' || e.key === ' ') && closeApp());
 win.addEventListener('click', (e) => {
   if ((e.target as HTMLElement).closest('a.go[href^="#"]')) closeApp();
 });

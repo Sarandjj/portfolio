@@ -43,9 +43,10 @@ const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
       </svg>
 
       <div class="homegrid" id="home">
+        <span class="taphint" aria-hidden="true">Tap an app</span>
         {
           PROJECTS.map((p) => (
-            <button class="app" type="button" data-app={p.slug}>
+            <button class="app" type="button" data-app={p.slug} aria-label={`Open ${p.name}`}>
               <i style={`background:linear-gradient(135deg,${p.c1},${p.c2})`} aria-hidden="true"><AppIcon name={p.slug} /></i>
               <span>{p.name}</span>
             </button>
@@ -71,7 +72,8 @@ const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
       <div class="win" id="win" aria-hidden="true" role="dialog" aria-label="App">
         {
           PROJECTS.map((p) => (
-            <div class="win-page" id={`app-${p.slug}`}>
+            <div class="win-page" id={`app-${p.slug}`} style={`--c1:${p.c1};--c2:${p.c2}`}>
+              <div class="splash" aria-hidden="true"><i><AppIcon name={p.slug} /></i><b>{p.name}</b></div>
               <header style={`background:linear-gradient(135deg,${p.c1},${p.c2})`}>
                 <small>{p.kind}</small>
                 <h3 tabindex="-1">{p.name}</h3>
@@ -79,6 +81,11 @@ const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
               <div class="body">
                 <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
                 <p>{p.summary}</p>
+                {p.screens.length > 0 && (
+                  <div class="wscreens" aria-label={`${p.name} screens`}>
+                    {p.screens.map((sc) => <img src={sc.src} alt={sc.alt} width="540" height="979" loading="lazy" decoding="async" />)}
+                  </div>
+                )}
                 <div class="chips">{p.stack.map((s) => <span>{s}</span>)}</div>
                 <div class="row">Platforms<span>{p.platforms}</span></div>
                 <ul>{p.works.map((w) => <li>{w}</li>)}</ul>
