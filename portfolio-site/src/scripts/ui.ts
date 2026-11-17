@@ -126,10 +126,13 @@ const CMDS: Cmd[] = [
   ['Go to Projects', 'page', go('/projects')],
   ...projectCmds,
   ['Go to Services', 'page', go('/services')],
+  ['Go to Blog', 'page', go('/blog')],
   ['Go to About', 'page', go('/about')],
+  ['Recruiter view', 'page', go('/recruiter')],
   ['Contact me', 'page', go('/contact')],
   ['Copy email', 'action', copyEmail],
   ['Toggle dark mode', 'action', toggleTheme],
+  ['English / தமிழ்', 'action', () => setLang(root.dataset.lang === 'ta' ? 'en' : 'ta')],
   ['Open GitHub', 'link', () => window.open(SITE.github, '_blank', 'noopener')],
   ['Open LinkedIn', 'link', () => window.open(SITE.linkedin, '_blank', 'noopener')],
 ];

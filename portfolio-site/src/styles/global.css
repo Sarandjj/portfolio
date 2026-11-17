@@ -329,3 +329,6 @@ body::after {
 
 /* decorative loops pause while scrolled out of view (ui.ts toggles .is-off), to save battery on phones */
 .is-off, .is-off * { animation-play-state: paused !important; }
+/* the command menu's .box is not the case-study "works today" box: no tick marks */
+.cmdk .box li::before { content: none; }
+.cmdk .box li { padding-left: 14px; position: static; }
