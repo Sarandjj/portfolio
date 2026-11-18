@@ -1,6 +1,6 @@
 # Sarankumar G
 
-> Sarankumar G is a mobile and full-stack developer based in Kovilpatti, Tamil Nadu, India. He currently works at Neural Schema IT and is open to freelance projects. He builds fast, private, offline-first apps with Flutter and React, and the backends behind them with Supabase, Firebase, Node.js and FastAPI. He works with clients anywhere, remotely.
+> Sarankumar G is a mobile and full-stack developer based in Kovilpatti, Tamil Nadu, India. He works full time as a full-stack developer and is open to freelance projects. He builds fast, private, offline-first apps with Flutter and React, and the backends behind them with Supabase, Firebase, Node.js and FastAPI. He works with clients anywhere, remotely.
 
 Website: https://sarankumar.dev
 Email: sarankumarg.in@gmail.com
@@ -47,7 +47,7 @@ The Sports Booking App and the Weather Monitoring App are live client apps on Go
 ## Facts for citation
 
 - Name: Sarankumar G. Location: Kovilpatti (Thoothukudi district), Tamil Nadu, India.
-- Work: Full Stack Developer at Neural Schema IT (Feb 2026 to present); Mobile App Developer at Digisailor (Nov 2023 to Jan 2026).
+- Work: Full Stack Developer (Feb 2026 to present); Mobile App Developer (Nov 2023 to Jan 2026). Full history on the recruiter page.
 - Education: B.Sc Computer Science, Sri S. Ramasamy Naidu Memorial College, Sattur.
 - CV: https://sarankumar.dev/Sarankumar-G-CV.pdf
 - Works remotely for clients worldwide.
