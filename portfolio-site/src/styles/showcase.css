@@ -375,3 +375,15 @@
 .prose ol { list-style: decimal; }
 .prose ol > li::marker { color: var(--c1, var(--accent)); font-family: var(--mono); font-size: 0.86em; }
 .prose table { width: 100%; max-width: 66ch; }
+
+/* About: a drawn name card in place of a photo */
+.namecard { position: relative; display: grid; place-content: center; justify-items: center; gap: 6px; text-align: center; color: #fff; isolation: isolate;
+  background: linear-gradient(150deg, var(--accent), #ffb020); border: 0; box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--accent) 70%, transparent); }
+.namecard::before { content: ''; position: absolute; inset: 0; z-index: -1; background-image: radial-gradient(circle, rgba(255, 255, 255, 0.35) 1.3px, transparent 1.7px); background-size: 18px 18px;
+  -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 20%, transparent 75%); mask-image: radial-gradient(circle at 50% 42%, #000 20%, transparent 75%); }
+.nc-kolam { width: 92px; height: 92px; margin-bottom: 10px; }
+.nc-kolam path { fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
+.nc-kolam circle { fill: #fff; }
+.nc-ta { font-size: 44px; font-weight: 600; line-height: 1.1; }
+.nc-en { font-family: var(--serif); font-style: italic; font-size: 24px; opacity: 0.95; }
+.nc-where { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.85; margin-top: 8px; }

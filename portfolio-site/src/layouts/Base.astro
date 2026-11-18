@@ -39,6 +39,8 @@ const imageUrl = new URL(image, Astro.site).href;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- www.sarankumar.dev goes to the same page on sarankumar.dev (the live demos only allow the main domain) -->
+    <script is:inline>if (location.hostname === 'www.sarankumar.dev') location.replace('https://sarankumar.dev' + location.pathname + location.search + location.hash);</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />

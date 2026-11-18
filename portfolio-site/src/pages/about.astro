@@ -35,8 +35,15 @@ const jsonLd = [
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
 
       <header class="about-hero" style="margin-top:22px">
-        <div class="photo">
-          <img src="/saran.jpg" alt="Portrait of Sarankumar G" width="640" height="800" fetchpriority="high" />
+        <div class="photo namecard" aria-hidden="true">
+          <svg class="nc-kolam" viewBox="0 0 64 64">
+            <path d="M32 3 C48 3 61 16 61 32 C61 48 48 61 32 61 C16 61 3 48 3 32 C3 16 16 3 32 3 Z" />
+            <path d="M32 13 C40 22 42 22 51 32 C42 42 40 42 32 51 C24 42 22 42 13 32 C22 22 24 22 32 13 Z" />
+            {[22, 32, 42].flatMap((y) => [22, 32, 42].map((x) => <circle cx={x} cy={y} r="2.4" />))}
+          </svg>
+          <b class="nc-ta" lang="ta">சரண்</b>
+          <span class="nc-en">Sarankumar G</span>
+          <span class="nc-where">Kovilpatti · Tamil Nadu</span>
         </div>
         <div>
           <h1 class="page-title" style="margin-top:0" data-ta="வணக்கம், நான் &lt;em&gt;சரண்.&lt;/em&gt;">Hi, I'm <em>Saran.</em></h1>
