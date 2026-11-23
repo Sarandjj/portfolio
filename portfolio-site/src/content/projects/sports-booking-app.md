@@ -1,6 +1,7 @@
 ---
 name: Sports Booking App
 kind: court booking and matches
+description: A sports app for booking courts, joining matches and managing player profiles, live on Google Play and the App Store. Built in Flutter with Firebase.
 summary: A sports app for booking courts, joining matches and managing player profiles, live on Google Play and the App Store. I built the Flutter app and its Firebase, push-notification and payment integrations.
 role: Mobile application developer, responsible for the Flutter app across its development lifecycle
 status: live

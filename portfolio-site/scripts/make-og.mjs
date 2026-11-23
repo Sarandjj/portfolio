@@ -2,6 +2,8 @@
 //   public/og/default.png          from scripts/og/default.html
 //   public/og/projects/<slug>.png  from scripts/og/project.html + each project's frontmatter
 //   public/og/blog/<slug>.png      from scripts/og/post.html + each post's frontmatter (blog.png for the index)
+//   public/og/<page>.png           from scripts/og/post.html, for about, contact, projects, services, recruiter
+// `node scripts/make-og.mjs pages` renders only the page images.
 import { execFileSync } from 'node:child_process';
 import { readFileSync, readdirSync, mkdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
@@ -22,6 +24,24 @@ function shot(htmlFile, query, out) {
     { stdio: 'ignore' },
   );
   console.log('wrote', out.replace(root + '/', ''));
+}
+
+// Main pages, so a shared link shows what the page is instead of the same default card everywhere.
+const PAGES = [
+  ['about', 'About', 'Mobile and full-stack developer', 'Tamil Nadu, India', '👋', '#ff6a3d', '#ffb03d'],
+  ['projects', 'Work', 'Apps I have built and am building', 'Case studies', '📱', '#7a4dff', '#3da5ff'],
+  ['services', 'Services', 'Apps, and the systems behind them', 'Flutter · React · Backend', '🛠️', '#1f9d6b', '#3dd6a5'],
+  ['contact', 'Contact', "Got an idea? Let's talk.", 'Start a project', '✉️', '#ff3d7a', '#ff6a3d'],
+  ['recruiter', 'Recruiter view', 'Sarankumar G on one page', 'Flutter and full-stack developer', '📄', '#3d6aff', '#7a4dff'],
+];
+function pageShots() {
+  for (const [slug, tag, title, project, emoji, c1, c2] of PAGES) {
+    shot('post.html', { tag: `${tag} · Sarankumar G`, title, project, emoji, c1, c2 }, join(root, 'public/og', `${slug}.png`));
+  }
+}
+if (process.argv[2] === 'pages') {
+  pageShots();
+  process.exit(0);
 }
 
 mkdirSync(join(root, 'public/og/projects'), { recursive: true });
@@ -50,3 +70,4 @@ for (const file of readdirSync(postDir).filter((f) => f.endsWith('.md'))) {
     join(root, 'public/og/blog', file.replace(/\.md$/, '.png')));
 }
 shot('post.html', { title: 'Notes from building apps', project: 'Blog', emoji: '✍️', c1: '#ff6a3d', c2: '#7a4dff' }, join(root, 'public/og/blog.png'));
+pageShots();

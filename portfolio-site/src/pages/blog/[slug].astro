@@ -3,7 +3,7 @@ import { render, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getPosts, readingMinutes } from '../../lib/posts';
-import { SITE } from '../../data/site';
+import { SITE, PERSON_REF } from '../../data/site';
 import AppIcon from '../../components/AppIcon.astro';
 
 export async function getStaticPaths() {
@@ -32,8 +32,8 @@ const jsonLd = [
     url,
     image: `${SITE.url}/og/blog/${entry.id}.png`,
     keywords: p.tags.join(', '),
-    author: { '@id': `${SITE.url}/#person` },
-    publisher: { '@id': `${SITE.url}/#person` },
+    author: PERSON_REF,
+    publisher: PERSON_REF,
   },
   {
     '@context': 'https://schema.org',
@@ -45,9 +45,11 @@ const jsonLd = [
     ],
   },
 ];
+// Google shows about 60 characters of a title; drop the name suffix when it would push past that
+const pageTitle = p.title.length + SITE.name.length + 3 <= 60 ? `${p.title} | ${SITE.name}` : p.title;
 ---
 
-<Base title={`${p.title} | ${SITE.name}`} description={p.description} image={`/og/blog/${entry.id}.png`} jsonLd={jsonLd}>
+<Base title={pageTitle} description={p.description} image={`/og/blog/${entry.id}.png`} jsonLd={jsonLd}>
   <div class="page">
     <div class="wrap">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: p.title }]} />

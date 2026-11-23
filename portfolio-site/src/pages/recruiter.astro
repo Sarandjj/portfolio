@@ -2,17 +2,35 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { getProjects } from '../lib/projects';
-import { SITE, STATUS_LABEL } from '../data/site';
+import { SITE, STATUS_LABEL, PERSON } from '../data/site';
 import AppIcon from '../components/AppIcon.astro';
 
 const projects = await getProjects();
 const live = projects.filter((p) => p.data.links.length > 0);
 const own = projects.filter((p) => p.data.links.length === 0);
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    url: `${SITE.url}/recruiter`,
+    mainEntity: PERSON,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Recruiter view', item: `${SITE.url}/recruiter` },
+    ],
+  },
+];
 ---
 
 <Base
-  title="Recruiter view | Sarankumar G, Flutter and full-stack developer"
+  title="Recruiter view | Sarankumar G, Flutter developer"
   description="Everything about Sarankumar G on one page: current role, experience, education, skills, apps live on both stores, and how to reach him."
+  image="/og/recruiter.png"
+  jsonLd={jsonLd}
 >
   <div class="page">
     <div class="wrap rv">

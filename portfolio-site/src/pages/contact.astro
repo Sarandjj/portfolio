@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Mayil from '../components/Mayil.astro';
 import { getProjects } from '../lib/projects';
-import { SITE, FORM_ENDPOINT } from '../data/site';
+import { SITE, FORM_ENDPOINT, PERSON } from '../data/site';
 
 const projects = await getProjects();
 const jsonLd = [
@@ -12,14 +12,15 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
     url: `${SITE.url}/contact`,
-    mainEntity: { '@id': `${SITE.url}/#person` },
+    mainEntity: PERSON,
   },
 ];
 ---
 
 <Base
-  title="Contact | Sarankumar G"
+  title="Hire a Flutter developer | Contact Sarankumar G"
   description="Start a project or ask a question. Send a message to Sarankumar G, a mobile and full-stack developer in Tamil Nadu, India."
+  image="/og/contact.png"
   jsonLd={jsonLd}
 >
   <div class="page">

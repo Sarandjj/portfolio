@@ -1,6 +1,7 @@
 ---
 name: Weather Monitoring App
 kind: weather data and alerts
+description: A weather and environmental monitoring app with data dashboards, station maps and push alerts, live on Google Play and the App Store. Built in Flutter.
 summary: A weather and environmental monitoring app associated with a government environmental authority, live on Google Play and the App Store. I worked on its Flutter features, including data dashboards, station maps and push alerts.
 role: Flutter developer, working on specific features of the app
 status: live

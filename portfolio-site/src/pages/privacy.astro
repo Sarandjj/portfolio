@@ -2,11 +2,30 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { SITE } from '../data/site';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Privacy',
+    url: `${SITE.url}/privacy`,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Privacy', item: `${SITE.url}/privacy` },
+    ],
+  },
+];
 ---
 
 <Base
   title="Privacy | Sarankumar G"
   description="What this site collects: nothing for analytics until you allow it, and only what you type in the contact form."
+  jsonLd={jsonLd}
 >
   <div class="page">
     <div class="wrap">

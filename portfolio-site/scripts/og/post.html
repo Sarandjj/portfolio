@@ -32,6 +32,7 @@ h2 { margin-top: 14px; font-family: IS; font-style: italic; font-weight: 400; fo
 const q = new URLSearchParams(location.search);
 const c1 = q.get('c1'), c2 = q.get('c2');
 document.getElementById('name').textContent = q.get('title');
+if (q.get('tag')) document.querySelector('.tag').textContent = q.get('tag');
 document.getElementById('status').textContent = q.get('project');
 document.getElementById('stack').textContent = q.get('stack');
 const icon = document.getElementById('icon');

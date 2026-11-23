@@ -9,7 +9,7 @@ import ArchDiagram from '../../components/ArchDiagram.astro';
 import ShotFrame from '../../components/ShotFrame.astro';
 import DemoPhone from '../../components/DemoPhone.astro';
 import { getProjects } from '../../lib/projects';
-import { SITE } from '../../data/site';
+import { SITE, PERSON_REF } from '../../data/site';
 
 export async function getStaticPaths() {
   const all = await getProjects();
@@ -35,7 +35,7 @@ const jsonLd = [
     applicationCategory: 'MobileApplication',
     operatingSystem: p.platforms,
     ...(p.links[0] ? { installUrl: p.links[0].url } : {}),
-    author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+    author: PERSON_REF,
   },
   {
     '@context': 'https://schema.org',
@@ -49,7 +49,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title={`${p.name}: ${p.kind} | ${SITE.name}`} description={p.summary} image={`/og/projects/${entry.id}.png`} jsonLd={jsonLd}>
+<Base title={`${p.name}: ${p.kind} | ${SITE.name}`} description={p.description ?? p.summary} image={`/og/projects/${entry.id}.png`} jsonLd={jsonLd}>
   <div class="page" style={`--c1:${p.c1};--c2:${p.c2}`}>
     <div class="wrap">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: p.name }]} />

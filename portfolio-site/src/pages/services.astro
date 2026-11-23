@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import { SITE } from '../data/site';
+import { SITE, PERSON_REF } from '../data/site';
 import AppIcon from '../components/AppIcon.astro';
 import TempleBorder from '../components/TempleBorder.astro';
 
@@ -43,7 +43,7 @@ jsonLd.push({
   '@id': `${SITE.url}/services#service`,
   name: 'Sarankumar G, mobile and web app development',
   url: `${SITE.url}/services`,
-  provider: { '@id': `${SITE.url}/#person` },
+  provider: PERSON_REF,
   areaServed: 'Worldwide',
   address: { '@type': 'PostalAddress', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
   email: SITE.email,
@@ -95,6 +95,7 @@ const faqs = [
 <Base
   title="Flutter, React & Backend Development Services | Sarankumar G"
   description="Mobile and web apps, backend and data, and app rescue. Flutter, React, Supabase, Firebase, Node.js and FastAPI, from Tamil Nadu, India, for clients anywhere."
+  image="/og/services.png"
   jsonLd={jsonLd}
 >
   <div class="page">

@@ -8,6 +8,8 @@ const projects = defineCollection({
     name: z.string(),
     kind: z.string(),
     summary: z.string(),
+    /** meta description for search results, when summary is longer than ~160 characters */
+    description: z.string().optional(),
     /** what Saran did on it, shown under the title. Used for client work. */
     role: z.string().optional(),
     status: z.enum(['live', 'beta', 'progress']),

@@ -9,7 +9,7 @@ import Thoranam from '../components/festival/Thoranam.astro';
 import DoorstepKolam from '../components/festival/DoorstepKolam.astro';
 import Malligai from '../components/festival/Malligai.astro';
 import '../styles/home.css';
-import { SITE, STATUS_LABEL } from '../data/site';
+import { SITE, STATUS_LABEL, PERSON, PERSON_REF } from '../data/site';
 import { getPosts, readingMinutes } from '../lib/posts';
 import { getProjects } from '../lib/projects';
 const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
@@ -36,16 +36,7 @@ const posts = await getPosts();
 const jsonLd = [
   {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${SITE.url}/#person`,
-    name: SITE.name,
-    url: SITE.url,
-    jobTitle: 'Mobile and full-stack developer',
-    email: SITE.email,
-    address: { '@type': 'PostalAddress', addressLocality: 'Kovilpatti', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
-    alumniOf: { '@type': 'CollegeOrUniversity', name: 'Sri S. Ramasamy Naidu Memorial College, Sattur' },
-    sameAs: [SITE.github, SITE.linkedin],
-    knowsAbout: ['Flutter', 'Dart', 'React', 'Firebase', 'Supabase', 'Node.js', 'FastAPI', 'Python', 'Offline-first apps', 'Mobile app development'],
+    ...PERSON,
   },
   {
     '@context': 'https://schema.org',
@@ -54,7 +45,7 @@ const jsonLd = [
     url: SITE.url,
     name: SITE.name,
     inLanguage: 'en',
-    publisher: { '@id': `${SITE.url}/#person` },
+    publisher: PERSON_REF,
   },
 ];
 ---

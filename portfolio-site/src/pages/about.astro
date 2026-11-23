@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { getProjects } from '../lib/projects';
-import { SITE } from '../data/site';
+import { SITE, PERSON } from '../data/site';
 import AppIcon from '../components/AppIcon.astro';
 import TempleBorder from '../components/TempleBorder.astro';
 
@@ -12,7 +12,7 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
     url: `${SITE.url}/about`,
-    mainEntity: { '@id': `${SITE.url}/#person` },
+    mainEntity: PERSON,
   },
   {
     '@context': 'https://schema.org',
@@ -26,8 +26,9 @@ const jsonLd = [
 ---
 
 <Base
-  title="About | Sarankumar G"
-  description="Sarankumar G is a mobile and full-stack developer from Tamil Nadu, India. Flutter, React, Supabase, Firebase, Node.js and FastAPI, with a focus on fast, private, offline-first apps."
+  title="About Sarankumar G | Flutter and full-stack developer"
+  description="Sarankumar G is a mobile and full-stack developer from Tamil Nadu, India, building fast, private, offline-first apps with Flutter, React and Supabase."
+  image="/og/about.png"
   jsonLd={jsonLd}
 >
   <div class="page">

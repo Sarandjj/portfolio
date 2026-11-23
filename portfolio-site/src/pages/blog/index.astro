@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getPosts, readingMinutes } from '../../lib/posts';
-import { SITE } from '../../data/site';
+import { SITE, PERSON_REF } from '../../data/site';
 import AppIcon from '../../components/AppIcon.astro';
 
 import { postLook as look } from '../../data/post-look';
@@ -15,7 +15,7 @@ const jsonLd = [
     '@type': 'Blog',
     name: 'Notes from building',
     url: `${SITE.url}/blog`,
-    author: { '@id': `${SITE.url}/#person` },
+    author: PERSON_REF,
     blogPost: posts.map((p) => ({ '@type': 'BlogPosting', headline: p.data.title, url: `${SITE.url}/blog/${p.id}`, datePublished: p.data.date.toISOString() })),
   },
   {
