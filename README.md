@@ -1,16 +1,23 @@
-# portfolio
+# sarankumar.dev
 
-A new Flutter project.
+Source for [sarankumar.dev](https://sarankumar.dev), the portfolio and blog of Sarankumar G.
 
-## Getting Started
+| Folder | What |
+|---|---|
+| [`portfolio-site/`](portfolio-site/) | The live site: Astro, static HTML, deployed to Firebase Hosting. Start with its README. |
+| [`prototype/`](prototype/) | The HTML design prototype and the plan the site was built from. |
 
-This project is a starting point for a Flutter application.
+```bash
+cd portfolio-site
+npm install
+npm run dev                         # http://localhost:4321
+npm run build                       # static site in dist/ (Node 22+)
+firebase deploy --only hosting      # run from portfolio-site/, never from the repo root
+```
 
-A few resources to get you started if this is your first Flutter project:
+Writing a new blog post: add `portfolio-site/src/content/posts/<slug>.md`, give it colours in
+`src/data/post-look.ts`, render its share image with `node scripts/make-og.mjs posts <slug>`,
+and add a line for it in `public/llms.txt`.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The live demos of FinWise, NallHub and Nirai live in those apps' own repositories (branch `portfolio-demo`).
+The old Flutter web version of this portfolio was removed; it is in the git history before this change.
