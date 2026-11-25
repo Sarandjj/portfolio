@@ -32,3 +32,6 @@ demo-hosting/*/public/
 
 # CV copy that includes a phone number (send directly, never commit)
 cv/*-with-phone.pdf
+
+# What IndexNow was last told (scripts/indexnow.mjs)
+.indexnow-sent.json
