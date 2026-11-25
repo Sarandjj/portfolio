@@ -32,14 +32,16 @@ import { SITE } from '../data/site';
       sessionStorage.setItem('intro', '1');
     } catch (e) {}
     if (!show) { intro.remove(); return; }
-    d.classList.add('intro');
+    // 'intro-on', not 'intro': the home page has an unrelated .intro paragraph style (max-width 500px)
+    // that would squeeze the whole page while the welcome plays, then let it jump wide again (a big layout shift)
+    d.classList.add('intro-on');
     var t0 = performance.now();
     var done = false;
     function out() {
       if (done) return;
       done = true;
       d.classList.add('intro-out');
-      setTimeout(function () { d.classList.remove('intro', 'intro-out'); intro.remove(); }, 650);
+      setTimeout(function () { d.classList.remove('intro-on', 'intro-out'); intro.remove(); }, 650);
     }
     // leave once the page and its fonts are ready, but never before the kolam has drawn (~0.9s)
     // and never later than 1.8s, even on a slow connection

@@ -29,8 +29,10 @@ if (menu && menuBtn) {
   menu.addEventListener('click', (e) => {
     if ((e.target as HTMLElement).closest('a')) menu.close();
   });
-  // if the screen grows past the phone layout, the menu is not needed any more
-  matchMedia('(min-width: 821px)').addEventListener('change', (m) => m.matches && menu.open && menu.close());
+  // if the screen grows until the menu button disappears (821px, or 961px in Tamil), the menu is not needed any more
+  addEventListener('resize', () => {
+    if (menu.open && getComputedStyle(menuBtn).display === 'none') menu.close();
+  });
 }
 
 /* ---------- nav border once scrolled ---------- */
@@ -112,6 +114,79 @@ async function copyEmail() {
 }
 $$('[data-copy-email]').forEach((b) => b.addEventListener('click', copyEmail));
 
+/* ---------- blog: copy a post's link (the phone's share sheet where there is one), and copy code blocks ---------- */
+// These labels change after a click, so they follow the language here instead of through data-ta.
+const L = {
+  share: ['Share', 'பகிர்'],
+  copyLink: ['Copy link', 'இணைப்பை நகலெடு'],
+  linkCopied: ['Link copied ✓', 'இணைப்பு நகலெடுக்கப்பட்டது ✓'],
+  copy: ['Copy', 'நகலெடு'],
+  copied: ['Copied ✓', 'நகலெடுக்கப்பட்டது ✓'],
+  failed: ['Copy failed', 'நகலெடுக்க முடியவில்லை'],
+  copyCode: ['Copy code', 'குறியீட்டை நகலெடு'],
+} as const;
+const tr = (k: keyof typeof L) => L[k][root.dataset.lang === 'ta' ? 1 : 0];
+const relabel: (() => void)[] = [];
+addEventListener('site:lang', () => relabel.forEach((f) => f()));
+
+$$<HTMLButtonElement>('[data-copy-link]').forEach((b) => {
+  const label = b.querySelector('[data-label]') ?? b;
+  const canShare = typeof navigator.share === 'function' && matchMedia('(pointer: coarse)').matches;
+  const rest = () => (label.textContent = tr(canShare ? 'share' : 'copyLink'));
+  rest();
+  relabel.push(rest);
+  b.addEventListener('click', async () => {
+    const url = b.dataset.copyLink!;
+    if (canShare) {
+      try { await navigator.share({ title: document.title, url }); } catch {}
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      label.textContent = tr('linkCopied');
+    } catch {
+      label.textContent = tr('failed');
+    }
+    setTimeout(rest, 2000);
+  });
+});
+
+// a "#" beside each section heading in posts and case studies, so a section can be linked to
+$$<HTMLHeadingElement>('.prose h2[id], .prose h3[id]').forEach((h) => {
+  const a = document.createElement('a');
+  a.className = 'h-link';
+  a.href = `#${h.id}`;
+  a.textContent = '#';
+  a.setAttribute('aria-label', `Link to “${h.textContent}”`);
+  h.append(a);
+});
+
+$$<HTMLPreElement>('.prose pre').forEach((pre) => {
+  const wrap = document.createElement('div');
+  wrap.className = 'code-wrap';
+  pre.replaceWith(wrap);
+  wrap.append(pre);
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'code-copy';
+  const rest = () => {
+    btn.textContent = tr('copy');
+    btn.setAttribute('aria-label', tr('copyCode'));
+  };
+  rest();
+  relabel.push(rest);
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(pre.innerText.replace(/\n$/, ''));
+      btn.textContent = tr('copied');
+    } catch {
+      btn.textContent = tr('failed');
+    }
+    setTimeout(rest, 2000);
+  });
+  wrap.append(btn);
+});
+
 /* ---------- command menu (⌘K / Ctrl+K) ---------- */
 type Cmd = [label: string, kind: string, run: () => void];
 const go = (href: string) => () => {
@@ -126,6 +201,11 @@ const CMDS: Cmd[] = [
   ['Go to Projects', 'page', go('/projects')],
   ...projectCmds,
   ['Go to Services', 'page', go('/services')],
+  ['Flutter app development', 'page', go('/services/flutter-app-development')],
+  ['Backend development', 'page', go('/services/backend-development')],
+  ['Flutter app rescue', 'page', go('/services/flutter-app-rescue')],
+  ['Web development', 'page', go('/services/web-development')],
+  ['Flutter developer in Tamil Nadu', 'page', go('/flutter-developer-tamil-nadu')],
   ['Go to Blog', 'page', go('/blog')],
   ['Go to About', 'page', go('/about')],
   ['Recruiter view', 'page', go('/recruiter')],

@@ -1,0 +1,197 @@
+---
+// One honest local page for searches like "Flutter developer in Tamil Nadu" or "web developer Tamil Nadu".
+// Only real facts: where Saran is, the time zone, Tamil-language work (NallHub), offline-first apps, remote clients.
+// Do not copy this page per city: many near-identical city pages are treated as spam.
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import AppIcon from '../components/AppIcon.astro';
+import StatusBadge from '../components/StatusBadge.astro';
+import { SITE, PERSON_REF } from '../data/site';
+import { SERVICES } from '../data/services';
+
+const url = `${SITE.url}/flutter-developer-tamil-nadu`;
+const nallhub = await getEntry('projects', 'nallhub');
+const finwise = await getEntry('projects', 'finwise');
+const nirai = await getEntry('projects', 'nirai');
+const apps = [nallhub, finwise, nirai].filter((p) => p !== undefined);
+
+const why: [string, string, string, string][] = [
+  [
+    'Your hours, your language',
+    'I work in IST, so calls and replies happen in your working day. We can talk in Tamil or English.',
+    'உங்கள் நேரம், உங்கள் மொழி',
+    'நான் IST நேரத்தில் வேலை செய்கிறேன்; அதனால் அழைப்புகளும் பதில்களும் உங்கள் வேலை நேரத்திலேயே. தமிழிலோ ஆங்கிலத்திலோ பேசலாம்.',
+  ],
+  [
+    'Apps in Tamil as well as English',
+    'NallHub, a school app for private schools in Tamil Nadu, has a full Tamil interface for parents. This site switches to Tamil too.',
+    'ஆங்கிலத்துடன் தமிழிலும் செயலிகள்',
+    'தமிழ்நாட்டுத் தனியார் பள்ளிகளுக்கான NallHub செயலியில் பெற்றோருக்கு முழுத் தமிழ் இடைமுகம் உண்டு. இந்த இணையதளமும் தமிழுக்கு மாறும்.',
+  ],
+  [
+    'Built for the phones people really use',
+    'Many users here are on older Android phones with patchy connections. My apps save every change on the phone first, so they keep working offline.',
+    'மக்கள் உண்மையில் பயன்படுத்தும் கைப்பேசிகளுக்காக',
+    'இங்கு பலர் பழைய Android கைப்பேசிகளையும் நிலையற்ற இணைய இணைப்பையும் பயன்படுத்துகிறார்கள். என் செயலிகள் ஒவ்வொரு மாற்றத்தையும் முதலில் கைப்பேசியிலேயே சேமிப்பதால், இணைப்பு இல்லாதபோதும் இயங்கும்.',
+  ],
+  [
+    'Clients anywhere',
+    'Being in Tamil Nadu does not limit who I work with. I work remotely with clients across India and abroad.',
+    'எங்கிருந்தும் வாடிக்கையாளர்கள்',
+    'தமிழ்நாட்டில் இருப்பது நான் யாருடன் வேலை செய்கிறேன் என்பதைக் கட்டுப்படுத்துவதில்லை. இந்தியா முழுவதும், வெளிநாடுகளிலும் உள்ள வாடிக்கையாளர்களுடன் தொலைதூரமாக வேலை செய்கிறேன்.',
+  ],
+];
+
+const faqs: [string, string, string, string][] = [
+  [
+    'Where are you based?',
+    'Kovilpatti, in Thoothukudi district, Tamil Nadu, India. I work remotely, in IST.',
+    'நீங்கள் எங்கே இருக்கிறீர்கள்?',
+    'தமிழ்நாட்டின் தூத்துக்குடி மாவட்டத்தில் உள்ள கோவில்பட்டி. IST நேரத்தில், தொலைதூரமாக வேலை செய்கிறேன்.',
+  ],
+  [
+    'Do you only work with clients in Tamil Nadu?',
+    'No. I work with clients across India and abroad. Being here means IST hours, and Tamil when you want it.',
+    'தமிழ்நாட்டு வாடிக்கையாளர்களுடன் மட்டும்தான் வேலை செய்வீர்களா?',
+    'இல்லை. இந்தியா முழுவதும், வெளிநாடுகளிலும் உள்ள வாடிக்கையாளர்களுடன் வேலை செய்கிறேன். இங்கு இருப்பதால் IST நேரமும், வேண்டுமென்றால் தமிழும் கிடைக்கும்.',
+  ],
+  [
+    'Can my app be in Tamil?',
+    'Yes. A Flutter app can switch between English and Tamil, the way NallHub does for parents.',
+    'என் செயலி தமிழில் இருக்க முடியுமா?',
+    'ஆம். NallHub பெற்றோருக்குச் செய்வதுபோல, ஒரு Flutter செயலி ஆங்கிலத்துக்கும் தமிழுக்கும் இடையே மாற முடியும்.',
+  ],
+  [
+    'Do you build websites too, or only apps?',
+    'Both. Android and iOS apps in Flutter, websites and web apps in React, Next.js, Astro or Flutter web, and the backend behind them.',
+    'இணையதளங்களும் உருவாக்குவீர்களா, செயலிகள் மட்டும்தானா?',
+    'இரண்டும். Flutter-இல் Android, iOS செயலிகள்; React, Next.js, Astro அல்லது Flutter web-இல் இணையதளங்களும் இணையச் செயலிகளும்; அவற்றின் பின்னணி backend-உம்.',
+  ],
+  [
+    'How much does it cost?',
+    'There is no public price list, because it depends on the screens, the backend and what the app connects to. After a short call you get the scope and a quote in writing.',
+    'செலவு எவ்வளவு?',
+    'பொதுவான விலைப்பட்டியல் இல்லை; திரைகள், backend, செயலி இணையும் சேவைகள் ஆகியவற்றைப் பொறுத்தது. ஒரு சிறிய அழைப்புக்குப் பிறகு, வேலையின் அளவையும் விலையையும் எழுத்துப்பூர்வமாகப் பெறுவீர்கள்.',
+  ],
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': `${url}#service`,
+    name: 'Sarankumar G, Flutter and web developer in Tamil Nadu',
+    url,
+    description: 'Freelance Flutter, mobile and web app development from Kovilpatti, Tamil Nadu, India.',
+    provider: PERSON_REF,
+    address: { '@type': 'PostalAddress', addressLocality: 'Kovilpatti', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
+    areaServed: [
+      { '@type': 'State', name: 'Tamil Nadu' },
+      { '@type': 'Country', name: 'India' },
+      'Worldwide',
+    ],
+    knowsLanguage: ['en', 'ta'],
+    email: SITE.email,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Services',
+      itemListElement: SERVICES.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: s.name, url: `${SITE.url}/services/${s.slug}` },
+      })),
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Flutter developer in Tamil Nadu', item: url },
+    ],
+  },
+];
+---
+
+<Base
+  title="Flutter & web developer in Tamil Nadu | Sarankumar G"
+  description="Freelance Flutter, mobile and web developer in Kovilpatti, Tamil Nadu. Apps in English and Tamil, for businesses, schools and clients anywhere in India."
+  image="/og/about.png"
+  jsonLd={jsonLd}
+>
+  <div class="page svc-page" style="--t1:#ff6a3d;--t2:#ffb020">
+    <div class="wrap">
+      <Breadcrumb items={[{ label: 'Home', href: '/', ta: 'முகப்பு' }, { label: 'Flutter developer in Tamil Nadu', ta: 'தமிழ்நாட்டில் Flutter டெவலப்பர்' }]} />
+
+      <header class="svc-hero">
+        <p class="label" style="margin:22px 0 0" data-ta="கோவில்பட்டி, தமிழ்நாடு">Kovilpatti, Tamil Nadu</p>
+        <h1 class="page-title" data-ta="தமிழ்நாட்டில் ஒரு <em>Flutter &amp; இணைய டெவலப்பர்.</em>">A Flutter and web developer <em>in Tamil Nadu.</em></h1>
+        <p class="page-lede" data-ta="நான் சரண்குமார் G, தமிழ்நாட்டின் கோவில்பட்டியைச் சேர்ந்த மொபைல் &amp; ஃபுல்-ஸ்டாக் டெவலப்பர். இங்குள்ள வாடிக்கையாளர்களுக்கும் வேறு எங்கிருப்பவர்களுக்கும் Android, iOS, இணையச் செயலிகளை ஆங்கிலத்திலும் தமிழிலும் உருவாக்குகிறேன்.">
+          I'm Sarankumar G, a mobile and full-stack developer in Kovilpatti, Tamil Nadu. I build Android, iOS and web apps for clients here and anywhere else, in English and Tamil.
+        </p>
+        <div class="page-cta">
+          <a class="btn solid" href="/contact?need=app" data-ta="உங்கள் திட்டத்தைப் பற்றிச் சொல்லுங்கள்">Tell me about your project</a>
+          <a class="btn ghost" href="/projects" data-ta="என் வேலைகளைப் பாருங்கள்">See my work</a>
+        </div>
+      </header>
+
+      <section>
+        <h2 class="sec-h" data-ta="ஏன் <em>என்னுடன்.</em>">Why work <em>with me.</em></h2>
+        <ul class="svc-steps svc-why">
+          {why.map(([t, d, tt, td]) => (
+            <li>
+              <h3 data-ta={tt}>{t}</h3>
+              <p data-ta={td}>{d}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="sec-h" data-ta="நான் செய்யும் <em>வேலைகள்.</em>">What I <em>build.</em></h2>
+        <div class="svc-others">
+          {SERVICES.map((s) => (
+            <a href={`/services/${s.slug}`} style={`--t1:${s.c1};--t2:${s.c2}`}>
+              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={s.ic} /></span>
+              <span><b data-ta={s.ta.name}>{s.name}</b><small data-ta={`${s.ta.h1} ${s.ta.h1em}`}>{s.h1} {s.h1em}</small></span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sec-h" data-ta="தமிழ்நாட்டுக்காக <em>உருவாக்கியவை.</em>">Built here, <em>used here.</em></h2>
+        <ul class="blog-list related">
+          {apps.map((p) => (
+            <li style={`--t1:${p.data.c1};--t2:${p.data.c2}`}>
+              <a href={`/projects/${p.id}`}>
+                <span class="bl-icon" aria-hidden="true"><AppIcon name={p.id} /></span>
+                <span class="mono meta svc-meta"><StatusBadge status={p.data.status} /><span>{p.data.kind}</span></span>
+                <h3>{p.data.name}</h3>
+                <p>{p.data.description ?? p.data.summary}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="faq">
+        <h2 class="sec-h" data-ta="பொதுவான <em>கேள்விகள்.</em>">Common <em>questions.</em></h2>
+        <div class="faq">
+          {faqs.map(([q, a, tq, tan]) => <details><summary data-ta={tq}>{q}</summary><p data-ta={tan}>{a}</p></details>)}
+        </div>
+      </section>
+
+      <div class="cta-band">
+        <h2 data-ta="மனதில் ஒரு <em>செயலி இருக்கிறதா?</em>">Have an app <em>in mind?</em></h2>
+        <p data-ta="என்ன தேவை, யாருக்காக, தோராயமாக எப்போது என்று சொல்லுங்கள். தமிழிலோ ஆங்கிலத்திலோ பதில் அனுப்புவேன்.">Tell me what you need, who it is for and roughly when. I'll reply in Tamil or English.</p>
+        <a class="btn solid" href="/contact?need=app" data-ta="விலை மதிப்பீடு பெறுங்கள்">Get a quote</a>
+      </div>
+    </div>
+  </div>
+</Base>

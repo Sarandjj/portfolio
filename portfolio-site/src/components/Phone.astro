@@ -3,7 +3,8 @@ import Mayil from './Mayil.astro';
 import AppIcon from './AppIcon.astro';
 import { STATUS_LABEL, SITE } from '../data/site';
 import { getProjects } from '../lib/projects';
-const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
+import { shots } from '../lib/shots';
+const PROJECTS = await Promise.all((await getProjects()).map(async (p) => ({ slug: p.id, ...p.data, shots: await shots(p.data.screens) })));
 ---
 
 <div class="device">
@@ -81,9 +82,9 @@ const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
               <div class="body">
                 <span class="badge" data-status={p.status}>{STATUS_LABEL[p.status]}</span>
                 <p>{p.summary}</p>
-                {p.screens.length > 0 && (
+                {p.shots.length > 0 && (
                   <div class="wscreens" aria-label={`${p.name} screens`}>
-                    {p.screens.map((sc) => <img src={sc.src} alt={sc.alt} width="540" height="979" loading="lazy" decoding="async" />)}
+                    {p.shots.map((sc) => <img src={sc.src} srcset={sc.srcset} sizes="120px" alt={sc.alt} width={sc.width} height={sc.height} loading="lazy" decoding="async" />)}
                   </div>
                 )}
                 <div class="chips">{p.stack.map((s) => <span>{s}</span>)}</div>

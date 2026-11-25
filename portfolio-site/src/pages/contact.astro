@@ -31,7 +31,7 @@ const jsonLd = [
 
       <div class="contact-grid">
         <div>
-          <form class="form" id="form" action={FORM_ENDPOINT} method="post" novalidate>
+          <form class="form" id="form" action={FORM_ENDPOINT} method="post" novalidate data-clarity-mask="true">
             <div class="field">
               <label for="name">Name</label>
               <input id="name" name="name" autocomplete="name" required />
@@ -111,6 +111,7 @@ const jsonLd = [
       app: ['project', 'I need a mobile app. Here is the idea: '],
       web: ['project', 'I need a website or web app. It should: '],
       backend: ['project', 'I need a backend or API for my app. Details: '],
+      rescue: ['project', 'I have a Flutter app that needs fixing. The main problems are: '],
       hire: ['other', 'I am hiring for a role and would like to talk. The role: '],
     };
     const need = NEEDS[new URLSearchParams(location.search).get('need') ?? ''];

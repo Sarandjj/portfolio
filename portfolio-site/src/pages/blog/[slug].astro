@@ -2,24 +2,30 @@
 import { render, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import { getPosts, readingMinutes } from '../../lib/posts';
+import { getPosts, readingMinutes, relatedPosts, topicHref } from '../../lib/posts';
 import { SITE, PERSON_REF } from '../../data/site';
 import AppIcon from '../../components/AppIcon.astro';
+import { postLook as look } from '../../data/post-look';
 
 export async function getStaticPaths() {
   const all = await getPosts();
-  return all.map((entry, i) => ({
+  return all.map((entry) => ({
     params: { slug: entry.id },
-    props: { entry, newer: all[i - 1], older: all[i + 1] },
+    props: { entry, related: relatedPosts(entry, all) },
   }));
 }
 
-const { entry, newer, older } = Astro.props;
+const { entry, related } = Astro.props;
 const p = entry.data;
-const { Content } = await render(entry);
-const project = await getEntry('projects', p.project);
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2);
+const project = p.project ? await getEntry('projects', p.project) : undefined;
 const url = `${SITE.url}/blog/${entry.id}`;
 const fmt = (d: Date) => d.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const fmtTa = (d: Date) => d.toLocaleDateString('ta-IN', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const shortTa = (d: Date) => d.toLocaleDateString('ta-IN', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+const short = (d: Date) => d.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+const minutes = readingMinutes(entry.body);
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -27,13 +33,18 @@ const jsonLd = [
     headline: p.title,
     description: p.description,
     datePublished: p.date.toISOString(),
-    dateModified: p.date.toISOString(),
+    dateModified: (p.updated ?? p.date).toISOString(),
     mainEntityOfPage: url,
     url,
     image: `${SITE.url}/og/blog/${entry.id}.png`,
     keywords: p.tags.join(', '),
+    wordCount: (entry.body ?? '').split(/\s+/).filter(Boolean).length,
+    timeRequired: `PT${minutes}M`,
+    inLanguage: 'en',
     author: PERSON_REF,
     publisher: PERSON_REF,
+    isPartOf: { '@type': 'Blog', name: 'Notes from building', url: `${SITE.url}/blog` },
+    ...(project ? { about: { '@type': 'SoftwareApplication', name: project.data.name, url: `${SITE.url}/projects/${project.id}` } } : {}),
   },
   {
     '@context': 'https://schema.org',
@@ -47,38 +58,106 @@ const jsonLd = [
 ];
 // Google shows about 60 characters of a title; drop the name suffix when it would push past that
 const pageTitle = p.title.length + SITE.name.length + 3 <= 60 ? `${p.title} | ${SITE.name}` : p.title;
+const share = {
+  x: `https://x.com/intent/post?${new URLSearchParams({ text: p.title, url })}`,
+  linkedin: `https://www.linkedin.com/sharing/share-offsite/?${new URLSearchParams({ url })}`,
+};
+const colours = project ? `--c1:${project.data.c1};--c2:${project.data.c2}` : `--c1:${look(entry.id).c1};--c2:${look(entry.id).c2}`;
 ---
 
 <Base title={pageTitle} description={p.description} image={`/og/blog/${entry.id}.png`} jsonLd={jsonLd}>
   <div class="page">
     <div class="wrap">
-      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: p.title }]} />
-      <article class="post-page" style={project ? `--c1:${project.data.c1};--c2:${project.data.c2}` : undefined}>
-        <header>
-          <p class="mono meta" style="margin:22px 0 0">
-            <time datetime={p.date.toISOString()}>{fmt(p.date)}</time> · {readingMinutes(entry.body)} min read
+      <Breadcrumb items={[{ label: 'Home', href: '/', ta: 'முகப்பு' }, { label: 'Blog', href: '/blog', ta: 'வலைப்பதிவு' }, { label: p.title }]} />
+      <article class="post-page" style={colours}>
+        <header class="post-head">
+          <p class="mono meta post-meta">
+            <time datetime={p.date.toISOString()} data-ta={fmtTa(p.date)}>{fmt(p.date)}</time>
+            {p.updated && <span data-ta={`புதுப்பிக்கப்பட்டது ${fmtTa(p.updated)}`}>Updated <time datetime={p.updated.toISOString()}>{fmt(p.updated)}</time></span>}
+            <span data-ta={`${minutes} நிமிட வாசிப்பு`}>{minutes} min read</span>
           </p>
-          {project && (
-            <a class="post-app" href={`/projects/${project.id}`}>
-              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={project.id} /></span>
-              <span><small>Related app</small>{project.data.name}</span>
-            </a>
-          )}
-          <h1 class="page-title">{p.title}</h1>
+          <h1 class="page-title post-title">{p.title}</h1>
           <p class="page-lede">{p.description}</p>
+          <div class="post-tags">
+            {project && (
+              <a class="post-app" href={`/projects/${project.id}`}>
+                <span class="ic-tile sm" aria-hidden="true"><AppIcon name={project.id} /></span>
+                <span><small data-ta="தொடர்புடைய செயலி">Related app</small>{project.data.name}</span>
+              </a>
+            )}
+            <ul class="chips" aria-label="Topics">
+              {p.tags.map((t) => <li><a class="chip" href={topicHref(t)}>{t}</a></li>)}
+            </ul>
+          </div>
         </header>
-        <div class="prose"><Content /></div>
+
+        <div class="cs-grid post-grid">
+          <div class="prose"><Content /></div>
+          <aside class="aside">
+            {toc.length > 2 && (
+              <nav class="toc" aria-label="On this page">
+                <p class="mono" data-ta="இந்தப் பக்கத்தில்">On this page</p>
+                <ol>
+                  {toc.map((h, i) => (
+                    <li><a href={`#${h.slug}`}><span>{String(i + 1).padStart(2, '0')}</span>{h.text}</a></li>
+                  ))}
+                </ol>
+                <span class="toc-bar" aria-hidden="true"><i></i></span>
+              </nav>
+            )}
+            <div class="box share">
+              <h3 data-ta="இந்தக் குறிப்பைப் பகிருங்கள்">Share this note</h3>
+              <div class="share-row">
+                <button type="button" class="share-btn" data-copy-link={url}>
+                  <span data-label>Copy link</span>
+                </button>
+                <a class="share-btn" href={share.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+                <a class="share-btn" href={share.x} target="_blank" rel="noopener">X ↗</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <footer class="author-box">
+          <span class="author-mark" aria-hidden="true"><b lang="ta">ச</b></span>
+          <div>
+            <p class="mono meta" data-ta="எழுதியவர்">Written by</p>
+            <p class="author-name"><a href="/about">{SITE.name}</a></p>
+            <p class="author-bio" data-ta="தமிழ்நாட்டைச் சேர்ந்த மொபைல் &amp; ஃபுல்-ஸ்டாக் டெவலப்பர். Flutter செயலிகளையும் அவற்றின் பின்னணி அமைப்புகளையும் உருவாக்குகிறேன்; அப்போது கற்றுக்கொள்வதை எழுதி வைக்கிறேன்.">Mobile and full-stack developer in Tamil Nadu, India. I build Flutter apps and the backends behind them, and write down what I learn while doing it.</p>
+            <p class="author-links">
+              <a href="/about" data-ta="என்னைப் பற்றி">About me</a>
+              <a href={SITE.github} target="_blank" rel="noopener">GitHub ↗</a>
+              <a href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+              <a href="/rss.xml" data-ta="RSS ஊட்டம்">RSS feed</a>
+            </p>
+          </div>
+        </footer>
       </article>
 
-      <nav class="pager" aria-label="More posts">
-        {newer ? <a href={`/blog/${newer.id}`}><small>Newer</small><b>{newer.data.title}</b></a> : <span></span>}
-        {older ? <a href={`/blog/${older.id}`}><small>Older</small><b>{older.data.title}</b></a> : <span></span>}
-      </nav>
+      {
+        related.length > 0 && (
+          <section class="keep-reading" aria-labelledby="keep-reading">
+            <h2 id="keep-reading" data-ta="தொடர்ந்து படிக்க">Keep reading</h2>
+            <ul class="blog-list related">
+              {related.map((r) => (
+                <li style={`--t1:${look(r.id).c1};--t2:${look(r.id).c2}`}>
+                  <a href={`/blog/${r.id}`}>
+                    <span class="bl-icon" aria-hidden="true"><AppIcon name={look(r.id).g} /></span>
+                    <span class="mono meta" data-ta={`${shortTa(r.data.date)} · ${readingMinutes(r.body)} நிமிட வாசிப்பு`}>{short(r.data.date)} · {readingMinutes(r.body)} min read</span>
+                    <h3>{r.data.title}</h3>
+                    <p>{r.data.description}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
 
       <div class="cta-band">
-        <h2>Building something similar?</h2>
-        <p>Tell me what you need and I'll get back to you.</p>
-        <a class="btn solid" href="/contact">Get in touch</a>
+        <h2 data-ta="இதைப் போன்ற ஒன்றை <em>உருவாக்குகிறீர்களா?</em>">Building something <em>similar?</em></h2>
+        <p data-ta="உங்களுக்கு என்ன தேவை என்று சொல்லுங்கள்; நான் உங்களைத் தொடர்புகொள்கிறேன்.">Tell me what you need and I'll get back to you.</p>
+        <a class="btn solid" href="/contact" data-ta="தொடர்புகொள்ளுங்கள்">Get in touch</a>
       </div>
     </div>
   </div>

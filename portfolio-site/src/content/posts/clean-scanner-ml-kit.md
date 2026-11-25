@@ -1,6 +1,6 @@
 ---
 title: "I built my own document scanner, then went back to ML Kit"
-description: "I replaced Google's ML Kit document scanner with my own live edge detector, tested both on a real phone the same day, and went back, keeping the parts of mine that still earned their place."
+description: "I replaced Google's ML Kit document scanner with my own edge detector, tested both on a real phone the same day, and went back. Here is what I kept."
 date: 2026-10-27
 project: clean-scanner
 tags: [Flutter, ML Kit, Vision]

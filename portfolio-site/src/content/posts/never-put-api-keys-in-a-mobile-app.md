@@ -1,6 +1,6 @@
 ---
 title: "Why you should never put an API key inside a mobile app"
-description: "Anything shipped in an app can be pulled out of it. Here is the simple fix I used in Coin18: put a small server in the middle that holds the key and caches the data."
+description: "Anything shipped in an app can be pulled out of it. The fix I used in Coin18: a small server in the middle that holds the key and caches the data."
 date: 2026-10-27
 project: coin18
 tags: [Flutter, Security, Node.js]

@@ -75,6 +75,7 @@ const imageUrl = new URL(image, Astro.site).href;
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title="Notes from building, Sarankumar G" href="/rss.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="Plain-text summary for AI assistants" />
+    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Full text of the site for AI assistants" />
     {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
 
     <!-- set theme and the js flag before first paint so nothing flashes -->

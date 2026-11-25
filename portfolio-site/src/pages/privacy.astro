@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import { SITE } from '../data/site';
+import { SITE, CLARITY_ID } from '../data/site';
 
 const jsonLd = [
   {
@@ -37,6 +37,16 @@ const jsonLd = [
         <h2>Analytics (only if you allow it)</h2>
         <p>When you press "Allow analytics" on the banner, the site loads Google Analytics, through the Firebase project that hosts this site. It counts page views and a few clicks (the contact form being sent, the CV download, email copied, demo launches and links to other sites). Google also receives your browser type, device type, approximate location from your IP address and the page you came from, and sets cookies.</p>
         <p>I have switched off Google's advertising features for this property. If you press "No thanks", or your browser sends a Global Privacy Control signal, nothing is loaded and nothing is sent. You can change your mind at any time with "Cookie settings" in the footer.</p>
+
+        {
+          CLARITY_ID && (
+            <>
+              <h2>Microsoft Clarity (only if you allow it)</h2>
+              <p>The same "Allow analytics" choice also loads Microsoft Clarity. It records how pages are used (scrolling, clicks and mouse movement) as anonymous replays and heatmaps, so I can see what is hard to find or confusing. What you type in the contact form is masked and never recorded. Clarity sets cookies and receives your browser, device and approximate location, like Google Analytics.</p>
+              <p>Pressing "No thanks" later, from "Cookie settings" in the footer, tells Clarity to stop and clears its cookies.</p>
+            </>
+          )
+        }
 
         <h2>The contact form</h2>
         <p>If you write to me, your name, email and message are sent through Formspree to my inbox. I use them to reply to you and for nothing else. Ask me and I will delete the conversation.</p>

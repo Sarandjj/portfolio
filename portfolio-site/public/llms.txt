@@ -1,12 +1,13 @@
 # Sarankumar G
 
-> Sarankumar G is a mobile and full-stack developer based in Kovilpatti, Tamil Nadu, India. He works full time as a full-stack developer and is open to freelance projects. He builds fast, private, offline-first apps with Flutter and React, and the backends behind them with Supabase, Firebase, Node.js and FastAPI. He works with clients anywhere, remotely.
+> Sarankumar G (also written Saran, Sarankumar or Saran Kumar) is a mobile, web and full-stack developer based in Kovilpatti, Tamil Nadu, India. He works full time as a full-stack developer and is open to freelance projects. He builds fast, private, offline-first apps with Flutter and React, and the backends behind them with Supabase, Firebase, Node.js and FastAPI. He works with clients anywhere, remotely.
 
 Website: https://sarankumar.dev
 Email: sarankumarg.in@gmail.com
 GitHub: https://github.com/Sarandjj
 LinkedIn: https://www.linkedin.com/in/sarankuamr-g
 Time zone: Asia/Kolkata (IST, UTC+5:30)
+Full text of every page: https://sarankumar.dev/llms-full.txt
 
 ## What he does
 
@@ -19,6 +20,11 @@ Time zone: Asia/Kolkata (IST, UTC+5:30)
 
 - [Home](https://sarankumar.dev/): overview, selected work and toolbox.
 - [Services](https://sarankumar.dev/services): what he offers, how an engagement works, and common questions.
+  - [Flutter app development](https://sarankumar.dev/services/flutter-app-development): Android, iOS and web apps from one Flutter codebase, offline-first, released to both stores.
+  - [Backend development](https://sarankumar.dev/services/backend-development): Supabase, Firebase, Node.js and FastAPI backends with security rules in the database.
+  - [Flutter app rescue](https://sarankumar.dev/services/flutter-app-rescue): auditing and fixing slow or buggy Flutter apps, worst problems first.
+  - [Web development](https://sarankumar.dev/services/web-development): websites and web apps in React, Next.js, Astro and Flutter web, built so search engines can read them.
+- [Flutter and web developer in Tamil Nadu](https://sarankumar.dev/flutter-developer-tamil-nadu): based in Kovilpatti, Tamil Nadu (IST); apps in English and Tamil; works with clients across India and abroad.
 - [About](https://sarankumar.dev/about): background, how he builds, and his stack.
 - [Projects](https://sarankumar.dev/projects): case studies of seven apps: two live client apps and five of his own.
 - [Recruiter view](https://sarankumar.dev/recruiter): experience, skills and apps on one page.
@@ -27,6 +33,10 @@ Time zone: Asia/Kolkata (IST, UTC+5:30)
 
 ## Blog posts
 
+- [Flutter web and SEO: why my portfolio is plain HTML now](https://sarankumar.dev/blog/flutter-web-seo): why a Flutter web site is hard for search engines to read, and what moving to static HTML with Astro changed.
+- [Three ways to put a live Flutter app demo on a portfolio](https://sarankumar.dev/blog/live-flutter-demos-with-fake-data): how FinWise, Nirai and NallHub run in the browser with made-up data, from a seeded local database to an in-memory fake Supabase backend.
+- [7 things to have ready before you hire an app developer](https://sarankumar.dev/blog/before-you-hire-an-app-developer): a checklist for clients: the goal, the users, the must-have screens, the accounts to own, and who decides.
+- [Why you should never put an API key inside a mobile app](https://sarankumar.dev/blog/never-put-api-keys-in-a-mobile-app): keys in an app can be extracted; Coin18 keeps them on a small Node.js server that also caches.
 - [Offline-first sync to Google Drive with no backend](https://sarankumar.dev/blog/nirai-drive-sync-no-backend): how Nirai merges changes between devices through one JSON file in the user's own Drive, with a field-by-field merge and tombstones.
 - [Soft deletes in Drift: SQLite's onDelete does not fire on UPDATE](https://sarankumar.dev/blog/finwise-soft-delete-drift): why tombstones switch off foreign-key cascades and how FinWise rebuilt them.
 - [I built my own document scanner, then went back to ML Kit](https://sarankumar.dev/blog/clean-scanner-ml-kit): a real-phone comparison that decided between a custom edge detector and Google's scanner.

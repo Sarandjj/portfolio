@@ -38,6 +38,8 @@ function sourcesFor(path) {
   if (post) return [`src/content/posts/${post[1]}.md`];
   const project = path.match(/^\/projects\/(.+)$/);
   if (project) return [`src/content/projects/${project[1]}.md`];
+  // the service pages share one data file
+  if (path.startsWith('/services/')) return ['src/data/services.ts'];
   return page(path.slice(1));
 }
 

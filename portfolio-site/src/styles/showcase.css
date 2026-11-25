@@ -251,7 +251,7 @@
 .rv-apps a:hover { background: color-mix(in srgb, var(--t1) 7%, transparent); padding-left: 10px; padding-right: 10px; }
 .rv-apps a:hover .ic-tile { transform: rotate(-8deg); }
 @media (max-width: 960px) { .rv-facts { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 820px) { .rv-apps a { grid-template-columns: 40px 1fr; } .rv-apps a > span:not(.ic-tile), .rv-apps a > em { grid-column: 2; } }
+@media (max-width: 820px) { .rv-apps a { grid-template-columns: 40px minmax(0, 1fr); } .rv-apps a > span:not(.ic-tile), .rv-apps a > em { grid-column: 2; } .rv-apps em { white-space: normal; } }
 
 /* ---------- blog post: a calmer title size and the app it came from ---------- */
 .post-page .page-title { font-size: clamp(36px, 5.4vw, 64px); line-height: 1.02; }

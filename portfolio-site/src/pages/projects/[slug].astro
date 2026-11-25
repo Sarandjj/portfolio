@@ -10,6 +10,7 @@ import ShotFrame from '../../components/ShotFrame.astro';
 import DemoPhone from '../../components/DemoPhone.astro';
 import { getProjects } from '../../lib/projects';
 import { SITE, PERSON_REF } from '../../data/site';
+import { shots } from '../../lib/shots';
 
 export async function getStaticPaths() {
   const all = await getProjects();
@@ -22,6 +23,7 @@ export async function getStaticPaths() {
 const { entry, prev, next } = Astro.props;
 const p = entry.data;
 const { Content, headings } = await render(entry);
+const screenShots = await shots(p.screens);
 const toc = headings.filter((h) => h.depth === 2);
 // Show the phone frames only when there are real screenshots. Placeholders look unfinished.
 const url = `${SITE.url}/projects/${entry.id}`;
@@ -78,9 +80,9 @@ const jsonLd = [
         </div>
         {
           (
-            p.screens.length > 0 ? (
+            screenShots.length > 0 ? (
               <div class="shots shots-real" aria-label="Screenshots">
-                {p.screens.slice(0, 3).map((sc) => <img class="shot-img" src={sc.src} alt={sc.alt} width="540" height="979" loading="eager" />)}
+                {screenShots.slice(0, 3).map((sc) => <img class="shot-img" src={sc.src} srcset={sc.srcset} sizes="(max-width: 960px) 120px, 150px" alt={sc.alt} width={sc.width} height={sc.height} loading="eager" />)}
               </div>
             ) : (
               <div class="shots" aria-label="Screen previews">

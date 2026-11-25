@@ -1,5 +1,6 @@
 ---
-interface Props { items: { label: string; href?: string }[] }
+/** `ta` is the Tamil label, swapped in when the visitor picks தமிழ் */
+interface Props { items: { label: string; href?: string; ta?: string }[] }
 const { items } = Astro.props;
 ---
 
@@ -8,7 +9,7 @@ const { items } = Astro.props;
     {
       items.map((it, i) => (
         <li>
-          {it.href && i < items.length - 1 ? <a href={it.href}>{it.label}</a> : <span aria-current="page">{it.label}</span>}
+          {it.href && i < items.length - 1 ? <a href={it.href} data-ta={it.ta}>{it.label}</a> : <span aria-current="page" data-ta={it.ta}>{it.label}</span>}
         </li>
       ))
     }

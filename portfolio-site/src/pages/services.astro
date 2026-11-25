@@ -4,6 +4,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import { SITE, PERSON_REF } from '../data/site';
 import AppIcon from '../components/AppIcon.astro';
 import TempleBorder from '../components/TempleBorder.astro';
+import { serviceBySlug } from '../data/services';
 
 const jsonLd = [
   {
@@ -18,19 +19,19 @@ const jsonLd = [
 
 const offers = [
   {
-    ic: 'app', c1: '#027dfd', c2: '#13b9fd',
+    ic: 'app', c1: '#027dfd', c2: '#13b9fd', slug: 'flutter-app-development',
     title: 'Mobile & web apps',
     text: 'Android and iOS apps from one Flutter codebase, built offline-first and ready for the stores, plus web apps in Flutter or React.',
     list: ['Flutter and Dart', 'React web apps', 'Offline storage and sync', 'Camera, OCR, biometrics, notifications', 'Store release'],
   },
   {
-    ic: 'db', c1: '#0f9d58', c2: '#2bb673',
+    ic: 'db', c1: '#0f9d58', c2: '#2bb673', slug: 'backend-development',
     title: 'Backend & data',
     text: 'The server side: sign-in, a database with proper security rules, and APIs the app can rely on.',
     list: ['Supabase: Postgres, Auth, RLS, Edge Functions', 'Firebase', 'Node.js and Express APIs', 'FastAPI (Python) APIs', 'Caching and rate limits'],
   },
   {
-    ic: 'bolt', c1: '#ff6a3d', c2: '#ffb020',
+    ic: 'bolt', c1: '#ff6a3d', c2: '#ffb020', slug: 'flutter-app-rescue',
     title: 'Rescue & speed',
     text: 'Already have a Flutter app that is slow, buggy or hard to change? I can audit it and fix the worst problems first.',
     list: ['Performance and layout fixes', 'Bug fixing', 'Code cleanup and tests', 'Technical advice'],
@@ -52,7 +53,7 @@ jsonLd.push({
     name: 'Services',
     itemListElement: offers.map((o) => ({
       '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: o.title, description: o.text },
+      itemOffered: { '@type': 'Service', name: o.title, description: o.text, url: `${SITE.url}/services/${o.slug}` },
     })),
   },
 });
@@ -118,10 +119,12 @@ const faqs = [
                 <h2>{o.title}</h2>
                 <p>{o.text}</p>
                 <ul>{o.list.map((l) => <li>{l}</li>)}</ul>
+                <a class="svc-more" href={`/services/${o.slug}`} data-ta={`${serviceBySlug(o.slug)?.ta.name} பற்றி மேலும் <b aria-hidden="true">→</b>`}>More about {o.title.toLowerCase()} <b aria-hidden="true">→</b></a>
               </div>
             ))
           }
         </div>
+        <p class="lede svc-also" data-ta='இணையதளங்களுக்கு: <a href="/services/web-development">இணைய உருவாக்கம்</a>. தமிழ்நாட்டில் இருக்கிறீர்களா? <a href="/flutter-developer-tamil-nadu">தமிழ்நாட்டில் Flutter &amp; இணைய டெவலப்பர்</a>.'>Need a website? See <a href="/services/web-development">web development</a>. Based in Tamil Nadu? See <a href="/flutter-developer-tamil-nadu">Flutter and web developer in Tamil Nadu</a>.</p>
       </section>
 
       <section id="wired">

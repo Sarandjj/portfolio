@@ -633,8 +633,13 @@ h1 em { padding-right: 0; }
 @media (prefers-reduced-motion: reduce) { .skyline .blades { animation: none; } }
 
 /* ---------- v7: festival decorations ---------- */
-.hero { padding-top: 124px; }
-.thoranam { position: absolute; top: 0; left: 0; right: 0; height: 120px; pointer-events: none; z-index: 1; }
+/* The garland's drawing is 1400 x 110 and scales with the page width (slice), so on screens wider than
+   about 1500px it grows taller than its 120px box. The hero's top padding grows with it (110/1400 of the
+   width, plus a gap), so the hanging flowers never cover the status line. */
+.hero { padding-top: max(136px, calc(7.86vw + 22px)); }
+/* decorations (the garland's swing, the glow behind the phone) may reach past the screen edge; never let them scroll the page sideways */
+.hero { overflow-x: clip; }
+.thoranam { position: absolute; top: 0; left: 0; right: 0; height: 120px; pointer-events: none; z-index: 1; overflow-x: clip; }
 .thoranam svg { width: 100%; height: 100%; display: block; overflow: visible; }
 .thoranam .rope { fill: none; stroke: #8d6e63; stroke-width: 3.2; stroke-linecap: round; }
 .thoranam .rope-twist { fill: none; stroke: #d7ccc8; stroke-width: 1.6; stroke-dasharray: 3 4; opacity: 0.9; }

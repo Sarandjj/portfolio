@@ -2,7 +2,7 @@
 // - Nothing loads and nothing is sent until the visitor presses "Allow analytics".
 // - A Global Privacy Control signal counts as "no", and the banner is not shown.
 // - Events are collected by one click listener, using small rules and data-track attributes.
-import { GA_ID } from '../data/site';
+import { GA_ID, CLARITY_ID } from '../data/site';
 
 const KEY = 'analytics-consent';
 type Choice = 'yes' | 'no';
@@ -28,6 +28,7 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: GtagFn;
+    clarity?: ((...args: unknown[]) => void) & { q?: unknown[] };
   }
 }
 
@@ -46,11 +47,29 @@ function load() {
   s.async = true;
   s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
   document.head.appendChild(s);
+  loadClarity();
+}
+
+// Microsoft Clarity (heatmaps and anonymous session recordings), only when CLARITY_ID is set.
+// It is only ever loaded after "Allow analytics", and is told so with its consent call.
+function loadClarity() {
+  if (!CLARITY_ID || window.clarity) return;
+  window.clarity = function (...args: unknown[]) {
+    (window.clarity!.q = window.clarity!.q || []).push(args);
+  };
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = `https://www.clarity.ms/tag/${CLARITY_ID}`;
+  document.head.appendChild(s);
+  window.clarity('consent');
+  window.clarity('set', 'lang', document.documentElement.dataset.lang === 'ta' ? 'ta' : 'en');
 }
 
 function track(name: string, params: Record<string, string | number> = {}) {
   if (read() !== 'yes' || !window.gtag) return;
   window.gtag('event', name, params);
+  // the same moments in Clarity, so recordings can be filtered by them (for example "contact_submit")
+  window.clarity?.('event', name);
 }
 
 // ---- consent banner ----
@@ -73,6 +92,8 @@ banner?.addEventListener('click', (e) => {
   write(choice);
   banner.hidden = true;
   if (choice === 'yes') load();
+  // changed their mind after allowing: Clarity stops and clears its cookies
+  else window.clarity?.('consent', false);
 });
 
 // "Cookie settings" link in the footer reopens the banner

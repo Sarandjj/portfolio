@@ -12,10 +12,12 @@ import '../styles/home.css';
 import { SITE, STATUS_LABEL, PERSON, PERSON_REF } from '../data/site';
 import { getPosts, readingMinutes } from '../lib/posts';
 import { getProjects } from '../lib/projects';
+import { shots } from '../lib/shots';
 const PROJECTS = (await getProjects()).map((p) => ({ slug: p.id, ...p.data }));
 const LIVE = PROJECTS.filter((p) => p.links.length > 0);
 const OWN = PROJECTS.filter((p) => p.links.length === 0);
 const FEATURED = OWN.find((p) => p.screens.length > 0);
+const FEATURED_SHOTS = FEATURED ? await shots(FEATURED.screens) : [];
 const REST = OWN.filter((p) => p !== FEATURED);
 const DEMOS = PROJECTS.filter((p) => p.demo);
 const FILTERS = [['all', 'All'], ['live', 'On the stores'], ['mobile', 'Mobile'], ['web', 'Web'], ['backend', 'Backend']];
@@ -169,9 +171,9 @@ const jsonLd = [
             </div>
             <div class="feat-shots" aria-hidden="true">
               {/* two phones, each slowly cross-fading between two real screens */}
-              {[FEATURED.screens.slice(0, 2), FEATURED.screens.slice(2, 4)].map((pair, i) => (
+              {[FEATURED_SHOTS.slice(0, 2), FEATURED_SHOTS.slice(2, 4)].map((pair, i) => (
                 <div class={`ph ${i ? 'b' : 'a'}`}>
-                  {pair.map((sh) => <img src={sh.src} alt="" width="540" height="979" loading="lazy" decoding="async" />)}
+                  {pair.map((sh) => <img src={sh.src} srcset={sh.srcset} sizes="(max-width: 640px) 130px, 210px" alt="" width={sh.width} height={sh.height} loading="lazy" decoding="async" />)}
                 </div>
               ))}
             </div>

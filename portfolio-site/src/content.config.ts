@@ -57,8 +57,10 @@ const posts = defineCollection({
     /** one or two sentences, also used as the meta description */
     description: z.string(),
     date: z.coerce.date(),
-    /** the project this post comes from (a slug in src/content/projects) */
-    project: z.string(),
+    /** set when the post is meaningfully rewritten (not for typo fixes); shown as "Updated" and used as dateModified */
+    updated: z.coerce.date().optional(),
+    /** the project this post comes from (a slug in src/content/projects); leave out for general posts */
+    project: z.string().optional(),
     tags: z.array(z.string()).default([]),
     /** false until Saran has read it and changed anything that is not how he would say it */
     reviewed: z.boolean().default(false),

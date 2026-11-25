@@ -5,5 +5,7 @@ const APP: Record<string, { g: string; c1: string; c2: string }> = {
   'finwise-soft-delete-drift': { g: 'finwise', c1: '#2bb673', c2: '#0e8a7a' },
   'never-put-api-keys-in-a-mobile-app': { g: 'coin18', c1: '#ffb020', c2: '#ff7a1a' },
   'nirai-drive-sync-no-backend': { g: 'nirai', c1: '#4f7bff', c2: '#7a4dff' },
+  'live-flutter-demos-with-fake-data': { g: 'web', c1: '#7a4dff', c2: '#3da5ff' },
+  'flutter-web-seo': { g: 'discover', c1: '#1f9d6b', c2: '#3dd6a5' },
 };
 export const postLook = (id: string) => APP[id] ?? { g: 'writing', c1: '#c08a2b', c2: '#d4501e' };

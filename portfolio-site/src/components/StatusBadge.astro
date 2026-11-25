@@ -1,7 +1,7 @@
 ---
-import { STATUS_LABEL, type Status } from '../data/site';
+import { STATUS_LABEL, STATUS_LABEL_TA, type Status } from '../data/site';
 interface Props { status: Status }
 const { status } = Astro.props;
 ---
 
-<span class="badge" data-status={status}>{STATUS_LABEL[status]}</span>
+<span class="badge" data-status={status} data-ta={STATUS_LABEL_TA[status]}>{STATUS_LABEL[status]}</span>

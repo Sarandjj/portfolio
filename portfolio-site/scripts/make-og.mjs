@@ -3,7 +3,7 @@
 //   public/og/projects/<slug>.png  from scripts/og/project.html + each project's frontmatter
 //   public/og/blog/<slug>.png      from scripts/og/post.html + each post's frontmatter (blog.png for the index)
 //   public/og/<page>.png           from scripts/og/post.html, for about, contact, projects, services, recruiter
-// `node scripts/make-og.mjs pages` renders only the page images.
+// `node scripts/make-og.mjs pages` renders only the page images; `... posts <slug> <slug>` only those posts.
 import { execFileSync } from 'node:child_process';
 import { readFileSync, readdirSync, mkdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
@@ -44,11 +44,12 @@ if (process.argv[2] === 'pages') {
   process.exit(0);
 }
 
+const postsOnly = process.argv[2] === 'posts';
 mkdirSync(join(root, 'public/og/projects'), { recursive: true });
-shot('default.html', null, join(root, 'public/og/default.png'));
+if (!postsOnly) shot('default.html', null, join(root, 'public/og/default.png'));
 
 const dir = join(root, 'src/content/projects');
-for (const file of readdirSync(dir).filter((f) => f.endsWith('.md'))) {
+for (const file of postsOnly ? [] : readdirSync(dir).filter((f) => f.endsWith('.md'))) {
   const fm = YAML.parse(readFileSync(join(dir, file), 'utf8').split('---')[1]);
   shot('project.html', {
     name: fm.name, kind: fm.kind, emoji: fm.emoji, c1: fm.c1, c2: fm.c2,
@@ -63,11 +64,17 @@ const projects = Object.fromEntries(
   readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => [f.replace(/\.md$/, ''), front(join(dir, f))]),
 );
 const postDir = join(root, 'src/content/posts');
-for (const file of readdirSync(postDir).filter((f) => f.endsWith('.md'))) {
+// colours for posts without an app, read from the same table the site uses
+const LOOK = Object.fromEntries(
+  [...readFileSync(join(root, 'src/data/post-look.ts'), 'utf8').matchAll(/'([\w-]+)': \{ g: '[\w-]+', c1: '(#\w+)', c2: '(#\w+)' \}/g)].map(([, id, c1, c2]) => [id, { c1, c2 }]),
+);
+const only = process.argv[2] === 'posts' ? process.argv.slice(3) : null;
+for (const file of readdirSync(postDir).filter((f) => f.endsWith('.md') && (!only || only.includes(f.replace(/\.md$/, ''))))) {
   const fm = front(join(postDir, file));
-  const pr = projects[fm.project];
+  // general posts have no app: they use their colours from src/data/post-look.ts and a writing emoji
+  const pr = projects[fm.project] ?? { name: fm.tags?.[0] ?? 'Blog', emoji: '✍️', ...(LOOK[file.replace(/\.md$/, '')] ?? { c1: '#c08a2b', c2: '#d4501e' }) };
   shot('post.html', { title: fm.title, project: pr.name, emoji: pr.emoji, c1: pr.c1, c2: pr.c2 },
     join(root, 'public/og/blog', file.replace(/\.md$/, '.png')));
 }
-shot('post.html', { title: 'Notes from building apps', project: 'Blog', emoji: '✍️', c1: '#ff6a3d', c2: '#7a4dff' }, join(root, 'public/og/blog.png'));
-pageShots();
+if (!postsOnly) shot('post.html', { title: 'Notes from building apps', project: 'Blog', emoji: '✍️', c1: '#ff6a3d', c2: '#7a4dff' }, join(root, 'public/og/blog.png'));
+if (!postsOnly) pageShots();

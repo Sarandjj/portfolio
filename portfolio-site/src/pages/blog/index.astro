@@ -1,14 +1,16 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import { getPosts, readingMinutes } from '../../lib/posts';
+import { getPosts, readingMinutes, blogTopics } from '../../lib/posts';
 import { SITE, PERSON_REF } from '../../data/site';
 import AppIcon from '../../components/AppIcon.astro';
 
 import { postLook as look } from '../../data/post-look';
 
 const posts = await getPosts();
+const topics = blogTopics(posts);
 const fmt = (d: Date) => d.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+const fmtTa = (d: Date) => d.toLocaleDateString('ta-IN', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -16,7 +18,7 @@ const jsonLd = [
     name: 'Notes from building',
     url: `${SITE.url}/blog`,
     author: PERSON_REF,
-    blogPost: posts.map((p) => ({ '@type': 'BlogPosting', headline: p.data.title, url: `${SITE.url}/blog/${p.id}`, datePublished: p.data.date.toISOString() })),
+    blogPost: posts.map((p) => ({ '@type': 'BlogPosting', headline: p.data.title, url: `${SITE.url}/blog/${p.id}`, datePublished: p.data.date.toISOString(), author: PERSON_REF })),
   },
   {
     '@context': 'https://schema.org',
@@ -31,34 +33,76 @@ const jsonLd = [
 
 <Base
   title="Blog | Notes from building apps | Sarankumar G"
-  description="Short engineering notes from building Flutter apps: offline sync with no backend, soft deletes in Drift, and choosing ML Kit over a hand-built scanner."
+  description="Notes from building Flutter apps and their backends: offline sync, Drift and SQLite, app security, live demos, SEO, and what to know before hiring a developer."
   image="/og/blog.png"
   jsonLd={jsonLd}
 >
   <div class="page">
     <div class="wrap">
-      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} />
+      <Breadcrumb items={[{ label: 'Home', href: '/', ta: 'முகப்பு' }, { label: 'Blog', ta: 'வலைப்பதிவு' }]} />
       <header>
-        <p class="label" style="margin:22px 0 0">Writing</p>
+        <p class="label" style="margin:22px 0 0" data-ta="எழுத்து">Writing</p>
         <h1 class="page-title" data-ta="உருவாக்கும்போது &lt;em&gt;எழுதிய குறிப்புகள்.&lt;/em&gt;">Notes from <em>building.</em></h1>
-        <p class="page-lede">What I ran into while building my own apps, and what I did about it. One problem per post, with the decision and the trade-off.</p>
+        <p class="page-lede" data-ta="என் சொந்தச் செயலிகளை உருவாக்கும்போது நான் சந்தித்தவையும், அவற்றுக்கு நான் செய்தவையும். ஒரு பதிவுக்கு ஒரு பிரச்சினை, எடுத்த முடிவோடும் அதன் விலையோடும்.">What I ran into while building my own apps, and what I did about it. One problem per post, with the decision and the trade-off.</p>
+        <p class="mono meta blog-sub" data-ta={`${posts.length} குறிப்புகள் · <a href="/rss.xml">RSS மூலம் பின்தொடருங்கள்</a>`}>{posts.length} notes · <a href="/rss.xml">Subscribe with RSS</a></p>
       </header>
+
+      {
+        topics.length > 0 && (
+          <div class="filters" id="topics" role="group" aria-label="Filter by topic">
+            <button type="button" data-t="" aria-pressed="true" data-ta={`அனைத்தும் <span class="cnt">${posts.length}</span>`}>All <span class="cnt">{posts.length}</span></button>
+            {topics.map(({ tag, count }) => (
+              <button type="button" data-t={tag} aria-pressed="false">{tag} <span class="cnt">{count}</span></button>
+            ))}
+          </div>
+        )
+      }
 
       <ul class="blog-list">
         {
-          posts.map((p) => (
-            <li style={`--t1:${look(p.id).c1};--t2:${look(p.id).c2}`}>
+          posts.map((p, i) => (
+            <li style={`--t1:${look(p.id).c1};--t2:${look(p.id).c2}`} data-tags={JSON.stringify(p.data.tags)} class:list={{ latest: i === 0 }}>
               <a href={`/blog/${p.id}`}>
                 <span class="bl-icon" aria-hidden="true"><AppIcon name={look(p.id).g} /></span>
-                <span class="mono meta">{fmt(p.data.date)} · {readingMinutes(p.body)} min read · {p.data.tags.join(', ')}</span>
+                <span class="mono meta">{i === 0 && <b class="bl-new" data-ta="புதியது">Latest</b>}<time datetime={p.data.date.toISOString()} data-ta={fmtTa(p.data.date)}>{fmt(p.data.date)}</time> · <span data-ta={`${readingMinutes(p.body)} நிமிட வாசிப்பு`}>{readingMinutes(p.body)} min read</span> · {p.data.tags.join(', ')}</span>
                 <h2>{p.data.title}</h2>
                 <p>{p.data.description}</p>
-                <span class="bl-more">Read the note <b aria-hidden="true">→</b></span>
+                <span class="bl-more" data-ta='குறிப்பைப் படிக்க <b aria-hidden="true">→</b>'>Read the note <b aria-hidden="true">→</b></span>
               </a>
             </li>
           ))
         }
       </ul>
+      <p class="page-lede" id="none" hidden style="margin-top:28px" data-ta="இந்தத் தலைப்பில் இன்னும் குறிப்புகள் இல்லை.">No notes on this topic yet.</p>
     </div>
   </div>
+
+  <script>
+    // Topic filter. The choice lives in ?topic= so a tag on a post can link straight to it.
+    const btns = [...document.querySelectorAll<HTMLButtonElement>('#topics button')];
+    const items = [...document.querySelectorAll<HTMLElement>('.blog-list li')];
+    function apply(topic: string) {
+      const known = btns.some((b) => b.dataset.t === topic);
+      const t = known ? topic : '';
+      btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === t)));
+      let shown = 0;
+      items.forEach((li) => {
+        const ok = !t || (JSON.parse(li.dataset.tags ?? '[]') as string[]).includes(t);
+        li.hidden = !ok;
+        if (ok) shown++;
+      });
+      document.querySelector<HTMLElement>('#none')!.hidden = shown > 0;
+    }
+    document.querySelector('#topics')?.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('button');
+      if (!b) return;
+      const t = b.dataset.t ?? '';
+      const u = new URL(location.href);
+      if (t) u.searchParams.set('topic', t);
+      else u.searchParams.delete('topic');
+      history.replaceState(null, '', u);
+      apply(t);
+    });
+    apply(new URLSearchParams(location.search).get('topic') ?? '');
+  </script>
 </Base>

@@ -1,0 +1,165 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import AppIcon from '../../components/AppIcon.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import { SITE, PERSON_REF } from '../../data/site';
+import { SERVICES, type Service } from '../../data/services';
+import { postLook as look } from '../../data/post-look';
+import { readingMinutes } from '../../lib/posts';
+
+export function getStaticPaths() {
+  return SERVICES.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+const { service: s } = Astro.props as { service: Service };
+const t = s.ta;
+const url = `${SITE.url}/services/${s.slug}`;
+const projects = (await Promise.all(s.projects.map((id) => getEntry('projects', id)))).filter((p) => p !== undefined);
+const posts = (await Promise.all(s.posts.map((id) => getEntry('posts', id)))).filter((p) => p !== undefined);
+const others = SERVICES.filter((o) => o.slug !== s.slug);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name: s.name,
+    serviceType: s.serviceType,
+    description: s.description,
+    url,
+    provider: PERSON_REF,
+    areaServed: 'Worldwide',
+    isRelatedTo: projects.map((p) => ({ '@type': 'SoftwareApplication', name: p.data.name, url: `${SITE.url}/projects/${p.id}` })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: s.faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE.url}/services` },
+      { '@type': 'ListItem', position: 3, name: s.name, item: url },
+    ],
+  },
+];
+---
+
+<Base title={s.metaTitle} description={s.description} image="/og/services.png" jsonLd={jsonLd}>
+  <div class="page svc-page" style={`--t1:${s.c1};--t2:${s.c2}`}>
+    <div class="wrap">
+      <Breadcrumb items={[{ label: 'Home', href: '/', ta: 'முகப்பு' }, { label: 'Services', href: '/services', ta: 'சேவைகள்' }, { label: s.name, ta: t.name }]} />
+
+      <header class="svc-hero">
+        <span class="ic-tile lg" aria-hidden="true"><AppIcon name={s.ic} /></span>
+        <p class="label" style="margin:22px 0 0" data-ta={t.name}>{s.name}</p>
+        <h1 class="page-title" data-ta={`${t.h1} <em>${t.h1em}</em>`}>{s.h1} <em>{s.h1em}</em></h1>
+        <p class="page-lede" data-ta={t.lede}>{s.lede}</p>
+        <div class="page-cta">
+          <a class="btn solid" href={`/contact?need=${s.need}`} data-ta="உங்கள் திட்டத்தைப் பற்றிச் சொல்லுங்கள்">Tell me about your project</a>
+          <a class="btn ghost" href="#faq" data-ta="கேள்விகள்">Questions</a>
+        </div>
+      </header>
+
+      <section>
+        <div class="svc-grid">
+          <div class="box svc-box">
+            <h2 data-ta="யாருக்கானது">Who it is for</h2>
+            <ul class="svc-for">{s.forWho.map((w, i) => <li data-ta={t.forWho[i]}>{w}</li>)}</ul>
+          </div>
+          <div class="box svc-box">
+            <h2 data-ta="நீங்கள் பெறுவது">What you get</h2>
+            <ul>{s.youGet.map((g, i) => <li data-ta={t.youGet[i]}>{g}</li>)}</ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sec-h" data-ta="எப்படி <em>நடக்கிறது.</em>">How it <em>works.</em></h2>
+        <ol class="svc-steps">
+          {s.steps.map((st, i) => (
+            <li>
+              <span class="mono">{String(i + 1).padStart(2, '0')}</span>
+              <h3 data-ta={t.steps[i].title}>{st.title}</h3>
+              <p data-ta={t.steps[i].text}>{st.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {
+        projects.length > 0 && (
+          <section>
+            <h2 class="sec-h" data-ta="இதைக் காட்டும் <em>என் வேலைகள்.</em>">Work that <em>shows it.</em></h2>
+            <ul class="blog-list related">
+              {projects.map((p) => (
+                <li style={`--t1:${p.data.c1};--t2:${p.data.c2}`}>
+                  <a href={`/projects/${p.id}`}>
+                    <span class="bl-icon" aria-hidden="true"><AppIcon name={p.id} /></span>
+                    <span class="mono meta svc-meta"><StatusBadge status={p.data.status} /><span>{p.data.kind}</span></span>
+                    <h3>{p.data.name}</h3>
+                    <p>{p.data.description ?? p.data.summary}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      {
+        posts.length > 0 && (
+          <section>
+            <h2 class="sec-h" data-ta="இது பற்றிய <em>குறிப்புகள்.</em>">Notes on <em>this.</em></h2>
+            <ul class="blog-list related">
+              {posts.map((p) => (
+                <li style={`--t1:${look(p.id).c1};--t2:${look(p.id).c2}`}>
+                  <a href={`/blog/${p.id}`}>
+                    <span class="bl-icon" aria-hidden="true"><AppIcon name={look(p.id).g} /></span>
+                    <span class="mono meta" data-ta={`${readingMinutes(p.body)} நிமிட வாசிப்பு`}>{readingMinutes(p.body)} min read</span>
+                    <h3>{p.data.title}</h3>
+                    <p>{p.data.description}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      <section id="faq">
+        <h2 class="sec-h" data-ta="பொதுவான <em>கேள்விகள்.</em>">Common <em>questions.</em></h2>
+        <div class="faq">
+          {s.faqs.map(([q, a], i) => <details><summary data-ta={t.faqs[i][0]}>{q}</summary><p data-ta={t.faqs[i][1]}>{a}</p></details>)}
+        </div>
+      </section>
+
+      <section>
+        <p class="label" data-ta="பிற சேவைகள்">Other services</p>
+        <div class="svc-others">
+          {others.map((o) => (
+            <a href={`/services/${o.slug}`} style={`--t1:${o.c1};--t2:${o.c2}`}>
+              <span class="ic-tile sm" aria-hidden="true"><AppIcon name={o.ic} /></span>
+              <span><b data-ta={o.ta.name}>{o.name}</b><small data-ta={`${o.ta.h1} ${o.ta.h1em}`}>{o.h1} {o.h1em}</small></span>
+            </a>
+          ))}
+          <a href="/services" style="--t1:#c08a2b;--t2:#d4501e">
+            <span class="ic-tile sm" aria-hidden="true"><AppIcon name="stack" /></span>
+            <span><b data-ta="அனைத்துச் சேவைகளும்">All services</b><small data-ta="நான் எப்படி வேலை செய்கிறேன், நாம் எப்படி இணைந்து வேலை செய்யலாம்">How I work, and how we can work together</small></span>
+          </a>
+        </div>
+      </section>
+
+      <div class="cta-band">
+        <h2 data-ta="மனதில் ஏதாவது <em>இருக்கிறதா?</em>">Have something <em>in mind?</em></h2>
+        <p data-ta="என்ன தேவை, யாருக்காக, தோராயமாக எப்போது என்று சொல்லுங்கள். கேள்விகளுடனும் அடுத்த படிகளுடனும் பதில் அனுப்புவேன்.">Tell me what you need, who it is for and roughly when. I'll reply with questions and next steps.</p>
+        <a class="btn solid" href={`/contact?need=${s.need}`} data-ta="விலை மதிப்பீடு பெறுங்கள்">Get a quote</a>
+      </div>
+    </div>
+  </div>
+</Base>

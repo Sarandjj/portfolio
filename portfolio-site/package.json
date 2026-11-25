@@ -9,7 +9,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "indexnow": "node scripts/indexnow.mjs",
+    "deploy": "astro build && firebase deploy --only hosting && node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

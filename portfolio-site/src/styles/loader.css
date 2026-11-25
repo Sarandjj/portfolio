@@ -1,8 +1,8 @@
 /* ---------- first-visit welcome ---------- */
 #intro { display: none; }
-.intro #intro { display: grid; place-items: center; position: fixed; inset: 0; z-index: 9999; background: var(--paper); color: var(--ink);
+.intro-on #intro { display: grid; place-items: center; position: fixed; inset: 0; z-index: 9999; background: var(--paper); color: var(--ink);
   clip-path: inset(0 0 0 0 round 0); transition: clip-path 0.6s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.6s; }
-.intro #intro::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+.intro-on #intro::before { content: ''; position: absolute; inset: 0; pointer-events: none;
   background: radial-gradient(circle at 50% 46%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 42%); }
 .intro-out #intro { clip-path: inset(0 0 100% 0 round 0 0 40% 40%); }
 .intro-out #intro .intro-in { transform: translateY(-40px); opacity: 0; }
@@ -21,7 +21,7 @@
 @keyframes k-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes k-bar { to { transform: scaleX(1); } }
 /* no scrolling behind the welcome */
-html.intro:not(.intro-out) { overflow: hidden; }
+html.intro-on:not(.intro-out) { overflow: hidden; }
 
 /* ---------- page-to-page bar ---------- */
 .navload { position: fixed; left: 0; top: 0; z-index: 9998; height: 3px; width: 100%; pointer-events: none; transform: scaleX(0); transform-origin: 0 50%;

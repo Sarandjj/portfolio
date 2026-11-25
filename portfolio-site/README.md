@@ -1,8 +1,10 @@
 # sarankumar.dev (new site)
 
-Astro + self-hosted fonts, deployed as static files to Firebase Hosting. This is **Phase 1** of
-`../prototype/PLAN.md`: home, SEO foundations and a 404 page. **Phase 2** adds /projects, five case studies, /about, /services and /contact. The old Flutter portfolio in the
-parent folder keeps running until this site is switched over.
+Astro + self-hosted fonts, deployed as static files to Firebase Hosting at https://sarankumar.dev.
+It replaced the old Flutter web portfolio, which has been removed from this repo (it is still in git history).
+The plan it was built from is in `../prototype/PLAN.md`.
+
+Build with **Node 22 or newer** (Astro refuses older versions).
 
 ## Commands
 
@@ -11,7 +13,11 @@ npm install
 npm run dev        # http://localhost:4321
 npm run build      # static site into dist/
 npm run preview    # serve dist/ locally (what Firebase will serve)
-node scripts/make-og.mjs   # re-render share images (public/og/default.png and public/og/projects/*.png) with headless Chrome
+node scripts/make-og.mjs   # re-render every share image (public/og/) with headless Chrome
+node scripts/make-og.mjs pages               # only about, contact, projects, services, recruiter
+node scripts/make-og.mjs posts <slug> <slug> # only these blog posts (do this for every new post)
+npm run deploy     # build, deploy to Firebase, then tell IndexNow (Bing and others) which pages changed
+npm run indexnow -- --dry-run   # list the pages IndexNow would be told about, send nothing
 ```
 
 Deploy (not done yet, needs Saran's go-ahead):
@@ -26,6 +32,8 @@ firebase deploy --only hosting                         # production, only after 
 
 | Path | What |
 |---|---|
+| `src/data/services.ts` | The three service pages at /services/<slug>: copy, steps, related work, FAQ |
+| `src/pages/llms-full.txt.ts` | /llms-full.txt, the full text of the site for AI assistants, built from the same content |
 | `src/data/site.ts` | Name, email, links, nav, form endpoint, status labels, planned posts |
 | `src/content/projects/*.md` | The 5 case studies. Frontmatter = status, stack, "works today", numbers, architecture steps, `todo` list. Body = the story |
 | `src/pages/index.astro` | Home page sections |
